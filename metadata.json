@@ -1,0 +1,6 @@
+{
+  "name": "VietGo AI - Smart Vietnam Travel Assistant",
+  "description": "Nền tảng du lịch thông minh toàn diện dành cho Việt Nam với AI Chatbot RAG, Lập lịch trình & Ngân sách tự động, Bản đồ thông minh và Cẩm nang 34+ tỉnh thành.",
+  "requestFramePermissions": ["geolocation"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
