@@ -3,7 +3,9 @@ import path from 'path';
 import dotenv from 'dotenv';
 import { GoogleGenAI, Type } from '@google/genai';
 import { createServer as createViteServer } from 'vite';
-import { PROVINCES, ALL_TIPS, searchAllPOIs, searchAllFoods } from './src/data/vietnamData.ts';
+import { PROVINCES, ALL_TIPS, searchAllPOIs, searchAllFoods } from '../database/vietnamData.ts';
+import { buildRAGContext } from '../ai/ragContext.ts';
+import { getChatSystemInstruction, getTripPlannerPrompt, getModifyItineraryPrompt } from '../ai/systemPrompt.ts';
 
 dotenv.config();
 
@@ -24,40 +26,6 @@ if (apiKey) {
       },
     },
   });
-}
-
-// Helper: Build RAG context for prompt grounding
-function buildRAGContext(query: string, provinceName?: string): string {
-  let context = `BỐI CẢNH TRI THỨC DU LỊCH VIỆT NAM (VIETGO AI KNOWLEDGE BASE):\n`;
-
-  // Search relevant provinces
-  const targetProvinces = provinceName 
-    ? PROVINCES.filter(p => p.name.toLowerCase().includes(provinceName.toLowerCase()))
-    : PROVINCES.slice(0, 7);
-
-  targetProvinces.forEach(p => {
-    context += `\n--- [TỈNH/THÀNH]: ${p.name} (${p.region}) ---\n`;
-    context += `Đặc trưng: ${p.tagline}\n`;
-    context += `Mùa đẹp nhất: ${p.bestMonths} | Thời tiết: ${p.weatherSummary}\n`;
-    context += `Văn hóa & Kiêng kỵ: ${p.culturalTaboos.join('; ')}\n`;
-    context += `Di chuyển: Đến bằng ${p.transportation.arrival.join(', ')}. Thuê xe máy: ${p.transportation.avgBikeRental}\n`;
-    context += `Điểm tham quan tiêu biểu:\n`;
-    p.pois.forEach(poi => {
-      context += ` - ${poi.name} (${poi.category}): Giá vé ${poi.ticketPrice.toLocaleString()}đ, Giờ mở cửa: ${poi.openingHours}. Mẹo: ${poi.localTips}\n`;
-    });
-    context += `Ẩm thực đặc sản chuẩn vị:\n`;
-    p.foods.forEach(f => {
-      context += ` - ${f.dishName} (${f.name}): Giá ${f.priceRange} (${f.address}). Đặc trưng: ${f.description}\n`;
-    });
-  });
-
-  // Include top tips
-  context += `\n--- MẸO DU LỊCH & QUY ĐỊNH HÀNG KHÔNG (400+ TIPS) ---\n`;
-  ALL_TIPS.forEach(t => {
-    context += `* [${t.category.toUpperCase()}] ${t.title}: ${t.content}\n`;
-  });
-
-  return context;
 }
 
 // 1. Health check
@@ -86,14 +54,7 @@ app.post('/api/chat', async (req, res) => {
 
     if (ai) {
       const ragContext = buildRAGContext(message);
-      const systemInstruction = `Bạn là VietGo AI — Trợ lý du lịch thông minh số 1 tại Việt Nam.
-Nhiệm vụ của bạn là tư vấn du lịch Việt Nam chuẩn xác, thân thiện, am hiểu văn hóa, không chém gió hay bịa đặt (No Hallucination).
-Hãy luôn dựa vào TRI THỨC ĐƯỢC CUNG CẤP (RAG Context) để trả lời:
-- Luôn nêu rõ tên địa điểm, địa chỉ thật, giá cả tham khảo chính xác bằng VNĐ.
-- Đưa ra lời khuyên thực chiến (tips tránh chặt chém, giờ đẹp tránh đông, quy tắc văn hóa).
-- Giọng điệu hào hứng, mến khách, hiếu khách đúng tinh thần du lịch Việt Nam.
-- Ngôn ngữ phản hồi: ${language === 'vi' ? 'Tiếng Việt' : language === 'en' ? 'English' : language === 'ko' ? '한국어' : language === 'ja' ? '日本語' : '中文'}.
-- Định dạng câu trả lời rõ ràng với bullet points, in đậm tên quán/địa điểm, giá tiền.`;
+      const systemInstruction = getChatSystemInstruction(language);
 
       const contents = [
         ...conversationHistory.map((m: any) => ({
@@ -167,21 +128,16 @@ app.post('/api/plan-trip', async (req, res) => {
     let summaryAI = '';
 
     if (ai) {
-      const prompt = `Hãy lập lịch trình du lịch chi tiết ${numDays} ngày tại ${province.name}, Việt Nam.
-Thông tin chuyến đi:
-- Số ngày: ${numDays} ngày
-- Ngân sách tổng: ${totalBudget.toLocaleString()} VNĐ cho ${count} người (${companions})
-- Phong cách du lịch: ${style}
-- Cơ sở dữ liệu địa điểm gợi ý: ${province.pois.map(p => `${p.name} (Giá vé: ${p.ticketPrice}đ)`).join(', ')}
-- Quán ăn gợi ý: ${province.foods.map(f => `${f.dishName} tại ${f.name} (Giá: ${f.priceRange})`).join(', ')}
-
-Yêu cầu output dạng JSON chính xác theo Schema:
-Tạo danh sách ${numDays} ngày (Day 1 đến Day ${numDays}), mỗi ngày có 4 mốc thời gian:
-1. "Sáng (07:30 - 11:30)"
-2. "Trưa (11:30 - 13:30)"
-3. "Chiều (14:00 - 17:30)"
-4. "Tối (18:00 - 22:00)"
-Tối ưu cung đường không bị đi vòng ngược chiều, cân đối chi phí ăn uống và vé vào cửa hợp lý.`;
+      const prompt = getTripPlannerPrompt({
+        numDays,
+        provinceName: province.name,
+        totalBudget,
+        count,
+        companions,
+        style,
+        poisInfo: province.pois.map(p => `${p.name} (Giá vé: ${p.ticketPrice}đ)`).join(', '),
+        foodsInfo: province.foods.map(f => `${f.dishName} tại ${f.name} (Giá: ${f.priceRange})`).join(', '),
+      });
 
       try {
         const response = await ai.models.generateContent({
@@ -353,11 +309,7 @@ app.post('/api/modify-itinerary', async (req, res) => {
     }
 
     if (ai) {
-      const prompt = `Bạn là VietGo AI Travel Solver. Người dùng muốn chỉnh sửa lịch trình du lịch hiện tại:
-Yêu cầu chỉnh sửa: "${modificationRequest}"
-Lịch trình hiện tại: ${JSON.stringify(currentPlan.days)}
-
-Hãy trả về phiên bản days mới đã cập nhật theo đúng yêu cầu (ví dụ: đổi món ăn, thay địa điểm, tăng giảm thời gian nghỉ ngơi) nhưng vẫn giữ cấu trúc JSON tương thích.`;
+      const prompt = getModifyItineraryPrompt(modificationRequest, JSON.stringify(currentPlan.days));
 
       const response = await ai.models.generateContent({
         model: 'gemini-3.7-flash',
@@ -443,7 +395,8 @@ app.post('/api/reserve', (req, res) => {
 async function startServer() {
   if (process.env.NODE_ENV !== 'production') {
     const vite = await createViteServer({
-      server: { middlewareMode: true },
+      root: path.resolve(process.cwd(), 'frontend'),
+      server: { middlewareMode: true, allowedHosts: true },
       appType: 'spa',
     });
     app.use(vite.middlewares);

@@ -10,7 +10,7 @@ import { BudgetTracker } from './components/BudgetTracker';
 import { TravelDNAProfile } from './components/TravelDNAProfile';
 import { BookingModal } from './components/BookingModal';
 import { SOSModal } from './components/SOSModal';
-import { LanguageCode } from './types';
+import { LanguageCode } from '@db/types';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState('chat');

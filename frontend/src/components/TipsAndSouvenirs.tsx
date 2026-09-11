@@ -14,8 +14,8 @@ import {
   PhoneCall,
   Gift
 } from 'lucide-react';
-import { ALL_TIPS, PROVINCES } from '../data/vietnamData';
-import { TravelTip, SouvenirItem } from '../types';
+import { ALL_TIPS, PROVINCES } from '@db/vietnamData';
+import { TravelTip, SouvenirItem } from '@db/types';
 
 interface TipsAndSouvenirsProps {
   onOpenSOS: () => void;

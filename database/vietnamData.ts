@@ -1,4 +1,4 @@
-import { Province, TravelTip, Festival, Souvenir, FoodSpot, POI } from '../types';
+import { Province, TravelTip, Festival, Souvenir, FoodSpot, POI } from './types';
 
 export const ALL_TIPS: TravelTip[] = [
   // Safety & Emergency

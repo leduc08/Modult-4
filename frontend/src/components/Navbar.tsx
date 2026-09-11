@@ -14,7 +14,7 @@ import {
   HelpCircle,
   PhoneCall
 } from 'lucide-react';
-import { LanguageCode } from '../types';
+import { LanguageCode } from '@db/types';
 
 interface NavbarProps {
   activeTab: string;

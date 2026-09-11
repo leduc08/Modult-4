@@ -16,20 +16,14 @@
     "allowJs": true,
     "jsx": "react-jsx",
     "paths": {
-      "@/*": ["./frontend/*"],
-      "@db/*": ["./database/*"]
+      "@/*": ["./*"],
+      "@db/*": ["../database/*"]
     },
     "allowImportingTsExtensions": true,
     "noEmit": true
   },
-  "references": [
-    { "path": "./frontend" },
-    { "path": "./backend" }
-  ],
   "include": [
-    "frontend/**/*",
-    "backend/**/*",
-    "database/**/*",
-    "ai/**/*"
+    "src/**/*",
+    "../database/**/*"
   ]
 }
