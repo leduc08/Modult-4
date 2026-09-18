@@ -13,8 +13,8 @@ import {
   Award,
   ChevronRight
 } from 'lucide-react';
-import { PROVINCES, searchAllFoods } from '@db/vietnamData';
-import { FoodSpot } from '@db/types';
+import { PROVINCES, searchAllFoods } from '../data/vietnamData';
+import { FoodSpot } from '../types';
 
 interface FoodDirectoryProps {
   onOpenBooking: (item: { name: string; type: 'table' | 'ticket'; price?: number }) => void;

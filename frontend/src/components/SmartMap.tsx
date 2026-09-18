@@ -14,8 +14,8 @@ import {
   Filter,
   X
 } from 'lucide-react';
-import { PROVINCES, searchAllPOIs, searchAllFoods } from '@db/vietnamData';
-import { POI, FoodSpot, FestivalEvent } from '@db/types';
+import { PROVINCES, searchAllPOIs, searchAllFoods } from '../data/vietnamData';
+import { POI, FoodSpot, FestivalEvent } from '../types';
 
 interface SmartMapProps {
   onOpenBooking: (item: { name: string; type: 'table' | 'ticket'; price?: number }) => void;

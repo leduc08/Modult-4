@@ -16,7 +16,7 @@ import {
   ExternalLink,
   ChevronRight
 } from 'lucide-react';
-import { ChatMessage, POI, FoodSpot, TravelTip } from '@db/types';
+import { ChatMessage, POI, FoodSpot, TravelTip } from '../types';
 
 interface AIChatbotProps {
   onNavigateTab: (tab: string, extraData?: any) => void;

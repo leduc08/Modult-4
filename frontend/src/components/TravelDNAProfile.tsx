@@ -11,7 +11,7 @@ import {
   CheckCircle2,
   Award
 } from 'lucide-react';
-import { UserProfile, TravelStyle } from '@db/types';
+import { UserProfile, TravelStyle } from '../types';
 
 export const TravelDNAProfile: React.FC = () => {
   const [profile, setProfile] = useState<UserProfile>({

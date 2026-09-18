@@ -2,17 +2,17 @@
 
 @layer base {
   body {
-    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: 'Be Vietnam Pro', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: #FFFFFF;
+    color: #222222;
   }
-  h1, h2, .font-display {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-  }
-  .font-serif-display {
-    font-family: 'Playfair Display', Georgia, serif;
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Be Vietnam Pro', 'Plus Jakarta Sans', sans-serif;
+    color: #222222;
   }
 }
 
-/* Custom Scrollbars */
+/* Custom Scrollbars in Airbnb Style */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -21,14 +21,14 @@
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(168, 162, 158, 0.4);
+  background: #D1D5DB;
   border-radius: 9999px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(120, 113, 108, 0.6);
+  background: #9CA3AF;
 }
 
 .leaflet-container {
-  font-family: 'Plus Jakarta Sans', sans-serif !important;
+  font-family: 'Be Vietnam Pro', 'Plus Jakarta Sans', sans-serif !important;
   z-index: 10;
 }

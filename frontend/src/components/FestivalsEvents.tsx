@@ -11,8 +11,8 @@ import {
   Info,
   QrCode
 } from 'lucide-react';
-import { PROVINCES } from '@db/vietnamData';
-import { FestivalEvent } from '@db/types';
+import { PROVINCES } from '../data/vietnamData';
+import { FestivalEvent } from '../types';
 
 interface FestivalsEventsProps {
   onOpenBooking: (item: { name: string; type: 'table' | 'ticket'; price?: number }) => void;

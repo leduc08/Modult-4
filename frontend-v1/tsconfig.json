@@ -16,14 +16,14 @@
     "allowJs": true,
     "jsx": "react-jsx",
     "paths": {
-      "@/*": [
-        "./*"
-      ],
-      "@db/*": [
-        "../database/*"
-      ]
+      "@/*": ["./*"],
+      "@db/*": ["../database/*"]
     },
     "allowImportingTsExtensions": true,
     "noEmit": true
-  }
+  },
+  "include": [
+    "src/**/*",
+    "../database/**/*"
+  ]
 }

@@ -23,8 +23,8 @@ import {
   MessageSquare
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
-import { TripPlan, TravelStyle, CompanionType } from '@db/types';
-import { PROVINCES } from '@db/vietnamData';
+import { TripPlan, TravelStyle, CompanionType } from '../types';
+import { PROVINCES } from '../data/vietnamData';
 
 interface TripPlannerProps {
   onNavigateTab: (tab: string, extraData?: any) => void;

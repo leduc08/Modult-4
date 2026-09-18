@@ -11,7 +11,7 @@ import {
   Wallet,
   ArrowUpRight
 } from 'lucide-react';
-import { BudgetBreakdown, ExpenseItem } from '@db/types';
+import { BudgetBreakdown, ExpenseItem } from '../types';
 
 export const BudgetTracker: React.FC = () => {
   const [totalBudget, setTotalBudget] = useState<number>(6000000);
