@@ -16,6 +16,7 @@ import {
 } from 'lucide-react';
 import { PROVINCES, searchAllPOIs, searchAllFoods } from '../data/vietnamData';
 import { POI, FoodSpot, FestivalEvent } from '../types';
+import { CARTO_API_KEY } from '../config/maps';
 
 interface SmartMapProps {
   onOpenBooking: (item: { name: string; type: 'table' | 'ticket'; price?: number }) => void;
@@ -68,10 +69,10 @@ export const SmartMap: React.FC<SmartMapProps> = ({
 
       L.control.zoom({ position: 'bottomright' }).addTo(map);
 
-      // Clean, high-resolution tile layer (CartoDB Positron / OSM)
-      L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-        attribution: '&copy; <a href="https://carto.com/">CARTO</a>, &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-        maxZoom: 19,
+      // Minimalist Gray Canvas map (Beautiful like CARTO, Free, No API Key)
+      L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+        attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ',
+        maxZoom: 16,
       }).addTo(map);
 
       mapInstanceRef.current = map;

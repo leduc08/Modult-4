@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useMemo } from 'react';
+import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import { 
   Search, 
   MapPin, 
@@ -25,7 +25,10 @@ import {
   LocateFixed, 
   ExternalLink,
   Map as MapIcon,
-  List as ListIcon
+  List as ListIcon,
+  AlertTriangle,
+  RefreshCw,
+  Info
 } from 'lucide-react';
 import L from 'leaflet';
 import { 
@@ -34,6 +37,28 @@ import {
   queryNearbyPlaces 
 } from '../services/nearbyPlacesService';
 import { DetailItem } from './ItemDetailModal';
+import { 
+  DEFAULT_DATA_SOURCE, 
+  IS_SAMPLE_MODE, 
+  DataSourceType,
+  CARTO_API_KEY
+} from '../config/maps';
+import {
+  searchNearbyPlaces as searchGoogle,
+  GoogleApiError,
+} from '../services/googlePlacesService';
+import {
+  searchNearbyPlaces as searchFoursquare,
+  FoursquareApiError,
+} from '../services/foursquareService';
+import { GoogleMapView } from './GoogleMapView';
+import {
+  loadCityPlaces,
+  filterCityPlaces,
+  hasPreFetchedData,
+  type CityPlacesData,
+  type MergeStats,
+} from '../data/places/index';
 
 interface NearbyPageProps {
   wishlist: string[];
@@ -54,7 +79,19 @@ const POPULAR_AREAS = [
   { id: 'phu-quoc', name: 'Phú Quốc', lat: 10.2899, lng: 103.9840 },
   { id: 'hue', name: 'Huế', lat: 16.4637, lng: 107.5909 },
   { id: 'ninh-binh', name: 'Ninh Bình', lat: 20.2506, lng: 105.9745 },
+  { id: 'nha-trang', name: 'Nha Trang', lat: 12.2388, lng: 109.1967 },
 ];
+
+/** Find nearest city for a GPS coordinate */
+function findNearestCity(lat: number, lng: number): typeof POPULAR_AREAS[0] {
+  let nearest = POPULAR_AREAS[0];
+  let minDist = Infinity;
+  for (const city of POPULAR_AREAS) {
+    const d = Math.hypot(city.lat - lat, city.lng - lng);
+    if (d < minDist) { minDist = d; nearest = city; }
+  }
+  return nearest;
+}
 
 export const NearbyPage: React.FC<NearbyPageProps> = ({
   wishlist,
@@ -66,7 +103,7 @@ export const NearbyPage: React.FC<NearbyPageProps> = ({
   // Map Container & Instance Refs
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<L.Map | null>(null);
-  const markersMapRef = useRef<{ [key: string]: L.Marker }>({});
+  const markersMapRef = useRef<{ [key: string]: L.Marker | L.CircleMarker }>({});
   const userMarkerRef = useRef<L.CircleMarker | null>(null);
   const userAccuracyCircleRef = useRef<L.Circle | null>(null);
   const placeCardsRef = useRef<{ [key: string]: HTMLDivElement | null }>({});
@@ -85,15 +122,19 @@ export const NearbyPage: React.FC<NearbyPageProps> = ({
     lat: number;
     lng: number;
     name: string;
+    cityId: string;
     isRealUser: boolean;
   }>({
     lat: 16.0544,
     lng: 108.2022,
     name: 'Đà Nẵng',
+    cityId: 'da-nang',
     isRealUser: false,
   });
 
   // Flag indicating the user panned the map away from current search center
+  const searchCenterRef = useRef(searchCenter);
+  searchCenterRef.current = searchCenter;
   const [hasMapMovedAway, setHasMapMovedAway] = useState(false);
   const [currentMapCenter, setCurrentMapCenter] = useState<{ lat: number; lng: number } | null>(null);
 
@@ -112,6 +153,47 @@ export const NearbyPage: React.FC<NearbyPageProps> = ({
 
   // 6. Mobile toggle: 'map' | 'list'
   const [mobileView, setMobileView] = useState<'map' | 'list'>('map');
+
+  // -----------------------------------------------------------------------
+  // 7. Live Data Mode State (Foursquare / Google / Sample)
+  // -----------------------------------------------------------------------
+
+  /**
+   * 'foursquare+osm' → dữ liệu pre-fetched kết hợp (khuyến nghị, không gọi API runtime)
+   * 'sample'         → dữ liệu tĩnh vietnamData.ts (Leaflet, không cần API key)
+   * 'foursquare'     → Foursquare Places API free
+   * 'google'         → Google Places API (New) - có billing
+   */
+  const [dataSource, setDataSource] = useState<DataSourceType>(() => {
+    // Auto-detect pre-fetched data on mount
+    if (hasPreFetchedData()) return 'foursquare+osm';
+    return 'sample';
+  });
+
+  /** Trạng thái fetch chung */
+  const [fetchState, setFetchState] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
+
+  /** Lỗi từ API — phân loại rõ ràng */
+  const [apiError, setApiError] = useState<{ type: string; message: string } | null>(null);
+
+  /** Kết quả từ API (tách riêng khỏi sample places) */
+  const [livePlaces, setLivePlaces] = useState<NearbyPlace[]>([]);
+
+  /** Đã gọi search ít nhất 1 lần chưa */
+  const [hasSearchedOnce, setHasSearchedOnce] = useState(false);
+
+  /** Debounce timer ref cho filter change */
+  const filterDebounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  /** Pre-fetched city data (loaded from JSON) */
+  const [cityData, setCityData] = useState<CityPlacesData | null>(null);
+  const [loadedCityId, setLoadedCityId] = useState<string | null>(null);
+  const usingSample = dataSource === 'sample' || (
+    dataSource === 'foursquare+osm' && loadedCityId === searchCenter.cityId && !cityData
+  );
+
+  /** Merge stats from pre-fetched data */
+  const [mergeStats, setMergeStats] = useState<MergeStats | null>(null);
 
   // Trigger Toast helper
   const showToast = (msg: string) => {
@@ -148,10 +230,12 @@ export const NearbyPage: React.FC<NearbyPageProps> = ({
         const coords = { lat: latitude, lng: longitude, accuracy };
         setRealUserCoords(coords);
         setGeoState('located');
+        const nearestCity = findNearestCity(latitude, longitude);
         setSearchCenter({
           lat: latitude,
           lng: longitude,
           name: 'Vị trí của bạn',
+          cityId: nearestCity.id,
           isRealUser: true,
         });
         setHasMapMovedAway(false);
@@ -180,21 +264,29 @@ export const NearbyPage: React.FC<NearbyPageProps> = ({
   };
 
   // Jump to specific preset city/area
-  const handleSelectArea = (area: { name: string; lat: number; lng: number }) => {
+  const handleSelectArea = (area: typeof POPULAR_AREAS[0]) => {
     setSearchCenter({
       lat: area.lat,
       lng: area.lng,
       name: area.name,
+      cityId: area.id,
       isRealUser: false,
     });
     setHasMapMovedAway(false);
     if (mapInstanceRef.current) {
-      mapInstanceRef.current.flyTo([area.lat, area.lng], 14, { duration: 1 });
+      const map = mapInstanceRef.current;
+      map.stop();
+      if (map.getContainer().clientWidth > 0) {
+        map.flyTo([area.lat, area.lng], 14, { duration: 1 });
+      } else {
+        map.setView([area.lat, area.lng], 14, { animate: false });
+      }
     }
   };
 
-  // Query places based on searchCenter and filters
-  const places = useMemo(() => {
+  // Query places based on searchCenter and filters (Sample Mode)
+  const samplePlaces = useMemo(() => {
+    if (!usingSample) return [];
     return queryNearbyPlaces({
       center: { lat: searchCenter.lat, lng: searchCenter.lng },
       radiusKm: selectedRadius,
@@ -203,7 +295,156 @@ export const NearbyPage: React.FC<NearbyPageProps> = ({
       sortBy,
       onlyOpenNow,
     });
-  }, [searchCenter, selectedRadius, selectedCategory, searchQuery, sortBy, onlyOpenNow]);
+  }, [searchCenter, selectedRadius, selectedCategory, searchQuery, sortBy, onlyOpenNow, usingSample]);
+
+  /** Danh sách địa điểm hiển thị — tuỳ theo dataSource */
+  const staticPlaces = useMemo(() => {
+    if (dataSource !== 'foursquare+osm' || cityData?.cityId !== searchCenter.cityId) return [];
+    return filterCityPlaces(cityData, {
+      center: searchCenter, radiusKm: selectedRadius, category: selectedCategory,
+      searchQuery, sortBy,
+    });
+  }, [dataSource, cityData, searchCenter, selectedRadius, selectedCategory, searchQuery, sortBy]);
+  const places = usingSample ? samplePlaces : dataSource === 'foursquare+osm' ? staticPlaces : livePlaces;
+  const [visiblePlaceCount, setVisiblePlaceCount] = useState(50);
+  useEffect(() => { setVisiblePlaceCount(50); }, [places]);
+
+  // ---------------------------------------------------------------------------
+  // Live Search (Foursquare hoặc Google) — CHỈ gọi khi user xác nhận
+  // ---------------------------------------------------------------------------
+
+  const executeSearch = useCallback(async () => {
+    if (dataSource === 'sample') return;
+
+    // --- foursquare+osm mode: filter pre-fetched JSON locally ---
+    if (dataSource === 'foursquare+osm') {
+      if (!cityData) return;
+      setFetchState('loading');
+      setHasSearchedOnce(true);
+
+      const filtered = filterCityPlaces(cityData, {
+        center: { lat: searchCenter.lat, lng: searchCenter.lng },
+        radiusKm: selectedRadius,
+        category: selectedCategory,
+        searchQuery,
+        sortBy,
+      });
+
+      setLivePlaces(filtered);
+      setFetchState('success');
+      return;
+    }
+
+    // --- Realtime API modes (foursquare / google) ---
+    setFetchState('loading');
+    setApiError(null);
+    setHasSearchedOnce(true);
+
+    const radiusMeters = selectedRadius === 'all' ? 50000 : selectedRadius * 1000;
+
+    try {
+      let results: NearbyPlace[] = [];
+
+      if (dataSource === 'foursquare') {
+        results = await searchFoursquare({
+          center: { lat: searchCenter.lat, lng: searchCenter.lng },
+          radiusMeters,
+          category: selectedCategory,
+          limit: 20,
+        });
+      } else if (dataSource === 'google') {
+        results = await searchGoogle({
+          center: { lat: searchCenter.lat, lng: searchCenter.lng },
+          radiusMeters,
+          category: selectedCategory,
+          maxResultCount: 20,
+        });
+      }
+
+      setLivePlaces(results);
+      setFetchState('success');
+    } catch (err: unknown) {
+      const e = err as { type?: string; message?: string };
+      setApiError({ type: e.type ?? 'UNKNOWN', message: e.message ?? String(err) });
+      setFetchState('error');
+    }
+  }, [dataSource, searchCenter, selectedRadius, selectedCategory, cityData, searchQuery, sortBy]);
+
+  /**
+   * Auto-load city JSON when dataSource is 'foursquare+osm' and cityId changes
+   */
+  useEffect(() => {
+    if (dataSource !== 'foursquare+osm') return;
+
+    let cancelled = false;
+    setFetchState('loading');
+    setCityData(null);
+    setMergeStats(null);
+    setLoadedCityId(null);
+    setSelectedPlaceId(null);
+
+    loadCityPlaces(searchCenter.cityId).then(data => {
+      if (cancelled) return;
+      setLoadedCityId(searchCenter.cityId);
+      if (data) {
+        setCityData(data);
+        setMergeStats(data.stats);
+
+        // Auto-filter immediately
+        const filtered = filterCityPlaces(data, {
+          center: { lat: searchCenter.lat, lng: searchCenter.lng },
+          radiusKm: selectedRadius,
+          category: selectedCategory,
+          searchQuery,
+          sortBy,
+        });
+        setLivePlaces(filtered);
+        setFetchState('success');
+        setHasSearchedOnce(true);
+      } else {
+        // No pre-fetched data for this city → fallback to sample
+        setCityData(null);
+        setMergeStats(null);
+        setLivePlaces([]);
+        setFetchState('idle');
+      }
+    });
+
+    return () => { cancelled = true; };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dataSource, searchCenter.cityId]);
+
+  /**
+   * Trigger search với debounce khi filter thay đổi.
+   * KHÔNG trigger khi selectedPlaceId thay đổi.
+   */
+  useEffect(() => {
+    if (dataSource === 'sample' || dataSource === 'foursquare+osm') return;
+    if (!hasSearchedOnce) return;
+
+    if (filterDebounceRef.current) clearTimeout(filterDebounceRef.current);
+    filterDebounceRef.current = setTimeout(() => {
+      executeSearch();
+    }, dataSource === 'foursquare+osm' ? 200 : 800);
+
+    return () => {
+      if (filterDebounceRef.current) clearTimeout(filterDebounceRef.current);
+    };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selectedCategory, selectedRadius, searchQuery, sortBy, dataSource, searchCenter]);
+
+  /** Chuyển về sample mode và báo rõ (không âm thầm) */
+  const handleFallbackToSample = () => {
+    setDataSource('sample');
+    setFetchState('idle');
+    setApiError(null);
+    setLivePlaces([]);
+    setCityData(null);
+    setMergeStats(null);
+  };
+
+  // Alias cũ cho executeGoogleSearch (dùng trong handleSearchThisArea)
+  const executeGoogleSearch = executeSearch;
 
   // The active selected place object
   const selectedPlace = useMemo(() => {
@@ -213,6 +454,7 @@ export const NearbyPage: React.FC<NearbyPageProps> = ({
 
   // 1. Initialize Leaflet Map
   useEffect(() => {
+    if (dataSource === 'google') return;
     if (!mapContainerRef.current) return;
     if (mapInstanceRef.current) return;
 
@@ -224,13 +466,14 @@ export const NearbyPage: React.FC<NearbyPageProps> = ({
       zoom: 14,
       zoomControl: false,
       attributionControl: true,
+      preferCanvas: true,
     });
 
-    // Clean, crisp CartoDB Positron tiles matching Airbnb aesthetic
+    // Minimalist Gray Canvas map (Beautiful like CARTO, Free, No API Key)
     leafletLib
-      .tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
-        attribution: '&copy; <a href="https://carto.com/">CARTO</a> &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a>',
-        maxZoom: 19,
+      .tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
+        attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ',
+        maxZoom: 16,
       })
       .addTo(map);
 
@@ -242,10 +485,9 @@ export const NearbyPage: React.FC<NearbyPageProps> = ({
       const center = map.getCenter();
       setCurrentMapCenter({ lat: center.lat, lng: center.lng });
       // If moved significantly from searchCenter (> 400m)
-      const dist = Math.hypot(center.lat - searchCenter.lat, center.lng - searchCenter.lng);
-      if (dist > 0.005) {
-        setHasMapMovedAway(true);
-      }
+      const activeCenter = searchCenterRef.current;
+      const dist = Math.hypot(center.lat - activeCenter.lat, center.lng - activeCenter.lng);
+      setHasMapMovedAway(dist > 0.005);
     });
 
     mapInstanceRef.current = map;
@@ -254,7 +496,14 @@ export const NearbyPage: React.FC<NearbyPageProps> = ({
       map.remove();
       mapInstanceRef.current = null;
     };
-  }, []);
+  }, [dataSource === 'google']);
+
+  useEffect(() => {
+    const map = mapInstanceRef.current;
+    if (!map) return;
+    map.stop();
+    if (map.getContainer().clientWidth > 0) map.invalidateSize();
+  }, [mobileView]);
 
   // 2. Render / Update User Location Marker
   useEffect(() => {
@@ -318,6 +567,18 @@ export const NearbyPage: React.FC<NearbyPageProps> = ({
 
     places.forEach((place) => {
       const isSelected = place.id === selectedPlaceId;
+      if (places.length > 100 && !isSelected) {
+        const label = document.createElement('span');
+        label.textContent = place.name;
+        const marker = leafletLib.circleMarker([place.coordinates.lat, place.coordinates.lng], {
+          radius: 4, color: '#ffffff', weight: 1, fillColor: '#e34263', fillOpacity: 0.8,
+        }).addTo(map).bindTooltip(label).on('click', () => {
+          setSelectedPlaceId(place.id);
+          placeCardsRef.current[place.id]?.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        });
+        markersMapRef.current[place.id] = marker;
+        return;
+      }
 
       // Icon emoji based on category
       const iconEmoji =
@@ -334,6 +595,8 @@ export const NearbyPage: React.FC<NearbyPageProps> = ({
           : '📍';
 
       // Airbnb style custom HTML pin
+      const safeName = document.createElement('span');
+      safeName.textContent = place.name;
       const pinHtml = `
         <div class="group relative cursor-pointer select-none transition-all duration-200 transform ${
           isSelected ? 'scale-125 z-50' : 'hover:scale-115'
@@ -344,7 +607,7 @@ export const NearbyPage: React.FC<NearbyPageProps> = ({
               : 'bg-white text-[#222222] border-[#E5E5E5] hover:border-[#222222]'
           }">
             <span class="text-sm">${iconEmoji}</span>
-            <span class="max-w-[100px] truncate text-[11px]">${place.name}</span>
+            <span class="max-w-[100px] truncate text-[11px]">${safeName.innerHTML}</span>
           </div>
           <div class="w-2 h-2 mx-auto rotate-45 -mt-1 ${
             isSelected ? 'bg-[#222222]' : 'bg-white border-r border-b border-[#E5E5E5]'
@@ -392,13 +655,20 @@ export const NearbyPage: React.FC<NearbyPageProps> = ({
   // Re-search at current map center (Airbnb "Tìm trong khu vực này")
   const handleSearchThisArea = () => {
     if (!currentMapCenter) return;
+    const nearestCity = findNearestCity(currentMapCenter.lat, currentMapCenter.lng);
     setSearchCenter({
       lat: currentMapCenter.lat,
       lng: currentMapCenter.lng,
       name: 'Khu vực trên bản đồ',
+      cityId: nearestCity.id,
       isRealUser: false,
     });
     setHasMapMovedAway(false);
+    // Live mode: trigger search người dùng xác nhận khu vực mới
+    if (dataSource !== 'sample' && dataSource !== 'foursquare+osm') {
+      executeSearch();
+    }
+    // foursquare+osm: auto-loads via useEffect on cityId change
   };
 
   // Reset all filters
@@ -418,7 +688,7 @@ export const NearbyPage: React.FC<NearbyPageProps> = ({
     onlyOpenNow;
 
   return (
-    <div className="min-h-[calc(100vh-80px)] bg-white text-[#222222] flex flex-col relative">
+    <div className="min-h-[calc(100vh-110px)] bg-white text-[#222222] flex flex-col relative">
       {/* Toast Notification */}
       {toastMessage && (
         <div className="fixed top-20 left-1/2 -translate-x-1/2 z-50 bg-[#222222] text-white px-5 py-2.5 rounded-full shadow-2xl flex items-center gap-2 text-xs font-bold animate-in fade-in slide-in-from-top-4 duration-200">
@@ -435,7 +705,7 @@ export const NearbyPage: React.FC<NearbyPageProps> = ({
         <div
           className={`w-full lg:w-[42%] xl:w-[40%] flex flex-col border-r border-[#E5E5E5] bg-white z-10 ${
             mobileView === 'map' ? 'hidden lg:flex' : 'flex'
-          } max-h-none lg:max-h-[calc(100vh-80px)] overflow-hidden`}
+          } max-h-none lg:max-h-[calc(100vh-110px)] overflow-hidden`}
         >
           {/* Top Sticky Header: Search Bar & Area Indicator */}
           <div className="p-4 sm:p-5 border-b border-[#E5E5E5] bg-white shrink-0 space-y-3">
@@ -446,7 +716,18 @@ export const NearbyPage: React.FC<NearbyPageProps> = ({
                 type="text"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Tìm địa điểm, món ăn, cà phê, di tích..."
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' && dataSource !== 'sample') {
+                    executeSearch();
+                  }
+                }}
+                placeholder={
+                  dataSource === 'foursquare'
+                    ? 'Tìm địa điểm, món ăn, cà phê... (Enter để tìm)'
+                    : dataSource === 'google'
+                    ? 'Tìm địa điểm... (Enter để tìm)'
+                    : 'Tìm địa điểm, món ăn, cà phê, di tích...'
+                }
                 className="w-full pl-10 pr-9 py-2.5 bg-[#F7F7F7] hover:bg-[#EFEFEF] focus:bg-white border border-[#E5E5E5] focus:border-[#222222] rounded-full text-xs sm:text-sm font-semibold text-[#222222] placeholder:text-[#717171] transition-all focus:outline-hidden"
               />
               {searchQuery && (
@@ -459,7 +740,33 @@ export const NearbyPage: React.FC<NearbyPageProps> = ({
               )}
             </div>
 
+            {/* Live Mode: nút tìm kiếm rõ ràng (Foursquare hoặc Google — NOT foursquare+osm) */}
+            {dataSource !== 'sample' && dataSource !== 'foursquare+osm' && (
+              <button
+                onClick={executeSearch}
+                disabled={fetchState === 'loading'}
+                className="w-full flex items-center justify-center gap-2 py-2 bg-[#FF385C] hover:bg-[#E00B41] disabled:bg-[#E5E5E5] text-white disabled:text-[#717171] rounded-full text-xs font-bold transition-colors cursor-pointer"
+              >
+                {fetchState === 'loading' ? (
+                  <><RefreshCw className="w-3.5 h-3.5 animate-spin" /><span>Đang tìm...</span></>
+                ) : (
+                  <><Search className="w-3.5 h-3.5" /><span>Tìm quanh đây</span></>
+                )}
+              </button>
+            )}
+
             {/* Category Filter Pills (Horizontal Scroll) */}
+            <select
+              aria-label="Chọn thành phố"
+              value={searchCenter.cityId}
+              onChange={event => {
+                const area = POPULAR_AREAS.find(city => city.id === event.target.value);
+                if (area) handleSelectArea(area);
+              }}
+              className="lg:hidden w-full bg-white border border-[#E5E5E5] rounded-lg px-3 py-2 text-sm"
+            >
+              {POPULAR_AREAS.map(city => <option key={city.id} value={city.id}>{city.name}</option>)}
+            </select>
             <div className="flex items-center gap-1.5 overflow-x-auto scrollbar-none pb-1">
               {categories.map((cat) => {
                 const Icon = cat.icon;
@@ -514,6 +821,8 @@ export const NearbyPage: React.FC<NearbyPageProps> = ({
 
                 <button
                   onClick={() => setOnlyOpenNow(!onlyOpenNow)}
+                  disabled={dataSource === 'foursquare+osm' && !usingSample}
+                  title={dataSource === 'foursquare+osm' && !usingSample ? 'Chưa có trạng thái mở cửa hiện tại' : undefined}
                   className={`px-2.5 py-1 rounded-full text-[11px] font-bold cursor-pointer transition-colors border ${
                     onlyOpenNow
                       ? 'bg-emerald-50 text-emerald-700 border-emerald-300'
@@ -538,31 +847,87 @@ export const NearbyPage: React.FC<NearbyPageProps> = ({
           </div>
 
           {/* Area Indicator & GPS Status Banner */}
-          <div className="px-5 py-3 bg-[#F7F7F7]/60 border-b border-[#E5E5E5] flex items-center justify-between text-xs shrink-0">
-            <div className="flex items-center gap-2 truncate">
-              <span className="w-2 h-2 rounded-full bg-[#FF385C] shrink-0 animate-pulse"></span>
-              <span className="font-bold text-[#222222] truncate">
-                {searchCenter.isRealUser
-                  ? 'Gần bạn (Vị trí hiện tại)'
-                  : `Quanh khu vực: ${searchCenter.name}`}
-              </span>
-              <span className="text-[#717171] text-[11px] shrink-0">
-                • {places.length} địa điểm
-              </span>
+          <div className="px-5 py-3 bg-[#F7F7F7]/60 border-b border-[#E5E5E5] flex flex-col gap-2 text-xs shrink-0">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2 truncate">
+                <span className="w-2 h-2 rounded-full bg-[#FF385C] shrink-0 animate-pulse"></span>
+                <span className="font-bold text-[#222222] truncate">
+                  {searchCenter.isRealUser
+                    ? 'Gần bạn (Vị trí hiện tại)'
+                    : `Quanh khu vực: ${searchCenter.name}`}
+                </span>
+                <span className="text-[#717171] text-[11px] shrink-0">
+                  • {places.length} địa điểm
+                </span>
+              </div>
+
+              <div className="flex items-center gap-1.5 shrink-0">
+                {/* Badge nguồn dữ liệu */}
+                {usingSample && (
+                  <span className="text-[10px] font-bold bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full border border-amber-300">
+                    📊 Mẫu
+                  </span>
+                )}
+                {dataSource === 'foursquare+osm' && !usingSample && (
+                  <span className="text-[10px] font-bold bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full border border-emerald-300">
+                    🌐 FSQ+OSM
+                  </span>
+                )}
+
+                {/* Toggle nguồn */}
+                {(hasPreFetchedData() || !IS_SAMPLE_MODE) && (
+                  <button
+                    onClick={() => {
+                      const modes: DataSourceType[] = ['foursquare+osm', 'sample'];
+                      if (!IS_SAMPLE_MODE) modes.push(DEFAULT_DATA_SOURCE);
+                      const currentIdx = modes.indexOf(dataSource);
+                      const next = modes[(currentIdx + 1) % modes.length];
+                      setDataSource(next);
+                      setLivePlaces([]);
+                      setFetchState('idle');
+                      setApiError(null);
+                      setHasSearchedOnce(false);
+                      setCityData(null);
+                      setMergeStats(null);
+                    }}
+                    className="text-[10px] font-bold text-[#717171] hover:text-[#222222] px-2 py-0.5 rounded-full border border-[#E5E5E5] bg-white transition-colors cursor-pointer"
+                    title="Chuyển nguồn dữ liệu"
+                  >
+                    🔄 Nguồn khác
+                  </button>
+                )}
+
+              {/* Locate Button */}
+              <button
+                onClick={handleRequestUserLocation}
+                disabled={geoState === 'locating'}
+                className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white hover:bg-stone-50 border border-[#E5E5E5] text-[#222222] text-xs font-bold shadow-2xs hover:shadow-xs transition-all cursor-pointer shrink-0"
+                title="Sử dụng vị trí của tôi"
+              >
+                <LocateFixed className={`w-3.5 h-3.5 text-[#FF385C] ${geoState === 'locating' ? 'animate-spin' : ''}`} />
+                <span className="hidden sm:inline">
+                  {geoState === 'locating' ? 'Đang định vị...' : 'Vị trí của tôi'}
+                </span>
+              </button>
+              </div>
             </div>
 
-            {/* Locate Button */}
-            <button
-              onClick={handleRequestUserLocation}
-              disabled={geoState === 'locating'}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white hover:bg-stone-50 border border-[#E5E5E5] text-[#222222] text-xs font-bold shadow-2xs hover:shadow-xs transition-all cursor-pointer shrink-0"
-              title="Sử dụng vị trí của tôi"
-            >
-              <LocateFixed className={`w-3.5 h-3.5 text-[#FF385C] ${geoState === 'locating' ? 'animate-spin' : ''}`} />
-              <span className="hidden sm:inline">
-                {geoState === 'locating' ? 'Đang định vị...' : 'Vị trí của tôi'}
-              </span>
-            </button>
+            {/* Merge stats — chỉ hiện với foursquare+osm */}
+            {dataSource === 'foursquare+osm' && mergeStats && (
+              <div className="flex flex-wrap items-center gap-2 text-[10px] text-[#717171]">
+                <span className="flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-green-500"></span>{mergeStats.fromFoursquare} Foursquare</span>
+                <span>·</span>
+                <span className="flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-blue-500"></span>{mergeStats.fromOSM} OSM</span>
+                <span>·</span>
+                <span className="flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-yellow-500"></span>{mergeStats.merged} đã gộp</span>
+                {mergeStats.needsReview > 0 && (
+                  <><span>·</span><span className="text-amber-600 font-bold">⚠ {mergeStats.needsReview} cần kiểm tra</span></>
+                )}
+                {cityData?.fetchedAt && (
+                  <span className="ml-auto">Cập nhật: {new Date(cityData.fetchedAt).toLocaleDateString('vi-VN')}</span>
+                )}
+              </div>
+            )}
           </div>
 
           {/* Geolocation Explanation & Permission Notice (If not located) */}
@@ -614,13 +979,61 @@ export const NearbyPage: React.FC<NearbyPageProps> = ({
             </div>
           )}
 
+          {/* Live Mode: empty state khi chưa tìm lần nào (KHÔNG hiện cho foursquare+osm vì auto-load) */}
+          {dataSource !== 'sample' && dataSource !== 'foursquare+osm' && !hasSearchedOnce && fetchState !== 'loading' && (
+            <div className="p-4 m-4 rounded-2xl bg-blue-50/70 border border-blue-200/80 text-blue-950 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs shrink-0">
+              <div className="space-y-0.5">
+                <div className="font-bold flex items-center gap-1.5 text-blue-900">
+                  <Search className="w-4 h-4 text-[#FF385C]" />
+                  <span>
+                    Nhấn "Tìm quanh đây" để xem địa điểm thực
+                    {dataSource === 'foursquare' ? ' từ Foursquare' : ' từ Google'}
+                  </span>
+                </div>
+                <p className="text-[11px] text-blue-800">
+                  Kết quả tìm kiếm theo vị trí thực, cập nhật theo thời gian thực.
+                </p>
+              </div>
+              <button
+                onClick={executeSearch}
+                disabled={fetchState === 'loading'}
+                className="px-4 py-2 bg-[#222222] hover:bg-black text-white rounded-full font-bold text-xs shrink-0 cursor-pointer shadow-xs"
+              >
+                Tìm quanh đây
+              </button>
+            </div>
+          )}
+
+          {/* foursquare+osm: no data for this city */}
+          {dataSource === 'foursquare+osm' && !cityData && fetchState !== 'loading' && (
+            <div className="p-4 m-4 rounded-2xl bg-amber-50/70 border border-amber-200/80 text-amber-950 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs shrink-0">
+              <div className="space-y-0.5">
+                <div className="font-bold flex items-center gap-1.5 text-amber-900">
+                  <Info className="w-4 h-4" />
+                  <span>Đang hiển thị dữ liệu mẫu cho {searchCenter.name}</span>
+                </div>
+                <p className="text-[11px] text-amber-800">
+                  Dữ liệu địa điểm của khu vực này chưa được cập nhật.
+                </p>
+              </div>
+              <button
+                onClick={handleFallbackToSample}
+                className="px-4 py-2 bg-[#222222] hover:bg-black text-white rounded-full font-bold text-xs shrink-0 cursor-pointer shadow-xs"
+              >
+                Dùng dữ liệu mẫu
+              </button>
+            </div>
+          )}
+
           {/* Places Scrollable List */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-3.5">
+          <div className="flex-1 overflow-y-auto p-4 pb-24 lg:pb-4 space-y-3.5">
             {places.length === 0 ? (
               <div className="py-16 text-center space-y-3 bg-[#F7F7F7] rounded-3xl border border-[#E5E5E5] p-6">
                 <Compass className="w-10 h-10 text-stone-300 mx-auto" />
                 <div className="text-sm font-bold text-[#222222]">
-                  Không tìm thấy địa điểm nào trong bán kính này
+                  {dataSource === 'foursquare+osm' && cityData?.places.length === 0
+                    ? 'Chưa có dữ liệu cho khu vực này'
+                    : 'Không tìm thấy địa điểm nào trong bán kính này'}
                 </div>
                 <p className="text-xs text-[#717171] max-w-sm mx-auto">
                   Hãy thử nới rộng bán kính tìm kiếm, xóa từ khóa lọc hoặc chọn một thành phố du lịch lớn.
@@ -641,7 +1054,7 @@ export const NearbyPage: React.FC<NearbyPageProps> = ({
                 </div>
               </div>
             ) : (
-              places.map((place) => {
+              places.slice(0, visiblePlaceCount).map((place) => {
                 const isSelected = place.id === selectedPlaceId;
                 const isWishlisted = wishlist.includes(place.id);
 
@@ -650,6 +1063,7 @@ export const NearbyPage: React.FC<NearbyPageProps> = ({
                     key={place.id}
                     ref={(el) => (placeCardsRef.current[place.id] = el)}
                     onClick={() => handleSelectPlaceFromList(place)}
+                    data-place-id={place.id}
                     className={`bg-white rounded-2xl border p-3 sm:p-4 flex gap-3.5 sm:gap-4 transition-all cursor-pointer relative group ${
                       isSelected
                         ? 'border-[#222222] shadow-md ring-2 ring-[#222222]/10 bg-stone-50/40'
@@ -664,17 +1078,38 @@ export const NearbyPage: React.FC<NearbyPageProps> = ({
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                         loading="lazy"
                       />
-                      <span className="absolute top-1.5 left-1.5 px-2 py-0.5 rounded-md text-[10px] font-bold bg-black/60 backdrop-blur-xs text-white uppercase">
-                        {place.categoryGroup === 'food'
-                          ? 'Ẩm thực'
-                          : place.categoryGroup === 'cafe'
-                          ? 'Cà phê'
-                          : place.categoryGroup === 'sightseeing'
-                          ? 'Thắng cảnh'
-                          : place.categoryGroup === 'culture'
-                          ? 'Văn hóa'
-                          : 'Mua sắm'}
-                      </span>
+                      {/* Placeholder image label */}
+                      {place.isPlaceholderImage && (
+                        <span className="absolute bottom-1 left-1 px-1.5 py-0.5 rounded text-[8px] font-medium bg-black/50 text-white/80">
+                          Ảnh minh họa
+                        </span>
+                      )}
+                      <div className="absolute top-1.5 left-1.5 right-1.5 flex flex-wrap items-center gap-1">
+                        <span className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-black/60 backdrop-blur-xs text-white uppercase">
+                          {place.categoryGroup === 'food'
+                            ? 'Ẩm thực'
+                            : place.categoryGroup === 'cafe'
+                            ? 'Cà phê'
+                            : place.categoryGroup === 'sightseeing'
+                            ? 'Thắng cảnh'
+                            : place.categoryGroup === 'culture'
+                            ? 'Văn hóa'
+                            : 'Mua sắm'}
+                        </span>
+                        {/* Source badge */}
+                        {place.dataSource === 'foursquare' && (
+                          <span className="px-1.5 py-0.5 rounded-md text-[8px] font-bold bg-green-500/80 text-white">FSQ</span>
+                        )}
+                        {place.dataSource === 'osm' && (
+                          <span className="px-1.5 py-0.5 rounded-md text-[8px] font-bold bg-blue-500/80 text-white">OSM</span>
+                        )}
+                        {place.dataSource === 'merged' && (
+                          <span className="px-1.5 py-0.5 rounded-md text-[8px] font-bold bg-yellow-500/80 text-white">Gộp</span>
+                        )}
+                        {place.needsReview && (
+                          <span className="px-1 py-0.5 rounded-md text-[8px] font-bold bg-amber-500/80 text-white" title="Cần kiểm tra thủ công">⚠</span>
+                        )}
+                      </div>
                     </div>
 
                     {/* Information Content */}
@@ -718,11 +1153,18 @@ export const NearbyPage: React.FC<NearbyPageProps> = ({
                           <span className="font-semibold text-[#222222]">
                             {place.distanceText ? `${place.distanceText} (đường chim bay)` : ''}
                           </span>
-                          <div className="flex items-center gap-1 font-bold text-[#222222]">
-                            <Star className="w-3.5 h-3.5 fill-[#FF385C] text-[#FF385C]" />
-                            <span>{place.rating}</span>
-                            <span className="text-[#717171] font-normal">({place.reviewCount})</span>
-                          </div>
+                          {/* Rating — ẩn nếu null/0 (không fabricate) */}
+                          {place.rating != null ? (
+                            <div className="flex items-center gap-1 font-bold text-[#222222]">
+                              <Star className="w-3.5 h-3.5 fill-[#FF385C] text-[#FF385C]" />
+                              <span>{place.rating}</span>
+                              {place.reviewCount ? (
+                                <span className="text-[#717171] font-normal">({place.reviewCount})</span>
+                              ) : null}
+                            </div>
+                          ) : (
+                            <span className="text-[#717171] text-[10px] italic">Chưa có đánh giá</span>
+                          )}
                         </div>
 
                         {/* Opening status & Price */}
@@ -732,7 +1174,7 @@ export const NearbyPage: React.FC<NearbyPageProps> = ({
                               place.isOpenNow ? 'text-emerald-600' : 'text-stone-400'
                             }`}
                           >
-                            {place.isOpenNow ? '● Đang mở cửa' : '○ Đã đóng cửa'}
+                            {place.isOpenNow === undefined ? 'Chưa có giờ mở cửa hiện tại' : place.isOpenNow ? '● Đang mở cửa' : '○ Đã đóng cửa'}
                           </span>
                           {place.priceDisplay && (
                             <span className="font-extrabold text-[#222222]">
@@ -743,7 +1185,7 @@ export const NearbyPage: React.FC<NearbyPageProps> = ({
                       </div>
 
                       {/* Quick Action Buttons */}
-                      <div className="flex items-center gap-1.5 pt-1.5">
+                      <div className="flex flex-wrap items-center gap-1.5 pt-1.5">
                         <button
                           onClick={(e) => {
                             e.stopPropagation();
@@ -793,6 +1235,12 @@ export const NearbyPage: React.FC<NearbyPageProps> = ({
                 );
               })
             )}
+            {places.length > visiblePlaceCount && (
+              <button onClick={() => setVisiblePlaceCount(count => count + 50)}
+                className="w-full py-3 text-sm font-semibold border border-[#E5E5E5] rounded-lg hover:bg-stone-50">
+                Xem thêm địa điểm ({places.length - visiblePlaceCount})
+              </button>
+            )}
           </div>
         </div>
 
@@ -800,12 +1248,60 @@ export const NearbyPage: React.FC<NearbyPageProps> = ({
         {/* RIGHT COLUMN: Interactive Leaflet Map (60% Desktop, Full on Mobile) */}
         {/* =================================================================== */}
         <div
-          className={`w-full lg:w-[58%] xl:w-[60%] relative flex-1 ${
+          className={`w-full lg:w-[58%] xl:w-[60%] relative flex-none lg:flex-1 ${
             mobileView === 'list' ? 'hidden lg:block' : 'block'
-          } h-[calc(100vh-140px)] lg:h-[calc(100vh-80px)] bg-stone-100`}
+          } h-[calc(100dvh-154px)] lg:h-[calc(100vh-110px)] bg-stone-100`}
         >
-          {/* Leaflet Map Canvas */}
-          <div ref={mapContainerRef} className="w-full h-full z-0" />
+          {/* Map Canvas — Google hoặc Leaflet tuỳ dataSource */}
+          {dataSource === 'google' ? (
+            <GoogleMapView
+              center={searchCenter}
+              places={livePlaces}
+              selectedPlaceId={selectedPlaceId}
+              onSelectPlace={(id) => {
+                // Chỉ update UI — KHÔNG trigger API call
+                setSelectedPlaceId(id);
+                const el = placeCardsRef.current[id];
+                if (el) el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+              }}
+              userCoords={realUserCoords}
+              onMapMoveEnd={(c) => {
+                setCurrentMapCenter(c);
+                const dist = Math.hypot(c.lat - searchCenter.lat, c.lng - searchCenter.lng);
+                if (dist > 0.005) setHasMapMovedAway(true);
+              }}
+            />
+          ) : (
+            // Leaflet Map Canvas (Sample Mode — giữ nguyên)
+            <div ref={mapContainerRef} className="w-full h-full z-0" />
+          )}
+
+          {/* Error Banner — API lỗi (KHÔNG âm thầm fallback) */}
+          {dataSource !== 'sample' && fetchState === 'error' && apiError && (
+            <div className="absolute top-4 left-4 right-4 z-30 bg-red-50 border border-red-200 rounded-2xl p-3 shadow-lg flex items-start justify-between gap-2 animate-in fade-in slide-in-from-top-2 duration-200">
+              <div className="flex items-start gap-2">
+                <AlertTriangle className="w-4 h-4 text-red-500 shrink-0 mt-0.5" />
+                <div className="space-y-0.5">
+                  <p className="text-xs font-bold text-red-700">
+                    {apiError.type === 'QUOTA_EXCEEDED'
+                      ? `Đã hết quota ${dataSource === 'foursquare' ? 'Foursquare' : 'Google'} hôm nay`
+                      : apiError.type === 'AUTH_FAILED'
+                      ? 'API key không hợp lệ'
+                      : apiError.type === 'NETWORK'
+                      ? 'Không thể kết nối mạng'
+                      : 'Lỗi không xác định'}
+                  </p>
+                  <p className="text-[11px] text-red-600">{apiError.message}</p>
+                </div>
+              </div>
+              <button
+                onClick={handleFallbackToSample}
+                className="text-[11px] font-bold text-red-600 hover:text-red-800 underline whitespace-nowrap shrink-0 cursor-pointer"
+              >
+                Dùng dữ liệu mẫu
+              </button>
+            </div>
+          )}
 
           {/* Floating Action: "Tìm trong khu vực này" (Airbnb search this area button) */}
           {hasMapMovedAway && (
@@ -855,7 +1351,7 @@ export const NearbyPage: React.FC<NearbyPageProps> = ({
           {/* Preset Quick City Floating Chips on Map (Bottom-left Desktop) */}
           <div className="hidden sm:flex absolute bottom-6 left-6 z-20 bg-white/95 backdrop-blur-md rounded-2xl p-2 border border-[#E5E5E5] shadow-lg max-w-md flex-wrap items-center gap-1 text-[11px]">
             <span className="font-bold text-[#717171] px-2">Đến nhanh:</span>
-            {POPULAR_AREAS.slice(0, 6).map((city) => (
+            {POPULAR_AREAS.slice(0, 7).map((city) => (
               <button
                 key={city.id}
                 onClick={() => handleSelectArea(city)}
@@ -870,9 +1366,16 @@ export const NearbyPage: React.FC<NearbyPageProps> = ({
             ))}
           </div>
 
+          {/* Attribution footer — Foursquare + OSM */}
+          {dataSource === 'foursquare+osm' && cityData && (
+            <div className="absolute bottom-0 left-0 right-0 z-10 bg-white/90 backdrop-blur-sm px-4 py-1.5 text-[9px] text-[#717171] border-t border-[#E5E5E5] flex items-center justify-center gap-1">
+              <span>Nguồn: {[cityData.attribution.foursquare, cityData.attribution.osm].filter(Boolean).join(' + ')}</span>
+            </div>
+          )}
+
           {/* Floating Selected Place Card at Bottom (Mobile and Desktop Peek) */}
           {selectedPlace && (
-            <div className="absolute bottom-20 lg:bottom-6 left-4 right-4 sm:left-auto sm:right-6 sm:w-96 z-30 bg-white rounded-3xl border border-[#E5E5E5] p-4 shadow-2xl space-y-3 animate-in fade-in slide-in-from-bottom-4 duration-200">
+            <div className="absolute bottom-24 lg:bottom-6 left-4 right-4 sm:left-auto sm:right-6 sm:w-96 z-30 bg-white rounded-3xl border border-[#E5E5E5] p-4 shadow-2xl space-y-3 animate-in fade-in slide-in-from-bottom-4 duration-200">
               <div className="flex justify-between items-start">
                 <div className="flex items-center gap-1.5">
                   <span className="px-2 py-0.5 rounded-md text-[10px] font-bold uppercase bg-rose-50 text-[#FF385C]">
@@ -891,11 +1394,10 @@ export const NearbyPage: React.FC<NearbyPageProps> = ({
               </div>
 
               <div className="flex gap-3">
-                <img
-                  src={selectedPlace.imageUrl}
-                  alt={selectedPlace.name}
-                  className="w-20 h-20 rounded-2xl object-cover shrink-0"
-                />
+                <div className="relative w-20 h-20 shrink-0">
+                  <img src={selectedPlace.imageUrl} alt={selectedPlace.name} className="w-full h-full rounded-2xl object-cover" />
+                  {selectedPlace.isPlaceholderImage && <span className="absolute bottom-0 inset-x-0 bg-black/60 text-white text-[9px] text-center">Ảnh minh họa</span>}
+                </div>
                 <div className="flex-1 min-w-0 space-y-1">
                   <h4 className="text-xs sm:text-sm font-bold text-[#222222] truncate">
                     {selectedPlace.name}
@@ -903,13 +1405,15 @@ export const NearbyPage: React.FC<NearbyPageProps> = ({
                   <p className="text-[11px] text-[#717171] truncate">{selectedPlace.address}</p>
                   <div className="flex items-center gap-2 text-xs">
                     <span className="font-bold text-[#FF385C]">
-                      {selectedPlace.priceDisplay || 'Miễn phí'}
+                      {selectedPlace.priceDisplay || 'Chưa có giá'}
                     </span>
+                    {selectedPlace.rating != null && <>
                     <span className="text-stone-300">•</span>
                     <span className="flex items-center gap-0.5 text-[#222222] font-semibold text-[11px]">
                       <Star className="w-3 h-3 fill-[#FF385C] text-[#FF385C]" />
                       {selectedPlace.rating}
                     </span>
+                    </>}
                   </div>
                 </div>
               </div>
@@ -956,7 +1460,7 @@ export const NearbyPage: React.FC<NearbyPageProps> = ({
       </div>
 
       {/* Mobile Floating Pill Button: Switch between Map and List (Airbnb style) */}
-      <div className="lg:hidden fixed bottom-18 left-1/2 -translate-x-1/2 z-30">
+      <div className="lg:hidden fixed bottom-20 left-1/2 -translate-x-1/2 z-30">
         <button
           onClick={() => setMobileView(mobileView === 'map' ? 'list' : 'map')}
           className="px-5 py-2.5 bg-[#222222] text-white rounded-full shadow-2xl flex items-center gap-2 text-xs font-bold cursor-pointer hover:scale-105 active:scale-95 transition-transform"

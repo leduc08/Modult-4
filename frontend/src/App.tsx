@@ -180,6 +180,7 @@ export default function App() {
         onAddToItinerary={handleAddToItinerary}
         onAskAI={handleAskAIAboutItem}
         onOpenBooking={handleOpenBooking}
+        googlePlaceId={(selectedDetailItem as any)?.googlePlaceId}
       />
 
       {/* 4. Account Drawer (Wishlist, Travel DNA, Budget Tracker, Emergency) */}

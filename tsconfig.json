@@ -22,14 +22,11 @@
     "allowImportingTsExtensions": true,
     "noEmit": true
   },
-  "references": [
-    { "path": "./frontend" },
-    { "path": "./backend" }
-  ],
   "include": [
     "frontend/**/*",
     "backend/**/*",
     "database/**/*",
-    "ai/**/*"
+    "ai/**/*",
+    "scripts/**/*.ts"
   ]
 }

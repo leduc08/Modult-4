@@ -17,12 +17,19 @@ export default defineConfig(() => {
       emptyOutDir: true,
     },
     server: {
-      allowedHosts: true,
+      allowedHosts: true as true,
       // HMR is disabled in AI Studio via DISABLE_HMR env var.
       // Do not modify—file watching is disabled to prevent flickering during agent edits.
       hmr: process.env.DISABLE_HMR !== 'true',
       // Disable file watching when DISABLE_HMR is true to save CPU during agent edits.
       watch: process.env.DISABLE_HMR === 'true' ? null : {},
+      proxy: {
+        '/api/foursquare': {
+          target: 'https://places-api.foursquare.com',
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/api\/foursquare/, '')
+        }
+      }
     },
   };
 });

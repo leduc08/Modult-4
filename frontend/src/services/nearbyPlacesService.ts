@@ -3,6 +3,9 @@ import { DetailItem } from '../components/ItemDetailModal';
 
 export type PlaceCategoryGroup = 'all' | 'food' | 'cafe' | 'sightseeing' | 'culture' | 'shopping';
 
+/** Nhận dạng nguồn dữ liệu — dùng để phân biệt với Google Places */
+export const DATA_SOURCE_ID = 'local-sample' as const;
+
 export interface NearbyPlace {
   id: string;
   name: string;
@@ -17,8 +20,8 @@ export interface NearbyPlace {
   provinceName: string;
   provinceId: string;
   imageUrl: string;
-  rating: number;
-  reviewCount: number;
+  rating: number | null;
+  reviewCount: number | null;
   openingHours?: string;
   isOpenNow?: boolean;
   priceDisplay?: string;
@@ -30,6 +33,35 @@ export interface NearbyPlace {
   distanceKm?: number;
   distanceText?: string;
   sourceItem: DetailItem;
+  /**
+   * Google place_id — chỉ có khi địa điểm đến từ Google Places API.
+   * Dùng để lazy-fetch Place Details khi mở ItemDetailModal.
+   * Không có với dữ liệu mẫu (vietnamData.ts).
+   */
+  googlePlaceId?: string;
+
+  // --- Multi-source fields (Foursquare + OSM pre-fetch) ---
+
+  /** Nguồn dữ liệu gốc */
+  dataSource?: 'foursquare' | 'osm' | 'merged' | 'sample' | 'google';
+
+  /** Foursquare place ID — giữ để đối chiếu */
+  foursquareId?: string;
+
+  /** OSM element ID (e.g. "node/123456") — giữ để đối chiếu */
+  osmId?: string;
+
+  /** true nếu ảnh là minh họa (chưa có ảnh thật) — UI cần ghi rõ */
+  isPlaceholderImage?: boolean;
+
+  /** true nếu merge có conflict cần kiểm tra thủ công */
+  needsReview?: boolean;
+
+  /** Số điện thoại */
+  phone?: string;
+
+  /** Website */
+  website?: string;
 }
 
 // Earth's radius in kilometers

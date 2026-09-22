@@ -15,9 +15,14 @@ import {
   Compass, 
   Utensils, 
   AlertCircle,
-  ExternalLink
+  ExternalLink,
+  Phone,
+  Globe
 } from 'lucide-react';
 import { POI, FoodSpot, Festival, Province } from '../types';
+import { IS_SAMPLE_MODE, DEFAULT_DATA_SOURCE } from '../config/maps';
+import { getPlaceDetails as getGooglePlaceDetails, buildDirectionsUrl, buildPlaceUrl, GooglePlaceDetail } from '../services/googlePlacesService';
+import { getPlaceDetails as getFoursquarePlaceDetails, buildFoursquareUrl, FoursquareDetail } from '../services/foursquareService';
 
 export type DetailItem = 
   | ({ itemType: 'poi' } & POI)
@@ -34,6 +39,8 @@ interface ItemDetailModalProps {
   onAddToItinerary?: (item: DetailItem) => void;
   onAskAI?: (item: DetailItem) => void;
   onOpenBooking?: (booking: { name: string; type: 'table' | 'ticket'; price?: number }) => void;
+  /** Google place_id — nếu có, sẽ lazy-fetch 1 ảnh + đị chi tiết khi modal mở */
+  googlePlaceId?: string;
 }
 
 export const ItemDetailModal: React.FC<ItemDetailModalProps> = ({
@@ -45,9 +52,14 @@ export const ItemDetailModal: React.FC<ItemDetailModalProps> = ({
   onAddToItinerary,
   onAskAI,
   onOpenBooking,
+  googlePlaceId,
 }) => {
   const [copied, setCopied] = useState(false);
   const [addedToPlan, setAddedToPlan] = useState(false);
+
+  // Live detail state (chỉ active khi có googlePlaceId và không phải sample mode)
+  const [liveDetail, setLiveDetail] = useState<GooglePlaceDetail | FoursquareDetail | null>(null);
+  const [detailLoading, setDetailLoading] = useState(false);
 
   // Close on Escape
   useEffect(() => {
@@ -63,6 +75,34 @@ export const ItemDetailModal: React.FC<ItemDetailModalProps> = ({
       window.removeEventListener('keydown', handleKeyDown);
     };
   }, [isOpen, onClose]);
+
+  // Lazy-fetch Place Details khi modal mở (chỉ 1 lần nhờ session cache)
+  useEffect(() => {
+    if (!isOpen || !googlePlaceId || IS_SAMPLE_MODE) return;
+    setDetailLoading(true);
+
+    const fetchDetail = DEFAULT_DATA_SOURCE === 'foursquare' 
+      ? getFoursquarePlaceDetails(googlePlaceId)
+      : getGooglePlaceDetails(googlePlaceId);
+
+    fetchDetail
+      .then((detail) => {
+        setLiveDetail(detail as any);
+      })
+      .catch(() => {
+        // Không block UI nếu lỗi — giữ ảnh tĩnh bình thường
+        setLiveDetail(null);
+      })
+      .finally(() => setDetailLoading(false));
+  }, [isOpen, googlePlaceId]);
+
+  // Reset detail khi modal đóng
+  useEffect(() => {
+    if (!isOpen) {
+      setLiveDetail(null);
+      setDetailLoading(false);
+    }
+  }, [isOpen]);
 
   if (!isOpen || !item) return null;
 
@@ -86,12 +126,12 @@ export const ItemDetailModal: React.FC<ItemDetailModalProps> = ({
   const title = 'dishName' in item ? `${item.dishName} (${item.name})` : item.name;
   const address = 'address' in item ? item.address : 'provinceName' in item ? item.provinceName : ('tagline' in item ? item.tagline : 'Việt Nam');
   const imageUrl = item.imageUrl;
-  const rating = 'rating' in item ? item.rating : 4.9;
-  const reviewCount = 'reviewCount' in item ? item.reviewCount : 120;
+  const rating = 'rating' in item ? item.rating : null;
+  const reviewCount = 'reviewCount' in item ? item.reviewCount : null;
   const description = item.description;
 
   // Pricing formatting
-  let priceText = 'Miễn phí tham quan';
+  let priceText = 'Chưa có thông tin giá';
   let priceNumber: number | undefined = undefined;
   if ('ticketPrice' in item && typeof item.ticketPrice === 'number') {
     priceNumber = item.ticketPrice;
@@ -166,12 +206,11 @@ export const ItemDetailModal: React.FC<ItemDetailModalProps> = ({
               {title}
             </h1>
             <div className="flex flex-wrap items-center gap-3 text-xs sm:text-sm text-[#717171]">
-              <div className="flex items-center gap-1 font-bold text-[#222222]">
+              {rating != null && <div className="flex items-center gap-1 font-bold text-[#222222]">
                 <Star className="w-4 h-4 fill-amber-400 text-amber-400" />
                 <span>{rating.toFixed(1)}</span>
-                <span className="text-[#717171] font-normal">({reviewCount} đánh giá)</span>
-              </div>
-              <span>•</span>
+                {reviewCount != null && <span className="text-[#717171] font-normal">({reviewCount} đánh giá)</span>}
+              </div>}
               <div className="flex items-center gap-1 text-[#222222]">
                 <MapPin className="w-3.5 h-3.5 text-[#FF385C]" />
                 <span>{address}</span>
@@ -179,17 +218,31 @@ export const ItemDetailModal: React.FC<ItemDetailModalProps> = ({
             </div>
           </div>
 
-          {/* Photo Showcase */}
+          {/* Photo Showcase — Live Photo (nếu có) hoặc ảnh tĩnh */}
           <div className="rounded-2xl sm:rounded-3xl overflow-hidden bg-[#F7F7F7] aspect-[16/9] sm:aspect-[21/9] relative shadow-xs">
-            <img
-              src={imageUrl}
-              alt={title}
-              className="w-full h-full object-cover"
-              onError={(e) => {
-                // Fallback travel image
-                (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1528127269322-539801943592?w=1000&auto=format&fit=crop&q=80';
-              }}
-            />
+            {detailLoading ? (
+              // Loading skeleton trong khi fetch Live Photo
+              <div className="w-full h-full bg-gradient-to-r from-[#F7F7F7] via-[#EFEFEF] to-[#F7F7F7] animate-pulse" />
+            ) : (
+              <img
+                src={liveDetail?.photoUrl ?? imageUrl}
+                alt={title}
+                className="w-full h-full object-cover"
+                onError={(e) => {
+                  // Fallback ảnh tĩnh nếu Live Photo lỗi
+                  (e.target as HTMLImageElement).src = imageUrl || 'https://images.unsplash.com/photo-1528127269322-539801943592?w=1000&auto=format&fit=crop&q=80';
+                }}
+              />
+            )}
+            {/* Attribution tác giả ảnh (Google Places policy) */}
+            {'isPlaceholderImage' in item && item.isPlaceholderImage === true && !liveDetail?.photoUrl && (
+              <span className="absolute bottom-2 left-2 text-xs text-white bg-black/60 px-2 py-1 rounded">Ảnh minh họa</span>
+            )}
+            {'photoAttribution' in (liveDetail || {}) && (liveDetail as any).photoAttribution && (
+              <span className="absolute bottom-2 right-2 text-[10px] text-white/80 bg-black/40 px-1.5 py-0.5 rounded">
+                © {(liveDetail as any).photoAttribution}
+              </span>
+            )}
           </div>
 
           {/* Two-Column Grid: Left details, Right Action Card */}
@@ -302,15 +355,45 @@ export const ItemDetailModal: React.FC<ItemDetailModalProps> = ({
                     <span className="text-[#222222] font-medium">{address}</span>
                   </div>
                   <a
-                    href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${title} ${address}`)}`}
+                    href={
+                      googlePlaceId
+                        ? (DEFAULT_DATA_SOURCE === 'foursquare' 
+                           ? buildFoursquareUrl(googlePlaceId) 
+                           : buildPlaceUrl(googlePlaceId))
+                        : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${title} ${address}`)}`
+                    }
                     target="_blank"
                     rel="noreferrer"
                     className="inline-flex items-center gap-1 text-xs font-bold text-[#FF385C] hover:underline shrink-0"
                   >
-                    <span>Mở Google Maps</span>
+                    <span>Mở {DEFAULT_DATA_SOURCE === 'foursquare' ? 'Foursquare' : 'Google Maps'}</span>
                     <ExternalLink className="w-3 h-3" />
                   </a>
                 </div>
+
+                {/* Thông tin bổ sung từ API (lazy-loaded) */}
+                {liveDetail && (
+                  <div className="flex flex-wrap gap-3">
+                    {liveDetail.websiteUri && (
+                      <a
+                        href={liveDetail.websiteUri}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="flex items-center gap-1.5 text-xs font-semibold text-[#717171] hover:text-[#222222]"
+                      >
+                        <Globe className="w-3.5 h-3.5" />
+                        <span>Website</span>
+                        <ExternalLink className="w-2.5 h-2.5" />
+                      </a>
+                    )}
+                    {liveDetail.nationalPhoneNumber && (
+                      <span className="flex items-center gap-1.5 text-xs font-semibold text-[#717171]">
+                        <Phone className="w-3.5 h-3.5" />
+                        <span>{liveDetail.nationalPhoneNumber}</span>
+                      </span>
+                    )}
+                  </div>
+                )}
               </section>
             </div>
 
