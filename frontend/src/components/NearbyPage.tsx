@@ -10,7 +10,6 @@ import {
   Clock, 
   ArrowUpRight, 
   Plus, 
-  Bot, 
   X, 
   Check, 
   RotateCcw, 
@@ -19,6 +18,7 @@ import {
   Landmark, 
   Camera, 
   ShoppingBag, 
+  BedDouble,
   Layers, 
   ChevronRight, 
   AlertCircle, 
@@ -31,6 +31,7 @@ import {
   Info
 } from 'lucide-react';
 import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
 import { 
   NearbyPlace, 
   PlaceCategoryGroup, 
@@ -65,7 +66,6 @@ interface NearbyPageProps {
   onToggleWishlist: (id: string) => void;
   onSelectItem: (item: DetailItem) => void;
   onAddToItinerary: (item: DetailItem) => void;
-  onAskAI: (item: DetailItem) => void;
 }
 
 // Preset popular areas for quick jump when GPS is off or user wants to browse
@@ -98,12 +98,13 @@ export const NearbyPage: React.FC<NearbyPageProps> = ({
   onToggleWishlist,
   onSelectItem,
   onAddToItinerary,
-  onAskAI,
 }) => {
   // Map Container & Instance Refs
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<L.Map | null>(null);
   const markersMapRef = useRef<{ [key: string]: L.Marker | L.CircleMarker }>({});
+  const clusterMarkersRef = useRef<L.Marker[]>([]);
+  const [mapZoom, setMapZoom] = useState(14);
   const userMarkerRef = useRef<L.CircleMarker | null>(null);
   const userAccuracyCircleRef = useRef<L.Circle | null>(null);
   const placeCardsRef = useRef<{ [key: string]: HTMLDivElement | null }>({});
@@ -115,6 +116,7 @@ export const NearbyPage: React.FC<NearbyPageProps> = ({
   // 'denied' = permission denied / error / timeout
   const [geoState, setGeoState] = useState<'idle' | 'locating' | 'located' | 'denied'>('idle');
   const [geoErrorMessage, setGeoErrorMessage] = useState<string>('');
+  const [showGeoNotice, setShowGeoNotice] = useState(false);
   const [realUserCoords, setRealUserCoords] = useState<{ lat: number; lng: number; accuracy?: number } | null>(null);
 
   // 2. Active Search Center (Can be real user coords OR chosen city / map drag center)
@@ -211,6 +213,7 @@ export const NearbyPage: React.FC<NearbyPageProps> = ({
     { id: 'sightseeing', label: 'Tham quan', icon: Camera },
     { id: 'culture', label: 'Văn hóa', icon: Landmark },
     { id: 'shopping', label: 'Mua sắm', icon: ShoppingBag },
+    { id: 'stay', label: 'Lưu trú', icon: BedDouble },
   ];
 
   // Request real user location with geolocation API
@@ -218,10 +221,12 @@ export const NearbyPage: React.FC<NearbyPageProps> = ({
     if (!navigator.geolocation) {
       setGeoState('denied');
       setGeoErrorMessage('Trình duyệt của bạn không hỗ trợ xác định vị trí.');
+      setShowGeoNotice(true);
       return;
     }
 
     setGeoState('locating');
+    setShowGeoNotice(false);
     setGeoErrorMessage('');
 
     navigator.geolocation.getCurrentPosition(
@@ -247,6 +252,7 @@ export const NearbyPage: React.FC<NearbyPageProps> = ({
       },
       (error) => {
         setGeoState('denied');
+        setShowGeoNotice(true);
         if (error.code === error.PERMISSION_DENIED) {
           setGeoErrorMessage('Bạn đã từ chối quyền truy cập vị trí. Bạn vẫn có thể chọn thành phố bên dưới.');
         } else if (error.code === error.TIMEOUT) {
@@ -473,6 +479,7 @@ export const NearbyPage: React.FC<NearbyPageProps> = ({
     leafletLib
       .tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
         attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ',
+        className: 'nearby-base-tiles',
         maxZoom: 16,
       })
       .addTo(map);
@@ -489,6 +496,7 @@ export const NearbyPage: React.FC<NearbyPageProps> = ({
       const dist = Math.hypot(center.lat - activeCenter.lat, center.lng - activeCenter.lng);
       setHasMapMovedAway(dist > 0.005);
     });
+    map.on('zoomend', () => setMapZoom(map.getZoom()));
 
     mapInstanceRef.current = map;
 
@@ -564,8 +572,39 @@ export const NearbyPage: React.FC<NearbyPageProps> = ({
     // Remove existing markers
     Object.values(markersMapRef.current).forEach((m: any) => m?.remove());
     markersMapRef.current = {};
+    clusterMarkersRef.current.forEach(marker => marker.remove());
+    clusterMarkersRef.current = [];
+
+    const clusteredIds = new Set<string>();
+    if (mapZoom <= 15 && places.length > 40) {
+      const grid = new Map<string, NearbyPlace[]>();
+      for (const place of places) {
+        if (place.id === selectedPlaceId) continue;
+        const point = map.latLngToContainerPoint([place.coordinates.lat, place.coordinates.lng]);
+        const key = `${Math.floor(point.x / 88)}:${Math.floor(point.y / 88)}`;
+        const group = grid.get(key) || [];
+        group.push(place);
+        grid.set(key, group);
+      }
+      for (const group of grid.values()) {
+        if (group.length < 2) continue;
+        group.forEach(place => clusteredIds.add(place.id));
+        const lat = group.reduce((sum, place) => sum + place.coordinates.lat, 0) / group.length;
+        const lng = group.reduce((sum, place) => sum + place.coordinates.lng, 0) / group.length;
+        const icon = leafletLib.divIcon({
+          className: 'nearby-cluster-marker',
+          html: `<span class="flex items-center justify-center w-9 h-9 rounded-full bg-[#FF385C] text-white font-bold text-xs border-[3px] border-white shadow-lg">${group.length}</span>`,
+          iconSize: [36, 36], iconAnchor: [18, 18],
+        });
+        const marker = leafletLib.marker([lat, lng], { icon }).addTo(map).on('click', () => {
+          map.fitBounds(leafletLib.latLngBounds(group.map(place => [place.coordinates.lat, place.coordinates.lng])), { maxZoom: 16, padding: [48, 48] });
+        });
+        clusterMarkersRef.current.push(marker);
+      }
+    }
 
     places.forEach((place) => {
+      if (clusteredIds.has(place.id)) return;
       const isSelected = place.id === selectedPlaceId;
       if (places.length > 100 && !isSelected) {
         const label = document.createElement('span');
@@ -639,7 +678,7 @@ export const NearbyPage: React.FC<NearbyPageProps> = ({
 
       markersMapRef.current[place.id] = marker;
     });
-  }, [places, selectedPlaceId]);
+  }, [places, selectedPlaceId, mapZoom]);
 
   // When selectedPlaceId changes, center map on that place
   const handleSelectPlaceFromList = (place: NearbyPlace) => {
@@ -756,18 +795,8 @@ export const NearbyPage: React.FC<NearbyPageProps> = ({
             )}
 
             {/* Category Filter Pills (Horizontal Scroll) */}
-            <select
-              aria-label="Chọn thành phố"
-              value={searchCenter.cityId}
-              onChange={event => {
-                const area = POPULAR_AREAS.find(city => city.id === event.target.value);
-                if (area) handleSelectArea(area);
-              }}
-              className="lg:hidden w-full bg-white border border-[#E5E5E5] rounded-lg px-3 py-2 text-sm"
-            >
-              {POPULAR_AREAS.map(city => <option key={city.id} value={city.id}>{city.name}</option>)}
-            </select>
-            <div className="flex items-center gap-1.5 overflow-x-auto scrollbar-none pb-1">
+            <div className="relative after:pointer-events-none after:absolute after:right-0 after:top-0 after:bottom-1 after:w-7 after:bg-gradient-to-l after:from-white after:to-transparent">
+            <div className="flex items-center gap-1.5 overflow-x-auto pb-1">
               {categories.map((cat) => {
                 const Icon = cat.icon;
                 const isSelected = selectedCategory === cat.id;
@@ -786,6 +815,7 @@ export const NearbyPage: React.FC<NearbyPageProps> = ({
                   </button>
                 );
               })}
+            </div>
             </div>
 
             {/* Sub-Filters: Radius, Sort, and Open Now */}
@@ -847,14 +877,14 @@ export const NearbyPage: React.FC<NearbyPageProps> = ({
           </div>
 
           {/* Area Indicator & GPS Status Banner */}
-          <div className="px-5 py-3 bg-[#F7F7F7]/60 border-b border-[#E5E5E5] flex flex-col gap-2 text-xs shrink-0">
+          <div className="px-4 py-2 bg-[#F7F7F7]/60 border-b border-[#E5E5E5] flex flex-col gap-1 text-xs shrink-0">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2 truncate">
-                <span className="w-2 h-2 rounded-full bg-[#FF385C] shrink-0 animate-pulse"></span>
+                <span className="w-2 h-2 rounded-full bg-[#FF385C] shrink-0"></span>
                 <span className="font-bold text-[#222222] truncate">
                   {searchCenter.isRealUser
-                    ? 'Gần bạn (Vị trí hiện tại)'
-                    : `Quanh khu vực: ${searchCenter.name}`}
+                    ? 'Gần bạn'
+                    : searchCenter.name}
                 </span>
                 <span className="text-[#717171] text-[11px] shrink-0">
                   • {places.length} địa điểm
@@ -862,41 +892,6 @@ export const NearbyPage: React.FC<NearbyPageProps> = ({
               </div>
 
               <div className="flex items-center gap-1.5 shrink-0">
-                {/* Badge nguồn dữ liệu */}
-                {usingSample && (
-                  <span className="text-[10px] font-bold bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full border border-amber-300">
-                    📊 Mẫu
-                  </span>
-                )}
-                {dataSource === 'foursquare+osm' && !usingSample && (
-                  <span className="text-[10px] font-bold bg-emerald-50 text-emerald-700 px-2 py-0.5 rounded-full border border-emerald-300">
-                    🌐 FSQ+OSM
-                  </span>
-                )}
-
-                {/* Toggle nguồn */}
-                {(hasPreFetchedData() || !IS_SAMPLE_MODE) && (
-                  <button
-                    onClick={() => {
-                      const modes: DataSourceType[] = ['foursquare+osm', 'sample'];
-                      if (!IS_SAMPLE_MODE) modes.push(DEFAULT_DATA_SOURCE);
-                      const currentIdx = modes.indexOf(dataSource);
-                      const next = modes[(currentIdx + 1) % modes.length];
-                      setDataSource(next);
-                      setLivePlaces([]);
-                      setFetchState('idle');
-                      setApiError(null);
-                      setHasSearchedOnce(false);
-                      setCityData(null);
-                      setMergeStats(null);
-                    }}
-                    className="text-[10px] font-bold text-[#717171] hover:text-[#222222] px-2 py-0.5 rounded-full border border-[#E5E5E5] bg-white transition-colors cursor-pointer"
-                    title="Chuyển nguồn dữ liệu"
-                  >
-                    🔄 Nguồn khác
-                  </button>
-                )}
-
               {/* Locate Button */}
               <button
                 onClick={handleRequestUserLocation}
@@ -905,77 +900,26 @@ export const NearbyPage: React.FC<NearbyPageProps> = ({
                 title="Sử dụng vị trí của tôi"
               >
                 <LocateFixed className={`w-3.5 h-3.5 text-[#FF385C] ${geoState === 'locating' ? 'animate-spin' : ''}`} />
-                <span className="hidden sm:inline">
-                  {geoState === 'locating' ? 'Đang định vị...' : 'Vị trí của tôi'}
+                <span className={geoState === 'located' ? 'sr-only' : 'hidden sm:inline'}>
+                  {geoState === 'locating' ? 'Đang định vị...' : geoState === 'located' ? 'Định vị lại' : 'Vị trí của tôi'}
                 </span>
               </button>
               </div>
             </div>
 
-            {/* Merge stats — chỉ hiện với foursquare+osm */}
-            {dataSource === 'foursquare+osm' && mergeStats && (
-              <div className="flex flex-wrap items-center gap-2 text-[10px] text-[#717171]">
-                <span className="flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-green-500"></span>{mergeStats.fromFoursquare} Foursquare</span>
-                <span>·</span>
-                <span className="flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-blue-500"></span>{mergeStats.fromOSM} OSM</span>
-                <span>·</span>
-                <span className="flex items-center gap-1"><span className="w-1.5 h-1.5 rounded-full bg-yellow-500"></span>{mergeStats.merged} đã gộp</span>
-                {mergeStats.needsReview > 0 && (
-                  <><span>·</span><span className="text-amber-600 font-bold">⚠ {mergeStats.needsReview} cần kiểm tra</span></>
-                )}
-                {cityData?.fetchedAt && (
-                  <span className="ml-auto">Cập nhật: {new Date(cityData.fetchedAt).toLocaleDateString('vi-VN')}</span>
-                )}
-              </div>
-            )}
+            <select aria-label="Chọn thành phố" value={searchCenter.cityId}
+              onChange={event => { const area = POPULAR_AREAS.find(city => city.id === event.target.value); if (area) handleSelectArea(area); }}
+              className="lg:hidden w-full bg-white border border-[#D1D1D1] rounded-lg px-2 py-1 text-xs font-semibold">
+              {POPULAR_AREAS.map(city => <option key={city.id} value={city.id}>{city.name}</option>)}
+            </select>
           </div>
 
           {/* Geolocation Explanation & Permission Notice (If not located) */}
-          {geoState === 'idle' && (
-            <div className="p-4 m-4 rounded-2xl bg-amber-50/70 border border-amber-200/80 text-amber-950 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-xs shrink-0">
-              <div className="space-y-0.5">
-                <div className="font-bold flex items-center gap-1.5 text-amber-900">
-                  <Navigation className="w-4 h-4 text-[#FF385C]" />
-                  <span>Cho phép vị trí để tìm địa điểm gần bạn nhất</span>
-                </div>
-                <p className="text-[11px] text-amber-800">
-                  VietGo chỉ yêu cầu quyền khi bạn bấm xác nhận, không theo dõi liên tục.
-                </p>
-              </div>
-              <button
-                onClick={handleRequestUserLocation}
-                className="px-4 py-2 bg-[#222222] hover:bg-black text-white rounded-full font-bold text-xs shrink-0 cursor-pointer shadow-xs"
-              >
-                Sử dụng vị trí của tôi
-              </button>
-            </div>
-          )}
-
-          {/* Geolocation Denied Notice & Quick City Selector */}
-          {geoState === 'denied' && (
-            <div className="p-4 m-4 rounded-2xl bg-stone-50 border border-[#E5E5E5] text-stone-800 space-y-2 text-xs shrink-0">
-              <div className="flex items-center gap-2 font-bold text-rose-600">
-                <AlertCircle className="w-4 h-4" />
-                <span>{geoErrorMessage || 'Chưa nhận được vị trí'}</span>
-              </div>
-              <p className="text-[11px] text-[#717171]">
-                Chọn nhanh một thành phố bên dưới để tiếp tục khám phá:
-              </p>
-              <div className="flex flex-wrap gap-1.5 pt-1">
-                {POPULAR_AREAS.map((city) => (
-                  <button
-                    key={city.id}
-                    onClick={() => handleSelectArea(city)}
-                    className={`px-3 py-1 rounded-full text-[11px] font-semibold border transition-all cursor-pointer ${
-                      searchCenter.name === city.name
-                        ? 'bg-[#222222] text-white border-[#222222]'
-                        : 'bg-white text-[#717171] border-[#E5E5E5] hover:border-[#222222]'
-                    }`}
-                  >
-                    {city.name}
-                  </button>
-                ))}
-              </div>
+          {geoState === 'denied' && showGeoNotice && (
+            <div className="px-4 py-2 bg-amber-50 border-b border-amber-200 text-xs text-amber-900 flex items-center gap-2 shrink-0">
+              <AlertCircle className="w-4 h-4 shrink-0" />
+              <span className="flex-1">{geoErrorMessage || 'Chưa nhận được vị trí'}</span>
+              <button aria-label="Đóng thông báo vị trí" onClick={() => setShowGeoNotice(false)}><X className="w-4 h-4" /></button>
             </div>
           )}
 
@@ -1071,7 +1015,7 @@ export const NearbyPage: React.FC<NearbyPageProps> = ({
                     }`}
                   >
                     {/* Thumbnail Image */}
-                    <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-xl overflow-hidden shrink-0 bg-stone-100">
+                    <button type="button" aria-label={`Xem chi tiết ${place.name}`} onClick={(e) => { e.stopPropagation(); onSelectItem(place.sourceItem); }} className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-xl overflow-hidden shrink-0 bg-stone-100 text-left">
                       <img
                         src={place.imageUrl}
                         alt={place.name}
@@ -1080,7 +1024,7 @@ export const NearbyPage: React.FC<NearbyPageProps> = ({
                       />
                       {/* Placeholder image label */}
                       {place.isPlaceholderImage && (
-                        <span className="absolute bottom-1 left-1 px-1.5 py-0.5 rounded text-[8px] font-medium bg-black/50 text-white/80">
+                        <span className="absolute bottom-1 left-1 px-2 py-0.5 rounded text-[11px] font-semibold bg-black/75 text-white">
                           Ảnh minh họa
                         </span>
                       )}
@@ -1094,32 +1038,21 @@ export const NearbyPage: React.FC<NearbyPageProps> = ({
                             ? 'Thắng cảnh'
                             : place.categoryGroup === 'culture'
                             ? 'Văn hóa'
+                            : place.categoryGroup === 'stay'
+                            ? 'Lưu trú'
                             : 'Mua sắm'}
                         </span>
-                        {/* Source badge */}
-                        {place.dataSource === 'foursquare' && (
-                          <span className="px-1.5 py-0.5 rounded-md text-[8px] font-bold bg-green-500/80 text-white">FSQ</span>
-                        )}
-                        {place.dataSource === 'osm' && (
-                          <span className="px-1.5 py-0.5 rounded-md text-[8px] font-bold bg-blue-500/80 text-white">OSM</span>
-                        )}
-                        {place.dataSource === 'merged' && (
-                          <span className="px-1.5 py-0.5 rounded-md text-[8px] font-bold bg-yellow-500/80 text-white">Gộp</span>
-                        )}
-                        {place.needsReview && (
-                          <span className="px-1 py-0.5 rounded-md text-[8px] font-bold bg-amber-500/80 text-white" title="Cần kiểm tra thủ công">⚠</span>
-                        )}
                       </div>
-                    </div>
+                    </button>
 
                     {/* Information Content */}
                     <div className="flex-1 min-w-0 space-y-1.5 flex flex-col justify-between">
                       <div>
                         {/* Title & Heart Button */}
                         <div className="flex items-start justify-between gap-2">
-                          <h3 className="text-sm font-bold text-[#222222] truncate group-hover:text-[#FF385C] transition-colors">
+                          <button type="button" onClick={(e) => { e.stopPropagation(); onSelectItem(place.sourceItem); }} className="text-sm font-bold text-[#222222] truncate group-hover:text-[#FF385C] transition-colors text-left">
                             {place.name}
-                          </h3>
+                          </button>
                           <button
                             onClick={(e) => {
                               e.stopPropagation();
@@ -1151,7 +1084,7 @@ export const NearbyPage: React.FC<NearbyPageProps> = ({
                       <div className="space-y-1 pt-1 border-t border-[#E5E5E5]/60 text-[11px]">
                         <div className="flex items-center justify-between text-[#717171]">
                           <span className="font-semibold text-[#222222]">
-                            {place.distanceText ? `${place.distanceText} (đường chim bay)` : ''}
+                            {place.distanceText ? `${searchCenter.isRealUser ? 'Cách bạn' : 'Cách tâm khu vực'} ${place.distanceText} (đường chim bay)` : ''}
                           </span>
                           {/* Rating — ẩn nếu null/0 (không fabricate) */}
                           {place.rating != null ? (
@@ -1171,10 +1104,10 @@ export const NearbyPage: React.FC<NearbyPageProps> = ({
                         <div className="flex items-center justify-between">
                           <span
                             className={`font-semibold ${
-                              place.isOpenNow ? 'text-emerald-600' : 'text-stone-400'
+                              place.isOpenNow ? 'text-emerald-700' : 'text-[#595959]'
                             }`}
                           >
-                            {place.isOpenNow === undefined ? 'Chưa có giờ mở cửa hiện tại' : place.isOpenNow ? '● Đang mở cửa' : '○ Đã đóng cửa'}
+                            {place.isOpenNow === undefined ? 'Chưa có thông tin giờ mở cửa' : place.isOpenNow ? '● Đang mở cửa' : '○ Đã đóng cửa'}
                           </span>
                           {place.priceDisplay && (
                             <span className="font-extrabold text-[#222222]">
@@ -1186,16 +1119,6 @@ export const NearbyPage: React.FC<NearbyPageProps> = ({
 
                       {/* Quick Action Buttons */}
                       <div className="flex flex-wrap items-center gap-1.5 pt-1.5">
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            onSelectItem(place.sourceItem);
-                          }}
-                          className="px-2.5 py-1 rounded-lg bg-[#F7F7F7] hover:bg-[#E5E5E5] text-[11px] font-bold text-[#222222] transition-colors cursor-pointer"
-                        >
-                          Xem chi tiết
-                        </button>
-
                         <a
                           href={`https://www.google.com/maps/dir/?api=1&destination=${place.coordinates.lat},${place.coordinates.lng}`}
                           target="_blank"
@@ -1219,16 +1142,6 @@ export const NearbyPage: React.FC<NearbyPageProps> = ({
                           <span>Lịch trình</span>
                         </button>
 
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            onAskAI(place.sourceItem);
-                          }}
-                          className="p-1 rounded-lg bg-rose-50 hover:bg-rose-100 text-[#FF385C] transition-colors cursor-pointer"
-                          title="Hỏi AI về nơi này"
-                        >
-                          <Bot className="w-3.5 h-3.5" />
-                        </button>
                       </div>
                     </div>
                   </div>
@@ -1241,6 +1154,21 @@ export const NearbyPage: React.FC<NearbyPageProps> = ({
                 Xem thêm địa điểm ({places.length - visiblePlaceCount})
               </button>
             )}
+            <details className="text-xs text-[#595959] border-t border-[#E5E5E5] pt-3">
+              <summary className="cursor-pointer font-semibold">Thông tin dữ liệu</summary>
+              <div className="pt-2 space-y-1">
+                <p>Nguồn: {cityData ? [cityData.attribution.foursquare, cityData.attribution.osm].filter(Boolean).join(' + ') : usingSample ? 'Dữ liệu mẫu' : dataSource}</p>
+                {mergeStats && <p>{mergeStats.fromFoursquare} Foursquare · {mergeStats.fromOSM} OpenStreetMap · {mergeStats.merged} đã gộp · {mergeStats.needsReview} cần kiểm tra</p>}
+                {cityData?.fetchedAt && <p>Cập nhật: {new Date(cityData.fetchedAt).toLocaleDateString('vi-VN')}</p>}
+                {(hasPreFetchedData() || !IS_SAMPLE_MODE) && <button onClick={() => {
+                  const modes: DataSourceType[] = ['foursquare+osm', 'sample'];
+                  if (!IS_SAMPLE_MODE) modes.push(DEFAULT_DATA_SOURCE);
+                  const next = modes[(modes.indexOf(dataSource) + 1) % modes.length];
+                  setDataSource(next); setLivePlaces([]); setFetchState('idle'); setApiError(null);
+                  setHasSearchedOnce(false); setCityData(null); setMergeStats(null);
+                }} className="font-semibold underline">Đổi nguồn dữ liệu</button>}
+              </div>
+            </details>
           </div>
         </div>
 
@@ -1348,22 +1276,14 @@ export const NearbyPage: React.FC<NearbyPageProps> = ({
             </div>
           </div>
 
-          {/* Preset Quick City Floating Chips on Map (Bottom-left Desktop) */}
-          <div className="hidden sm:flex absolute bottom-6 left-6 z-20 bg-white/95 backdrop-blur-md rounded-2xl p-2 border border-[#E5E5E5] shadow-lg max-w-md flex-wrap items-center gap-1 text-[11px]">
-            <span className="font-bold text-[#717171] px-2">Đến nhanh:</span>
-            {POPULAR_AREAS.slice(0, 7).map((city) => (
-              <button
-                key={city.id}
-                onClick={() => handleSelectArea(city)}
-                className={`px-2.5 py-1 rounded-xl font-bold cursor-pointer transition-all ${
-                  searchCenter.name === city.name
-                    ? 'bg-[#222222] text-white'
-                    : 'bg-[#F7F7F7] text-[#717171] hover:text-[#222222]'
-                }`}
-              >
-                {city.name}
-              </button>
-            ))}
+          {/* Compact city picker */}
+          <div className="hidden sm:flex absolute bottom-6 left-6 z-20 bg-white/95 backdrop-blur-md rounded-xl p-2 border border-[#D1D1D1] shadow-lg items-center gap-2 text-xs">
+            <span className="font-bold text-[#595959]">Thành phố</span>
+            <select aria-label="Đến nhanh thành phố" value={searchCenter.cityId}
+              onChange={event => { const area = POPULAR_AREAS.find(city => city.id === event.target.value); if (area) handleSelectArea(area); }}
+              className="bg-white border border-[#D1D1D1] rounded-lg px-2 py-1 font-semibold text-[#222222]">
+              {POPULAR_AREAS.map(city => <option key={city.id} value={city.id}>{city.name}</option>)}
+            </select>
           </div>
 
           {/* Attribution footer — Foursquare + OSM */}
@@ -1382,7 +1302,7 @@ export const NearbyPage: React.FC<NearbyPageProps> = ({
                     {selectedPlace.categoryLabel}
                   </span>
                   <span className="text-[11px] font-bold text-[#717171]">
-                    {selectedPlace.distanceText ? `• Cách ${selectedPlace.distanceText}` : ''}
+                    {selectedPlace.distanceText ? `• ${searchCenter.isRealUser ? 'Cách bạn' : 'Cách tâm khu vực'} ${selectedPlace.distanceText}` : ''}
                   </span>
                 </div>
                 <button
@@ -1394,14 +1314,14 @@ export const NearbyPage: React.FC<NearbyPageProps> = ({
               </div>
 
               <div className="flex gap-3">
-                <div className="relative w-20 h-20 shrink-0">
+                <button type="button" onClick={() => onSelectItem(selectedPlace.sourceItem)} aria-label={`Xem chi tiết ${selectedPlace.name}`} className="relative w-20 h-20 shrink-0 text-left">
                   <img src={selectedPlace.imageUrl} alt={selectedPlace.name} className="w-full h-full rounded-2xl object-cover" />
-                  {selectedPlace.isPlaceholderImage && <span className="absolute bottom-0 inset-x-0 bg-black/60 text-white text-[9px] text-center">Ảnh minh họa</span>}
-                </div>
+                  {selectedPlace.isPlaceholderImage && <span className="absolute bottom-0 inset-x-0 bg-black/75 text-white text-[11px] font-semibold text-center">Ảnh minh họa</span>}
+                </button>
                 <div className="flex-1 min-w-0 space-y-1">
-                  <h4 className="text-xs sm:text-sm font-bold text-[#222222] truncate">
+                  <button type="button" onClick={() => onSelectItem(selectedPlace.sourceItem)} className="text-xs sm:text-sm font-bold text-[#222222] truncate text-left w-full hover:text-[#FF385C]">
                     {selectedPlace.name}
-                  </h4>
+                  </button>
                   <p className="text-[11px] text-[#717171] truncate">{selectedPlace.address}</p>
                   <div className="flex items-center gap-2 text-xs">
                     <span className="font-bold text-[#FF385C]">
@@ -1446,12 +1366,6 @@ export const NearbyPage: React.FC<NearbyPageProps> = ({
                     <span>Lịch trình</span>
                   </button>
 
-                  <button
-                    onClick={() => onSelectItem(selectedPlace.sourceItem)}
-                    className="px-3.5 py-1.5 rounded-full bg-[#FF385C] hover:bg-[#E00B41] text-white text-xs font-bold cursor-pointer"
-                  >
-                    Chi tiết
-                  </button>
                 </div>
               </div>
             </div>

@@ -1,0 +1,4185 @@
+{
+  "cityId": "phu-quoc",
+  "cityName": "Phú Quốc",
+  "center": {
+    "lat": 10.2899,
+    "lng": 103.984
+  },
+  "fetchedAt": "2026-09-24T16:05:34.686Z",
+  "sources": {
+    "foursquare": {
+      "count": 81,
+      "fetchedAt": "2026-09-24T16:05:34.686Z"
+    },
+    "osm": {
+      "count": 382,
+      "fetchedAt": "2026-09-24T16:05:34.686Z"
+    }
+  },
+  "stats": {
+    "total": 158,
+    "fromFoursquare": 65,
+    "fromOSM": 89,
+    "merged": 4,
+    "needsReview": 7
+  },
+  "places": [
+    {
+      "id": "fsq-677b47eb0ea94f14428b3b2e",
+      "name": "58 Cafe",
+      "coordinates": {
+        "lat": 10.224392,
+        "lng": 103.969401
+      },
+      "address": "58 Đường Hoàng Văn Thụ, TT. Dương Đông, Phú Quốc, Kiên Giang, Vietnam, Phu Quoc, Tỉnh Kiến Giang",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Café",
+      "foursquareId": "677b47eb0ea94f14428b3b2e",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Café",
+        "Coffee Shop"
+      ]
+    },
+    {
+      "id": "osm-node-7163447485",
+      "name": "ALFA TOURS PRO",
+      "coordinates": {
+        "lat": 10.2050822,
+        "lng": 103.9635213
+      },
+      "address": "84, Trần Hưng Đạo",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Địa điểm",
+      "osmId": "node/7163447485",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": "+84899358858",
+      "website": "https://alfatoursvietnam.ru/phuquoc",
+      "openingHours": "Mo-Su 09:00-22:00",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "information"
+      ]
+    },
+    {
+      "id": "osm-node-3257682973",
+      "name": "Amanda",
+      "coordinates": {
+        "lat": 10.2177647,
+        "lng": 103.9585934
+      },
+      "address": "6, Bạch Đằng, Dương Đông",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Cà phê",
+      "osmId": "node/3257682973",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "cafe"
+      ]
+    },
+    {
+      "id": "osm-node-4583554193",
+      "name": "An giang",
+      "coordinates": {
+        "lat": 10.2135546,
+        "lng": 103.9659372
+      },
+      "address": "Đường 30 Tháng 4",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Cà phê",
+      "osmId": "node/4583554193",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": "Mo-Su 06:00-20:30",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "vietnamese",
+        "cafe"
+      ]
+    },
+    {
+      "id": "osm-node-4807736721",
+      "name": "Au Lac",
+      "coordinates": {
+        "lat": 10.2073193,
+        "lng": 103.9627871
+      },
+      "address": "5, Trần Hưng Đạo",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (vietnamese)",
+      "osmId": "node/4807736721",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": "Mo-Su 09:00-23:00",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "vietnamese",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "osm-way-32003769",
+      "name": "Bãi Trường",
+      "coordinates": {
+        "lat": 10.138022,
+        "lng": 103.9736958
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "way/32003769",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "attraction"
+      ]
+    },
+    {
+      "id": "osm-node-6349705928",
+      "name": "Banana Garden",
+      "coordinates": {
+        "lat": 10.2054208,
+        "lng": 103.9647538
+      },
+      "address": "91/4, Trần Hưng Đạo",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (regional)",
+      "osmId": "node/6349705928",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "regional",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-13663629066",
+      "name": "Bảo vệ tài nguyên rừng là trách nhiệm của mọi người",
+      "coordinates": {
+        "lat": 10.3628008,
+        "lng": 103.9926225
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Địa điểm",
+      "osmId": "node/13663629066",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "information"
+      ]
+    },
+    {
+      "id": "osm-node-13663629067",
+      "name": "Bảo vệ tài nguyên rừng là trách nhiệm của mọi người",
+      "coordinates": {
+        "lat": 10.3625524,
+        "lng": 103.9927927
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Địa điểm",
+      "osmId": "node/13663629067",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "information"
+      ]
+    },
+    {
+      "id": "osm-node-13663629080",
+      "name": "Bảo vệ tài nguyên rừng là trách nhiệm của mọi người",
+      "coordinates": {
+        "lat": 10.3585221,
+        "lng": 103.9898069
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Địa điểm",
+      "osmId": "node/13663629080",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "information"
+      ]
+    },
+    {
+      "id": "osm-way-1282429333",
+      "name": "Bazan Roastery",
+      "coordinates": {
+        "lat": 10.2618171,
+        "lng": 103.9571224
+      },
+      "address": "Búng Gội, Đặc Khu Phú Quốc",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Cà phê",
+      "osmId": "way/1282429333",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": "+84906554078",
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "coffee_shop",
+        "cafe"
+      ]
+    },
+    {
+      "id": "fsq-55c84f1a498ebead03491090",
+      "name": "Bee Farm",
+      "coordinates": {
+        "lat": 10.315036016685664,
+        "lng": 103.97169723872508
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Farm",
+      "foursquareId": "55c84f1a498ebead03491090",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Farm"
+      ]
+    },
+    {
+      "id": "osm-node-5310069421",
+      "name": "Bella Outdoor Pizzeria",
+      "coordinates": {
+        "lat": 10.2638344,
+        "lng": 103.9428629
+      },
+      "address": "Đường tỉnh 45",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực",
+      "osmId": "node/5310069421",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-11085421499",
+      "name": "Buffet Xưa và Nay - Buffet hải sản tươi sống Phú Quốc",
+      "coordinates": {
+        "lat": 10.2164741,
+        "lng": 103.9692534
+      },
+      "address": "144A, Đường 30 Tháng 4, Phú Quốc",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (seafood;grill;lẩu;nướng;hotpot;hải_sản)",
+      "osmId": "node/11085421499",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "+84 878 712 345",
+      "website": "https://www.buffetxuavanay.com/",
+      "openingHours": "15h",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "seafood;grill;lẩu;nướng;hotpot;hải_sản",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "fsq-5cb5e9d04c9be6002cf2d910",
+      "name": "Bui Mart",
+      "coordinates": {
+        "lat": 10.224252,
+        "lng": 103.965877
+      },
+      "address": "H. Phú Quốc, Tỉnh Kiên Giang",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Convenience Store",
+      "foursquareId": "5cb5e9d04c9be6002cf2d910",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Convenience Store"
+      ]
+    },
+    {
+      "id": "osm-node-9409064417",
+      "name": "Bụi Quán",
+      "coordinates": {
+        "lat": 10.2080427,
+        "lng": 103.9621859
+      },
+      "address": "Trần Hưng Đạo",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (fish;seafood;vietnamese)",
+      "osmId": "node/9409064417",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "fish;seafood;vietnamese",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "fsq-54a963bf498e51ca1dc0fefd",
+      "name": "Bún Quậy",
+      "coordinates": {
+        "lat": 10.231138,
+        "lng": 103.952918
+      },
+      "address": "Xóm Quảng Ngãi, Phú Quốc, Kiên Giang",
+      "categoryGroup": "food",
+      "categoryLabel": "Nhà hàng Việt",
+      "foursquareId": "54a963bf498e51ca1dc0fefd",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Vietnamese Restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-13232482301",
+      "name": "Cà Phê Bàng",
+      "coordinates": {
+        "lat": 10.2318734,
+        "lng": 103.9522746
+      },
+      "address": "225, Trần Phú",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Cà phê",
+      "osmId": "node/13232482301",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": "0363 063 688",
+      "website": null,
+      "openingHours": "Mo-Sa 06:30-22:30; Su 06:30-23:00",
+      "description": null,
+      "needsReview": true,
+      "conflictNote": "Tọa độ cách 4m; địa chỉ khác biệt giữa FSQ và OSM",
+      "tags": [
+        "cafe"
+      ]
+    },
+    {
+      "id": "merged-67a04d868270405423f6dca3",
+      "name": "Cà Phê Bàng",
+      "coordinates": {
+        "lat": 10.231899,
+        "lng": 103.9523
+      },
+      "address": "Thành phố Phú Quốc, Kiên Giang",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Coffee Shop",
+      "foursquareId": "67a04d868270405423f6dca3",
+      "osmId": "node/13363072801",
+      "dataSource": "merged",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": true,
+      "conflictNote": "Tọa độ cách 4m; địa chỉ khác biệt giữa FSQ và OSM",
+      "tags": [
+        "Coffee Shop",
+        "cafe"
+      ]
+    },
+    {
+      "id": "fsq-694ce6974a0cdf36aaab27d7",
+      "name": "Cà Phê Xóm Cồn",
+      "coordinates": {
+        "lat": 10.222873,
+        "lng": 103.9551
+      },
+      "address": "87 Đường Nguyễn Văn Trỗi, Khu 2, Thành phố Phú Quốc, Kiên Giang",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Café",
+      "foursquareId": "694ce6974a0cdf36aaab27d7",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Café"
+      ]
+    },
+    {
+      "id": "fsq-4dc9f190887769ff3d446a83",
+      "name": "Cafe Phố Biển Dinh Cậu",
+      "coordinates": {
+        "lat": 10.216813666745491,
+        "lng": 103.95709494219149
+      },
+      "address": "Dinh Cậu, Tỉnh Kiến Giang",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Café",
+      "foursquareId": "4dc9f190887769ff3d446a83",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Café"
+      ]
+    },
+    {
+      "id": "osm-node-13663629075",
+      "name": "Cảm săn bắn, bảy bắt, mua bán động vật hoang dã dưới mọi hình thức",
+      "coordinates": {
+        "lat": 10.3598832,
+        "lng": 103.9911393
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Địa điểm",
+      "osmId": "node/13663629075",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "information"
+      ]
+    },
+    {
+      "id": "osm-node-13663629069",
+      "name": "Câm ẩm thu mua động, thực vật rừng trái phép",
+      "coordinates": {
+        "lat": 10.3616937,
+        "lng": 103.9930186
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Địa điểm",
+      "osmId": "node/13663629069",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "information"
+      ]
+    },
+    {
+      "id": "osm-node-13663629079",
+      "name": "Cẩm săn bắn, bẫy bắt, mua bản động vật hoang dã dưới mọi hình thức",
+      "coordinates": {
+        "lat": 10.3584991,
+        "lng": 103.9903491
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Địa điểm",
+      "osmId": "node/13663629079",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "information"
+      ]
+    },
+    {
+      "id": "osm-node-13663629070",
+      "name": "Cẩm săn bắn, bẫy bắt, mua bán động vật hoang dã dưới mọi hình thức",
+      "coordinates": {
+        "lat": 10.3613602,
+        "lng": 103.9926747
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Địa điểm",
+      "osmId": "node/13663629070",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "information"
+      ]
+    },
+    {
+      "id": "osm-node-13663629072",
+      "name": "Cấm săn bắn, bẫy bắt, mua bán động vật hoang dã dưới mọi hình thức",
+      "coordinates": {
+        "lat": 10.3607183,
+        "lng": 103.9923266
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Địa điểm",
+      "osmId": "node/13663629072",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "information"
+      ]
+    },
+    {
+      "id": "osm-node-13663629065",
+      "name": "Cầm thu mua động, thực vật rừng trái phép",
+      "coordinates": {
+        "lat": 10.3631007,
+        "lng": 103.9924675
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Địa điểm",
+      "osmId": "node/13663629065",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "information"
+      ]
+    },
+    {
+      "id": "fsq-672da96c9fdc354be3e887f5",
+      "name": "Chez Rico Family Restaurant",
+      "coordinates": {
+        "lat": 10.262836,
+        "lng": 103.939226
+      },
+      "address": "Phu Quoc, Tỉnh Kiến Giang",
+      "categoryGroup": "food",
+      "categoryLabel": "Restaurant",
+      "foursquareId": "672da96c9fdc354be3e887f5",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-6586065178",
+      "name": "Chinese Temple",
+      "coordinates": {
+        "lat": 10.2101371,
+        "lng": 103.9656298
+      },
+      "address": "",
+      "categoryGroup": "culture",
+      "categoryLabel": "Văn hóa",
+      "osmId": "node/6586065178",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "place_of_worship"
+      ]
+    },
+    {
+      "id": "osm-node-4792974669",
+      "name": "Chuồn Chuồn Bistro & Sky Bar",
+      "coordinates": {
+        "lat": 10.2088622,
+        "lng": 103.9657591
+      },
+      "address": "Trần Hưng Đạo, Duong Dong",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (fusion_kitchen_international-vietnamese)",
+      "osmId": "node/4792974669",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "+84 773 608 883",
+      "website": "https://www.facebook.com/chuonchuonbistro",
+      "openingHours": "07:00-23:00",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "fusion_kitchen_international-vietnamese",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-6212716886",
+      "name": "COCO",
+      "coordinates": {
+        "lat": 10.2027997,
+        "lng": 103.9642917
+      },
+      "address": "92a, Trần Hưng Đạo",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực",
+      "osmId": "node/6212716886",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "09273559888",
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "restaurant"
+      ]
+    },
+    {
+      "id": "fsq-5c31a358475abd002cf26e6a",
+      "name": "Cô Dẹp",
+      "coordinates": {
+        "lat": 10.223362,
+        "lng": 103.972894
+      },
+      "address": "H. Phú Quốc, Tỉnh Kiên Giang",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Food and Beverage Retail",
+      "foursquareId": "5c31a358475abd002cf26e6a",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Food and Beverage Retail",
+        "Grocery Store"
+      ]
+    },
+    {
+      "id": "fsq-5ecb7ff0a93f0c0008d823c3",
+      "name": "Cty Tnhh Lý Minh Phát",
+      "coordinates": {
+        "lat": 10.259189,
+        "lng": 103.998505
+      },
+      "address": "tổ 1.ấp cây thông trong.xã cửa dương (đường k8.kho đạn), Thành phố Phú Quốc, tỉnh Kiên Giang",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Furniture and Home Store",
+      "foursquareId": "5ecb7ff0a93f0c0008d823c3",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Furniture and Home Store"
+      ]
+    },
+    {
+      "id": "fsq-58bba690dad263186b51c731",
+      "name": "Cua Hang",
+      "coordinates": {
+        "lat": 10.268653,
+        "lng": 103.94113
+      },
+      "address": "Tỉnh Kiến Giang",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Town",
+      "foursquareId": "58bba690dad263186b51c731",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Town"
+      ]
+    },
+    {
+      "id": "fsq-514ed3b7e4b020b3b433d14d",
+      "name": "Cua Temple",
+      "coordinates": {
+        "lat": 10.217281082026908,
+        "lng": 103.95637586524109
+      },
+      "address": "Dương Đông, Tỉnh Kiến Giang",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Lighthouse",
+      "foursquareId": "514ed3b7e4b020b3b433d14d",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Lighthouse"
+      ]
+    },
+    {
+      "id": "osm-node-8231093534",
+      "name": "Cửa hàng Đức Toàn",
+      "coordinates": {
+        "lat": 10.2235033,
+        "lng": 103.968747
+      },
+      "address": "233, Nguyễn Trung Trực, Phú Quốc",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Mua sắm",
+      "osmId": "node/8231093534",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": "+84936148900",
+      "website": "https://kingbear.vn/",
+      "openingHours": "Mo-Su 07:00-17:00",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "supermarket"
+      ]
+    },
+    {
+      "id": "osm-node-4137870590",
+      "name": "Ding Tea",
+      "coordinates": {
+        "lat": 10.2132357,
+        "lng": 103.9592663
+      },
+      "address": "43, Trần Hưng Đạo",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Cà phê",
+      "osmId": "node/4137870590",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "cafe"
+      ]
+    },
+    {
+      "id": "fsq-6211aa9acace1f04f3a90988",
+      "name": "dinh bà lê kim định",
+      "coordinates": {
+        "lat": 10.251482,
+        "lng": 103.94286
+      },
+      "address": "Phu Quoc, Tỉnh Kiến Giang",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Palace",
+      "foursquareId": "6211aa9acace1f04f3a90988",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Palace"
+      ]
+    },
+    {
+      "id": "osm-node-11689582169",
+      "name": "Drunken Monkey",
+      "coordinates": {
+        "lat": 10.2634992,
+        "lng": 103.9375626
+      },
+      "address": "Đường tỉnh 975B",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (burger;local;mexican;pizza;seafood;vietnamese)",
+      "osmId": "node/11689582169",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "burger;local;mexican;pizza;seafood;vietnamese",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-1166204872",
+      "name": "Duc Ninh Pepper Farm",
+      "coordinates": {
+        "lat": 10.2100119,
+        "lng": 103.9850305
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/1166204872",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "attraction"
+      ]
+    },
+    {
+      "id": "osm-node-10736277208",
+      "name": "Điểm Tạp Trung Tham Quan Vườn quốc gia Phú Quốc",
+      "coordinates": {
+        "lat": 10.3643268,
+        "lng": 103.9917269
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/10736277208",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": "250.000Vd p.P. 1 hour walk (30m in & 30m out) 2km",
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "attraction"
+      ]
+    },
+    {
+      "id": "fsq-5bc646d859c42300390230fc",
+      "name": "Điện Thoại Di Động Ngọc Quang",
+      "coordinates": {
+        "lat": 10.228146,
+        "lng": 103.95488
+      },
+      "address": "Cách Mạng Tháng 8, Khu phố 6, Dương Đông, Thành phố Phú Quốc, tỉnh Kiên Giang",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Mobile Phone Store",
+      "foursquareId": "5bc646d859c42300390230fc",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Mobile Phone Store"
+      ]
+    },
+    {
+      "id": "fsq-545204a7498e7420c09f68e9",
+      "name": "Đúng Hạnh",
+      "coordinates": {
+        "lat": 10.223222,
+        "lng": 103.964197
+      },
+      "address": "160 Nguyễn Trung Trực, Khu Phố 8, Thị Trấn Dương Đông, Phú Quốc, Kiên Giang",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Miscellaneous Store",
+      "foursquareId": "545204a7498e7420c09f68e9",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Miscellaneous Store"
+      ]
+    },
+    {
+      "id": "fsq-6763981f827966005d3bd442",
+      "name": "GaCafeEatery",
+      "coordinates": {
+        "lat": 10.249548,
+        "lng": 103.958442
+      },
+      "address": "Phu Quoc, Tỉnh Kiến Giang",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Café",
+      "foursquareId": "6763981f827966005d3bd442",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Café"
+      ]
+    },
+    {
+      "id": "osm-node-3318170432",
+      "name": "Ganesh Indian Restaurant",
+      "coordinates": {
+        "lat": 10.208007,
+        "lng": 103.9625157
+      },
+      "address": "97, Tran Hung Dao Street, Phu Quoc Island",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (indian)",
+      "osmId": "node/3318170432",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "+84 77 3994 917",
+      "website": "http://www.ganeshphuquoc.com",
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "indian",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "fsq-5554d953498ec133eee3ce66",
+      "name": "Ganh Dau Beach",
+      "coordinates": {
+        "lat": 10.24604179895946,
+        "lng": 103.96051730542136
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Beach",
+      "foursquareId": "5554d953498ec133eee3ce66",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Beach"
+      ]
+    },
+    {
+      "id": "fsq-5c6e3efdbfc6d0002cce111a",
+      "name": "Garden Coffee",
+      "coordinates": {
+        "lat": 10.27177,
+        "lng": 103.939887
+      },
+      "address": "H. Phú Quốc, Tỉnh Kiên Giang",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Coffee Shop",
+      "foursquareId": "5c6e3efdbfc6d0002cce111a",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Coffee Shop",
+        "Smoothie Shop"
+      ]
+    },
+    {
+      "id": "fsq-4e847df0775bb095c88f5918",
+      "name": "German B",
+      "coordinates": {
+        "lat": 10.2042590848,
+        "lng": 103.96405741418171
+      },
+      "address": "Trang Hung Dao 78, Duong Dong, Tỉnh Kiến Giang",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Coffee Shop",
+      "foursquareId": "4e847df0775bb095c88f5918",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": "1664 053830",
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Coffee Shop"
+      ]
+    },
+    {
+      "id": "osm-node-13663629068",
+      "name": "Hãy gìn giữ tài nguyên rừng cho con cháu của chúng ta",
+      "coordinates": {
+        "lat": 10.3621379,
+        "lng": 103.993023
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Địa điểm",
+      "osmId": "node/13663629068",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "information"
+      ]
+    },
+    {
+      "id": "merged-5d95dc5c38d63d0008aec32f",
+      "name": "Highlands Coffee",
+      "coordinates": {
+        "lat": 10.218818,
+        "lng": 103.971938
+      },
+      "address": "H. Phú Quốc, Tỉnh Kiên Giang",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Café",
+      "foursquareId": "5d95dc5c38d63d0008aec32f",
+      "osmId": "node/9750707917",
+      "dataSource": "merged",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": "http://highlandscoffee.com.vn",
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Café",
+        "coffee_shop",
+        "cafe"
+      ]
+    },
+    {
+      "id": "osm-node-4950707922",
+      "name": "Hoàng Mậu PQ",
+      "coordinates": {
+        "lat": 10.2258565,
+        "lng": 103.9749522
+      },
+      "address": "163, Lý Thường Kệt",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Mua sắm",
+      "osmId": "node/4950707922",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": "24/7",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "electronics"
+      ]
+    },
+    {
+      "id": "fsq-4e41f1ce7d8bec1e4d128571",
+      "name": "Hong Nhung Ca Phe",
+      "coordinates": {
+        "lat": 10.225065,
+        "lng": 103.968229
+      },
+      "address": "Tỉnh Kiến Giang",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Coffee Shop",
+      "foursquareId": "4e41f1ce7d8bec1e4d128571",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Coffee Shop"
+      ]
+    },
+    {
+      "id": "osm-node-12772991910",
+      "name": "Hồ Chí Minh",
+      "coordinates": {
+        "lat": 10.2287357,
+        "lng": 103.9771261
+      },
+      "address": "",
+      "categoryGroup": "culture",
+      "categoryLabel": "Di tích lịch sử",
+      "osmId": "node/12772991910",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "memorial"
+      ]
+    },
+    {
+      "id": "osm-node-5158463023",
+      "name": "Hung Quoc Convent",
+      "coordinates": {
+        "lat": 10.2215973,
+        "lng": 103.9616966
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/5158463023",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "attraction"
+      ]
+    },
+    {
+      "id": "osm-node-7112937286",
+      "name": "Huy Espresso",
+      "coordinates": {
+        "lat": 10.2046358,
+        "lng": 103.9638125
+      },
+      "address": "90, Trần Hưng Đạo",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Cà phê",
+      "osmId": "node/7112937286",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "cafe"
+      ]
+    },
+    {
+      "id": "fsq-656dcd970733ca2960297406",
+      "name": "Hữu Lê Drink & Food",
+      "coordinates": {
+        "lat": 10.256331,
+        "lng": 103.94422
+      },
+      "address": "Phu Quoc, Tỉnh Kiến Giang",
+      "categoryGroup": "food",
+      "categoryLabel": "Nhà hàng Việt",
+      "foursquareId": "656dcd970733ca2960297406",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Vietnamese Restaurant"
+      ]
+    },
+    {
+      "id": "fsq-4ccc14cd2dc437047953c408",
+      "name": "Il Ristorante | Chen Sea Resort and Spa",
+      "coordinates": {
+        "lat": 10.250541459771684,
+        "lng": 103.94391689111973
+      },
+      "address": "Bai Xep, Ong Lang, Cua Duong, Phu Quoc, Kien Giang, Vietnam",
+      "categoryGroup": "food",
+      "categoryLabel": "Mediterranean Restaurant",
+      "foursquareId": "4ccc14cd2dc437047953c408",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Mediterranean Restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-3312952761",
+      "name": "Jerry's Jungle Tours",
+      "coordinates": {
+        "lat": 10.2175098,
+        "lng": 103.9585031
+      },
+      "address": "Dương Đông",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Mua sắm",
+      "osmId": "node/3312952761",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": "+84 93 822 60 21",
+      "website": "http://www.jerrystours.com",
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "travel_agency"
+      ]
+    },
+    {
+      "id": "fsq-67738cd024207457d67bf3f9",
+      "name": "K Mark",
+      "coordinates": {
+        "lat": 10.264235,
+        "lng": 103.943507
+      },
+      "address": "2 DT45, Phu Quoc, Tỉnh Kiến Giang",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Supermarket",
+      "foursquareId": "67738cd024207457d67bf3f9",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Supermarket"
+      ]
+    },
+    {
+      "id": "osm-way-1290175452",
+      "name": "Karaoke Las Vegas",
+      "coordinates": {
+        "lat": 10.2092168,
+        "lng": 103.9881034
+      },
+      "address": "",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực",
+      "osmId": "way/1290175452",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "+84 878812168",
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "fast_food"
+      ]
+    },
+    {
+      "id": "osm-node-13663629071",
+      "name": "Không khai thác, chặt phá cây rừng trái phép",
+      "coordinates": {
+        "lat": 10.361055,
+        "lng": 103.9925978
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Địa điểm",
+      "osmId": "node/13663629071",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "information"
+      ]
+    },
+    {
+      "id": "osm-node-13663629074",
+      "name": "Không khai thác, chặt phá cây rừng trái phép",
+      "coordinates": {
+        "lat": 10.360093,
+        "lng": 103.9913728
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Địa điểm",
+      "osmId": "node/13663629074",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "information"
+      ]
+    },
+    {
+      "id": "osm-node-13663629077",
+      "name": "Không khai thác, chặt phá cây rừng trái phép",
+      "coordinates": {
+        "lat": 10.3592385,
+        "lng": 103.9909457
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Địa điểm",
+      "osmId": "node/13663629077",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "information"
+      ]
+    },
+    {
+      "id": "osm-node-11980424868",
+      "name": "Khu du lịch sinh thái Master Hải",
+      "coordinates": {
+        "lat": 10.305887,
+        "lng": 103.9258201
+      },
+      "address": "",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực",
+      "osmId": "node/11980424868",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "+84899179091",
+      "website": null,
+      "openingHours": "Mo-Su 08:00-21:00",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-13664486967",
+      "name": "KHU DỰ TRỮ SINH QUYỂN THẾ GIỚI KIÊN GIANG Kien Giang Blosphere Reserve",
+      "coordinates": {
+        "lat": 10.3319104,
+        "lng": 103.9742973
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Địa điểm",
+      "osmId": "node/13664486967",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "information"
+      ]
+    },
+    {
+      "id": "fsq-59af97928496ca7f9597c045",
+      "name": "King Western",
+      "coordinates": {
+        "lat": 10.205302,
+        "lng": 103.96414
+      },
+      "address": "Thành phố Phú Quốc, ខេត្តកំពត",
+      "categoryGroup": "food",
+      "categoryLabel": "Pizzeria",
+      "foursquareId": "59af97928496ca7f9597c045",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "0297 6283 838",
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Pizzeria"
+      ]
+    },
+    {
+      "id": "fsq-503f7c36e4b08d67c33e5486",
+      "name": "Lá Cafe",
+      "coordinates": {
+        "lat": 10.21468291606332,
+        "lng": 103.95930651254933
+      },
+      "address": "Phu Quoc, Tỉnh Kiến Giang",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Café",
+      "foursquareId": "503f7c36e4b08d67c33e5486",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Café"
+      ]
+    },
+    {
+      "id": "osm-node-13135539002",
+      "name": "Lagman Phu Quoc",
+      "coordinates": {
+        "lat": 10.2054818,
+        "lng": 103.9632791
+      },
+      "address": "82 Đường Trần Hưng Đạo, Dương Đông, Phú Quốc, Kiên Giang, Вьетнам",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (oriental)",
+      "osmId": "node/13135539002",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "oriental",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-7113524785",
+      "name": "Lavender",
+      "coordinates": {
+        "lat": 10.263268,
+        "lng": 103.9377226
+      },
+      "address": "Đường tỉnh 45",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực",
+      "osmId": "node/7113524785",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "restaurant"
+      ]
+    },
+    {
+      "id": "fsq-5bfa5a1ec876c8002c8c60bd",
+      "name": "Legend Revived",
+      "coordinates": {
+        "lat": 10.262959,
+        "lng": 103.939232
+      },
+      "address": "H. Phú Quốc, Tỉnh Kiên Giang",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Café",
+      "foursquareId": "5bfa5a1ec876c8002c8c60bd",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Café"
+      ]
+    },
+    {
+      "id": "osm-node-5263056621",
+      "name": "Lê Hô Pepper",
+      "coordinates": {
+        "lat": 10.2122952,
+        "lng": 103.9898635
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/5263056621",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "attraction"
+      ]
+    },
+    {
+      "id": "osm-way-1282342453",
+      "name": "Luong Mini Market",
+      "coordinates": {
+        "lat": 10.2626208,
+        "lng": 103.9387963
+      },
+      "address": "3",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Mua sắm",
+      "osmId": "way/1282342453",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": true,
+      "conflictNote": "Tọa độ cách 26m; địa chỉ khác biệt giữa FSQ và OSM",
+      "tags": [
+        "supermarket"
+      ]
+    },
+    {
+      "id": "fsq-676bbaa265555d1c2f2ffc09",
+      "name": "Luong Mini Market",
+      "coordinates": {
+        "lat": 10.262393,
+        "lng": 103.938753
+      },
+      "address": "Phu Quoc, Tỉnh Kiến Giang",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Convenience Store",
+      "foursquareId": "676bbaa265555d1c2f2ffc09",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": true,
+      "conflictNote": "Tọa độ cách 26m; địa chỉ khác biệt giữa FSQ và OSM",
+      "tags": [
+        "Convenience Store"
+      ]
+    },
+    {
+      "id": "fsq-5c612a8446e1b6002cf5c970",
+      "name": "Mai Jo Fusion Treat Restaurant",
+      "coordinates": {
+        "lat": 10.263571,
+        "lng": 103.943
+      },
+      "address": "Thành phố Phú Quốc, tỉnh Kiên Giang",
+      "categoryGroup": "food",
+      "categoryLabel": "Restaurant",
+      "foursquareId": "5c612a8446e1b6002cf5c970",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Restaurant"
+      ]
+    },
+    {
+      "id": "fsq-4ca5ec0214c33704ca53ba3b",
+      "name": "Mango Bay",
+      "coordinates": {
+        "lat": 10.258541331066297,
+        "lng": 103.9357018179931
+      },
+      "address": "",
+      "categoryGroup": "stay",
+      "categoryLabel": "Lưu trú",
+      "foursquareId": "4ca5ec0214c33704ca53ba3b",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/stay-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Resort",
+        "Beach"
+      ]
+    },
+    {
+      "id": "osm-node-4528359242",
+      "name": "May Misa",
+      "coordinates": {
+        "lat": 10.2613803,
+        "lng": 103.9387614
+      },
+      "address": "Xã Cúa Duong",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực",
+      "osmId": "node/4528359242",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "+84 946 751 459",
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "restaurant"
+      ]
+    },
+    {
+      "id": "fsq-695e4ce78a0afa702c07833a",
+      "name": "Mi Te Hung Vuong",
+      "coordinates": {
+        "lat": 10.223238,
+        "lng": 103.972691
+      },
+      "address": "Phu Quoc, Tỉnh Kiến Giang",
+      "categoryGroup": "food",
+      "categoryLabel": "Nhà hàng Việt",
+      "foursquareId": "695e4ce78a0afa702c07833a",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Vietnamese Restaurant",
+        "Noodle Restaurant"
+      ]
+    },
+    {
+      "id": "fsq-65805914fb80963daf3b2591",
+      "name": "Mint Mart",
+      "coordinates": {
+        "lat": 10.285636,
+        "lng": 103.932207
+      },
+      "address": "Phu Quoc, Tỉnh Kiến Giang",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Convenience Store",
+      "foursquareId": "65805914fb80963daf3b2591",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Convenience Store"
+      ]
+    },
+    {
+      "id": "fsq-5da074bc8a8ebb0008a4462b",
+      "name": "Misu House",
+      "coordinates": {
+        "lat": 10.223432,
+        "lng": 103.972848
+      },
+      "address": "H. Phú Quốc, Tỉnh Kiên Giang",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Baby Store",
+      "foursquareId": "5da074bc8a8ebb0008a4462b",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Baby Store"
+      ]
+    },
+    {
+      "id": "osm-node-12345190748",
+      "name": "Mộc Kitchen PQ Cooking Class",
+      "coordinates": {
+        "lat": 10.2130163,
+        "lng": 103.9598032
+      },
+      "address": "47/9, Trần Hưng Đạo, Thành phố Phú Quốc",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (vietnamese)",
+      "osmId": "node/12345190748",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": "https://mockitchen.vn/cooking-class/",
+      "openingHours": "Mo-Su 10:00-20:00",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "vietnamese",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "fsq-5a24bb0ad0a14909fe0cf8ef",
+      "name": "Ngọc Quang Mobile",
+      "coordinates": {
+        "lat": 10.227991,
+        "lng": 103.95519
+      },
+      "address": "Cách Mạng Tháng 8, khu phố 6, Dương Đông, Phú Quốc, Thành phố Phú Quốc, tỉnh Kiên Giang",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Electronics Store",
+      "foursquareId": "5a24bb0ad0a14909fe0cf8ef",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Electronics Store"
+      ]
+    },
+    {
+      "id": "fsq-5f0f191167564371a952ab52",
+      "name": "Nhà Xua 68",
+      "coordinates": {
+        "lat": 10.224645,
+        "lng": 103.969939
+      },
+      "address": "H. Phú Quốc, Tỉnh Kiên Giang",
+      "categoryGroup": "food",
+      "categoryLabel": "Nhà hàng Việt",
+      "foursquareId": "5f0f191167564371a952ab52",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "0967 896 677",
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Vietnamese Restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-1954274168",
+      "name": "Nước Mắm Khải Hoàn",
+      "coordinates": {
+        "lat": 10.2199452,
+        "lng": 103.9714979
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/1954274168",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "attraction"
+      ]
+    },
+    {
+      "id": "fsq-69b126d1786cd3784bedd785",
+      "name": "Ocean Bay Beach",
+      "coordinates": {
+        "lat": 10.253808,
+        "lng": 103.9413
+      },
+      "address": "Phu Quoc, Tỉnh Kiến Giang",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Beach",
+      "foursquareId": "69b126d1786cd3784bedd785",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Beach"
+      ]
+    },
+    {
+      "id": "osm-node-6351617762",
+      "name": "Orange Beach",
+      "coordinates": {
+        "lat": 10.2031398,
+        "lng": 103.9617356
+      },
+      "address": "Trần Hưng Đạo",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực",
+      "osmId": "node/6351617762",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-4453260590",
+      "name": "Ôc Nôc Quán",
+      "coordinates": {
+        "lat": 10.2165213,
+        "lng": 103.960598
+      },
+      "address": "6, Lý Tự Trọng",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (vietnamese)",
+      "osmId": "node/4453260590",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "vietnamese",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "fsq-52c0013b498e89903301c671",
+      "name": "Ông Lang beach",
+      "coordinates": {
+        "lat": 10.25836909342175,
+        "lng": 103.93900429118409
+      },
+      "address": "Phu Quoc, Vietnam",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Beach",
+      "foursquareId": "52c0013b498e89903301c671",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Beach"
+      ]
+    },
+    {
+      "id": "osm-node-8273857617",
+      "name": "Path to Public Beach",
+      "coordinates": {
+        "lat": 10.2930031,
+        "lng": 103.8966512
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/8273857617",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "viewpoint"
+      ]
+    },
+    {
+      "id": "osm-node-5227336425",
+      "name": "Pepper farm",
+      "coordinates": {
+        "lat": 10.3276289,
+        "lng": 103.9552982
+      },
+      "address": "",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực",
+      "osmId": "node/5227336425",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "+84 918 086 129",
+      "website": "https://pepperfarmphuquoc.com",
+      "openingHours": "Th-Tu 09:00-17:00",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "restaurant",
+        "attraction"
+      ]
+    },
+    {
+      "id": "osm-node-2590497234",
+      "name": "Pepper Farm",
+      "coordinates": {
+        "lat": 10.3065465,
+        "lng": 103.9827927
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/2590497234",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "attraction"
+      ]
+    },
+    {
+      "id": "osm-way-1281353957",
+      "name": "Pepper Farm",
+      "coordinates": {
+        "lat": 10.3352309,
+        "lng": 103.9479662
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "way/1281353957",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "attraction",
+        "spices"
+      ]
+    },
+    {
+      "id": "fsq-519a0497498eb2757c687e4e",
+      "name": "Pepper Farm",
+      "coordinates": {
+        "lat": 10.328221640555215,
+        "lng": 103.95499283732777
+      },
+      "address": "Phú Quốc, Bình Thuận",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Farm",
+      "foursquareId": "519a0497498eb2757c687e4e",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": "https://phuquoccountryside.com",
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Farm"
+      ]
+    },
+    {
+      "id": "fsq-5e01dfac66d0380008be2ca1",
+      "name": "Pharmacy",
+      "coordinates": {
+        "lat": 10.259773,
+        "lng": 103.949143
+      },
+      "address": "H. Phú Quốc, Tỉnh Kiên Giang",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Pharmacy",
+      "foursquareId": "5e01dfac66d0380008be2ca1",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Pharmacy"
+      ]
+    },
+    {
+      "id": "osm-node-6349705929",
+      "name": "Pho Karaoke",
+      "coordinates": {
+        "lat": 10.2059896,
+        "lng": 103.9649213
+      },
+      "address": "91/?, Trần Hưng Đạo",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Mua sắm",
+      "osmId": "node/6349705929",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "beauty"
+      ]
+    },
+    {
+      "id": "fsq-57f09c08cd1070010bc60377",
+      "name": "Phụ Kiện Điện Thoại Double Q",
+      "coordinates": {
+        "lat": 10.230363,
+        "lng": 103.966541
+      },
+      "address": "Cách Mạng Tháng 8, Dương Dông, Tỉnh Kiên Giang",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Mobile Phone Store",
+      "foursquareId": "57f09c08cd1070010bc60377",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Mobile Phone Store"
+      ]
+    },
+    {
+      "id": "osm-node-5227515822",
+      "name": "Phu Quoc Bee Farm",
+      "coordinates": {
+        "lat": 10.3142522,
+        "lng": 103.941546
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/5227515822",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": true,
+      "conflictNote": "Tọa độ cách 112m giữa FSQ và OSM",
+      "tags": [
+        "attraction"
+      ]
+    },
+    {
+      "id": "fsq-56f369a0498eb141eacfff8f",
+      "name": "Phu Quoc Bee Farm",
+      "coordinates": {
+        "lat": 10.315098,
+        "lng": 103.940988
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Dessert Shop",
+      "foursquareId": "56f369a0498eb141eacfff8f",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": "0966 663 365",
+      "website": "http://www.phuquocbeefarm.com",
+      "openingHours": null,
+      "description": null,
+      "needsReview": true,
+      "conflictNote": "Tọa độ cách 112m giữa FSQ và OSM",
+      "tags": [
+        "Dessert Shop",
+        "Farm"
+      ]
+    },
+    {
+      "id": "osm-node-4586869295",
+      "name": "Phu Quoc draft beer",
+      "coordinates": {
+        "lat": 10.2920225,
+        "lng": 103.9151084
+      },
+      "address": "đường cua",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Mua sắm",
+      "osmId": "node/4586869295",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": "cold draft local beer!",
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "beverages"
+      ]
+    },
+    {
+      "id": "osm-node-3482735049",
+      "name": "Phu Quoc Ridgeback Terrain Raceway",
+      "coordinates": {
+        "lat": 10.2517526,
+        "lng": 103.9785201
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/3482735049",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "attraction"
+      ]
+    },
+    {
+      "id": "fsq-5209d9a411d2d0a01ab6ef4a",
+      "name": "Phu Quoc Ridgeback Terrain Raceway",
+      "coordinates": {
+        "lat": 10.252246816274416,
+        "lng": 103.97874111773572
+      },
+      "address": "Phu Quoc Island, Phu Quoc, Tỉnh Kiến Giang",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Dog Park",
+      "foursquareId": "5209d9a411d2d0a01ab6ef4a",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Dog Park"
+      ]
+    },
+    {
+      "id": "fsq-4d02fbcdc2e53704b1e4ae67",
+      "name": "Phuquoc beach",
+      "coordinates": {
+        "lat": 10.20431817752811,
+        "lng": 103.96199053426565
+      },
+      "address": "Phuquoc, Vietnam",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Beach",
+      "foursquareId": "4d02fbcdc2e53704b1e4ae67",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Beach"
+      ]
+    },
+    {
+      "id": "fsq-65d2fd9ece80f02231d58139",
+      "name": "Quán Ăn 93",
+      "coordinates": {
+        "lat": 10.223317,
+        "lng": 103.95486
+      },
+      "address": "Phu Quoc, Tỉnh Kiến Giang",
+      "categoryGroup": "food",
+      "categoryLabel": "Seafood Restaurant",
+      "foursquareId": "65d2fd9ece80f02231d58139",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Seafood Restaurant"
+      ]
+    },
+    {
+      "id": "fsq-5208c74c498e7bbf57b0ec4e",
+      "name": "Quán Chay Khánh Ly",
+      "coordinates": {
+        "lat": 10.21753017828415,
+        "lng": 103.95964470805947
+      },
+      "address": "35 Nguyen Trai, KP2, Duong Dong, Phu Quoc, Phú Quốc, Bình Thuận",
+      "categoryGroup": "food",
+      "categoryLabel": "Vegan and Vegetarian Restaurant",
+      "foursquareId": "5208c74c498e7bbf57b0ec4e",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "0344 518 712",
+      "website": "http://foody.vn",
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Vegan and Vegetarian Restaurant"
+      ]
+    },
+    {
+      "id": "fsq-5062f832e4b000718bfaeb8a",
+      "name": "Quán Ốc 343",
+      "coordinates": {
+        "lat": 10.213303,
+        "lng": 103.964955
+      },
+      "address": "Duong Dong, Tỉnh Kiến Giang, Tỉnh Kiến Giang",
+      "categoryGroup": "food",
+      "categoryLabel": "Seafood Restaurant",
+      "foursquareId": "5062f832e4b000718bfaeb8a",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Seafood Restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-4477907228",
+      "name": "Quảng cáo Lê Thuận",
+      "coordinates": {
+        "lat": 10.2231407,
+        "lng": 103.9625181
+      },
+      "address": "6, Mạc Cửu",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Mua sắm",
+      "osmId": "node/4477907228",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": "0918807274",
+      "website": "http://www.quangcaophuquoc.net",
+      "openingHours": "24/7",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "copyshop"
+      ]
+    },
+    {
+      "id": "osm-node-4486938390",
+      "name": "Quảng cáo Phú Quốc",
+      "coordinates": {
+        "lat": 10.2137819,
+        "lng": 103.9648997
+      },
+      "address": "151A, Đường 30 Tháng 4",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Mua sắm",
+      "osmId": "node/4486938390",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": "+84 91 880 72 74",
+      "website": "http://www.quangcaophuquoc.net",
+      "openingHours": "24/7",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "computer"
+      ]
+    },
+    {
+      "id": "fsq-66459ca4c59e4679325c3fdb",
+      "name": "Quảng Trường Hồ Chí Minh",
+      "coordinates": {
+        "lat": 10.228718,
+        "lng": 103.976289
+      },
+      "address": "Phu Quoc, Tỉnh Kiến Giang",
+      "categoryGroup": "culture",
+      "categoryLabel": "Monument",
+      "foursquareId": "66459ca4c59e4679325c3fdb",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Monument"
+      ]
+    },
+    {
+      "id": "fsq-69cf8c02b601345742a32da5",
+      "name": "Qui Hien",
+      "coordinates": {
+        "lat": 10.244183,
+        "lng": 103.986602
+      },
+      "address": "Nguyen Trung Truc, Phu Quoc, Tỉnh Kiến Giang",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Pharmacy",
+      "foursquareId": "69cf8c02b601345742a32da5",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Pharmacy"
+      ]
+    },
+    {
+      "id": "osm-node-8273857717",
+      "name": "Quiet Public Beach Cove",
+      "coordinates": {
+        "lat": 10.2903428,
+        "lng": 103.8962953
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/8273857717",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "viewpoint"
+      ]
+    },
+    {
+      "id": "osm-node-5237800721",
+      "name": "Roslinh Bar",
+      "coordinates": {
+        "lat": 10.2626973,
+        "lng": 103.9402342
+      },
+      "address": "Lot 4, Ong Lang Hamlet",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Đồ uống",
+      "osmId": "node/5237800721",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "vietnamese",
+        "bar"
+      ]
+    },
+    {
+      "id": "fsq-50f75c5de4b070326f593748",
+      "name": "Sasco Blue Lagoon Beach",
+      "coordinates": {
+        "lat": 10.206773280215733,
+        "lng": 103.96116904505594
+      },
+      "address": "Phú Quốc, Bình Thuận",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Beach",
+      "foursquareId": "50f75c5de4b070326f593748",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Beach"
+      ]
+    },
+    {
+      "id": "osm-node-12229078354",
+      "name": "Siêu thị Bùi Mart",
+      "coordinates": {
+        "lat": 10.2242542,
+        "lng": 103.9666711
+      },
+      "address": "26, Lý Thường Kiệt, Thành phố Phú Quốc",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Mua sắm",
+      "osmId": "node/12229078354",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "supermarket"
+      ]
+    },
+    {
+      "id": "fsq-679e282d326fa47045c122bb",
+      "name": "Siêu Thị Zmart Trần Phú",
+      "coordinates": {
+        "lat": 10.227638,
+        "lng": 103.955055
+      },
+      "address": "Thành phố Phú Quốc, Kiên Giang",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Supermarket",
+      "foursquareId": "679e282d326fa47045c122bb",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Supermarket"
+      ]
+    },
+    {
+      "id": "osm-node-7005393785",
+      "name": "Snorkeling spot",
+      "coordinates": {
+        "lat": 10.2568503,
+        "lng": 103.9362179
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/7005393785",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "viewpoint"
+      ]
+    },
+    {
+      "id": "osm-node-4643598991",
+      "name": "So True",
+      "coordinates": {
+        "lat": 10.2628132,
+        "lng": 103.9379972
+      },
+      "address": "Đường Cua",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (vietnamese;seafood;local)",
+      "osmId": "node/4643598991",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "vietnamese;seafood;local",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-6495155085",
+      "name": "Song que seafood",
+      "coordinates": {
+        "lat": 10.2993894,
+        "lng": 103.9080914
+      },
+      "address": "",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (seafood;vietnamese;asian)",
+      "osmId": "node/6495155085",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "+84707926856",
+      "website": null,
+      "openingHours": "Mo-Su 08:00-23:00",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "seafood;vietnamese;asian",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "fsq-6721c1224f737730247d81e5",
+      "name": "Streamside Family Restaurant",
+      "coordinates": {
+        "lat": 10.255597,
+        "lng": 103.943656
+      },
+      "address": "Phu Quoc, Tỉnh Kiến Giang",
+      "categoryGroup": "food",
+      "categoryLabel": "Nhà hàng Việt",
+      "foursquareId": "6721c1224f737730247d81e5",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Vietnamese Restaurant"
+      ]
+    },
+    {
+      "id": "fsq-54c3540d498ed093fa9c7f42",
+      "name": "Studio - Make up Lê Tiên",
+      "coordinates": {
+        "lat": 10.223720890759024,
+        "lng": 103.96451205857548
+      },
+      "address": "3 Lý Thường Kiệt, Phú Quốc, Kiên Giang",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Bridal Store",
+      "foursquareId": "54c3540d498ed093fa9c7f42",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Bridal Store"
+      ]
+    },
+    {
+      "id": "osm-node-8251035918",
+      "name": "Su Muon Pagoda",
+      "coordinates": {
+        "lat": 10.2003073,
+        "lng": 103.9854768
+      },
+      "address": "",
+      "categoryGroup": "culture",
+      "categoryLabel": "Văn hóa",
+      "osmId": "node/8251035918",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "place_of_worship"
+      ]
+    },
+    {
+      "id": "fsq-5e651d9017c5cd0007204bbe",
+      "name": "Sun Flowers",
+      "coordinates": {
+        "lat": 10.224133,
+        "lng": 103.972244
+      },
+      "address": "Thành phố Phú Quốc, tỉnh Kiên Giang",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Coffee Shop",
+      "foursquareId": "5e651d9017c5cd0007204bbe",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Coffee Shop"
+      ]
+    },
+    {
+      "id": "fsq-5ac815fb17556241e1369fca",
+      "name": "Sunrise Restaurant",
+      "coordinates": {
+        "lat": 10.2615185,
+        "lng": 103.933815
+      },
+      "address": "Sea Sense Resort, Thành phố Phú Quốc, tỉnh Kiên Giang",
+      "categoryGroup": "food",
+      "categoryLabel": "Restaurant",
+      "foursquareId": "5ac815fb17556241e1369fca",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": true,
+      "conflictNote": "Tọa độ cách 766m giữa FSQ và OSM",
+      "tags": [
+        "Restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-13301390401",
+      "name": "Sushi Ngú",
+      "coordinates": {
+        "lat": 10.215232,
+        "lng": 103.9615381
+      },
+      "address": "Đường 30 Tháng 4",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (japanese)",
+      "osmId": "node/13301390401",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "japanese",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-10213562717",
+      "name": "Tay Nguyen Cafe",
+      "coordinates": {
+        "lat": 10.2250332,
+        "lng": 103.971318
+      },
+      "address": "Chu Van An",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Cà phê",
+      "osmId": "node/10213562717",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "cafe"
+      ]
+    },
+    {
+      "id": "osm-node-5519240633",
+      "name": "Temporary Church",
+      "coordinates": {
+        "lat": 10.230182,
+        "lng": 103.9586253
+      },
+      "address": "",
+      "categoryGroup": "culture",
+      "categoryLabel": "Văn hóa",
+      "osmId": "node/5519240633",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "place_of_worship"
+      ]
+    },
+    {
+      "id": "osm-node-13307528701",
+      "name": "TH-68",
+      "coordinates": {
+        "lat": 10.2110237,
+        "lng": 103.9597344
+      },
+      "address": "",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (seafood)",
+      "osmId": "node/13307528701",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "+84 96 444 68 69;+84 869 924 777",
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "seafood",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "fsq-659414ed1363526f2750b200",
+      "name": "The Beauty Bar",
+      "coordinates": {
+        "lat": 10.262022,
+        "lng": 103.938816
+      },
+      "address": "Phu Quoc, Tỉnh Kiến Giang",
+      "categoryGroup": "food",
+      "categoryLabel": "Thai Restaurant",
+      "foursquareId": "659414ed1363526f2750b200",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Thai Restaurant"
+      ]
+    },
+    {
+      "id": "merged-597b45423b830715fcac35cb",
+      "name": "The Clam's House",
+      "coordinates": {
+        "lat": 10.263273,
+        "lng": 103.937863
+      },
+      "address": "Tổ 3 , Ấp ông lang , Xã Cửa Dương, H. Phú Quốc, Tỉnh Kiên Giang",
+      "categoryGroup": "food",
+      "categoryLabel": "Fast Food Restaurant",
+      "foursquareId": "597b45423b830715fcac35cb",
+      "osmId": "node/5268001369",
+      "dataSource": "merged",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "0906 310 608",
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Fast Food Restaurant",
+        "Bar",
+        "Hotel",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "fsq-63a163b6265274523e870549",
+      "name": "The Coffee Garden",
+      "coordinates": {
+        "lat": 10.224645,
+        "lng": 103.972672
+      },
+      "address": "Phu Quoc, Tỉnh Kiến Giang",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Coffee Shop",
+      "foursquareId": "63a163b6265274523e870549",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Coffee Shop"
+      ]
+    },
+    {
+      "id": "osm-node-13648647562",
+      "name": "THE PEAK",
+      "coordinates": {
+        "lat": 10.2105201,
+        "lng": 103.9711978
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/13648647562",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": "+84 83 599 6099",
+      "website": "https://thepeakphuquoc.com/en/home.html",
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "attraction"
+      ]
+    },
+    {
+      "id": "fsq-563afd9ccd109b358d3e2042",
+      "name": "The Reefhouse",
+      "coordinates": {
+        "lat": 10.257240828095547,
+        "lng": 103.93816582192167
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Island",
+      "foursquareId": "563afd9ccd109b358d3e2042",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Island"
+      ]
+    },
+    {
+      "id": "osm-node-13306451601",
+      "name": "Thuong Lac",
+      "coordinates": {
+        "lat": 10.2151447,
+        "lng": 103.9616375
+      },
+      "address": "Đường 30 Tháng 4",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (chinese)",
+      "osmId": "node/13306451601",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": "Mo-Su 11:00-22:30",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "chinese",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "fsq-50a77409e4b082296b28c597",
+      "name": "Thuyen Hoan",
+      "coordinates": {
+        "lat": 10.223895475795334,
+        "lng": 103.9697139103429
+      },
+      "address": "33 Hoang Van Thu, Duong Dong, Phu Quoc",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Mobile Phone Store",
+      "foursquareId": "50a77409e4b082296b28c597",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": "0907 448 998",
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Mobile Phone Store"
+      ]
+    },
+    {
+      "id": "fsq-5e01e2631d883f00075d6250",
+      "name": "Tim Cafe",
+      "coordinates": {
+        "lat": 10.264364,
+        "lng": 103.939761
+      },
+      "address": "H. Phú Quốc, Tỉnh Kiên Giang",
+      "categoryGroup": "food",
+      "categoryLabel": "Nhà hàng Việt",
+      "foursquareId": "5e01e2631d883f00075d6250",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Vietnamese Restaurant"
+      ]
+    },
+    {
+      "id": "fsq-587a3f6bf22995732da66056",
+      "name": "Tim Nang organic permaculture farm",
+      "coordinates": {
+        "lat": 10.257951,
+        "lng": 103.950435
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Farm",
+      "foursquareId": "587a3f6bf22995732da66056",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Farm"
+      ]
+    },
+    {
+      "id": "osm-node-6480401886",
+      "name": "Tin Tin",
+      "coordinates": {
+        "lat": 10.2643736,
+        "lng": 103.9432235
+      },
+      "address": "Đường tỉnh 45",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Cà phê",
+      "osmId": "node/6480401886",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "cafe"
+      ]
+    },
+    {
+      "id": "osm-node-13677262906",
+      "name": "TOÀN DÂN TÍCH CỰC THAM GIA PHÒNG CHỐNG CHÁY VÀ CHỐNG CHẶT PHÁ RỪNG",
+      "coordinates": {
+        "lat": 10.3496345,
+        "lng": 103.9406373
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Địa điểm",
+      "osmId": "node/13677262906",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "information"
+      ]
+    },
+    {
+      "id": "fsq-65bf1dd786df3c415cfc296d",
+      "name": "Tơ Lụa Việt",
+      "coordinates": {
+        "lat": 10.297488,
+        "lng": 103.923497
+      },
+      "address": "Phu Quoc, Tỉnh Kiến Giang",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Clothing Store",
+      "foursquareId": "65bf1dd786df3c415cfc296d",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Clothing Store"
+      ]
+    },
+    {
+      "id": "osm-node-6805687368",
+      "name": "Tra Tien Huong",
+      "coordinates": {
+        "lat": 10.2042557,
+        "lng": 103.9644171
+      },
+      "address": "99, Tran Hung Dao",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Cà phê",
+      "osmId": "node/6805687368",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "cafe"
+      ]
+    },
+    {
+      "id": "osm-way-1119760289",
+      "name": "Trang - Ngan Cháy Tỏi Phú Quốc",
+      "coordinates": {
+        "lat": 10.2138988,
+        "lng": 103.9637497
+      },
+      "address": "119, Đường 30 Tháng 4",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (asian;vietnamese)",
+      "osmId": "way/1119760289",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "+84 786 838 838",
+      "website": null,
+      "openingHours": "Mo-Su 10:00-22:30",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "asian;vietnamese",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "merged-5a01621ab6eedb6d19403624",
+      "name": "Triple 8",
+      "coordinates": {
+        "lat": 10.262088,
+        "lng": 103.93857
+      },
+      "address": "Ong Lang, Phu quoc",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Café",
+      "foursquareId": "5a01621ab6eedb6d19403624",
+      "osmId": "node/6147306299",
+      "dataSource": "merged",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Café",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "fsq-4d1feae38629224ba4db0e87",
+      "name": "Turtle Island Dive Site",
+      "coordinates": {
+        "lat": 10.297900749206839,
+        "lng": 103.93563911437009
+      },
+      "address": "Nguyễn Trung Trực, Tỉnh Kiến Giang",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Dive Spot",
+      "foursquareId": "4d1feae38629224ba4db0e87",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Dive Spot"
+      ]
+    },
+    {
+      "id": "fsq-5c37350051950e002c8fdc06",
+      "name": "Van Anh",
+      "coordinates": {
+        "lat": 10.328038,
+        "lng": 103.972069
+      },
+      "address": "H. Phú Quốc, Tỉnh Kiên Giang",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Café",
+      "foursquareId": "5c37350051950e002c8fdc06",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Café",
+        "Miscellaneous Store"
+      ]
+    },
+    {
+      "id": "osm-node-13663629078",
+      "name": "Vì môi trường Xanh - Sạch - đẹp Xin vui lòng dễ rác đúng nơi quy định",
+      "coordinates": {
+        "lat": 10.3589366,
+        "lng": 103.9906382
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Địa điểm",
+      "osmId": "node/13663629078",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "information"
+      ]
+    },
+    {
+      "id": "osm-node-13663629073",
+      "name": "Vì môi trường Xanh - Sạch - đẹp Xin vui lòng đề rác đúng nơi quy định",
+      "coordinates": {
+        "lat": 10.360408,
+        "lng": 103.9918125
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Địa điểm",
+      "osmId": "node/13663629073",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "information"
+      ]
+    },
+    {
+      "id": "osm-node-13663629076",
+      "name": "Vì môi trường Xanh - Sạch - đẹp Xin vui lòng để rác đúng nơi quy định",
+      "coordinates": {
+        "lat": 10.3595092,
+        "lng": 103.9911419
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Địa điểm",
+      "osmId": "node/13663629076",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "information"
+      ]
+    },
+    {
+      "id": "osm-node-7202290987",
+      "name": "Vic Lavender",
+      "coordinates": {
+        "lat": 10.2633669,
+        "lng": 103.9376641
+      },
+      "address": "Đường tỉnh 45",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (seafood;burger;noodles;pasta;american;vietnamese;international;coffee_shop;curry;ice_cream)",
+      "osmId": "node/7202290987",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "seafood;burger;noodles;pasta;american;vietnamese;international;coffee_shop;curry;ice_cream",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "fsq-69326bae3219cc4eb247b936",
+      "name": "Vietnamese Beach",
+      "coordinates": {
+        "lat": 10.248544,
+        "lng": 103.944773
+      },
+      "address": "Phu Quoc, Tỉnh Kiến Giang",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Beach",
+      "foursquareId": "69326bae3219cc4eb247b936",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Beach"
+      ]
+    },
+    {
+      "id": "osm-node-13664486968",
+      "name": "VƯỜN QUỐC GIA PHÚ QUỐC BIỂN BÁO HIỆU CẤP DỰ BÁO CHÁY RỪNG",
+      "coordinates": {
+        "lat": 10.3316416,
+        "lng": 103.9741866
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Địa điểm",
+      "osmId": "node/13664486968",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "information"
+      ]
+    },
+    {
+      "id": "fsq-67d66e9955688c4d915b4dd5",
+      "name": "vườn tiêu bảo phương",
+      "coordinates": {
+        "lat": 10.332571,
+        "lng": 103.954359
+      },
+      "address": "Phu Quoc, Tỉnh Kiến Giang",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Farm",
+      "foursquareId": "67d66e9955688c4d915b4dd5",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Farm",
+        "Herbs and Spices Store"
+      ]
+    },
+    {
+      "id": "osm-node-12441398184",
+      "name": "Vườn Tiêu Đức Thạnh",
+      "coordinates": {
+        "lat": 10.2062349,
+        "lng": 103.9903154
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/12441398184",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": "+84939684142",
+      "website": null,
+      "openingHours": "Mo-Su 07:00-17:00",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "attraction",
+        "farm"
+      ]
+    },
+    {
+      "id": "osm-node-1954274170",
+      "name": "Vườn Tiêu Ngọc Hà",
+      "coordinates": {
+        "lat": 10.2113296,
+        "lng": 103.9834776
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/1954274170",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "attraction"
+      ]
+    },
+    {
+      "id": "osm-node-12014552001",
+      "name": "Way Coffee & Tea",
+      "coordinates": {
+        "lat": 10.2161587,
+        "lng": 103.9688093
+      },
+      "address": "Phú Quốc",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Cà phê",
+      "osmId": "node/12014552001",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": "+84328243258",
+      "website": null,
+      "openingHours": "Mo 06:30-22:30; Tu 06:00-22:30; We-Su 06:30-22:30",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "cafe"
+      ]
+    },
+    {
+      "id": "fsq-5e3d6ce5d420eb00082533bc",
+      "name": "Y Nghia Bungalow and Pepper farm",
+      "coordinates": {
+        "lat": 10.268565,
+        "lng": 103.940431
+      },
+      "address": "H. Phú Quốc, Tỉnh Kiên Giang",
+      "categoryGroup": "stay",
+      "categoryLabel": "Lưu trú",
+      "foursquareId": "5e3d6ce5d420eb00082533bc",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/stay-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Resort",
+        "Farm",
+        "Hotel"
+      ]
+    },
+    {
+      "id": "osm-node-6985102785",
+      "name": "YÊN HA 2",
+      "coordinates": {
+        "lat": 10.2629501,
+        "lng": 103.9411002
+      },
+      "address": "",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (vietnamese)",
+      "osmId": "node/6985102785",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "0963-633-307",
+      "website": null,
+      "openingHours": "Mo-Su 09:00-22:00",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "vietnamese",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-13202530501",
+      "name": "Алиса гид по Фукуоку 88trip",
+      "coordinates": {
+        "lat": 10.2030844,
+        "lng": 103.96457
+      },
+      "address": "105, Trần Hưng Đạo",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Mua sắm",
+      "osmId": "node/13202530501",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": "+84353002545",
+      "website": "http://phuquoc_travelexpert.ru",
+      "openingHours": "Mo-Su 12:00-20:00",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "travel_agency"
+      ]
+    },
+    {
+      "id": "fsq-5cd17f3628374e002c58d05b",
+      "name": "водопад дабань (suối đá bàn, da ban stream)",
+      "coordinates": {
+        "lat": 10.24983,
+        "lng": 104.022588
+      },
+      "address": "H. Phú Quốc, Tỉnh Kiên Giang",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Waterfall",
+      "foursquareId": "5cd17f3628374e002c58d05b",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Waterfall"
+      ]
+    },
+    {
+      "id": "osm-node-6117199886",
+      "name": "поворот в Нац.парк",
+      "coordinates": {
+        "lat": 10.3317904,
+        "lng": 103.9739539
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/6117199886",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "attraction"
+      ]
+    },
+    {
+      "id": "osm-node-13357233094",
+      "name": "中華民國留越國軍病故官兵眷暨義民紀念碑",
+      "coordinates": {
+        "lat": 10.2279557,
+        "lng": 103.9631907
+      },
+      "address": "",
+      "categoryGroup": "culture",
+      "categoryLabel": "Di tích lịch sử",
+      "osmId": "node/13357233094",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "memorial"
+      ]
+    }
+  ],
+  "attribution": {
+    "foursquare": "Foursquare Places API",
+    "osm": "Data © OpenStreetMap contributors (ODbL)"
+  }
+}

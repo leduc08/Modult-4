@@ -1,7 +1,7 @@
 import { PROVINCES } from '../data/vietnamData';
 import { DetailItem } from '../components/ItemDetailModal';
 
-export type PlaceCategoryGroup = 'all' | 'food' | 'cafe' | 'sightseeing' | 'culture' | 'shopping';
+export type PlaceCategoryGroup = 'all' | 'food' | 'cafe' | 'sightseeing' | 'culture' | 'shopping' | 'stay';
 
 /** Nhận dạng nguồn dữ liệu — dùng để phân biệt với Google Places */
 export const DATA_SOURCE_ID = 'local-sample' as const;

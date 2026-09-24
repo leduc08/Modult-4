@@ -182,7 +182,6 @@ export default function App() {
             onToggleWishlist={handleToggleWishlist}
             onSelectItem={(item) => setSelectedDetailItem(item)}
             onAddToItinerary={handleAddToItinerary}
-            onAskAI={handleAskAIAboutItem}
           />
         )}
 

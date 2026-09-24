@@ -23,6 +23,7 @@ import {
   mergePlaces,
   getPlaceholderImage,
 } from './mergeEngine.ts';
+import { isInactiveOSM, prunePlaces } from './placeQuality.ts';
 
 dotenv.config();
 
@@ -32,7 +33,10 @@ dotenv.config();
 
 const FSQ_API_KEY = process.env.FOURSQUARE_API_KEY || process.env.VITE_FOURSQUARE_API_KEY || '';
 const FSQ_BASE = 'https://places-api.foursquare.com';
-const OVERPASS_BASE = 'https://overpass-api.de/api/interpreter';
+const OVERPASS_BASES = [
+  'https://overpass-api.de/api/interpreter',
+  'https://maps.mail.ru/osm/tools/overpass/api/interpreter',
+];
 
 const OUTPUT_DIR = path.resolve(process.cwd(), 'frontend/src/data/places');
 
@@ -72,6 +76,10 @@ function osmTagsToCategory(tags: Record<string, string>): { group: PlaceCategory
   const shop = tags.shop || '';
   const historic = tags.historic || '';
   const leisure = tags.leisure || '';
+
+  if (['hotel', 'hostel', 'guest_house', 'motel', 'camp_site', 'chalet', 'apartment', 'resort'].includes(tourism)) {
+    return { group: 'stay', label: 'Lưu trú' };
+  }
 
   if (['restaurant', 'fast_food', 'food_court', 'bbq'].includes(amenity)) {
     return { group: 'food', label: tags.cuisine ? `Ẩm thực (${tags.cuisine})` : 'Ẩm thực' };
@@ -150,14 +158,16 @@ async function fetchFoursquareCategory(
 
     return results.filter(p => p.fsq_place_id && p.name &&
       Number.isFinite(p.latitude) && Number.isFinite(p.longitude)).map((p): MergedPlace => {
-      const group = cat.group;
+      const categoryName = p.categories?.[0]?.name || cat.label;
+      const isStay = /campground|camping|hotel|hostel|homestay|guesthouse|guest house|lodging|resort|motel/i.test(categoryName);
+      const group = isStay ? 'stay' : cat.group;
       return {
         id: `fsq-${p.fsq_place_id}`,
         name: p.name,
         coordinates: { lat: p.latitude, lng: p.longitude },
         address: p.location?.formatted_address || p.location?.address || '',
         categoryGroup: group,
-        categoryLabel: p.categories?.[0]?.name || cat.label,
+        categoryLabel: categoryName === 'Vietnamese Restaurant' ? 'Nhà hàng Việt' : isStay ? 'Lưu trú' : categoryName,
         foursquareId: p.fsq_place_id,
         osmId: undefined,
         dataSource: 'foursquare',
@@ -217,15 +227,15 @@ function buildOverpassQuery(lat: number, lng: number, radiusMeters = 10000): str
   return `
 [out:json][timeout:30];
 (
-  node["amenity"~"restaurant|cafe|fast_food|bar|pub|food_court|ice_cream"](around:${radiusMeters},${lat},${lng});
-  node["tourism"~"attraction|museum|viewpoint|gallery|information"](around:${radiusMeters},${lat},${lng});
-  node["historic"](around:${radiusMeters},${lat},${lng});
-  node["shop"](around:${radiusMeters},${lat},${lng});
-  node["leisure"~"park|garden"](around:${radiusMeters},${lat},${lng});
-  node["amenity"="place_of_worship"](around:${radiusMeters},${lat},${lng});
-  way["amenity"~"restaurant|cafe|fast_food"](around:${radiusMeters},${lat},${lng});
-  way["tourism"~"attraction|museum"](around:${radiusMeters},${lat},${lng});
-  way["shop"](around:${radiusMeters},${lat},${lng});
+  node["amenity"~"restaurant|cafe|fast_food|bar|pub|food_court|ice_cream"][name](around:${radiusMeters},${lat},${lng});
+  node["tourism"~"attraction|museum|viewpoint|gallery|information"][name](around:${radiusMeters},${lat},${lng});
+  node["historic"][name](around:${radiusMeters},${lat},${lng});
+  node["shop"][name](around:${radiusMeters},${lat},${lng});
+  node["leisure"~"park|garden"][name](around:${radiusMeters},${lat},${lng});
+  node["amenity"="place_of_worship"][name](around:${radiusMeters},${lat},${lng});
+  way["amenity"~"restaurant|cafe|fast_food"][name](around:${radiusMeters},${lat},${lng});
+  way["tourism"~"attraction|museum"][name](around:${radiusMeters},${lat},${lng});
+  way["shop"][name](around:${radiusMeters},${lat},${lng});
 );
 out center body;
   `.trim();
@@ -244,35 +254,116 @@ function parseOSMAddress(tags: Record<string, string>): string {
   return parts.join(', ');
 }
 
-async function fetchOSMPlaces(city: typeof CITIES[0]): Promise<MergedPlace[]> {
-  const query = buildOverpassQuery(city.lat, city.lng);
+async function fetchOverpassElements(query: string): Promise<OverpassElement[]> {
+  let lastError: unknown;
+  for (const endpoint of OVERPASS_BASES) {
+    try {
+      const res = await fetch(endpoint, {
+        signal: AbortSignal.timeout(30000),
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'User-Agent': 'VietGo/1.0',
+        },
+        body: `data=${encodeURIComponent(query)}`,
+      });
+      if (!res.ok) {
+        throw new Error(`Overpass HTTP ${res.status}: ${res.statusText}`);
+      }
+      const data = await res.json();
+      if (data.remark || !Array.isArray(data.elements)) {
+        throw new Error(`Incomplete Overpass response: ${data.remark || 'missing elements'}`);
+      }
+      return data.elements;
+    } catch (err) {
+      lastError = err;
+      console.warn(`  ⚠ Overpass ${new URL(endpoint).host}: ${(err as Error).message}`);
+    }
+  }
+  throw lastError;
+}
 
+function withinRadiusKm(lat: number, lng: number, centerLat: number, centerLng: number, radiusKm: number): boolean {
+  const toRadians = Math.PI / 180;
+  const dLat = (lat - centerLat) * toRadians;
+  const dLng = (lng - centerLng) * toRadians;
+  const a = Math.sin(dLat / 2) ** 2 +
+    Math.cos(centerLat * toRadians) * Math.cos(lat * toRadians) * Math.sin(dLng / 2) ** 2;
+  return 6371 * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a)) <= radiusKm;
+}
+
+function isTransientOverpassError(err: unknown): boolean {
+  return /Overpass HTTP (429|502|503|504)|timeout|aborted/i.test(String(err));
+}
+
+async function fetchOverpassArea(
+  lat: number, lng: number, radiusMeters: number, depth = 0,
+): Promise<OverpassElement[]> {
   try {
-    const res = await fetch(OVERPASS_BASE, {
-      signal: AbortSignal.timeout(60000),
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-        'User-Agent': 'VietGo/1.0',
-      },
-      body: `data=${encodeURIComponent(query)}`,
-    });
-
-    if (!res.ok) {
-      throw new Error(`Overpass HTTP ${res.status}: ${res.statusText}`);
+    return await fetchOverpassElements(buildOverpassQuery(lat, lng, radiusMeters));
+  } catch (err) {
+    if (!isTransientOverpassError(err) || depth >= 2) throw err;
+    const offsetKm = radiusMeters / 2000;
+    const latOffset = offsetKm / 111.32;
+    const lngOffset = offsetKm / (111.32 * Math.cos(lat * Math.PI / 180));
+    const childRadius = Math.ceil(radiusMeters * 0.75);
+    console.warn(`  ⚠ Splitting ${radiusMeters}m Overpass area into four ${childRadius}m areas`);
+    const byId = new Map<string, OverpassElement>();
+    for (const latSign of [-1, 1]) {
+      for (const lngSign of [-1, 1]) {
+        const tile = await fetchOverpassArea(
+          lat + latSign * latOffset,
+          lng + lngSign * lngOffset,
+          childRadius,
+          depth + 1,
+        );
+        for (const element of tile) byId.set(`${element.type}/${element.id}`, element);
+        await sleep(1000);
+      }
     }
+    return [...byId.values()];
+  }
+}
 
-    const data = await res.json();
-    if (data.remark || !Array.isArray(data.elements)) {
-      throw new Error(`Incomplete Overpass response: ${data.remark || 'missing elements'}`);
+async function fetchOSMPlaces(city: typeof CITIES[0]): Promise<MergedPlace[]> {
+  try {
+    let elements: OverpassElement[];
+    try {
+      elements = await fetchOverpassElements(buildOverpassQuery(city.lat, city.lng));
+    } catch (err) {
+      if (!isTransientOverpassError(err)) throw err;
+      console.warn(`  ⚠ Overpass timed out for ${city.name}; retrying as nine smaller areas`);
+      const byId = new Map<string, OverpassElement>();
+      const latStep = 5 / 111.32;
+      const lngStep = 5 / (111.32 * Math.cos(city.lat * Math.PI / 180));
+      for (const latOffset of [-1, 0, 1]) {
+        for (const lngOffset of [-1, 0, 1]) {
+          const tile = await fetchOverpassArea(
+            city.lat + latOffset * latStep,
+            city.lng + lngOffset * lngStep,
+            5100,
+          );
+          for (const element of tile) {
+            const lat = element.lat ?? element.center?.lat;
+            const lng = element.lon ?? element.center?.lon;
+            if (lat !== undefined && lng !== undefined &&
+                withinRadiusKm(lat, lng, city.lat, city.lng, 10)) {
+              byId.set(`${element.type}/${element.id}`, element);
+            }
+          }
+          console.log(`  🧩 Overpass area ${byId.size} unique places so far`);
+          await sleep(1000);
+        }
+      }
+      elements = [...byId.values()];
     }
-    const elements: OverpassElement[] = data.elements ?? [];
 
     return elements
       .filter(el => {
         // Chỉ giữ các element có tên
         return (el.tags?.name || el.tags?.['name:vi'] || el.tags?.['name:en']) &&
-          Number.isFinite(el.lat ?? el.center?.lat) && Number.isFinite(el.lon ?? el.center?.lon);
+          Number.isFinite(el.lat ?? el.center?.lat) && Number.isFinite(el.lon ?? el.center?.lon) &&
+          !isInactiveOSM(el.tags || {});
       })
       .map((el): MergedPlace => {
         const tags = el.tags || {};
@@ -344,7 +435,8 @@ async function processCity(city: typeof CITIES[0]): Promise<CityPlacesData> {
   }
 
   // Merge & dedup
-  const { places, stats } = mergePlaces(fsqPlaces, osmPlaces);
+  const merged = mergePlaces(fsqPlaces, osmPlaces);
+  const { places, stats, removed } = prunePlaces(merged.places);
 
   // Assign placeholder images for places without photos
   for (const place of places) {
@@ -355,6 +447,7 @@ async function processCity(city: typeof CITIES[0]): Promise<CityPlacesData> {
   }
 
   console.log(`  ✅ Kết quả: ${stats.total} tổng (${stats.fromFoursquare} FSQ, ${stats.fromOSM} OSM, ${stats.merged} merged, ${stats.needsReview} cần kiểm tra)`);
+  console.log(`  🧹 Đã loại ${removed} địa điểm thiếu thông tin hoặc ghi rõ đã đóng cửa`);
 
   const now = new Date().toISOString();
 

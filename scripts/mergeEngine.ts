@@ -14,7 +14,7 @@
 // Types
 // ---------------------------------------------------------------------------
 
-export type PlaceCategoryGroup = 'all' | 'food' | 'cafe' | 'sightseeing' | 'culture' | 'shopping';
+export type PlaceCategoryGroup = 'all' | 'food' | 'cafe' | 'sightseeing' | 'culture' | 'shopping' | 'stay';
 
 export interface MergedPlace {
   id: string;
@@ -143,11 +143,12 @@ export function haversineDistanceKm(
 // ---------------------------------------------------------------------------
 
 const PLACEHOLDER_IMAGES: Record<PlaceCategoryGroup, string> = {
-  food: 'https://images.unsplash.com/photo-1565299507177-b0ac66763828?w=400&q=80&auto=format&fit=crop',
+  food: '/images/food-placeholder.svg',
   cafe: 'https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop',
   sightseeing: 'https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop',
   culture: 'https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop',
   shopping: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop',
+  stay: '/images/stay-placeholder.svg',
   all: 'https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop',
 };
 

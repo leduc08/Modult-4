@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" role="img" aria-label="Minh họa món ăn">
+  <rect width="400" height="300" fill="#f5f0e9"/>
+  <circle cx="200" cy="145" r="104" fill="#fff" stroke="#ded4c8" stroke-width="9"/>
+  <circle cx="200" cy="145" r="76" fill="#e8c68e"/>
+  <path d="M135 132c22-22 49-3 69-20 19-16 44-1 57 18M135 161c25-17 46 9 67-9 19-16 47-2 62 10" fill="none" stroke="#c88851" stroke-width="12" stroke-linecap="round"/>
+  <path d="M156 96c16 3 18 13 20 26M234 177c16-8 24-18 28-32" fill="none" stroke="#688b66" stroke-width="13" stroke-linecap="round"/>
+  <path d="M90 244h220" stroke="#d1c5b8" stroke-width="4" stroke-linecap="round"/>
+</svg>

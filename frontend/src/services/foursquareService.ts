@@ -130,13 +130,16 @@ function fsqCategoriesToGroup(cats?: FoursquareCategory[]): {
 } {
   if (!cats || cats.length === 0) return { categoryGroup: 'sightseeing', categoryLabel: 'Tham quan' };
   const cat = cats[0];
+  if (/campground|camping|hotel|hostel|homestay|guesthouse|guest house|lodging|resort|motel/i.test(cat.name)) {
+    return { categoryGroup: 'stay', categoryLabel: 'Lưu trú' };
+  }
   const catId = cat.fsq_category_id;
   const numId = parseInt(catId, 10);
   const group = FSQ_CATEGORY_TO_GROUP[catId] ??
     (numId >= 13000 && numId < 14000 ? 'food' :
      numId >= 17000 && numId < 18000 ? 'shopping' :
      numId >= 12000 && numId < 13000 ? 'culture' : 'sightseeing');
-  return { categoryGroup: group, categoryLabel: cat.name };
+  return { categoryGroup: group, categoryLabel: cat.name === 'Vietnamese Restaurant' ? 'Nhà hàng Việt' : cat.name };
 }
 
 const PRICE_DISPLAY: Record<number, string> = {
@@ -319,11 +322,12 @@ export function clearDetailCache(): void {
  */
 function getDefaultImage(group: NearbyPlace['categoryGroup']): string {
   const imgs: Record<NearbyPlace['categoryGroup'], string> = {
-    food: 'https://images.unsplash.com/photo-1565299507177-b0ac66763828?w=400&q=80&auto=format&fit=crop',
+    food: '/images/food-placeholder.svg',
     cafe: 'https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop',
     sightseeing: 'https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop',
     culture: 'https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop',
     shopping: 'https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop',
+    stay: '/images/stay-placeholder.svg',
     all: 'https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop',
   };
   return imgs[group];

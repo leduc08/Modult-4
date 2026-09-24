@@ -1,0 +1,5503 @@
+{
+  "cityId": "sa-pa",
+  "cityName": "Sa Pa",
+  "center": {
+    "lat": 22.3364,
+    "lng": 103.8438
+  },
+  "fetchedAt": "2026-09-24T16:11:24.219Z",
+  "sources": {
+    "foursquare": {
+      "count": 82,
+      "fetchedAt": "2026-09-24T16:11:24.219Z"
+    },
+    "osm": {
+      "count": 365,
+      "fetchedAt": "2026-09-24T16:11:24.219Z"
+    }
+  },
+  "stats": {
+    "total": 207,
+    "fromFoursquare": 70,
+    "fromOSM": 132,
+    "merged": 5,
+    "needsReview": 19
+  },
+  "places": [
+    {
+      "id": "fsq-5c10dab664c8e1002cd28713",
+      "name": "1991 Sapa",
+      "coordinates": {
+        "lat": 22.336273,
+        "lng": 103.84302
+      },
+      "address": "TT. Sa Pa, Tỉnh Lào Cai",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Café",
+      "foursquareId": "5c10dab664c8e1002cd28713",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Café"
+      ]
+    },
+    {
+      "id": "osm-node-10286834209",
+      "name": "6 Ng. Vuon Treo, TT",
+      "coordinates": {
+        "lat": 22.3396951,
+        "lng": 103.8486889
+      },
+      "address": "6, Vuon Treo",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Mua sắm",
+      "osmId": "node/10286834209",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "ticket"
+      ]
+    },
+    {
+      "id": "osm-node-5907401185",
+      "name": "A Phủ Quán",
+      "coordinates": {
+        "lat": 22.3344262,
+        "lng": 103.8406857
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Địa điểm",
+      "osmId": "node/5907401185",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "information"
+      ]
+    },
+    {
+      "id": "osm-node-11871599148",
+      "name": "Alpine Coaster Sapa",
+      "coordinates": {
+        "lat": 22.3225629,
+        "lng": 103.8665646
+      },
+      "address": "Tổ 3, thị xã Sa Pa",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/11871599148",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": "Mo-Su 08:00-21:00",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "park"
+      ]
+    },
+    {
+      "id": "fsq-69fd715d19872b7f87c98da1",
+      "name": "Angel Statue",
+      "coordinates": {
+        "lat": 22.331538,
+        "lng": 103.8414
+      },
+      "address": "Violet, Sa Pa, Tỉnh Lào Cai",
+      "categoryGroup": "culture",
+      "categoryLabel": "Monument",
+      "foursquareId": "69fd715d19872b7f87c98da1",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Monument"
+      ]
+    },
+    {
+      "id": "merged-6a33919926853143d4c87ce4",
+      "name": "Artbook",
+      "coordinates": {
+        "lat": 22.335002,
+        "lng": 103.84075
+      },
+      "address": "Sa Pa, Tỉnh Lào Cai",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Bookstore",
+      "foursquareId": "6a33919926853143d4c87ce4",
+      "osmId": "node/13282898100",
+      "dataSource": "merged",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Bookstore",
+        "Gift Store",
+        "gift"
+      ]
+    },
+    {
+      "id": "fsq-562a2b6f498e7abdf563944a",
+      "name": "Ẩm Thực Việt 39 Xuân Viên TT Sapa",
+      "coordinates": {
+        "lat": 22.336256,
+        "lng": 103.843258
+      },
+      "address": "39 Xuân Viên, Sapa, Tỉnh Lào Cai",
+      "categoryGroup": "food",
+      "categoryLabel": "Nhà hàng Việt",
+      "foursquareId": "562a2b6f498e7abdf563944a",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Vietnamese Restaurant"
+      ]
+    },
+    {
+      "id": "fsq-4ffe82bee4b0a8a273449522",
+      "name": "Bamboo Bar",
+      "coordinates": {
+        "lat": 22.300203719369804,
+        "lng": 103.89372498631414
+      },
+      "address": "Tả Vân, Sa Pa, Tỉnh Lào Cai",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Coffee Shop",
+      "foursquareId": "4ffe82bee4b0a8a273449522",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": "1296 191831",
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Coffee Shop",
+        "Cocktail Bar",
+        "Lounge"
+      ]
+    },
+    {
+      "id": "osm-node-14121779101",
+      "name": "Banh Mi 911",
+      "coordinates": {
+        "lat": 22.3373127,
+        "lng": 103.8477918
+      },
+      "address": "15b, Phố Kim Đồng",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (local;vietnamese)",
+      "osmId": "node/14121779101",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "local;vietnamese",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-3668724311",
+      "name": "Bảo Tàng Sapa",
+      "coordinates": {
+        "lat": 22.3355407,
+        "lng": 103.8400955
+      },
+      "address": "103, Xuân Vien",
+      "categoryGroup": "culture",
+      "categoryLabel": "Văn hóa",
+      "osmId": "node/3668724311",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": "07:00-19:00",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "museum"
+      ]
+    },
+    {
+      "id": "osm-node-4553642589",
+      "name": "Bia Hơi 102",
+      "coordinates": {
+        "lat": 22.3353071,
+        "lng": 103.8395091
+      },
+      "address": "102, khách sạn hoàng hà",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (fish;vietnamese;breakfast;local)",
+      "osmId": "node/4553642589",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "fish;vietnamese;breakfast;local",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "fsq-4e1a7b346284ea72470c46a0",
+      "name": "BIDV Bank Sapa Branch",
+      "coordinates": {
+        "lat": 22.336994,
+        "lng": 103.844308
+      },
+      "address": "Tỉnh Lào Cai",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Structure",
+      "foursquareId": "4e1a7b346284ea72470c46a0",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Structure"
+      ]
+    },
+    {
+      "id": "osm-node-5031500829",
+      "name": "bistro.sapa - Bar & Eatery",
+      "coordinates": {
+        "lat": 22.3331609,
+        "lng": 103.8431483
+      },
+      "address": "7, Mường Hoa, Sa Pa",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Đồ uống",
+      "osmId": "node/5031500829",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": "Mo-Su 08:00-23:00",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "bar"
+      ]
+    },
+    {
+      "id": "osm-node-12768302901",
+      "name": "Buddha",
+      "coordinates": {
+        "lat": 22.3525244,
+        "lng": 103.7652475
+      },
+      "address": "",
+      "categoryGroup": "culture",
+      "categoryLabel": "Di tích lịch sử",
+      "osmId": "node/12768302901",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "monument"
+      ]
+    },
+    {
+      "id": "fsq-6270b1dbc2391d5e9d9b99fd",
+      "name": "Buddha",
+      "coordinates": {
+        "lat": 22.304203,
+        "lng": 103.775154
+      },
+      "address": "Tỉnh Lào Cai",
+      "categoryGroup": "culture",
+      "categoryLabel": "Monument",
+      "foursquareId": "6270b1dbc2391d5e9d9b99fd",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Monument"
+      ]
+    },
+    {
+      "id": "osm-node-5223027221",
+      "name": "Buffalo Bell Restaurant",
+      "coordinates": {
+        "lat": 22.3339448,
+        "lng": 103.8423471
+      },
+      "address": "25, Câu Mây",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực",
+      "osmId": "node/5223027221",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-3824250500",
+      "name": "Cafe in the cloud",
+      "coordinates": {
+        "lat": 22.3320945,
+        "lng": 103.8390779
+      },
+      "address": "060, Fansipan",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Cà phê",
+      "osmId": "node/3824250500",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": "Mo-Su 06:00-23:00",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "cafe"
+      ]
+    },
+    {
+      "id": "osm-node-4502614689",
+      "name": "Cao nguyên",
+      "coordinates": {
+        "lat": 22.3329576,
+        "lng": 103.8429954
+      },
+      "address": "",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (italian_pizza;vietnamese)",
+      "osmId": "node/4502614689",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "0988807807",
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "italian_pizza;vietnamese",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-854823033",
+      "name": "Carved Boulder Museum",
+      "coordinates": {
+        "lat": 22.304065,
+        "lng": 103.8985557
+      },
+      "address": "",
+      "categoryGroup": "culture",
+      "categoryLabel": "Văn hóa",
+      "osmId": "node/854823033",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "museum"
+      ]
+    },
+    {
+      "id": "osm-node-991996791",
+      "name": "Cát Cát",
+      "coordinates": {
+        "lat": 22.3285327,
+        "lng": 103.8346798
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/991996791",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "attraction"
+      ]
+    },
+    {
+      "id": "fsq-4d06e702a2685481643fc4bd",
+      "name": "Cat Cat (Cát Cát)",
+      "coordinates": {
+        "lat": 22.33097278619735,
+        "lng": 103.83453543623172
+      },
+      "address": "Sa Pá, Tỉnh Lào Cai",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Village",
+      "foursquareId": "4d06e702a2685481643fc4bd",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Village",
+        "Hiking Trail",
+        "Mountain"
+      ]
+    },
+    {
+      "id": "osm-node-6873081194",
+      "name": "Cave",
+      "coordinates": {
+        "lat": 22.3516712,
+        "lng": 103.8555026
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/6873081194",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "attraction"
+      ]
+    },
+    {
+      "id": "osm-way-85529099",
+      "name": "Cầu treo Cát Cát",
+      "coordinates": {
+        "lat": 22.3287499,
+        "lng": 103.829448
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "way/85529099",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "attraction"
+      ]
+    },
+    {
+      "id": "osm-way-672018312",
+      "name": "Cầu Treo Lao Chải San II",
+      "coordinates": {
+        "lat": 22.309578,
+        "lng": 103.8606921
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "way/672018312",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "attraction"
+      ]
+    },
+    {
+      "id": "fsq-4dc60d45d22dafda2fb5a635",
+      "name": "Chợ Sa Pa (Sapa Market)",
+      "coordinates": {
+        "lat": 22.334019691544874,
+        "lng": 103.8419473171234
+      },
+      "address": "Cầu Mây (Tuệ Tĩnh), Sa Pa, Tỉnh Lào Cai",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Market",
+      "foursquareId": "4dc60d45d22dafda2fb5a635",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Market",
+        "Farmers Market"
+      ]
+    },
+    {
+      "id": "osm-node-4959491122",
+      "name": "Coffee Time",
+      "coordinates": {
+        "lat": 22.3377889,
+        "lng": 103.8522134
+      },
+      "address": "549, Hàm Rồng",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Cà phê",
+      "osmId": "node/4959491122",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "coffee_shop",
+        "cafe"
+      ]
+    },
+    {
+      "id": "fsq-59bf1a022955130fbf78626a",
+      "name": "cộng cà phê",
+      "coordinates": {
+        "lat": 22.335003,
+        "lng": 103.841296
+      },
+      "address": "37 Xuan Vien, H. Sa Pa, Tỉnh Lào Cai",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Coffee Shop",
+      "foursquareId": "59bf1a022955130fbf78626a",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": true,
+      "conflictNote": "Tọa độ cách 586m giữa FSQ và OSM",
+      "tags": [
+        "Coffee Shop"
+      ]
+    },
+    {
+      "id": "osm-node-5097249121",
+      "name": "Cộng Cà Phê",
+      "coordinates": {
+        "lat": 22.3363052,
+        "lng": 103.8430427
+      },
+      "address": "",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Cà phê",
+      "osmId": "node/5097249121",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": "http://congcaphe.com",
+      "openingHours": null,
+      "description": null,
+      "needsReview": true,
+      "conflictNote": "Tọa độ cách 231m giữa FSQ và OSM",
+      "tags": [
+        "coffee_shop;vietnamese",
+        "cafe"
+      ]
+    },
+    {
+      "id": "fsq-5412eeca498e0e4501f35c46",
+      "name": "Công Viên Sa Pa",
+      "coordinates": {
+        "lat": 22.335852,
+        "lng": 103.842532
+      },
+      "address": "Xuân Viên, Sa Pá, Tỉnh Lào Cai",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Park",
+      "foursquareId": "5412eeca498e0e4501f35c46",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Park"
+      ]
+    },
+    {
+      "id": "fsq-4ef578816c25c411e9a34122",
+      "name": "Cơm Nhà Ta",
+      "coordinates": {
+        "lat": 22.336181466396983,
+        "lng": 103.84319707225768
+      },
+      "address": "Sapa, Tỉnh Lào Cai",
+      "categoryGroup": "food",
+      "categoryLabel": "Asian Restaurant",
+      "foursquareId": "4ef578816c25c411e9a34122",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Asian Restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-13084344806",
+      "name": "Cuu Hop Lop",
+      "coordinates": {
+        "lat": 22.3518073,
+        "lng": 103.8174629
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/13084344806",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "attraction"
+      ]
+    },
+    {
+      "id": "osm-node-5350810721",
+      "name": "Dao coffee",
+      "coordinates": {
+        "lat": 22.3358694,
+        "lng": 103.8431913
+      },
+      "address": "Đường Thạch Sơn",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Cà phê",
+      "osmId": "node/5350810721",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "coffee_shop",
+        "cafe"
+      ]
+    },
+    {
+      "id": "fsq-573aa1b4498e09c29115937b",
+      "name": "Dao Coffee&Herbal Tea",
+      "coordinates": {
+        "lat": 22.336038951650732,
+        "lng": 103.84303375771691
+      },
+      "address": "06 Thạch sơn, Sapa, Tỉnh Lào Cai",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Coffee Shop",
+      "foursquareId": "573aa1b4498e09c29115937b",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Coffee Shop"
+      ]
+    },
+    {
+      "id": "osm-node-11212270437",
+      "name": "Delta Italian",
+      "coordinates": {
+        "lat": 22.3329314,
+        "lng": 103.8426272
+      },
+      "address": "Ngo Cau May",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (italian;italian_pizza)",
+      "osmId": "node/11212270437",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": "Mo-Su 08:00-22:00",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "italian;italian_pizza",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "fsq-4cbd7f66c7228cfae1052ace",
+      "name": "Delta Italian Restaurant",
+      "coordinates": {
+        "lat": 22.333146831733213,
+        "lng": 103.84271585575488
+      },
+      "address": "33 Cầu Mây, Sa Pa, Tỉnh Lào Cai",
+      "categoryGroup": "food",
+      "categoryLabel": "Italian Restaurant",
+      "foursquareId": "4cbd7f66c7228cfae1052ace",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "203871799",
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Italian Restaurant",
+        "Wine Bar",
+        "Pizzeria"
+      ]
+    },
+    {
+      "id": "fsq-4da94667cda1652a2b6fdd76",
+      "name": "Dragon's Jaw Mountain (Núi Hàm Rồng)",
+      "coordinates": {
+        "lat": 22.33489890471805,
+        "lng": 103.84247807881833
+      },
+      "address": "Hàm Rồng, Sa Pa, Tỉnh Lào Cai",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Scenic Lookout",
+      "foursquareId": "4da94667cda1652a2b6fdd76",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Scenic Lookout",
+        "Mountain",
+        "Hiking Trail"
+      ]
+    },
+    {
+      "id": "fsq-527352af498ed6bee09e84df",
+      "name": "Đài Phun Nước Sa Pa (Sapa Fountain)",
+      "coordinates": {
+        "lat": 22.336042710655878,
+        "lng": 103.84236485185205
+      },
+      "address": "Xuân Viên, Sa Pa, Tỉnh Lào Cai",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Plaza",
+      "foursquareId": "527352af498ed6bee09e84df",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Plaza"
+      ]
+    },
+    {
+      "id": "fsq-4dd3889b45dd98b61e6ed579",
+      "name": "Đèo Trạm Tôn - Ô Quy Hồ",
+      "coordinates": {
+        "lat": 22.35294928920085,
+        "lng": 103.76480400426212
+      },
+      "address": "Quốc Lộ 4D, Tam Đường, Tỉnh Lai Châu",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Scenic Lookout",
+      "foursquareId": "4dd3889b45dd98b61e6ed579",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Scenic Lookout",
+        "Mountain",
+        "Rest Area"
+      ]
+    },
+    {
+      "id": "osm-node-13359125623",
+      "name": "Đền Hàng Phố",
+      "coordinates": {
+        "lat": 22.3333316,
+        "lng": 103.8404342
+      },
+      "address": "",
+      "categoryGroup": "culture",
+      "categoryLabel": "Văn hóa",
+      "osmId": "node/13359125623",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "place_of_worship"
+      ]
+    },
+    {
+      "id": "osm-node-12248299185",
+      "name": "Đền Mẫu Sơn",
+      "coordinates": {
+        "lat": 22.3368503,
+        "lng": 103.850107
+      },
+      "address": "",
+      "categoryGroup": "culture",
+      "categoryLabel": "Văn hóa",
+      "osmId": "node/12248299185",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "place_of_worship"
+      ]
+    },
+    {
+      "id": "osm-node-6420009785",
+      "name": "Điểm dừng chân Ý Linh Hồ",
+      "coordinates": {
+        "lat": 22.3143871,
+        "lng": 103.8572582
+      },
+      "address": "Lao Chai San",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Cà phê",
+      "osmId": "node/6420009785",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": "0888058666",
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "chicken;regional;noodles;oriental;sandwich;vietnamese;coffee_shop;curry;ice_cream;local;deli;tea;burger",
+        "cafe"
+      ]
+    },
+    {
+      "id": "fsq-6a258caf72ad7e52db2d0021",
+      "name": "Đồ Chơi - Souvenir Shop - ของที่ระลึก - 纪念品 - 기념품 - Hải Yến",
+      "coordinates": {
+        "lat": 22.33584,
+        "lng": 103.84357
+      },
+      "address": "Sa Pa, Tỉnh Lào Cai",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Gift Store",
+      "foursquareId": "6a258caf72ad7e52db2d0021",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Gift Store"
+      ]
+    },
+    {
+      "id": "fsq-4f2d2628e4b04297f6f06d36",
+      "name": "đồ nướng sapa",
+      "coordinates": {
+        "lat": 22.336360931396484,
+        "lng": 103.84378814697266
+      },
+      "address": "Sa Pa, Lào Cai, Tỉnh Lào Cai",
+      "categoryGroup": "food",
+      "categoryLabel": "Nhà hàng Việt",
+      "foursquareId": "4f2d2628e4b04297f6f06d36",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Vietnamese Restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-5549438722",
+      "name": "Family Restaurant - Coffee Fast Food",
+      "coordinates": {
+        "lat": 22.3302266,
+        "lng": 103.8458065
+      },
+      "address": "043, Mường Hoa",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (burger;pasta;italian;breakfast;curry;coffee_shop;local)",
+      "osmId": "node/5549438722",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "0976780735",
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "burger;pasta;italian;breakfast;curry;coffee_shop;local",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "fsq-4ebf1aa90e019a162a78fa12",
+      "name": "Fansipan (Phan Xi Păng (Fansipan))",
+      "coordinates": {
+        "lat": 22.303268,
+        "lng": 103.775005
+      },
+      "address": "Dãy Núi Hoàng Liên Sơn, Sa Pa, Tỉnh Lào Cai",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Mountain",
+      "foursquareId": "4ebf1aa90e019a162a78fa12",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Mountain",
+        "Hiking Trail"
+      ]
+    },
+    {
+      "id": "fsq-5967609c4ce0667b7a884af5",
+      "name": "Fansipan Peak 3143m",
+      "coordinates": {
+        "lat": 22.343883,
+        "lng": 103.812567
+      },
+      "address": "H. Sa Pa, Tỉnh Lào Cai",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Mountain",
+      "foursquareId": "5967609c4ce0667b7a884af5",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Mountain"
+      ]
+    },
+    {
+      "id": "fsq-575bf248498e205c95c78f5d",
+      "name": "Fansipan Terrace Café",
+      "coordinates": {
+        "lat": 22.332642,
+        "lng": 103.8385
+      },
+      "address": "Fansipan Street, Sapa, Lào Cai, Tỉnh Lào Cai",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Café",
+      "foursquareId": "575bf248498e205c95c78f5d",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Café"
+      ]
+    },
+    {
+      "id": "fsq-57e76320498e1db1bf51984a",
+      "name": "Fansipan Top Viewpoint",
+      "coordinates": {
+        "lat": 22.306375593159224,
+        "lng": 103.77484561274647
+      },
+      "address": "Sa Pa, Tỉnh Lào Cai",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Mountain",
+      "foursquareId": "57e76320498e1db1bf51984a",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Mountain"
+      ]
+    },
+    {
+      "id": "osm-node-4748806280",
+      "name": "Fansipang",
+      "coordinates": {
+        "lat": 22.3340656,
+        "lng": 103.8422665
+      },
+      "address": "23",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (regional;italian;american)",
+      "osmId": "node/4748806280",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "regional;italian;american",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-7057800285",
+      "name": "FUNNY PUB & BAR",
+      "coordinates": {
+        "lat": 22.3327232,
+        "lng": 103.8377534
+      },
+      "address": "069, Phan Xi Pang Str.",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Đồ uống",
+      "osmId": "node/7057800285",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": "0944535902",
+      "website": null,
+      "openingHours": "24/7",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "pizza;burger;sandwich;coffee_shop;deli;pasta;tea",
+        "pub"
+      ]
+    },
+    {
+      "id": "osm-node-7037687885",
+      "name": "Gem Valley Coffee Art",
+      "coordinates": {
+        "lat": 22.3309332,
+        "lng": 103.834866
+      },
+      "address": "Cat Cat Road",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (vietnamese)",
+      "osmId": "node/7037687885",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "+84 91 284 97 53",
+      "website": "https://dichoisapa.com/",
+      "openingHours": "Mo-Su 07:00-21:00",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "vietnamese",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-6296904485",
+      "name": "Ginger Home",
+      "coordinates": {
+        "lat": 22.3322114,
+        "lng": 103.8433848
+      },
+      "address": "1A, ngõ cầu mây",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (international)",
+      "osmId": "node/6296904485",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "+84 868 406 334",
+      "website": "https://ginger-home.business.site",
+      "openingHours": "Mo-Su 07:00-22:00",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "international",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-5928863687",
+      "name": "Good Morning Sa Pa",
+      "coordinates": {
+        "lat": 22.3325339,
+        "lng": 103.8435105
+      },
+      "address": "Mường Hoa",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (vietnamese)",
+      "osmId": "node/5928863687",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "vietnamese",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-5459024629",
+      "name": "Good Morning Vietnam",
+      "coordinates": {
+        "lat": 22.3324289,
+        "lng": 103.8395371
+      },
+      "address": "63 B, Mường Hoa",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (asian;breakfast;french;vietnamese)",
+      "osmId": "node/5459024629",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "+84 91 213 59 09",
+      "website": null,
+      "openingHours": "Mo-Fr 09:00-22:00; Sa-Su 09:00-23:00",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "asian;breakfast;french;vietnamese",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "fsq-5736b9c8498ef5d24016257b",
+      "name": "Good Morning Vietnam Restaurant",
+      "coordinates": {
+        "lat": 22.332546845541994,
+        "lng": 103.83952466003043
+      },
+      "address": "Sa Pá, Tỉnh Lào Cai",
+      "categoryGroup": "food",
+      "categoryLabel": "Nhà hàng Việt",
+      "foursquareId": "5736b9c8498ef5d24016257b",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "0912 135 909",
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Vietnamese Restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-4609107289",
+      "name": "Good Morning View",
+      "coordinates": {
+        "lat": 22.3299008,
+        "lng": 103.8459583
+      },
+      "address": "47, Mường Hoa",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (italian_pizza;local;noodles;pasta;pizza;savory_pancakes)",
+      "osmId": "node/4609107289",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "+84 91 292 78 10",
+      "website": null,
+      "openingHours": "Mo-Su 09:30-22:00",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "italian_pizza;local;noodles;pasta;pizza;savory_pancakes",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "fsq-651819c239bd4277c63c9dd7",
+      "name": "Hai Yen Market",
+      "coordinates": {
+        "lat": 22.33629,
+        "lng": 103.84348
+      },
+      "address": "Sa Pa, Tỉnh Lào Cai",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Market",
+      "foursquareId": "651819c239bd4277c63c9dd7",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Market"
+      ]
+    },
+    {
+      "id": "fsq-651ad0a0dc50d77bfe3c78bc",
+      "name": "Hai Yen Mart",
+      "coordinates": {
+        "lat": 22.334396,
+        "lng": 103.841781
+      },
+      "address": "Sa Pa, Tỉnh Lào Cai",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Convenience Store",
+      "foursquareId": "651ad0a0dc50d77bfe3c78bc",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Convenience Store"
+      ]
+    },
+    {
+      "id": "osm-node-12771601101",
+      "name": "Hai yen restaurant (buffet 199-299k)",
+      "coordinates": {
+        "lat": 22.3360067,
+        "lng": 103.8435799
+      },
+      "address": "12, Thạch Sơn",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực",
+      "osmId": "node/12771601101",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": "Mo-Su 10:00-22:00",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-12785182901",
+      "name": "Ham Rong Garden",
+      "coordinates": {
+        "lat": 22.3333503,
+        "lng": 103.84881
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/12785182901",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "attraction"
+      ]
+    },
+    {
+      "id": "osm-node-6712119087",
+      "name": "Hành Trình Sa Pa",
+      "coordinates": {
+        "lat": 22.3316477,
+        "lng": 103.8444415
+      },
+      "address": "Mường Hoa",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Mua sắm",
+      "osmId": "node/6712119087",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": "+84965225387",
+      "website": "https://sapaoriginaltrek.com/",
+      "openingHours": "Mo-Su 08:00-19:00",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "travel_agency"
+      ]
+    },
+    {
+      "id": "osm-node-4539039789",
+      "name": "Hau Thao",
+      "coordinates": {
+        "lat": 22.3041452,
+        "lng": 103.9078262
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/4539039789",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "attraction"
+      ]
+    },
+    {
+      "id": "osm-node-4539039890",
+      "name": "Hâu Thào village",
+      "coordinates": {
+        "lat": 22.317926,
+        "lng": 103.896191
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/4539039890",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "viewpoint"
+      ]
+    },
+    {
+      "id": "osm-node-4561184895",
+      "name": "Heaven Sapa",
+      "coordinates": {
+        "lat": 22.330309,
+        "lng": 103.8359679
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/4561184895",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "viewpoint"
+      ]
+    },
+    {
+      "id": "osm-node-4370771787",
+      "name": "Heaven's Gate",
+      "coordinates": {
+        "lat": 22.352974,
+        "lng": 103.7648085
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/4370771787",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "viewpoint"
+      ]
+    },
+    {
+      "id": "osm-node-10228570017",
+      "name": "Hello Vietnam Restaurant",
+      "coordinates": {
+        "lat": 22.3328043,
+        "lng": 103.8402034
+      },
+      "address": "45a, Fansipan Street",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (asian;breakfast;vietnamese)",
+      "osmId": "node/10228570017",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "+84976582898",
+      "website": null,
+      "openingHours": "Mo-Su 07:00-22:30",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "asian;breakfast;vietnamese",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-6503430415",
+      "name": "Hmong Antique Handicrafts",
+      "coordinates": {
+        "lat": 22.336818,
+        "lng": 103.842561
+      },
+      "address": "8a, Hoang Dieu",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Mua sắm",
+      "osmId": "node/6503430415",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": "Mo-Su 10:00-20:00",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Clothing,_bags,_handicrafts,_wall-hangs,_cushion_covers."
+      ]
+    },
+    {
+      "id": "osm-node-3285730952",
+      "name": "Hmong gathering",
+      "coordinates": {
+        "lat": 22.3328922,
+        "lng": 103.8427164
+      },
+      "address": "",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực",
+      "osmId": "node/3285730952",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": "https://chaulonghotel.com/",
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "restaurant",
+        "hotel"
+      ]
+    },
+    {
+      "id": "osm-node-4810067546",
+      "name": "Hoang Minh restaurant",
+      "coordinates": {
+        "lat": 22.3362371,
+        "lng": 103.8435031
+      },
+      "address": "23-24, Xuân Viên",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực",
+      "osmId": "node/4810067546",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": "Mo-Su 09:00-22:00",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "fast_food"
+      ]
+    },
+    {
+      "id": "fsq-656b1b9aeb933d1a120d4f76",
+      "name": "Hong Son Store",
+      "coordinates": {
+        "lat": 22.335846,
+        "lng": 103.843
+      },
+      "address": "Tỉnh Lào Cai",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Electronics Store",
+      "foursquareId": "656b1b9aeb933d1a120d4f76",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Electronics Store"
+      ]
+    },
+    {
+      "id": "osm-node-4810074431",
+      "name": "Hotpot stalla",
+      "coordinates": {
+        "lat": 22.3378538,
+        "lng": 103.8442454
+      },
+      "address": "Xuân Viên",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực",
+      "osmId": "node/4810074431",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": "Mo-Su 11:00-23:00",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "fast_food"
+      ]
+    },
+    {
+      "id": "fsq-62e5d7642ed9073c50d2e795",
+      "name": "Hội thánh tin lành Cầu Mây",
+      "coordinates": {
+        "lat": 22.297796,
+        "lng": 103.904371
+      },
+      "address": "TX. Sa Pa, Tỉnh Lào Cai",
+      "categoryGroup": "culture",
+      "categoryLabel": "Science Museum",
+      "foursquareId": "62e5d7642ed9073c50d2e795",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Science Museum"
+      ]
+    },
+    {
+      "id": "osm-node-13513865301",
+      "name": "impossible to pass, blocked",
+      "coordinates": {
+        "lat": 22.3315433,
+        "lng": 103.8363915
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/13513865301",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "attraction"
+      ]
+    },
+    {
+      "id": "osm-node-13513865302",
+      "name": "impossible to pass, blocked",
+      "coordinates": {
+        "lat": 22.3291412,
+        "lng": 103.8421408
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/13513865302",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "attraction"
+      ]
+    },
+    {
+      "id": "osm-node-13513865201",
+      "name": "Impossible to pass, blocked",
+      "coordinates": {
+        "lat": 22.3322559,
+        "lng": 103.8369277
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/13513865201",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "attraction"
+      ]
+    },
+    {
+      "id": "fsq-662c5375dec1620021b1264b",
+      "name": "Independence Monument",
+      "coordinates": {
+        "lat": 22.335661,
+        "lng": 103.842796
+      },
+      "address": "Sa Pa, Tỉnh Lào Cai",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Monument",
+      "foursquareId": "662c5375dec1620021b1264b",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Monument"
+      ]
+    },
+    {
+      "id": "osm-node-11377886669",
+      "name": "Khu Du Lịch Cầu Kính Rồng Mây",
+      "coordinates": {
+        "lat": 22.3727007,
+        "lng": 103.7572886
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/11377886669",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "attraction"
+      ]
+    },
+    {
+      "id": "fsq-651805d415ef6431af686ca8",
+      "name": "Kien Huyen Store",
+      "coordinates": {
+        "lat": 22.336685,
+        "lng": 103.84415
+      },
+      "address": "Sa Pa, Tỉnh Lào Cai",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Fashion Accessories Store",
+      "foursquareId": "651805d415ef6431af686ca8",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Fashion Accessories Store"
+      ]
+    },
+    {
+      "id": "osm-node-6141757902",
+      "name": "La Casa Pizza",
+      "coordinates": {
+        "lat": 22.333208,
+        "lng": 103.8429328
+      },
+      "address": "007, Mường Hoa",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (italian_pizza;local;coffee_shop)",
+      "osmId": "node/6141757902",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "0916089968",
+      "website": "http://sapalacasapizza.com",
+      "openingHours": "24/7",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "italian_pizza;local;coffee_shop",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-4301534889",
+      "name": "La Roma Pizza",
+      "coordinates": {
+        "lat": 22.3334533,
+        "lng": 103.8423966
+      },
+      "address": "28, Cau May",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (italian_pizza;pizza;vietnamese)",
+      "osmId": "node/4301534889",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "italian_pizza;pizza;vietnamese",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-13134425456",
+      "name": "Lagom Home: Services",
+      "coordinates": {
+        "lat": 22.2976592,
+        "lng": 103.9175585
+      },
+      "address": "",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Mua sắm",
+      "osmId": "node/13134425456",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": "+84333039369",
+      "website": null,
+      "openingHours": "Mo-Fr 09:00-18:00",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "travel_agency"
+      ]
+    },
+    {
+      "id": "fsq-4e9ce0a8e5fa336fdb157fee",
+      "name": "Lake Side Cafe",
+      "coordinates": {
+        "lat": 22.336892746508305,
+        "lng": 103.84426141599165
+      },
+      "address": "Tỉnh Lào Cai",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Café",
+      "foursquareId": "4e9ce0a8e5fa336fdb157fee",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Café"
+      ]
+    },
+    {
+      "id": "osm-node-5473353423",
+      "name": "Le Gecko",
+      "coordinates": {
+        "lat": 22.3362983,
+        "lng": 103.8428713
+      },
+      "address": "33, Xuân Vien",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Cà phê",
+      "osmId": "node/5473353423",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": "+84 214 3871 898",
+      "website": "https://www.legeckosapa.com",
+      "openingHours": "Mo-Su 06:30-22:30",
+      "description": null,
+      "needsReview": true,
+      "conflictNote": "Tọa độ cách 32m; địa chỉ khác biệt giữa FSQ và OSM",
+      "tags": [
+        "vietnamese",
+        "cafe"
+      ]
+    },
+    {
+      "id": "fsq-4d873cd402eb5481582466f5",
+      "name": "Le Gecko",
+      "coordinates": {
+        "lat": 22.336013761912202,
+        "lng": 103.84292747127046
+      },
+      "address": "4 Hàm Rồng, Sa Pa, Tỉnh Lào Cai",
+      "categoryGroup": "stay",
+      "categoryLabel": "Lưu trú",
+      "foursquareId": "4d873cd402eb5481582466f5",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/stay-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "203871504",
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": true,
+      "conflictNote": "Tọa độ cách 32m; địa chỉ khác biệt giữa FSQ và OSM",
+      "tags": [
+        "Hotel",
+        "Café",
+        "Vietnamese Restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-5336342422",
+      "name": "Le Gecko Cafe",
+      "coordinates": {
+        "lat": 22.3366425,
+        "lng": 103.8440917
+      },
+      "address": "02, Đường Ngũ Chỉ Sơn",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Cà phê",
+      "osmId": "node/5336342422",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": "+84 214 3871 224",
+      "website": "http://legeckocafe.com/",
+      "openingHours": "Mo-Th 06:30-22:30; Fr-Su 06:30-23:00",
+      "description": null,
+      "needsReview": true,
+      "conflictNote": "Tọa độ cách 5m; địa chỉ khác biệt giữa FSQ và OSM",
+      "tags": [
+        "coffee_shop;french;international;vietnamese",
+        "cafe"
+      ]
+    },
+    {
+      "id": "fsq-5bffd1f81543c7002c03527b",
+      "name": "Le Gecko Cafe",
+      "coordinates": {
+        "lat": 22.336685,
+        "lng": 103.844102
+      },
+      "address": "02 ngu chi son st, H. Sa Pa, Tỉnh Lào Cai",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Café",
+      "foursquareId": "5bffd1f81543c7002c03527b",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": "0214 3871 224",
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": true,
+      "conflictNote": "Tọa độ cách 701m; địa chỉ khác biệt giữa FSQ và OSM",
+      "tags": [
+        "Café",
+        "Pastry Shop"
+      ]
+    },
+    {
+      "id": "osm-node-10235261017",
+      "name": "Le Gecko Chalet",
+      "coordinates": {
+        "lat": 22.3398874,
+        "lng": 103.8499726
+      },
+      "address": "3, Suoi Ho",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (breakfast;coffee_shop;french)",
+      "osmId": "node/10235261017",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "+84 241 387 1898",
+      "website": "https://www.legeckosapa.com/",
+      "openingHours": "Mo-Su 06:30-23:00",
+      "description": null,
+      "needsReview": true,
+      "conflictNote": "Tọa độ cách 701m; địa chỉ khác biệt giữa FSQ và OSM",
+      "tags": [
+        "breakfast;coffee_shop;french",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-5473396221",
+      "name": "Le Petit Gecko",
+      "coordinates": {
+        "lat": 22.3362476,
+        "lng": 103.8423968
+      },
+      "address": "15, Xuân Viên",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (breakfast;burger;cake;coffee_shop;local;pizza)",
+      "osmId": "node/5473396221",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "+84 214 3871 131",
+      "website": "https://www.legeckosapa.com/",
+      "openingHours": "Mo-Su 07:00-22:30",
+      "description": null,
+      "needsReview": true,
+      "conflictNote": "Tọa độ cách 11m; địa chỉ khác biệt giữa FSQ và OSM",
+      "tags": [
+        "breakfast;burger;cake;coffee_shop;local;pizza",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-10235147817",
+      "name": "Le Petit Gecko",
+      "coordinates": {
+        "lat": 22.3362182,
+        "lng": 103.8422224
+      },
+      "address": "07, Xuân Viên",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (breakfast;burger;cake;coffee_shop;local)",
+      "osmId": "node/10235147817",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "+84 214 3871 131",
+      "website": "https://www.legeckosapa.com",
+      "openingHours": "Mo-Su 07:00-22:00",
+      "description": null,
+      "needsReview": true,
+      "conflictNote": "Tọa độ cách 24m; địa chỉ khác biệt giữa FSQ và OSM",
+      "tags": [
+        "breakfast;burger;cake;coffee_shop;local",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "fsq-4df3451de4cda09e6da27d25",
+      "name": "Le Petit Gecko",
+      "coordinates": {
+        "lat": 22.33615899780897,
+        "lng": 103.84244852370102
+      },
+      "address": "15 Xuân Viên, Sa Pa, Tỉnh Lào Cai",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Café",
+      "foursquareId": "4df3451de4cda09e6da27d25",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": "203871504",
+      "website": "http://www.lepetitgecko.com",
+      "openingHours": null,
+      "description": null,
+      "needsReview": true,
+      "conflictNote": "Tọa độ cách 24m; địa chỉ khác biệt giữa FSQ và OSM",
+      "tags": [
+        "Café"
+      ]
+    },
+    {
+      "id": "osm-node-6402127352",
+      "name": "LINKE handicraft",
+      "coordinates": {
+        "lat": 22.3283103,
+        "lng": 103.8350808
+      },
+      "address": "Cat Cat Road",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Mua sắm",
+      "osmId": "node/6402127352",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": "+84937003995",
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "clothes"
+      ]
+    },
+    {
+      "id": "fsq-4e900250f5b9f8967c849146",
+      "name": "Little Sapa",
+      "coordinates": {
+        "lat": 22.334241,
+        "lng": 103.841999
+      },
+      "address": "18 Cầu Mây, Sa Pa, Tỉnh Lào Cai",
+      "categoryGroup": "food",
+      "categoryLabel": "Nhà hàng Việt",
+      "foursquareId": "4e900250f5b9f8967c849146",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Vietnamese Restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-5403233925",
+      "name": "Little View Restaurant",
+      "coordinates": {
+        "lat": 22.3325185,
+        "lng": 103.8429278
+      },
+      "address": "042 Cau May, Cau May Alley, Sa Pa",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (vietnamese)",
+      "osmId": "node/5403233925",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "+84988787711",
+      "website": "https://www.littleviewhomestay.com/",
+      "openingHours": "Mo-Su 08:29-21:30",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "vietnamese",
+        "restaurant",
+        "guest_house"
+      ]
+    },
+    {
+      "id": "osm-node-13542290978",
+      "name": "Loco.bakery",
+      "coordinates": {
+        "lat": 22.3008258,
+        "lng": 103.8942278
+      },
+      "address": "",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Cà phê",
+      "osmId": "node/13542290978",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": "+84 367 132 700",
+      "website": null,
+      "openingHours": "08:30-22:00",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "breakfast; bakery",
+        "cafe"
+      ]
+    },
+    {
+      "id": "osm-node-5181841922",
+      "name": "Lotus restaurant",
+      "coordinates": {
+        "lat": 22.3332367,
+        "lng": 103.8424835
+      },
+      "address": "Cầu Mây",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực",
+      "osmId": "node/5181841922",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-989240410",
+      "name": "Madame Thao Cafe & Breakfast",
+      "coordinates": {
+        "lat": 22.3362449,
+        "lng": 103.842335
+      },
+      "address": "Xuân Viên",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Cà phê",
+      "osmId": "node/989240410",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "vietnamese;french;breakfast",
+        "cafe"
+      ]
+    },
+    {
+      "id": "osm-node-5474543921",
+      "name": "Mai coffee",
+      "coordinates": {
+        "lat": 22.3353302,
+        "lng": 103.8437106
+      },
+      "address": "020, Hàm Rồng",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Cà phê",
+      "osmId": "node/5474543921",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": "0967723444",
+      "website": null,
+      "openingHours": "Mo-Su 08:00-18:00",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "tea;breakfast;pizza;coffee_shop",
+        "cafe"
+      ]
+    },
+    {
+      "id": "osm-node-13281939115",
+      "name": "Massage Trị Liệu",
+      "coordinates": {
+        "lat": 22.340421,
+        "lng": 103.8418279
+      },
+      "address": "677, Đường Điện Biên Phủ",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Mua sắm",
+      "osmId": "node/13281939115",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "massage"
+      ]
+    },
+    {
+      "id": "fsq-6309b97e8f16897e4d68d55a",
+      "name": "mẩy quán",
+      "coordinates": {
+        "lat": 22.336526,
+        "lng": 103.84398
+      },
+      "address": "57 Xuan Vien, Sa Pa, Tỉnh Lào Cai",
+      "categoryGroup": "food",
+      "categoryLabel": "Nhà hàng Việt",
+      "foursquareId": "6309b97e8f16897e4d68d55a",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "0855 092 093",
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Vietnamese Restaurant"
+      ]
+    },
+    {
+      "id": "merged-53688e98498e2d56e7c01332",
+      "name": "Memory Coffee",
+      "coordinates": {
+        "lat": 22.336776,
+        "lng": 103.844063
+      },
+      "address": "65, Xuân Viên",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Café",
+      "foursquareId": "53688e98498e2d56e7c01332",
+      "osmId": "node/989240226",
+      "dataSource": "merged",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Café",
+        "cafe"
+      ]
+    },
+    {
+      "id": "osm-node-977821372",
+      "name": "Michell Restaurant",
+      "coordinates": {
+        "lat": 22.3333453,
+        "lng": 103.8424254
+      },
+      "address": "34, Cau May",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực",
+      "osmId": "node/977821372",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "restaurant"
+      ]
+    },
+    {
+      "id": "fsq-567ccff9498efd0ced2b7263",
+      "name": "Microwave Station",
+      "coordinates": {
+        "lat": 22.334425,
+        "lng": 103.84665
+      },
+      "address": "Hamrong Resort, Sapa, Tỉnh Lào Cai",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Other Great Outdoors",
+      "foursquareId": "567ccff9498efd0ced2b7263",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Other Great Outdoors"
+      ]
+    },
+    {
+      "id": "osm-node-4529344893",
+      "name": "moment romantic restaurant and bar",
+      "coordinates": {
+        "lat": 22.3313235,
+        "lng": 103.8443914
+      },
+      "address": "026B, muong hoa street",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (vietnamese)",
+      "osmId": "node/4529344893",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "0982884965",
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "vietnamese",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-3770242735",
+      "name": "Mua Sam Tong Hop Sa Pa",
+      "coordinates": {
+        "lat": 22.3378107,
+        "lng": 103.8482967
+      },
+      "address": "46, Đường Ngũ Chỉ Sơn",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Mua sắm",
+      "osmId": "node/3770242735",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": "Mo-Su 08:00-21:00",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "supermarket"
+      ]
+    },
+    {
+      "id": "osm-node-5918784285",
+      "name": "Muong hoa valley",
+      "coordinates": {
+        "lat": 22.3361784,
+        "lng": 103.8395591
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/5918784285",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "viewpoint"
+      ]
+    },
+    {
+      "id": "osm-node-11377884269",
+      "name": "Muong Hoa Valley",
+      "coordinates": {
+        "lat": 22.3144929,
+        "lng": 103.8773698
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/11377884269",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "viewpoint"
+      ]
+    },
+    {
+      "id": "osm-node-5357938521",
+      "name": "Museum of Family Homestay",
+      "coordinates": {
+        "lat": 22.3043654,
+        "lng": 103.8905888
+      },
+      "address": "",
+      "categoryGroup": "culture",
+      "categoryLabel": "Văn hóa",
+      "osmId": "node/5357938521",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "museum"
+      ]
+    },
+    {
+      "id": "osm-node-989239376",
+      "name": "Napoli's pizza",
+      "coordinates": {
+        "lat": 22.3362749,
+        "lng": 103.8426919
+      },
+      "address": "17, Xuân Viên",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực",
+      "osmId": "node/989239376",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "restaurant"
+      ]
+    },
+    {
+      "id": "fsq-4cb01c5c75ebb60c7f01c2ad",
+      "name": "Nature Restaurant Grill & Bar",
+      "coordinates": {
+        "lat": 22.3340363061067,
+        "lng": 103.84212812070885
+      },
+      "address": "24 Cầu Mây, Sa Pa, Tỉnh Lào Cai",
+      "categoryGroup": "food",
+      "categoryLabel": "Nhà hàng Việt",
+      "foursquareId": "4cb01c5c75ebb60c7f01c2ad",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "203872094",
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Vietnamese Restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-12905219702",
+      "name": "Nha Go",
+      "coordinates": {
+        "lat": 22.3859944,
+        "lng": 103.8373284
+      },
+      "address": "",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Mua sắm",
+      "osmId": "node/12905219702",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": "0878738989",
+      "website": null,
+      "openingHours": "Mo-Su 09:00-22:00",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "coffee"
+      ]
+    },
+    {
+      "id": "osm-node-4374908689",
+      "name": "Nha Hang",
+      "coordinates": {
+        "lat": 22.3331821,
+        "lng": 103.8425416
+      },
+      "address": "040, Cầu Mây",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (vietnamese)",
+      "osmId": "node/4374908689",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "+840203871045",
+      "website": "http://www.chapastarrestaurant.com",
+      "openingHours": "Mo-Su 10:00-22:00",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "vietnamese",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-4504392889",
+      "name": "Nhà hàng Cây Hương Thảo",
+      "coordinates": {
+        "lat": 22.3328704,
+        "lng": 103.8424286
+      },
+      "address": "029, Phố Đồng Lợi, Sa Pa",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (coffee_shop;asian;vietnamese;grill;pizza;chicken;steak_house;barbecue;breakfast;pancake)",
+      "osmId": "node/4504392889",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "0912 337 669",
+      "website": "https://rosemaryrestaurant.com",
+      "openingHours": "Mo-Su 08:00-21:30",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "coffee_shop;asian;vietnamese;grill;pizza;chicken;steak_house;barbecue;breakfast;pancake",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "fsq-66d6b3962b84765c2cc7fd8c",
+      "name": "Nhà Hàng Cồ Đoàn",
+      "coordinates": {
+        "lat": 22.335942,
+        "lng": 103.84395
+      },
+      "address": "Sa Pa, Tỉnh Lào Cai",
+      "categoryGroup": "food",
+      "categoryLabel": "Nhà hàng Việt",
+      "foursquareId": "66d6b3962b84765c2cc7fd8c",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": true,
+      "conflictNote": "Tọa độ cách 965m giữa FSQ và OSM",
+      "tags": [
+        "Vietnamese Restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-6328671285",
+      "name": "Nhà hàng Hảo Huệ",
+      "coordinates": {
+        "lat": 22.3369578,
+        "lng": 103.8495054
+      },
+      "address": "129 Thạch Sơn, TT. Sa Pa, Sa Pa, Lào Cai, Vietnam",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực",
+      "osmId": "node/6328671285",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-13707477574",
+      "name": "NHÀ HÀNG HUY VÂN SAPA",
+      "coordinates": {
+        "lat": 22.3366235,
+        "lng": 103.8440533
+      },
+      "address": "012, Xuân Viên",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực",
+      "osmId": "node/13707477574",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": "https://www.facebook.com/nhahanghuyvansapa",
+      "openingHours": "Mo-Su 08:00-23:00",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-6380504685",
+      "name": "Nhà Hàng Ladybird Sapa",
+      "coordinates": {
+        "lat": 22.3358135,
+        "lng": 103.843
+      },
+      "address": "04, Đường Thạch Sơn, Sapa",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (vietnamese;international;asian;pizza;pasta;barista_coffee)",
+      "osmId": "node/6380504685",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "+84 97 521 32 28",
+      "website": null,
+      "openingHours": "Mo-Su 06:45-22:00",
+      "description": "We are proud to be one of the few pioneering family-run restaurant in Sapa since 1991 (known as the Observatory). We serve authentic and fresh Vietnamese food, as well as great pasta, pizza and burgers. Our kitchen has always been run by our mama for almo",
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "vietnamese;international;asian;pizza;pasta;barista_coffee",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "fsq-5c124b5458002c002c8c69cd",
+      "name": "nhà hàng ô quý hồ",
+      "coordinates": {
+        "lat": 22.336071,
+        "lng": 103.843334
+      },
+      "address": "H. Sa Pa, Tỉnh Lào Cai",
+      "categoryGroup": "food",
+      "categoryLabel": "Restaurant",
+      "foursquareId": "5c124b5458002c002c8c69cd",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": true,
+      "conflictNote": "Tọa độ cách 15m; địa chỉ khác biệt giữa FSQ và OSM",
+      "tags": [
+        "Restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-4297711790",
+      "name": "Nhà hàng Ô Quý Hồ",
+      "coordinates": {
+        "lat": 22.3360221,
+        "lng": 103.8434704
+      },
+      "address": "8, Thạch Sơn",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (vietnamese)",
+      "osmId": "node/4297711790",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": "https://oquyhorestaurant.com/",
+      "openingHours": "Mo-Su 09:00-22:00",
+      "description": null,
+      "needsReview": true,
+      "conflictNote": "Tọa độ cách 15m; địa chỉ khác biệt giữa FSQ và OSM",
+      "tags": [
+        "vietnamese",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-6278133985",
+      "name": "Nhà Hàng S88",
+      "coordinates": {
+        "lat": 22.3367705,
+        "lng": 103.8468789
+      },
+      "address": "01, Võ Thị Sáu",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (vietnamese)",
+      "osmId": "node/6278133985",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "0976461268",
+      "website": null,
+      "openingHours": "24/7",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "vietnamese",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-4502008989",
+      "name": "Nhà hàng Sa Pa Sky",
+      "coordinates": {
+        "lat": 22.3309912,
+        "lng": 103.8338547
+      },
+      "address": "Cat Cat Road",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực",
+      "osmId": "node/4502008989",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "0203871333",
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "restaurant"
+      ]
+    },
+    {
+      "id": "osm-way-1149132933",
+      "name": "NHÀ HÀNG SAPA TV",
+      "coordinates": {
+        "lat": 22.3362834,
+        "lng": 103.8454546
+      },
+      "address": "19, Hoàng Văn Thụ, Sa Pa",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (vietnamese)",
+      "osmId": "way/1149132933",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "+84 563 456 789",
+      "website": "https://sapatv.vn/",
+      "openingHours": "24/7",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "vietnamese",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-13279268955",
+      "name": "Nhà Hàng Seoul",
+      "coordinates": {
+        "lat": 22.3405449,
+        "lng": 103.8421317
+      },
+      "address": "706, Đường Điện Biên Phủ",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (korean)",
+      "osmId": "node/13279268955",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": "Mo-Su 11:00+",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "korean",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-4501782989",
+      "name": "Nhà hàng song nhi sapa",
+      "coordinates": {
+        "lat": 22.3608196,
+        "lng": 103.7783146
+      },
+      "address": "",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (vietnamese)",
+      "osmId": "node/4501782989",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "0976373366",
+      "website": "https://songnhisapa.com/",
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "vietnamese",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "fsq-5b4b58aba6031c002ccdb446",
+      "name": "Nhà hàng Xuân Viên",
+      "coordinates": {
+        "lat": 22.336533,
+        "lng": 103.84393
+      },
+      "address": "008 Xuan Vien, H. Sa Pa, Tỉnh Lào Cai",
+      "categoryGroup": "food",
+      "categoryLabel": "Restaurant",
+      "foursquareId": "5b4b58aba6031c002ccdb446",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-13320306290",
+      "name": "Nhà Thờ Giáo Họ Mường Hoa",
+      "coordinates": {
+        "lat": 22.3139547,
+        "lng": 103.8734952
+      },
+      "address": "",
+      "categoryGroup": "culture",
+      "categoryLabel": "Văn hóa",
+      "osmId": "node/13320306290",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "place_of_worship"
+      ]
+    },
+    {
+      "id": "osm-node-13320306289",
+      "name": "Nhà Thờ Giáo Họ Thôn Lý",
+      "coordinates": {
+        "lat": 22.3190367,
+        "lng": 103.861656
+      },
+      "address": "",
+      "categoryGroup": "culture",
+      "categoryLabel": "Văn hóa",
+      "osmId": "node/13320306289",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "place_of_worship"
+      ]
+    },
+    {
+      "id": "osm-node-13335196158",
+      "name": "Nhà Thờ Giáo Xứ Lao Chải",
+      "coordinates": {
+        "lat": 22.3071956,
+        "lng": 103.8735776
+      },
+      "address": "",
+      "categoryGroup": "culture",
+      "categoryLabel": "Văn hóa",
+      "osmId": "node/13335196158",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "place_of_worship"
+      ]
+    },
+    {
+      "id": "osm-node-5466976221",
+      "name": "Nice view point",
+      "coordinates": {
+        "lat": 22.3847569,
+        "lng": 103.8384254
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/5466976221",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "viewpoint"
+      ]
+    },
+    {
+      "id": "osm-node-4492434389",
+      "name": "Ninety Pub",
+      "coordinates": {
+        "lat": 22.333304,
+        "lng": 103.8407918
+      },
+      "address": "33, Phan Xi Pang Str.",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Đồ uống",
+      "osmId": "node/4492434389",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "burger;sandwich;hot_dog",
+        "bar"
+      ]
+    },
+    {
+      "id": "osm-node-5300993321",
+      "name": "Old valley path",
+      "coordinates": {
+        "lat": 22.3994822,
+        "lng": 103.8699219
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/5300993321",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "viewpoint"
+      ]
+    },
+    {
+      "id": "osm-node-989240427",
+      "name": "Our Lady of Rosary Church - Sapa Catholic Parish",
+      "coordinates": {
+        "lat": 22.3352035,
+        "lng": 103.8422543
+      },
+      "address": "",
+      "categoryGroup": "culture",
+      "categoryLabel": "Văn hóa",
+      "osmId": "node/989240427",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "place_of_worship"
+      ]
+    },
+    {
+      "id": "osm-node-12775578003",
+      "name": "Pho, Bun, Com (English menu)",
+      "coordinates": {
+        "lat": 22.3405761,
+        "lng": 103.8456431
+      },
+      "address": "576, Đường Điện Biên Phủ - Quốc lộ 4D",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (asian)",
+      "osmId": "node/12775578003",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": "Mo-Su 09:00-18:00",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "asian",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-13658427801",
+      "name": "Phô Mây Restaurant",
+      "coordinates": {
+        "lat": 22.3342967,
+        "lng": 103.8418026
+      },
+      "address": "013, Cầu Mây",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (vietnamese)",
+      "osmId": "node/13658427801",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "0914 403242",
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "vietnamese",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-13276702875",
+      "name": "Phở Sạch Bắc Hà",
+      "coordinates": {
+        "lat": 22.3402906,
+        "lng": 103.8407269
+      },
+      "address": "685, Đường Điện Biên Phủ",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (regional)",
+      "osmId": "node/13276702875",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "regional",
+        "fast_food"
+      ]
+    },
+    {
+      "id": "fsq-4b943cfbf964a5207d7034e3",
+      "name": "Pi’s boutique sapa",
+      "coordinates": {
+        "lat": 22.332957960342004,
+        "lng": 103.8402763974235
+      },
+      "address": "41 Phansipan Street, Sa Pa, Tỉnh Lào Cai",
+      "categoryGroup": "stay",
+      "categoryLabel": "Lưu trú",
+      "foursquareId": "4b943cfbf964a5207d7034e3",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/stay-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "0961 008 668",
+      "website": "http://www.boutiquesapahotel.com",
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Hotel",
+        "Vietnamese Restaurant",
+        "Modern European Restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-13084364009",
+      "name": "Po Mu",
+      "coordinates": {
+        "lat": 22.3442159,
+        "lng": 103.8204362
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/13084364009",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "attraction"
+      ]
+    },
+    {
+      "id": "fsq-4f4b3831e4b0a34d3a6ba147",
+      "name": "Quảng Trường Sa Pa (Sapa Square)",
+      "coordinates": {
+        "lat": 22.335241375668026,
+        "lng": 103.84135347473492
+      },
+      "address": "Hàm Rồng (Cầu Mây), Sa Pa, Tỉnh Lào Cai",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Plaza",
+      "foursquareId": "4f4b3831e4b0a34d3a6ba147",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Plaza"
+      ]
+    },
+    {
+      "id": "osm-node-4338110892",
+      "name": "Red Dao House",
+      "coordinates": {
+        "lat": 22.3362874,
+        "lng": 103.8398872
+      },
+      "address": "4B, Thac Bac road",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực",
+      "osmId": "node/4338110892",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "0984699149",
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": true,
+      "conflictNote": "Tọa độ cách 14m; địa chỉ khác biệt giữa FSQ và OSM",
+      "tags": [
+        "restaurant"
+      ]
+    },
+    {
+      "id": "merged-4dc53348d164eb9c9fe7ee9f",
+      "name": "Red Dao House",
+      "coordinates": {
+        "lat": 22.336185,
+        "lng": 103.8398
+      },
+      "address": "4B Thác Bạc, Sa Pa, Tỉnh Lào Cai",
+      "categoryGroup": "food",
+      "categoryLabel": "Nhà hàng Việt",
+      "foursquareId": "4dc53348d164eb9c9fe7ee9f",
+      "osmId": "node/5481995422",
+      "dataSource": "merged",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "203872927",
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": true,
+      "conflictNote": "Tọa độ cách 14m; địa chỉ khác biệt giữa FSQ và OSM",
+      "tags": [
+        "Vietnamese Restaurant",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-6567516187",
+      "name": "Red Dzao",
+      "coordinates": {
+        "lat": 22.3361316,
+        "lng": 103.8398616
+      },
+      "address": "4, Thác Bacj",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (regional)",
+      "osmId": "node/6567516187",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "regional",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-6480695885",
+      "name": "rice field view",
+      "coordinates": {
+        "lat": 22.3471527,
+        "lng": 103.8857606
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/6480695885",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "viewpoint"
+      ]
+    },
+    {
+      "id": "osm-node-6278132286",
+      "name": "Romano Pizza",
+      "coordinates": {
+        "lat": 22.3398805,
+        "lng": 103.8464814
+      },
+      "address": "611, Điện Biên Phủ",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (pizza;diner;coffee_shop;fish_and_chips;pasta;steak_house;deli;vietnamese;italian;italian_pizza;local)",
+      "osmId": "node/6278132286",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "0974686789",
+      "website": null,
+      "openingHours": "24/7",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "pizza;diner;coffee_shop;fish_and_chips;pasta;steak_house;deli;vietnamese;italian;italian_pizza;local",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "fsq-659b985e666d9728ed6b3e73",
+      "name": "Sapa Ancient Stone Gallery",
+      "coordinates": {
+        "lat": 22.304068,
+        "lng": 103.89862
+      },
+      "address": "Tỉnh Lào Cai",
+      "categoryGroup": "culture",
+      "categoryLabel": "Museum",
+      "foursquareId": "659b985e666d9728ed6b3e73",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Museum"
+      ]
+    },
+    {
+      "id": "osm-node-6878263985",
+      "name": "Sapa Classic Vegan Restaurant",
+      "coordinates": {
+        "lat": 22.3317613,
+        "lng": 103.8440716
+      },
+      "address": "22, Đường Mường Hoat",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực",
+      "osmId": "node/6878263985",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "restaurant"
+      ]
+    },
+    {
+      "id": "fsq-69660c7799b7134a2a4e7cb6",
+      "name": "Sapa Ethnicraft",
+      "coordinates": {
+        "lat": 22.336437,
+        "lng": 103.843765
+      },
+      "address": "57 Xuan Vien, Sa Pa, Tỉnh Lào Cai",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Arts and Crafts Store",
+      "foursquareId": "69660c7799b7134a2a4e7cb6",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Arts and Crafts Store"
+      ]
+    },
+    {
+      "id": "fsq-674bdb7b32e45c0fdb2265ed",
+      "name": "Sapa Hemp",
+      "coordinates": {
+        "lat": 22.334359,
+        "lng": 103.841773
+      },
+      "address": "Sa Pa, Tỉnh Lào Cai",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Souvenir Store",
+      "foursquareId": "674bdb7b32e45c0fdb2265ed",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Souvenir Store"
+      ]
+    },
+    {
+      "id": "osm-node-5708334821",
+      "name": "Sapa La Belle Spa",
+      "coordinates": {
+        "lat": 22.3004929,
+        "lng": 103.8923751
+      },
+      "address": "07A/25, Tue Tinh Road Cau May Street",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Mua sắm",
+      "osmId": "node/5708334821",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": "+84978392399",
+      "website": "http://sapalabellespa.com",
+      "openingHours": "Mo-Su 09:00-23:00",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "massage"
+      ]
+    },
+    {
+      "id": "fsq-4f434c4ee4b05efae814494b",
+      "name": "Sapa Lake (Hồ Sa Pa)",
+      "coordinates": {
+        "lat": 22.33683183827806,
+        "lng": 103.8444878731815
+      },
+      "address": "Xuân Viên (Ngũ Chỉ Sơn), Sa Pa, Tỉnh Lào Cai",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Lake",
+      "foursquareId": "4f434c4ee4b05efae814494b",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Lake"
+      ]
+    },
+    {
+      "id": "osm-node-13341850401",
+      "name": "Sapa Memory Restaurant & Vegan",
+      "coordinates": {
+        "lat": 22.3369795,
+        "lng": 103.8488472
+      },
+      "address": "Thạch Sơn",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (vietnamese)",
+      "osmId": "node/13341850401",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": "Mo-Su 09:00-23:00",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "vietnamese",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "fsq-50ab33f0e4b03921058e1e14",
+      "name": "Sapa Museum",
+      "coordinates": {
+        "lat": 22.33570577249976,
+        "lng": 103.84034376639114
+      },
+      "address": "",
+      "categoryGroup": "culture",
+      "categoryLabel": "History Museum",
+      "foursquareId": "50ab33f0e4b03921058e1e14",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "History Museum"
+      ]
+    },
+    {
+      "id": "fsq-5ad445e62347241391a36bb5",
+      "name": "Sapa New Market (Chợ Sapa)",
+      "coordinates": {
+        "lat": 22.339197,
+        "lng": 103.852621
+      },
+      "address": "Sapa, H. Sa Pa, Tỉnh Lào Cai",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Market",
+      "foursquareId": "5ad445e62347241391a36bb5",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Market"
+      ]
+    },
+    {
+      "id": "fsq-507fc64ee4b0b37435cce314",
+      "name": "Sapa O'Chau",
+      "coordinates": {
+        "lat": 22.33585334124088,
+        "lng": 103.8399006391814
+      },
+      "address": "8 Thác Bạc, Sa Pa, Tỉnh Lào Cai",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Café",
+      "foursquareId": "507fc64ee4b0b37435cce314",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": "0915 351 479",
+      "website": "http://www.sapaochau.org",
+      "openingHours": null,
+      "description": null,
+      "needsReview": true,
+      "conflictNote": "Tọa độ cách 774m giữa FSQ và OSM",
+      "tags": [
+        "Café",
+        "Travel Agency"
+      ]
+    },
+    {
+      "id": "osm-node-5297289721",
+      "name": "Sapa O’Chau - Sustainable Tourism",
+      "coordinates": {
+        "lat": 22.3357766,
+        "lng": 103.8397492
+      },
+      "address": "08 Thac Bac Road",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Mua sắm",
+      "osmId": "node/5297289721",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": "+84915502589",
+      "website": "http://www.sapaochau.org",
+      "openingHours": "Mo-Su 09:00-18:00",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "travel_agency"
+      ]
+    },
+    {
+      "id": "fsq-672b0603a964877a9ee66a91",
+      "name": "Sapa Park",
+      "coordinates": {
+        "lat": 22.335992,
+        "lng": 103.842467
+      },
+      "address": "Thạch Sơn, Sa Pa, Tỉnh Lào Cai",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Park",
+      "foursquareId": "672b0603a964877a9ee66a91",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": true,
+      "conflictNote": "Tọa độ cách 289m giữa FSQ và OSM",
+      "tags": [
+        "Park"
+      ]
+    },
+    {
+      "id": "fsq-56e62678498e553b7a719cf4",
+      "name": "Sapa Rice Fields",
+      "coordinates": {
+        "lat": 22.300283,
+        "lng": 103.892628
+      },
+      "address": "Sa Pa, Tỉnh Lào Cai",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Nature Preserve",
+      "foursquareId": "56e62678498e553b7a719cf4",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Nature Preserve"
+      ]
+    },
+    {
+      "id": "fsq-4e6838ce8877a40daa94d9e9",
+      "name": "Sapa Rooms",
+      "coordinates": {
+        "lat": 22.333664936686716,
+        "lng": 103.84095518402826
+      },
+      "address": "18 Phan Xi Păng (Tuệ Tĩnh), Sa Pa, Tỉnh Lào Cai",
+      "categoryGroup": "stay",
+      "categoryLabel": "Lưu trú",
+      "foursquareId": "4e6838ce8877a40daa94d9e9",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/stay-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "206505228",
+      "website": "http://saparooms.com",
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Hotel",
+        "Coffee Shop",
+        "Vietnamese Restaurant"
+      ]
+    },
+    {
+      "id": "fsq-50420bb4e4b029b2496140cc",
+      "name": "Sapa Rose Valey",
+      "coordinates": {
+        "lat": 22.333787832104967,
+        "lng": 103.84208178484947
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Garden",
+      "foursquareId": "50420bb4e4b029b2496140cc",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Garden"
+      ]
+    },
+    {
+      "id": "fsq-57b2debc498e55da8bf5bbce",
+      "name": "Sapa Sisters Trekking Adventures",
+      "coordinates": {
+        "lat": 22.334589335338187,
+        "lng": 103.84077189524604
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Other Great Outdoors",
+      "foursquareId": "57b2debc498e55da8bf5bbce",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Other Great Outdoors"
+      ]
+    },
+    {
+      "id": "fsq-63ce70133a0bae55d697ad84",
+      "name": "Saparis Eatery & Cocktail Bar",
+      "coordinates": {
+        "lat": 22.336504,
+        "lng": 103.84102
+      },
+      "address": "02 Hoàng Diệu, TT. Sa Pa, Sa Pa, Lào Cai 330000, Tỉnh Lào Cai",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Food and Beverage Retail",
+      "foursquareId": "63ce70133a0bae55d697ad84",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Food and Beverage Retail"
+      ]
+    },
+    {
+      "id": "osm-node-11977506269",
+      "name": "Small shrine",
+      "coordinates": {
+        "lat": 22.3340808,
+        "lng": 103.8499446
+      },
+      "address": "",
+      "categoryGroup": "culture",
+      "categoryLabel": "Văn hóa",
+      "osmId": "node/11977506269",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "place_of_worship"
+      ]
+    },
+    {
+      "id": "merged-6757b6e146fa5c2a84aaf6af",
+      "name": "Starbucks",
+      "coordinates": {
+        "lat": 22.334857,
+        "lng": 103.840845
+      },
+      "address": "Sa Pa, Tỉnh Lào Cai",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Coffee Shop",
+      "foursquareId": "6757b6e146fa5c2a84aaf6af",
+      "osmId": "node/13282898096",
+      "dataSource": "merged",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Coffee Shop",
+        "coffee_shop",
+        "cafe"
+      ]
+    },
+    {
+      "id": "fsq-6772ab9945927d0d0a4c798e",
+      "name": "Starbucks",
+      "coordinates": {
+        "lat": 22.334899,
+        "lng": 103.840797
+      },
+      "address": "Sa Pa, Tỉnh Lào Cai",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Coffee Shop",
+      "foursquareId": "6772ab9945927d0d0a4c798e",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Coffee Shop"
+      ]
+    },
+    {
+      "id": "fsq-69edf22cee899f19ef029214",
+      "name": "Starbucks",
+      "coordinates": {
+        "lat": 22.306341,
+        "lng": 103.774866
+      },
+      "address": "Tam Duong, Tỉnh Lai Châu",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Coffee Shop",
+      "foursquareId": "69edf22cee899f19ef029214",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Coffee Shop",
+        "Café"
+      ]
+    },
+    {
+      "id": "osm-node-5356297323",
+      "name": "Stunning Homestay",
+      "coordinates": {
+        "lat": 22.3003928,
+        "lng": 103.9033084
+      },
+      "address": "",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (vietnamese)",
+      "osmId": "node/5356297323",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "02143772136",
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "vietnamese",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-4539038792",
+      "name": "Su Pan",
+      "coordinates": {
+        "lat": 22.2936565,
+        "lng": 103.9228442
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/4539038792",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "attraction"
+      ]
+    },
+    {
+      "id": "osm-node-4248281489",
+      "name": "Sua Xe Dinh Nghia",
+      "coordinates": {
+        "lat": 22.3361041,
+        "lng": 103.8457145
+      },
+      "address": "55, Thach Son",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Mua sắm",
+      "osmId": "node/4248281489",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "car"
+      ]
+    },
+    {
+      "id": "fsq-4d5e16fc865a224b5b4d8e85",
+      "name": "T-Bone Steak House",
+      "coordinates": {
+        "lat": 22.334007117622093,
+        "lng": 103.8421610435507
+      },
+      "address": "31 Cầu Mây, Sa Pa, Tỉnh Lào Cai",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Steakhouse",
+      "foursquareId": "4d5e16fc865a224b5b4d8e85",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": "203873208",
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Steakhouse",
+        "Café"
+      ]
+    },
+    {
+      "id": "osm-node-6114429389",
+      "name": "Ta Van",
+      "coordinates": {
+        "lat": 22.3038585,
+        "lng": 103.8902172
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/6114429389",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "viewpoint"
+      ]
+    },
+    {
+      "id": "osm-node-13283043211",
+      "name": "Tạp Hóa Chiến H Hiền",
+      "coordinates": {
+        "lat": 22.3406787,
+        "lng": 103.8417863
+      },
+      "address": "718A, Đường Điện Biên Phủ",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Mua sắm",
+      "osmId": "node/13283043211",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "convenience"
+      ]
+    },
+    {
+      "id": "osm-node-6139962086",
+      "name": "Tắm Lá Thuốc Bản Dao Sapa",
+      "coordinates": {
+        "lat": 22.3366652,
+        "lng": 103.8462762
+      },
+      "address": "035, Lê Văn Tám",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Mua sắm",
+      "osmId": "node/6139962086",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": "0969396698",
+      "website": null,
+      "openingHours": "24/7",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "massage"
+      ]
+    },
+    {
+      "id": "osm-node-5918784286",
+      "name": "Terrace rice fields shin chai",
+      "coordinates": {
+        "lat": 22.4024316,
+        "lng": 103.8366466
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/5918784286",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "viewpoint"
+      ]
+    },
+    {
+      "id": "fsq-4dc6463d887717c880395691",
+      "name": "Thác Bạc (Silver Waterfall)",
+      "coordinates": {
+        "lat": 22.36157827982436,
+        "lng": 103.77812382081555
+      },
+      "address": "Quốc Lộ 4D, Sa Pa, Tỉnh Lào Cai",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Waterfall",
+      "foursquareId": "4dc6463d887717c880395691",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Waterfall"
+      ]
+    },
+    {
+      "id": "fsq-4ffa54f0e4b024f55b4baded",
+      "name": "Thác Tình Yêu (Love Waterfall)",
+      "coordinates": {
+        "lat": 22.352957794534756,
+        "lng": 103.77486060285626
+      },
+      "address": "Quốc Lộ 4D, Sa Pá, Tỉnh Lào Cai",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Waterfall",
+      "foursquareId": "4ffa54f0e4b024f55b4baded",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Waterfall"
+      ]
+    },
+    {
+      "id": "fsq-4f362a21e4b0a8273d7ce9f3",
+      "name": "The Hill Station Deli & Boutique",
+      "coordinates": {
+        "lat": 22.333084,
+        "lng": 103.843216
+      },
+      "address": "7 Mường Hoa, Sa Pa, Tỉnh Lào Cai",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Deli",
+      "foursquareId": "4f362a21e4b0a8273d7ce9f3",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": "203887111",
+      "website": "http://www.thehillstation.com",
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Deli",
+        "Café",
+        "Boutique"
+      ]
+    },
+    {
+      "id": "osm-node-12301281456",
+      "name": "The Hmong Sisters Tavan",
+      "coordinates": {
+        "lat": 22.3004787,
+        "lng": 103.8928735
+      },
+      "address": "Ta Van Day, Sapa",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (burger;french;regional)",
+      "osmId": "node/12301281456",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": "Mo-Su 10:00-22:00",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "burger;french;regional",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "fsq-553ba00e498e4704476daf74",
+      "name": "The Real Outdoor Gear Shop",
+      "coordinates": {
+        "lat": 22.333486,
+        "lng": 103.842535
+      },
+      "address": "Cầu Mây, Sapa, Tỉnh Lào Cai",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Outdoor Supply Store",
+      "foursquareId": "553ba00e498e4704476daf74",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Outdoor Supply Store"
+      ]
+    },
+    {
+      "id": "osm-node-13320396945",
+      "name": "THIÊN TRƯỜNG BẢO ĐIỆN",
+      "coordinates": {
+        "lat": 22.3382,
+        "lng": 103.840048
+      },
+      "address": "",
+      "categoryGroup": "culture",
+      "categoryLabel": "Văn hóa",
+      "osmId": "node/13320396945",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "place_of_worship"
+      ]
+    },
+    {
+      "id": "osm-node-12248286646",
+      "name": "Thong Dong Vegan Kitchen & Café",
+      "coordinates": {
+        "lat": 22.3366743,
+        "lng": 103.8425864
+      },
+      "address": "08B, Hoang Dieu",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực",
+      "osmId": "node/12248286646",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "+84858250522;+84397978355",
+      "website": "https://thongdongvegan.com/",
+      "openingHours": "We-Mo 08:00-16:00, 17:30-21:30",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-3856260582",
+      "name": "Thông tin và Xúc tiến Du lịch tỉnh Lào Cai tại Sa Pa",
+      "coordinates": {
+        "lat": 22.335382,
+        "lng": 103.8407385
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Địa điểm",
+      "osmId": "node/3856260582",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "information"
+      ]
+    },
+    {
+      "id": "fsq-511e0c9ce4b0e4dca6f69de2",
+      "name": "Thu Hằng Hotel",
+      "coordinates": {
+        "lat": 22.336318,
+        "lng": 103.844692
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Structure",
+      "foursquareId": "511e0c9ce4b0e4dca6f69de2",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": "0214 3872 620",
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Structure"
+      ]
+    },
+    {
+      "id": "fsq-687c74a2cf0d362f97257b99",
+      "name": "Thuôc Táy Pharmacy",
+      "coordinates": {
+        "lat": 22.333703,
+        "lng": 103.842273
+      },
+      "address": "Sa Pa, Tỉnh Lào Cai",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Pharmacy",
+      "foursquareId": "687c74a2cf0d362f97257b99",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Pharmacy"
+      ]
+    },
+    {
+      "id": "osm-node-1675595828",
+      "name": "Ticket Checking Station No. 1",
+      "coordinates": {
+        "lat": 22.3309651,
+        "lng": 103.8339613
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Địa điểm",
+      "osmId": "node/1675595828",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "information"
+      ]
+    },
+    {
+      "id": "fsq-68d2325f337ea167dd2bf56a",
+      "name": "Tiem Nha Bu",
+      "coordinates": {
+        "lat": 22.334324,
+        "lng": 103.84167
+      },
+      "address": "Tỉnh Lào Cai",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Souvenir Store",
+      "foursquareId": "68d2325f337ea167dd2bf56a",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Souvenir Store"
+      ]
+    },
+    {
+      "id": "osm-node-7170676512",
+      "name": "TOM - Trails of Mountain",
+      "coordinates": {
+        "lat": 22.3356209,
+        "lng": 103.8392157
+      },
+      "address": "01A",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Mua sắm",
+      "osmId": "node/7170676512",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": "+84 02143 872 996",
+      "website": "https://www.trailsofmountain.com/",
+      "openingHours": null,
+      "description": "In Sapa Dragon Hotel lobby",
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "travel_agency"
+      ]
+    },
+    {
+      "id": "osm-node-5391383221",
+      "name": "Town Square",
+      "coordinates": {
+        "lat": 22.3352853,
+        "lng": 103.8415218
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/5391383221",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "attraction"
+      ]
+    },
+    {
+      "id": "osm-node-2440165326",
+      "name": "Trạm Tôn",
+      "coordinates": {
+        "lat": 22.3550702,
+        "lng": 103.7607199
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/2440165326",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "viewpoint"
+      ]
+    },
+    {
+      "id": "osm-node-7041239590",
+      "name": "Tran Ton Pass",
+      "coordinates": {
+        "lat": 22.3455799,
+        "lng": 103.8244908
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/7041239590",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "viewpoint"
+      ]
+    },
+    {
+      "id": "osm-node-13154793644",
+      "name": "Tree vegan Food & Drink",
+      "coordinates": {
+        "lat": 22.2994834,
+        "lng": 103.895183
+      },
+      "address": "1, Tan Van Giay",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực",
+      "osmId": "node/13154793644",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": "Mo-Su,PH 08:00-19:30",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "restaurant"
+      ]
+    },
+    {
+      "id": "fsq-4e9d83b68b81791d97bd36f9",
+      "name": "Trung Tin Mart",
+      "coordinates": {
+        "lat": 22.336622957531095,
+        "lng": 103.84426141599165
+      },
+      "address": "Tỉnh Lào Cai",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Flea Market",
+      "foursquareId": "4e9d83b68b81791d97bd36f9",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Flea Market"
+      ]
+    },
+    {
+      "id": "fsq-57558ae2498e6dcfea1a55d4",
+      "name": "Trường Sinh Quán",
+      "coordinates": {
+        "lat": 22.3360405862331,
+        "lng": 103.843228407204
+      },
+      "address": "08 Thạch sơn, Sapa, Lào cai, Tỉnh Lào Cai",
+      "categoryGroup": "food",
+      "categoryLabel": "Nhà hàng Việt",
+      "foursquareId": "57558ae2498e6dcfea1a55d4",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "0989 030 186",
+      "website": "http://truongsinhquan.vn",
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Vietnamese Restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-2024643568",
+      "name": "Tu viện Tả Phìn",
+      "coordinates": {
+        "lat": 22.3773798,
+        "lng": 103.8513176
+      },
+      "address": "",
+      "categoryGroup": "culture",
+      "categoryLabel": "Di tích lịch sử",
+      "osmId": "node/2024643568",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "ruins"
+      ]
+    },
+    {
+      "id": "osm-node-989239564",
+      "name": "Viet Emotion",
+      "coordinates": {
+        "lat": 22.3337884,
+        "lng": 103.8424662
+      },
+      "address": "27, Cau May",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (vietnamese)",
+      "osmId": "node/989239564",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "vietnamese",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "fsq-4e5100438877402b06d91a63",
+      "name": "Viet Emotion Restaurant & Tapas Café",
+      "coordinates": {
+        "lat": 22.333858353660066,
+        "lng": 103.84227460290128
+      },
+      "address": "27 Cầu Mây, Sa Pa, Tỉnh Lào Cai",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Tapas Restaurant",
+      "foursquareId": "4e5100438877402b06d91a63",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": "203872559",
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Tapas Restaurant",
+        "Bar",
+        "Café"
+      ]
+    },
+    {
+      "id": "fsq-4d5e1cdb5b276dcba2b6f5c5",
+      "name": "Vietdiscovery Restaurant",
+      "coordinates": {
+        "lat": 22.33587487259547,
+        "lng": 103.84417083322144
+      },
+      "address": "4D, Sapa, Tỉnh Lào Cai",
+      "categoryGroup": "food",
+      "categoryLabel": "Nhà hàng Việt",
+      "foursquareId": "4d5e1cdb5b276dcba2b6f5c5",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": true,
+      "conflictNote": "Tọa độ cách 418m; địa chỉ khác biệt giữa FSQ và OSM",
+      "tags": [
+        "Vietnamese Restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-5860819285",
+      "name": "Vietnam nomadtrails",
+      "coordinates": {
+        "lat": 22.3341888,
+        "lng": 103.8415441
+      },
+      "address": "13, Tuệ Tĩnh",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Mua sắm",
+      "osmId": "node/5860819285",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": "+84203872192",
+      "website": "https://www.vietnamnomadtrails.com/",
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "travel_agency"
+      ]
+    },
+    {
+      "id": "osm-node-6484971887",
+      "name": "View of Sapa town",
+      "coordinates": {
+        "lat": 22.3328851,
+        "lng": 103.8568375
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/6484971887",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "viewpoint"
+      ]
+    },
+    {
+      "id": "osm-node-5333758621",
+      "name": "view of waterfall from the top",
+      "coordinates": {
+        "lat": 22.293205,
+        "lng": 103.90551
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/5333758621",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "viewpoint"
+      ]
+    },
+    {
+      "id": "osm-node-6521247385",
+      "name": "View point over rice terraces and corn fields",
+      "coordinates": {
+        "lat": 22.4072385,
+        "lng": 103.8227607
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/6521247385",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "viewpoint"
+      ]
+    },
+    {
+      "id": "osm-node-2027787358",
+      "name": "View Point, altitute 2143m",
+      "coordinates": {
+        "lat": 22.3343421,
+        "lng": 103.7797703
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/2027787358",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "viewpoint"
+      ]
+    },
+    {
+      "id": "osm-node-5249889021",
+      "name": "Việt Home Restaurant",
+      "coordinates": {
+        "lat": 22.3335287,
+        "lng": 103.8409958
+      },
+      "address": "40, Cầu Mây",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (vietnamese)",
+      "osmId": "node/5249889021",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "+84913069423",
+      "website": "https://viethomerestaurant.com/",
+      "openingHours": null,
+      "description": null,
+      "needsReview": true,
+      "conflictNote": "Tọa độ cách 418m; địa chỉ khác biệt giữa FSQ và OSM",
+      "tags": [
+        "vietnamese",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-4252023719",
+      "name": "Waterfall",
+      "coordinates": {
+        "lat": 22.3608495,
+        "lng": 103.7902987
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/4252023719",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "viewpoint"
+      ]
+    },
+    {
+      "id": "osm-node-3223469462",
+      "name": "Waterfall Quy Khach",
+      "coordinates": {
+        "lat": 22.2940958,
+        "lng": 103.9053772
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/3223469462",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "viewpoint"
+      ]
+    },
+    {
+      "id": "osm-node-6277955415",
+      "name": "White Cloud",
+      "coordinates": {
+        "lat": 22.3324481,
+        "lng": 103.8390209
+      },
+      "address": "Fansipan Street",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (regional;international)",
+      "osmId": "node/6277955415",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "regional;international",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "fsq-6517edc29766bd241a42cd87",
+      "name": "Wild Orchid Handicraft",
+      "coordinates": {
+        "lat": 22.333832,
+        "lng": 103.842085
+      },
+      "address": "Sa Pa, Tỉnh Lào Cai",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Arts and Crafts Store",
+      "foursquareId": "6517edc29766bd241a42cd87",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Arts and Crafts Store"
+      ]
+    },
+    {
+      "id": "osm-node-5238881145",
+      "name": "Wooden Pub",
+      "coordinates": {
+        "lat": 22.3360386,
+        "lng": 103.840295
+      },
+      "address": "03, Thác Bạc, Sa Pa",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Đồ uống",
+      "osmId": "node/5238881145",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": "+84904799545",
+      "website": null,
+      "openingHours": "Mo-Su 08:00-24:00",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "bar"
+      ]
+    },
+    {
+      "id": "merged-5a057bbcfd9d736ba06f911a",
+      "name": "X6 Mart",
+      "coordinates": {
+        "lat": 22.337779,
+        "lng": 103.847107
+      },
+      "address": "022 Ngū Chi Són TT.Sa Pa, H. Sa Pa, Tỉnh Lào Cai",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Convenience Store",
+      "foursquareId": "5a057bbcfd9d736ba06f911a",
+      "osmId": "node/5183566627",
+      "dataSource": "merged",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Convenience Store",
+        "supermarket"
+      ]
+    },
+    {
+      "id": "osm-node-6476741385",
+      "name": "xe greenbus",
+      "coordinates": {
+        "lat": 22.3398502,
+        "lng": 103.844369
+      },
+      "address": "d. dien bien phu",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Địa điểm",
+      "osmId": "node/6476741385",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "information"
+      ]
+    }
+  ],
+  "attribution": {
+    "foursquare": "Foursquare Places API",
+    "osm": "Data © OpenStreetMap contributors (ODbL)"
+  }
+}

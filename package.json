@@ -12,7 +12,8 @@
     "share": "npm run tunnel",
     "clean": "rm -rf dist server.js",
     "lint": "tsc --noEmit",
-    "fetch-places": "tsx scripts/fetch-places.ts"
+    "fetch-places": "tsx scripts/fetch-places.ts",
+    "prune-places": "tsx scripts/prune-places.ts"
   },
   "dependencies": {
     "@google/genai": "^2.4.0",

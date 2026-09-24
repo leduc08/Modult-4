@@ -19,7 +19,11 @@ Continues `implementation_plan.md` and `task.md` from Antigravity task
 - [x] Check merge conflicts with automated regression tests.
 - [x] Run TypeScript checking and production build.
 
-## Data snapshot
+## Data snapshot before the 2026-09-24 quality filter
+
+The current Da Nang file contains 1199 places after the filter described in
+`nearby-hanoi-hcm-verification.md` removed 1778 businesses without an address,
+phone, or website. The figures below document the original fetch.
 
 `frontend/src/data/places/da-nang.json` contains:
 
@@ -36,8 +40,9 @@ Continues `implementation_plan.md` and `task.md` from Antigravity task
 Review counts refer to records, not conflict pairs. Conflicting source records
 are retained separately. Name candidates beyond 1 km are treated as different
 branches; within that range, differences above 100 m are flagged. Matches from
-50 to 100 m remain separate. The remaining nine city files have not been fetched;
-those cities use the existing sample fallback.
+50 to 100 m remain separate. At the time of this snapshot, the remaining nine
+city files had not been fetched. All ten configured cities now have JSON files;
+see `nearby-ten-cities-verification.md` for the current state.
 
 ## Corrections made during verification
 

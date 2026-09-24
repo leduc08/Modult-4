@@ -1,0 +1,6664 @@
+{
+  "cityId": "ninh-binh",
+  "cityName": "Ninh Bình",
+  "center": {
+    "lat": 20.2506,
+    "lng": 105.9745
+  },
+  "fetchedAt": "2026-09-24T16:12:16.212Z",
+  "sources": {
+    "foursquare": {
+      "count": 83,
+      "fetchedAt": "2026-09-24T16:12:16.212Z"
+    },
+    "osm": {
+      "count": 447,
+      "fetchedAt": "2026-09-24T16:12:16.212Z"
+    }
+  },
+  "stats": {
+    "total": 252,
+    "fromFoursquare": 68,
+    "fromOSM": 179,
+    "merged": 5,
+    "needsReview": 6
+  },
+  "places": [
+    {
+      "id": "osm-node-4671972691",
+      "name": "0971685111",
+      "coordinates": {
+        "lat": 20.2636006,
+        "lng": 105.9630808
+      },
+      "address": "72, tràng an",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Đồ uống",
+      "osmId": "node/4671972691",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "pub"
+      ]
+    },
+    {
+      "id": "osm-node-12728010901",
+      "name": "3 soldiers (30.05.1951)",
+      "coordinates": {
+        "lat": 20.2609147,
+        "lng": 105.9822355
+      },
+      "address": "",
+      "categoryGroup": "culture",
+      "categoryLabel": "Di tích lịch sử",
+      "osmId": "node/12728010901",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "memorial"
+      ]
+    },
+    {
+      "id": "osm-node-4490104989",
+      "name": "556 Khánh Tân Ninh Khánh tp Ninh Bình",
+      "coordinates": {
+        "lat": 20.2718862,
+        "lng": 105.9650163
+      },
+      "address": "556, Đường Trân Hưng Đạo",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực",
+      "osmId": "node/4490104989",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "0912865366",
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-13036914201",
+      "name": "7Bridges",
+      "coordinates": {
+        "lat": 20.2150567,
+        "lng": 105.9334689
+      },
+      "address": "",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Đồ uống",
+      "osmId": "node/13036914201",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": "https://www.7bridges.vn",
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "bar"
+      ]
+    },
+    {
+      "id": "osm-node-11959083169",
+      "name": "Amazing views on top of war ruins; difficult access, up from a stepladder and between branches.",
+      "coordinates": {
+        "lat": 20.2616625,
+        "lng": 105.9826864
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/11959083169",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "viewpoint"
+      ]
+    },
+    {
+      "id": "osm-node-5358515921",
+      "name": "Arched Bridge",
+      "coordinates": {
+        "lat": 20.2637434,
+        "lng": 105.9680367
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/5358515921",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "attraction"
+      ]
+    },
+    {
+      "id": "fsq-5b3238778496ca002cbf79c9",
+      "name": "Aroma - Fine Indian Cuisine",
+      "coordinates": {
+        "lat": 20.216611,
+        "lng": 105.938717
+      },
+      "address": "H. Hoa Lư, Tỉnh Ninh Bình",
+      "categoryGroup": "food",
+      "categoryLabel": "Indian Restaurant",
+      "foursquareId": "5b3238778496ca002cbf79c9",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "0941 297 773",
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Indian Restaurant",
+        "North Indian Restaurant",
+        "South Indian Restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-3189559920",
+      "name": "Ba Grotto",
+      "coordinates": {
+        "lat": 20.2338698,
+        "lng": 105.9186668
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/3189559920",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "attraction"
+      ]
+    },
+    {
+      "id": "osm-node-11607645669",
+      "name": "Bãi Bồi Ninh Xuân",
+      "coordinates": {
+        "lat": 20.2496808,
+        "lng": 105.9284765
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/11607645669",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "viewpoint"
+      ]
+    },
+    {
+      "id": "fsq-644752169a191773fe9278d7",
+      "name": "Bánh Đa Cá Rô Bình Minh",
+      "coordinates": {
+        "lat": 20.255509,
+        "lng": 105.966076
+      },
+      "address": "Thành Phố Ninh Bình, Tỉnh Ninh Bình",
+      "categoryGroup": "food",
+      "categoryLabel": "Nhà hàng Việt",
+      "foursquareId": "644752169a191773fe9278d7",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Vietnamese Restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-7294329086",
+      "name": "Banh mi Hanoi",
+      "coordinates": {
+        "lat": 20.2170435,
+        "lng": 105.9410845
+      },
+      "address": "Tam Cốc - Bích Động, Hoa Lư, Ninh Bình, Vietnam",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (asian;vietnamese)",
+      "osmId": "node/7294329086",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "+84 374 295 283",
+      "website": null,
+      "openingHours": "Mo-Su 09:00-21:00",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "asian;vietnamese",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "fsq-63dcb70dd470f81828d16e93",
+      "name": "Banh Mi Ngon",
+      "coordinates": {
+        "lat": 20.256444,
+        "lng": 105.970431
+      },
+      "address": "Thành Phố Ninh Bình, Tỉnh Ninh Bình",
+      "categoryGroup": "food",
+      "categoryLabel": "Nhà hàng Việt",
+      "foursquareId": "63dcb70dd470f81828d16e93",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": true,
+      "conflictNote": "Tọa độ cách 146m giữa FSQ và OSM",
+      "tags": [
+        "Vietnamese Restaurant",
+        "Sandwich Spot"
+      ]
+    },
+    {
+      "id": "osm-node-6968357485",
+      "name": "Banh Mi Tam Coc",
+      "coordinates": {
+        "lat": 20.2166711,
+        "lng": 105.9382432
+      },
+      "address": "Thai Vi",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Cà phê",
+      "osmId": "node/6968357485",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "sandwich;hotdog;coffee_shop",
+        "cafe"
+      ]
+    },
+    {
+      "id": "osm-node-5362615424",
+      "name": "Bánh sinh nhật Vân Anh",
+      "coordinates": {
+        "lat": 20.3286111,
+        "lng": 106.0097484
+      },
+      "address": "57A",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Mua sắm",
+      "osmId": "node/5362615424",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "bakery"
+      ]
+    },
+    {
+      "id": "osm-node-4236750991",
+      "name": "Bao Anh",
+      "coordinates": {
+        "lat": 20.2520185,
+        "lng": 105.9774566
+      },
+      "address": "15, Đuờng Hoàng Hoa Thám",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực",
+      "osmId": "node/4236750991",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "restaurant"
+      ]
+    },
+    {
+      "id": "fsq-66eba214ad31dc17a9a87060",
+      "name": "Bao Tang Ninh Binh",
+      "coordinates": {
+        "lat": 20.258574,
+        "lng": 105.980356
+      },
+      "address": "Thành Phố Ninh Bình, Tỉnh Ninh Bình",
+      "categoryGroup": "culture",
+      "categoryLabel": "Museum",
+      "foursquareId": "66eba214ad31dc17a9a87060",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": "0229 3885 886",
+      "website": "http://baotangtinh.ninhbinh.gov.vn",
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Museum"
+      ]
+    },
+    {
+      "id": "osm-node-5358515621",
+      "name": "Bell and Shrine",
+      "coordinates": {
+        "lat": 20.2641805,
+        "lng": 105.9681725
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/5358515621",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "attraction"
+      ]
+    },
+    {
+      "id": "osm-node-1540779110",
+      "name": "Bich Dong",
+      "coordinates": {
+        "lat": 20.2174623,
+        "lng": 105.9157081
+      },
+      "address": "",
+      "categoryGroup": "culture",
+      "categoryLabel": "Văn hóa",
+      "osmId": "node/1540779110",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": "Mo-Su 07:30-16:30",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "place_of_worship"
+      ]
+    },
+    {
+      "id": "osm-node-5573919622",
+      "name": "BIRD'S HOUSE (4:30 to 6pm)",
+      "coordinates": {
+        "lat": 20.2209865,
+        "lng": 105.8852156
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/5573919622",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "attraction"
+      ]
+    },
+    {
+      "id": "osm-node-12843616701",
+      "name": "Boat Tour Ticket Office",
+      "coordinates": {
+        "lat": 20.2537417,
+        "lng": 105.9186858
+      },
+      "address": "",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Mua sắm",
+      "osmId": "node/12843616701",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": "https://muave.disantrangan.vn/home/en",
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "ticket"
+      ]
+    },
+    {
+      "id": "merged-5a1000c0c365881529f9b487",
+      "name": "Brick Coffee",
+      "coordinates": {
+        "lat": 20.216928,
+        "lng": 105.94631
+      },
+      "address": "Tam coc Bich dong, Tỉnh Ninh Bình",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Coffee Shop",
+      "foursquareId": "5a1000c0c365881529f9b487",
+      "osmId": "node/5322232028",
+      "dataSource": "merged",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": "0963 952 261",
+      "website": null,
+      "openingHours": "24/7",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Coffee Shop",
+        "coffee_shop;tea",
+        "cafe"
+      ]
+    },
+    {
+      "id": "osm-node-5358515622",
+      "name": "Bruecke",
+      "coordinates": {
+        "lat": 20.2647709,
+        "lng": 105.9676109
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/5358515622",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "attraction"
+      ]
+    },
+    {
+      "id": "osm-node-5305531028",
+      "name": "Buddha cave",
+      "coordinates": {
+        "lat": 20.2304766,
+        "lng": 105.9373758
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/5305531028",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "attraction"
+      ]
+    },
+    {
+      "id": "osm-node-11286231769",
+      "name": "Buffalo Cave",
+      "coordinates": {
+        "lat": 20.2262084,
+        "lng": 105.9188803
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/11286231769",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "attraction"
+      ]
+    },
+    {
+      "id": "osm-node-4757339544",
+      "name": "Bún Chả 734",
+      "coordinates": {
+        "lat": 20.2446681,
+        "lng": 105.9927502
+      },
+      "address": "734, Nguyễn Công Trưs",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (grill)",
+      "osmId": "node/4757339544",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "0978252638",
+      "website": null,
+      "openingHours": "Mo-Su 06:00-18:00",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "grill",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "fsq-4f9355c6e4b0949d20d3d6e8",
+      "name": "Bún Chả Quạt",
+      "coordinates": {
+        "lat": 20.257292730231498,
+        "lng": 105.97467840687628
+      },
+      "address": "58 Phạm Hồng Thái",
+      "categoryGroup": "food",
+      "categoryLabel": "Noodle Restaurant",
+      "foursquareId": "4f9355c6e4b0949d20d3d6e8",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Noodle Restaurant",
+        "Vietnamese Restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-7181682985",
+      "name": "Bún Mọc Biển Hà",
+      "coordinates": {
+        "lat": 20.2574919,
+        "lng": 105.9718649
+      },
+      "address": "05, Đuờng Lê Hồng Phong",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (chicken;breakfast)",
+      "osmId": "node/7181682985",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "0904994114",
+      "website": null,
+      "openingHours": "Mo-Su 4:30-9:30",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "chicken;breakfast",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-3393595444",
+      "name": "Ca Grotto",
+      "coordinates": {
+        "lat": 20.2280803,
+        "lng": 105.9309077
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/3393595444",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "attraction"
+      ]
+    },
+    {
+      "id": "fsq-50a6decbe4b03d1eadfa8ee7",
+      "name": "Cafe 53",
+      "coordinates": {
+        "lat": 20.255861282348633,
+        "lng": 105.9749755859375
+      },
+      "address": "53 (Trương Hán Siêu), Thành Phố Ninh Bình, Tỉnh Ninh Bình",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Café",
+      "foursquareId": "50a6decbe4b03d1eadfa8ee7",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Café"
+      ]
+    },
+    {
+      "id": "fsq-4f7797ebe4b0488e2f1be19e",
+      "name": "Cafe Be",
+      "coordinates": {
+        "lat": 20.256607906829828,
+        "lng": 105.971264400643
+      },
+      "address": "Số 6 đường Cù Chính Lan tp Ninh Bình",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Café",
+      "foursquareId": "4f7797ebe4b0488e2f1be19e",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": "0969 862 666",
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Café"
+      ]
+    },
+    {
+      "id": "osm-node-4365887989",
+      "name": "Café Be",
+      "coordinates": {
+        "lat": 20.257456,
+        "lng": 105.9711921
+      },
+      "address": "",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (coffee_shop;vietnamese;italian_pizza)",
+      "osmId": "node/4365887989",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "0969 862 666",
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "coffee_shop;vietnamese;italian_pizza",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "fsq-4e72ccf31495dffb8ea38211",
+      "name": "Cafe Biển Bạch",
+      "coordinates": {
+        "lat": 20.254405111113442,
+        "lng": 105.97248655046754
+      },
+      "address": "Tran Phu street, Thành Phố Ninh Bình, Tỉnh Ninh Bình",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Café",
+      "foursquareId": "4e72ccf31495dffb8ea38211",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Café"
+      ]
+    },
+    {
+      "id": "fsq-5e31116e3935b100089e0fd7",
+      "name": "Café Hat6",
+      "coordinates": {
+        "lat": 20.251686,
+        "lng": 105.97492
+      },
+      "address": "",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Café",
+      "foursquareId": "5e31116e3935b100089e0fd7",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": "0915 033 535",
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Café"
+      ]
+    },
+    {
+      "id": "osm-node-5362693921",
+      "name": "Cafe Heaven",
+      "coordinates": {
+        "lat": 20.3304504,
+        "lng": 106.0048047
+      },
+      "address": "phố cháy đường 38B",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Cà phê",
+      "osmId": "node/5362693921",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "cafe"
+      ]
+    },
+    {
+      "id": "fsq-521c10b511d276b4d794578b",
+      "name": "cafe lọ",
+      "coordinates": {
+        "lat": 20.250685608974607,
+        "lng": 105.97796623874167
+      },
+      "address": "",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Café",
+      "foursquareId": "521c10b511d276b4d794578b",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": "0949 793 751",
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Café"
+      ]
+    },
+    {
+      "id": "osm-node-4366271794",
+      "name": "Canifa",
+      "coordinates": {
+        "lat": 20.2581944,
+        "lng": 105.974864
+      },
+      "address": "155, Đuờng Lê Hồng Phong",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Mua sắm",
+      "osmId": "node/4366271794",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "clothes"
+      ]
+    },
+    {
+      "id": "osm-node-6232830185",
+      "name": "Caphe Asian",
+      "coordinates": {
+        "lat": 20.2601519,
+        "lng": 105.9766824
+      },
+      "address": "Đường Phan Đình Phùng",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Cà phê",
+      "osmId": "node/6232830185",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": "0948720953",
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "coffee_shop",
+        "cafe"
+      ]
+    },
+    {
+      "id": "osm-node-5325374423",
+      "name": "Cau Lim",
+      "coordinates": {
+        "lat": 20.2504064,
+        "lng": 105.9751026
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/5325374423",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "attraction"
+      ]
+    },
+    {
+      "id": "osm-node-5615035822",
+      "name": "Cave viewpoint",
+      "coordinates": {
+        "lat": 20.2162827,
+        "lng": 105.9203389
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/5615035822",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "viewpoint"
+      ]
+    },
+    {
+      "id": "fsq-64a2afe71d7ccf7b715d8a27",
+      "name": "Cầu sắt Non nước",
+      "coordinates": {
+        "lat": 20.261052,
+        "lng": 105.984511
+      },
+      "address": "Phố 3 TT Yên Ninh Yên Khánh Ninh Bình, Yên Bằng, Ý Yên, Thành Phố Ninh Bình, Tỉnh Ninh Bình",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Bridge",
+      "foursquareId": "64a2afe71d7ccf7b715d8a27",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Bridge"
+      ]
+    },
+    {
+      "id": "fsq-56dfa7c1498e1bc939443f26",
+      "name": "Che Bong",
+      "coordinates": {
+        "lat": 20.251083,
+        "lng": 105.978289
+      },
+      "address": "",
+      "categoryGroup": "food",
+      "categoryLabel": "Nhà hàng Việt",
+      "foursquareId": "56dfa7c1498e1bc939443f26",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "0303 874 232",
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": true,
+      "conflictNote": "Tọa độ cách 710m giữa FSQ và OSM",
+      "tags": [
+        "Vietnamese Restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-11407488669",
+      "name": "Chef Hien Restaurant",
+      "coordinates": {
+        "lat": 20.2154048,
+        "lng": 105.9369391
+      },
+      "address": "",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (vietnamese)",
+      "osmId": "node/11407488669",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "+84834102755",
+      "website": null,
+      "openingHours": "Mo-Su 10:00-00:30",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "vietnamese",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "fsq-50a62b53e4b09b7a87ce7585",
+      "name": "Chicken Club",
+      "coordinates": {
+        "lat": 20.25716209411621,
+        "lng": 105.9706039428711
+      },
+      "address": "17 (Lương Văn Tụy), Thành Phố Ninh Bình, Tỉnh Ninh Bình",
+      "categoryGroup": "food",
+      "categoryLabel": "Diner",
+      "foursquareId": "50a62b53e4b09b7a87ce7585",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Diner"
+      ]
+    },
+    {
+      "id": "osm-node-5350977622",
+      "name": "Cho Dong Van",
+      "coordinates": {
+        "lat": 20.2138765,
+        "lng": 105.9346101
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/5350977622",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": "Mo-Su 16:00-21:00",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "marketplace",
+        "attraction"
+      ]
+    },
+    {
+      "id": "fsq-4f5c1d8ae4b0838068072e13",
+      "name": "Chợ Rồng",
+      "coordinates": {
+        "lat": 20.255813167866034,
+        "lng": 105.9767325779066
+      },
+      "address": "Vân Giang, Ninh Binh, Ninh Bình Province, Ninh Binh, Ninh Bình Province",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Shopping Mall",
+      "foursquareId": "4f5c1d8ae4b0838068072e13",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Shopping Mall",
+        "Market"
+      ]
+    },
+    {
+      "id": "fsq-63ae9ae69451ea32395663e8",
+      "name": "Chợ Rồng Ninh Bình",
+      "coordinates": {
+        "lat": 20.255613,
+        "lng": 105.97769
+      },
+      "address": "Thành Phố Ninh Bình, Tỉnh Ninh Bình",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Market",
+      "foursquareId": "63ae9ae69451ea32395663e8",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Market"
+      ]
+    },
+    {
+      "id": "osm-node-7852340985",
+      "name": "Chùa Bạc",
+      "coordinates": {
+        "lat": 20.2638528,
+        "lng": 105.9667606
+      },
+      "address": "",
+      "categoryGroup": "culture",
+      "categoryLabel": "Văn hóa",
+      "osmId": "node/7852340985",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "place_of_worship"
+      ]
+    },
+    {
+      "id": "osm-node-10220706854",
+      "name": "Chua bán long pagoda",
+      "coordinates": {
+        "lat": 20.2535489,
+        "lng": 105.9214868
+      },
+      "address": "",
+      "categoryGroup": "culture",
+      "categoryLabel": "Văn hóa",
+      "osmId": "node/10220706854",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "place_of_worship"
+      ]
+    },
+    {
+      "id": "fsq-4f76ac0de4b0e91fa63303f9",
+      "name": "Chùa Bích Động",
+      "coordinates": {
+        "lat": 20.217357187877685,
+        "lng": 105.91590875503843
+      },
+      "address": "Hoa Lư, Tỉnh Ninh Bình",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Buddhist Temple",
+      "foursquareId": "4f76ac0de4b0e91fa63303f9",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Buddhist Temple",
+        "Cave"
+      ]
+    },
+    {
+      "id": "osm-node-12478401301",
+      "name": "Chùa Cảnh Linh",
+      "coordinates": {
+        "lat": 20.2940839,
+        "lng": 106.0121988
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/12478401301",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "attraction"
+      ]
+    },
+    {
+      "id": "osm-node-5358515323",
+      "name": "Chua Dau Long",
+      "coordinates": {
+        "lat": 20.2598495,
+        "lng": 105.9664361
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/5358515323",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "attraction"
+      ]
+    },
+    {
+      "id": "osm-node-14082410701",
+      "name": "Chùa Dương Hồi",
+      "coordinates": {
+        "lat": 20.2811476,
+        "lng": 106.062278
+      },
+      "address": "Dương Hồi",
+      "categoryGroup": "culture",
+      "categoryLabel": "Văn hóa",
+      "osmId": "node/14082410701",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "place_of_worship"
+      ]
+    },
+    {
+      "id": "osm-node-14082417501",
+      "name": "Chùa Đồi (Phúc Lâm Cổ Tự)",
+      "coordinates": {
+        "lat": 20.2797301,
+        "lng": 106.0622168
+      },
+      "address": "",
+      "categoryGroup": "culture",
+      "categoryLabel": "Văn hóa",
+      "osmId": "node/14082417501",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "place_of_worship"
+      ]
+    },
+    {
+      "id": "osm-node-13387644246",
+      "name": "Chùa Kim Ngân",
+      "coordinates": {
+        "lat": 20.2824064,
+        "lng": 105.9008785
+      },
+      "address": "",
+      "categoryGroup": "culture",
+      "categoryLabel": "Văn hóa",
+      "osmId": "node/13387644246",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "place_of_worship"
+      ]
+    },
+    {
+      "id": "osm-node-4367499201",
+      "name": "Chua Linh Coc",
+      "coordinates": {
+        "lat": 20.214755,
+        "lng": 105.9213028
+      },
+      "address": "",
+      "categoryGroup": "culture",
+      "categoryLabel": "Văn hóa",
+      "osmId": "node/4367499201",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "place_of_worship"
+      ]
+    },
+    {
+      "id": "osm-node-4424766405",
+      "name": "Chùa Nhất Trụ",
+      "coordinates": {
+        "lat": 20.2878492,
+        "lng": 105.9074323
+      },
+      "address": "",
+      "categoryGroup": "culture",
+      "categoryLabel": "Văn hóa",
+      "osmId": "node/4424766405",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "place_of_worship",
+        "attraction"
+      ]
+    },
+    {
+      "id": "fsq-4fead3f2e4b05befc73f2ef8",
+      "name": "chùa non nước",
+      "coordinates": {
+        "lat": 20.26149797142032,
+        "lng": 105.98255667470666
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Mountain",
+      "foursquareId": "4fead3f2e4b05befc73f2ef8",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Mountain"
+      ]
+    },
+    {
+      "id": "osm-node-5481677763",
+      "name": "Chùa Phú Lăng",
+      "coordinates": {
+        "lat": 20.1868693,
+        "lng": 105.9438478
+      },
+      "address": "Ninh Bình",
+      "categoryGroup": "culture",
+      "categoryLabel": "Văn hóa",
+      "osmId": "node/5481677763",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "place_of_worship"
+      ]
+    },
+    {
+      "id": "osm-node-5481675894",
+      "name": "Chùa Quang Hiển",
+      "coordinates": {
+        "lat": 20.1797099,
+        "lng": 105.931385
+      },
+      "address": "Quang Hiển, Tam Điệp",
+      "categoryGroup": "culture",
+      "categoryLabel": "Văn hóa",
+      "osmId": "node/5481675894",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "place_of_worship"
+      ]
+    },
+    {
+      "id": "osm-node-12724993302",
+      "name": "Church",
+      "coordinates": {
+        "lat": 20.229398,
+        "lng": 105.9635587
+      },
+      "address": "",
+      "categoryGroup": "culture",
+      "categoryLabel": "Văn hóa",
+      "osmId": "node/12724993302",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "place_of_worship"
+      ]
+    },
+    {
+      "id": "fsq-5e3137a645c8510007a4e267",
+      "name": "City Gate Ninh Binh",
+      "coordinates": {
+        "lat": 20.2624,
+        "lng": 105.96051
+      },
+      "address": "",
+      "categoryGroup": "culture",
+      "categoryLabel": "Monument",
+      "foursquareId": "5e3137a645c8510007a4e267",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Monument"
+      ]
+    },
+    {
+      "id": "osm-node-6885080985",
+      "name": "CLB trà chanh chém gió",
+      "coordinates": {
+        "lat": 20.217636,
+        "lng": 105.9471205
+      },
+      "address": "tuân cáo , ninh thắng , hoa lư , ninh bình",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Cà phê",
+      "osmId": "node/6885080985",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": "0816712333",
+      "website": "https://ninhbinhmotorbike.com/nbm-cafe-music-on-sunday-in-tam-coc/",
+      "openingHours": "Mo-Su 07:56-09:00",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "coffee_shop",
+        "cafe"
+      ]
+    },
+    {
+      "id": "osm-node-12731141301",
+      "name": "Closed road (March 25)",
+      "coordinates": {
+        "lat": 20.2554809,
+        "lng": 105.9777428
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Địa điểm",
+      "osmId": "node/12731141301",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "information"
+      ]
+    },
+    {
+      "id": "fsq-5e199439df6b9700083ff1ab",
+      "name": "Coffee 1982 Legend",
+      "coordinates": {
+        "lat": 20.242527,
+        "lng": 105.973582
+      },
+      "address": "5227 Thang 7, Ниньбинь, Tỉnh Ninh Bình",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Coffee Shop",
+      "foursquareId": "5e199439df6b9700083ff1ab",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Coffee Shop"
+      ]
+    },
+    {
+      "id": "fsq-64475e5f17449d03d863de53",
+      "name": "Coffee Long Bien",
+      "coordinates": {
+        "lat": 20.250569,
+        "lng": 105.977987
+      },
+      "address": "Thành Phố Ninh Bình, Tỉnh Ninh Bình",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Coffee Shop",
+      "foursquareId": "64475e5f17449d03d863de53",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": "0915 803 383",
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Coffee Shop",
+        "Café"
+      ]
+    },
+    {
+      "id": "osm-node-3887715190",
+      "name": "Coffee Phong",
+      "coordinates": {
+        "lat": 20.257475,
+        "lng": 105.9723117
+      },
+      "address": "27, Đuờng Lê Hồng Phong",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (burger;sandwich;international;coffee_shop;noodles;pizza;diner;hot_dog;breakfast;sausage;tea;italian;deli)",
+      "osmId": "node/3887715190",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "+84 98 202 33 20",
+      "website": null,
+      "openingHours": "Mo-Su 07:00-23:00",
+      "description": null,
+      "needsReview": true,
+      "conflictNote": "Tọa độ cách 124m giữa FSQ và OSM",
+      "tags": [
+        "burger;sandwich;international;coffee_shop;noodles;pizza;diner;hot_dog;breakfast;sausage;tea;italian;deli",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "fsq-597142ceda2e0076a01e0fba",
+      "name": "Coffee Phong",
+      "coordinates": {
+        "lat": 20.256363,
+        "lng": 105.97233
+      },
+      "address": "",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Coffee Shop",
+      "foursquareId": "597142ceda2e0076a01e0fba",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": "0982 023 320",
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": true,
+      "conflictNote": "Tọa độ cách 124m giữa FSQ và OSM",
+      "tags": [
+        "Coffee Shop"
+      ]
+    },
+    {
+      "id": "osm-way-1362974362",
+      "name": "Cố đô Hoa Lư",
+      "coordinates": {
+        "lat": 20.2828485,
+        "lng": 105.9017497
+      },
+      "address": "",
+      "categoryGroup": "culture",
+      "categoryLabel": "Di tích lịch sử",
+      "osmId": "way/1362974362",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "attraction",
+        "city"
+      ]
+    },
+    {
+      "id": "fsq-67960f5af0a8ab70327bfeea",
+      "name": "Cố Viên Lầu",
+      "coordinates": {
+        "lat": 20.218894,
+        "lng": 105.936178
+      },
+      "address": "Hoa Lu, Tỉnh Ninh Bình",
+      "categoryGroup": "culture",
+      "categoryLabel": "History Museum",
+      "foursquareId": "67960f5af0a8ab70327bfeea",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "History Museum"
+      ]
+    },
+    {
+      "id": "fsq-4faf9468e4b01cbf309ac099",
+      "name": "Công Viên Cây Xanh Ninh Bình",
+      "coordinates": {
+        "lat": 20.259681,
+        "lng": 105.981545
+      },
+      "address": "Lê Đại Hành, Thành Phố Ninh Bình, Tỉnh Ninh Bình",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Park",
+      "foursquareId": "4faf9468e4b01cbf309ac099",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Park"
+      ]
+    },
+    {
+      "id": "osm-node-5481678716",
+      "name": "Cơ sở chế tác đá mỹ nghệ Duy Lợi",
+      "coordinates": {
+        "lat": 20.1853135,
+        "lng": 105.9460204
+      },
+      "address": "Ninh Bình",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Mua sắm",
+      "osmId": "node/5481678716",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": "0985501232",
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "craft"
+      ]
+    },
+    {
+      "id": "fsq-59aaacedb9ac386d8d86acab",
+      "name": "Cơm Gà 112",
+      "coordinates": {
+        "lat": 20.257443,
+        "lng": 105.97316
+      },
+      "address": "112 Lê Hồng Phong, Thành Phố Ninh Bình, Tỉnh Ninh Bình",
+      "categoryGroup": "food",
+      "categoryLabel": "Souvlaki Shop",
+      "foursquareId": "59aaacedb9ac386d8d86acab",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Souvlaki Shop"
+      ]
+    },
+    {
+      "id": "osm-node-5362621421",
+      "name": "Cửa hàng ăn nhanh nhật tiến",
+      "coordinates": {
+        "lat": 20.3255412,
+        "lng": 106.0138339
+      },
+      "address": "57A thị trấn Lâm",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực",
+      "osmId": "node/5362621421",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "fast_food"
+      ]
+    },
+    {
+      "id": "osm-node-5362643121",
+      "name": "Cửa hàng Huỳnh Phương",
+      "coordinates": {
+        "lat": 20.3327142,
+        "lng": 106.0051843
+      },
+      "address": "57A",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Mua sắm",
+      "osmId": "node/5362643121",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "department_store"
+      ]
+    },
+    {
+      "id": "osm-node-5362615423",
+      "name": "Cửa hàng Luật Hiền",
+      "coordinates": {
+        "lat": 20.3265204,
+        "lng": 106.0122474
+      },
+      "address": "57A thị trấn Lâm",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Mua sắm",
+      "osmId": "node/5362615423",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "department_store"
+      ]
+    },
+    {
+      "id": "osm-node-5362693922",
+      "name": "Cửa hàng Sáng Phi",
+      "coordinates": {
+        "lat": 20.3222175,
+        "lng": 105.98591
+      },
+      "address": "38B",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Mua sắm",
+      "osmId": "node/5362693922",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "department_store"
+      ]
+    },
+    {
+      "id": "merged-58ba594f91936a61c9e9f7bd",
+      "name": "Den Tho Vua Dinh Tien Hoang",
+      "coordinates": {
+        "lat": 20.28455732226575,
+        "lng": 105.90540089683485
+      },
+      "address": "Hoa Lu, Tỉnh Ninh Bình",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Palace",
+      "foursquareId": "58ba594f91936a61c9e9f7bd",
+      "osmId": "way/772041809",
+      "dataSource": "merged",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Palace",
+        "place_of_worship",
+        "attraction"
+      ]
+    },
+    {
+      "id": "osm-node-5973661787",
+      "name": "Dong Am Tiem",
+      "coordinates": {
+        "lat": 20.2815397,
+        "lng": 105.9114446
+      },
+      "address": "",
+      "categoryGroup": "culture",
+      "categoryLabel": "Văn hóa",
+      "osmId": "node/5973661787",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "place_of_worship"
+      ]
+    },
+    {
+      "id": "osm-node-7222461185",
+      "name": "Dong am tiem.",
+      "coordinates": {
+        "lat": 20.2791426,
+        "lng": 105.9103289
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/7222461185",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "attraction"
+      ]
+    },
+    {
+      "id": "osm-node-4319325289",
+      "name": "Dong Minh Restaurant and Travel Agency",
+      "coordinates": {
+        "lat": 20.2426014,
+        "lng": 105.9738488
+      },
+      "address": "454, Ngo Gia Tu",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Địa điểm",
+      "osmId": "node/4319325289",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": "+84 976 499 223",
+      "website": null,
+      "openingHours": null,
+      "description": "Kind family that also rent bikes for 100.000 VND for 24hs",
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "vietnamese",
+        "motorcycle_rental",
+        "information"
+      ]
+    },
+    {
+      "id": "osm-node-5392629123",
+      "name": "Dông Vài Gioi",
+      "coordinates": {
+        "lat": 20.2159867,
+        "lng": 105.900874
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/5392629123",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "attraction"
+      ]
+    },
+    {
+      "id": "osm-node-11389414469",
+      "name": "Dragon Bed",
+      "coordinates": {
+        "lat": 20.2842592,
+        "lng": 105.9061964
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/11389414469",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "attraction"
+      ]
+    },
+    {
+      "id": "osm-node-13310209616",
+      "name": "Duc Huy Bikes",
+      "coordinates": {
+        "lat": 20.259213,
+        "lng": 105.9624107
+      },
+      "address": "",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Mua sắm",
+      "osmId": "node/13310209616",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": "+84 338 466 411",
+      "website": "https://xedapthethaoduchuy.com/",
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "bicycle"
+      ]
+    },
+    {
+      "id": "osm-node-13392912624",
+      "name": "Duck Petting",
+      "coordinates": {
+        "lat": 20.2256163,
+        "lng": 105.9187098
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/13392912624",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "attraction"
+      ]
+    },
+    {
+      "id": "osm-node-5873101885",
+      "name": "Duck Pond and Pagoda",
+      "coordinates": {
+        "lat": 20.247219,
+        "lng": 105.9341971
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/5873101885",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "attraction"
+      ]
+    },
+    {
+      "id": "osm-node-4496334589",
+      "name": "Duong Len Den Tran",
+      "coordinates": {
+        "lat": 20.2557218,
+        "lng": 105.8983354
+      },
+      "address": "",
+      "categoryGroup": "culture",
+      "categoryLabel": "Văn hóa",
+      "osmId": "node/4496334589",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "place_of_worship"
+      ]
+    },
+    {
+      "id": "osm-node-5030505423",
+      "name": "Duyệt Dung",
+      "coordinates": {
+        "lat": 20.2629943,
+        "lng": 105.9736477
+      },
+      "address": "152/154, Đường Lương Văn Thằng",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Mua sắm",
+      "osmId": "node/5030505423",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "tyres"
+      ]
+    },
+    {
+      "id": "osm-way-1362964199",
+      "name": "Đàn Kính Thiên Tràng An",
+      "coordinates": {
+        "lat": 20.2596053,
+        "lng": 105.8807051
+      },
+      "address": "",
+      "categoryGroup": "culture",
+      "categoryLabel": "Văn hóa",
+      "osmId": "way/1362964199",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "place_of_worship",
+        "attraction"
+      ]
+    },
+    {
+      "id": "osm-node-5481678715",
+      "name": "Đền Quan Nghè",
+      "coordinates": {
+        "lat": 20.184956,
+        "lng": 105.9466265
+      },
+      "address": "Ninh Bình",
+      "categoryGroup": "culture",
+      "categoryLabel": "Văn hóa",
+      "osmId": "node/5481678715",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "place_of_worship"
+      ]
+    },
+    {
+      "id": "osm-node-6487330857",
+      "name": "Đền Suối Tiên",
+      "coordinates": {
+        "lat": 20.245985,
+        "lng": 105.9046498
+      },
+      "address": "",
+      "categoryGroup": "culture",
+      "categoryLabel": "Văn hóa",
+      "osmId": "node/6487330857",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "place_of_worship"
+      ]
+    },
+    {
+      "id": "osm-node-14082400001",
+      "name": "Đền thờ vua Đinh",
+      "coordinates": {
+        "lat": 20.2810741,
+        "lng": 106.0607577
+      },
+      "address": "",
+      "categoryGroup": "culture",
+      "categoryLabel": "Văn hóa",
+      "osmId": "node/14082400001",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "place_of_worship"
+      ]
+    },
+    {
+      "id": "osm-node-4496262793",
+      "name": "Đền Trình",
+      "coordinates": {
+        "lat": 20.2569467,
+        "lng": 105.9068014
+      },
+      "address": "",
+      "categoryGroup": "culture",
+      "categoryLabel": "Văn hóa",
+      "osmId": "node/4496262793",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "place_of_worship"
+      ]
+    },
+    {
+      "id": "osm-node-6305170385",
+      "name": "Đền vua Đinh",
+      "coordinates": {
+        "lat": 20.28811,
+        "lng": 105.9124347
+      },
+      "address": "",
+      "categoryGroup": "culture",
+      "categoryLabel": "Văn hóa",
+      "osmId": "node/6305170385",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "museum"
+      ]
+    },
+    {
+      "id": "osm-way-772041801",
+      "name": "Đền vua Lê Đại Hành",
+      "coordinates": {
+        "lat": 20.2861692,
+        "lng": 105.9057242
+      },
+      "address": "",
+      "categoryGroup": "culture",
+      "categoryLabel": "Văn hóa",
+      "osmId": "way/772041801",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "place_of_worship",
+        "attraction"
+      ]
+    },
+    {
+      "id": "osm-node-5481677762",
+      "name": "Đình Phú Lăng",
+      "coordinates": {
+        "lat": 20.1870172,
+        "lng": 105.9467587
+      },
+      "address": "Ninh Bình",
+      "categoryGroup": "culture",
+      "categoryLabel": "Văn hóa",
+      "osmId": "node/5481677762",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "place_of_worship"
+      ]
+    },
+    {
+      "id": "osm-node-4049605100",
+      "name": "Đình Quang Hiển",
+      "coordinates": {
+        "lat": 20.1800505,
+        "lng": 105.9306384
+      },
+      "address": "Quang Hiển, Tam Điệp",
+      "categoryGroup": "culture",
+      "categoryLabel": "Văn hóa",
+      "osmId": "node/4049605100",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "place_of_worship"
+      ]
+    },
+    {
+      "id": "fsq-4da127c90f578cfad2658618",
+      "name": "Động Người Xưa (Cave of Prehistoric Man)",
+      "coordinates": {
+        "lat": 20.25688205570326,
+        "lng": 105.97113243188211
+      },
+      "address": "Đường vào Cúc Phương, Cúc Phương, Tỉnh Ninh Bình",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Cave",
+      "foursquareId": "4da127c90f578cfad2658618",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Cave",
+        "Historic and Protected Site"
+      ]
+    },
+    {
+      "id": "osm-node-4690073093",
+      "name": "Đửc đẫn",
+      "coordinates": {
+        "lat": 20.2170931,
+        "lng": 105.9485083
+      },
+      "address": "",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (vietnamese)",
+      "osmId": "node/4690073093",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "0915408003",
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "vietnamese",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-11385523969",
+      "name": "End of Tam Coc Boat Tour",
+      "coordinates": {
+        "lat": 20.2341998,
+        "lng": 105.918104
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/11385523969",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "attraction"
+      ]
+    },
+    {
+      "id": "osm-node-6366200005",
+      "name": "Entry of Mermaid Cave",
+      "coordinates": {
+        "lat": 20.2174119,
+        "lng": 105.8903634
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/6366200005",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "attraction"
+      ]
+    },
+    {
+      "id": "fsq-524fc79611d2f2de2f5ef493",
+      "name": "Eva de Eva",
+      "coordinates": {
+        "lat": 20.254615,
+        "lng": 105.974757
+      },
+      "address": "76 Vân Giang, Thành Phố Ninh Bình, Tỉnh Ninh Bình",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Women's Store",
+      "foursquareId": "524fc79611d2f2de2f5ef493",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Women's Store"
+      ]
+    },
+    {
+      "id": "osm-node-4414778348",
+      "name": "Exit of Mermaid Cave",
+      "coordinates": {
+        "lat": 20.2186368,
+        "lng": 105.8898298
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/4414778348",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "attraction"
+      ]
+    },
+    {
+      "id": "osm-node-6487077785",
+      "name": "Family Restaurant",
+      "coordinates": {
+        "lat": 20.2151802,
+        "lng": 105.9368591
+      },
+      "address": "Thai Vi",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (asian;pizza;vietnamese)",
+      "osmId": "node/6487077785",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "asian;pizza;vietnamese",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-6430176085",
+      "name": "Farmtrip",
+      "coordinates": {
+        "lat": 20.2168509,
+        "lng": 105.9416374
+      },
+      "address": "Thai Vi",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Mua sắm",
+      "osmId": "node/6430176085",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "gift"
+      ]
+    },
+    {
+      "id": "osm-node-4186809211",
+      "name": "Father Cooking",
+      "coordinates": {
+        "lat": 20.216704,
+        "lng": 105.9379047
+      },
+      "address": "Thai Vi",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực",
+      "osmId": "node/4186809211",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-7081798485",
+      "name": "Free motorbike parking at restaurant",
+      "coordinates": {
+        "lat": 20.2184522,
+        "lng": 105.9177432
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Địa điểm",
+      "osmId": "node/7081798485",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "information"
+      ]
+    },
+    {
+      "id": "osm-node-5077357422",
+      "name": "Ga Ninh Bình",
+      "coordinates": {
+        "lat": 20.242242,
+        "lng": 105.974684
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Địa điểm",
+      "osmId": "node/5077357422",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": "+84916910480",
+      "website": "http://ninhbinhguide.com",
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "information"
+      ]
+    },
+    {
+      "id": "osm-node-11260373338",
+      "name": "Gạo Restaurant & Bar Coffee",
+      "coordinates": {
+        "lat": 20.2186398,
+        "lng": 105.9163907
+      },
+      "address": "",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (burger;coffee_shop;local;pizza;vietnamese)",
+      "osmId": "node/11260373338",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "0967 558 683",
+      "website": "https://gao-restaurant-coffee.business.site/",
+      "openingHours": "Su-Sa 07:00-23:00",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "burger;coffee_shop;local;pizza;vietnamese",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-7092786185",
+      "name": "Garden Spa",
+      "coordinates": {
+        "lat": 20.215932,
+        "lng": 105.9361815
+      },
+      "address": "Tam Coc habour, Van Lam village, Ninh Hải, Hoa lư, Ninh bình",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Mua sắm",
+      "osmId": "node/7092786185",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": "+84 229 6278 866",
+      "website": "https://garden-spa-tam-coc.business.site/",
+      "openingHours": "Th-Tu 10:00-22:00; We 12:00-22:00",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "massage"
+      ]
+    },
+    {
+      "id": "osm-node-3189559919",
+      "name": "Hai Grotto",
+      "coordinates": {
+        "lat": 20.2318445,
+        "lng": 105.919627
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/3189559919",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "attraction"
+      ]
+    },
+    {
+      "id": "osm-node-4366255093",
+      "name": "Hi Korea",
+      "coordinates": {
+        "lat": 20.260252,
+        "lng": 105.9701054
+      },
+      "address": "818, Đường Trân Hưng Đạo",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (korean;asian)",
+      "osmId": "node/4366255093",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": "Mo-Su 10:00-21:30",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "korean;asian",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-13386692502",
+      "name": "HK Buslines",
+      "coordinates": {
+        "lat": 20.2423876,
+        "lng": 105.9732662
+      },
+      "address": "",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Mua sắm",
+      "osmId": "node/13386692502",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": "1900252622",
+      "website": "https://hkopentour.com.vn/",
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "travel_agency"
+      ]
+    },
+    {
+      "id": "osm-node-4385153289",
+      "name": "Jollibee",
+      "coordinates": {
+        "lat": 20.2568375,
+        "lng": 105.9716525
+      },
+      "address": "922, Đường Trân Hưng Đạo",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (burger)",
+      "osmId": "node/4385153289",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "burger",
+        "fast_food"
+      ]
+    },
+    {
+      "id": "osm-node-4496334590",
+      "name": "Khong Temple",
+      "coordinates": {
+        "lat": 20.2681952,
+        "lng": 105.9043073
+      },
+      "address": "",
+      "categoryGroup": "culture",
+      "categoryLabel": "Văn hóa",
+      "osmId": "node/4496334590",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "place_of_worship"
+      ]
+    },
+    {
+      "id": "osm-node-13388919549",
+      "name": "Khong Temple",
+      "coordinates": {
+        "lat": 20.2681429,
+        "lng": 105.9044897
+      },
+      "address": "",
+      "categoryGroup": "culture",
+      "categoryLabel": "Văn hóa",
+      "osmId": "node/13388919549",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "place_of_worship"
+      ]
+    },
+    {
+      "id": "osm-way-474685617",
+      "name": "Khu du lịch sinh thái Tràng An",
+      "coordinates": {
+        "lat": 20.2527264,
+        "lng": 105.9180805
+      },
+      "address": "Trang An Road",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "way/474685617",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": "+84916910480",
+      "website": "http://ninhbinhguide.com",
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "attraction"
+      ]
+    },
+    {
+      "id": "osm-node-5964085988",
+      "name": "Kien Trang",
+      "coordinates": {
+        "lat": 20.2464641,
+        "lng": 105.9352576
+      },
+      "address": "",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (vietnamese)",
+      "osmId": "node/5964085988",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "01679739877",
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "vietnamese",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-7043079085",
+      "name": "Kim Quy Mountain",
+      "coordinates": {
+        "lat": 20.2422095,
+        "lng": 105.9140321
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/7043079085",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "attraction"
+      ]
+    },
+    {
+      "id": "osm-way-1168226656",
+      "name": "La Miette Bakery & Bistro",
+      "coordinates": {
+        "lat": 20.2151088,
+        "lng": 105.9367146
+      },
+      "address": "Thai Vi, Tam Coc, Ninh Binh",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (pizza;coffee_shop;american;french;steak_house;cake;fries;soup;pasta)",
+      "osmId": "way/1168226656",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "+84789891821",
+      "website": null,
+      "openingHours": "Mo-Su 07:00-22:00",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "pizza;coffee_shop;american;french;steak_house;cake;fries;soup;pasta",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-14143550401",
+      "name": "Lakeside Coffee and food",
+      "coordinates": {
+        "lat": 20.2163086,
+        "lng": 105.9348799
+      },
+      "address": "Thai Vi",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực",
+      "osmId": "node/14143550401",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": "Mo-Su 08:00-20:00",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-9959249817",
+      "name": "Làng mộc Phúc Lộc",
+      "coordinates": {
+        "lat": 20.2334605,
+        "lng": 105.9813608
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/9959249817",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "attraction"
+      ]
+    },
+    {
+      "id": "osm-node-9959187018",
+      "name": "Làng nghề đúc đồng Lâm",
+      "coordinates": {
+        "lat": 20.3240777,
+        "lng": 106.0186786
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/9959187018",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "attraction"
+      ]
+    },
+    {
+      "id": "osm-node-9959189619",
+      "name": "Làng nghề sơn mài Cát Đằng",
+      "coordinates": {
+        "lat": 20.2974936,
+        "lng": 106.0294016
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/9959189619",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "attraction"
+      ]
+    },
+    {
+      "id": "fsq-6a2f9d7b1cfbd64cf151cf50",
+      "name": "Lò E Coffee",
+      "coordinates": {
+        "lat": 20.245555,
+        "lng": 105.978201
+      },
+      "address": "Nam Binh, Hoa Lu, Tỉnh Ninh Bình",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Coffee Shop",
+      "foursquareId": "6a2f9d7b1cfbd64cf151cf50",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Coffee Shop"
+      ]
+    },
+    {
+      "id": "osm-node-4875091322",
+      "name": "Long Shyn",
+      "coordinates": {
+        "lat": 20.2498108,
+        "lng": 105.9683376
+      },
+      "address": "Đường Hải Thượng Lãn Ông",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Mua sắm",
+      "osmId": "node/4875091322",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": "097 9444856",
+      "website": null,
+      "openingHours": "Mo-Su 09:00-18:00",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "clothes"
+      ]
+    },
+    {
+      "id": "osm-node-4875092924",
+      "name": "Long Shyn",
+      "coordinates": {
+        "lat": 20.2491324,
+        "lng": 105.9683152
+      },
+      "address": "Đường Hải Thượng Lãn Ông",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Mua sắm",
+      "osmId": "node/4875092924",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": "Mo-Su 09:00-18:00",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "clothes"
+      ]
+    },
+    {
+      "id": "osm-node-10220706862",
+      "name": "Lotus Lake Board Walk",
+      "coordinates": {
+        "lat": 20.2315857,
+        "lng": 105.935904
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/10220706862",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "attraction"
+      ]
+    },
+    {
+      "id": "osm-node-6226857586",
+      "name": "Lucky Star",
+      "coordinates": {
+        "lat": 20.2454481,
+        "lng": 105.9354441
+      },
+      "address": "Tràng An",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực",
+      "osmId": "node/6226857586",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-12728018501",
+      "name": "Luong van tuy",
+      "coordinates": {
+        "lat": 20.2618899,
+        "lng": 105.9823867
+      },
+      "address": "",
+      "categoryGroup": "culture",
+      "categoryLabel": "Di tích lịch sử",
+      "osmId": "node/12728018501",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "memorial"
+      ]
+    },
+    {
+      "id": "osm-node-11913629654",
+      "name": "Lying Dragon Mountain",
+      "coordinates": {
+        "lat": 20.2295377,
+        "lng": 105.9338783
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/11913629654",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "attraction"
+      ]
+    },
+    {
+      "id": "osm-node-10933885005",
+      "name": "Madam 7 Tam Cốc",
+      "coordinates": {
+        "lat": 20.2144644,
+        "lng": 105.9362149
+      },
+      "address": "",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (vietnamese)",
+      "osmId": "node/10933885005",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "+84973603368",
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "vietnamese",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "fsq-6853885626338a2f3c803095",
+      "name": "Marché?",
+      "coordinates": {
+        "lat": 20.249517,
+        "lng": 105.96519
+      },
+      "address": "Hoa Lư, Tỉnh Ninh Bình",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Market",
+      "foursquareId": "6853885626338a2f3c803095",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Market"
+      ]
+    },
+    {
+      "id": "fsq-63dcebb04c86aa3881412e6c",
+      "name": "May Cafe & Bakery",
+      "coordinates": {
+        "lat": 20.257151,
+        "lng": 105.972891
+      },
+      "address": "Thành Phố Ninh Bình, Tỉnh Ninh Bình",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Café",
+      "foursquareId": "63dcebb04c86aa3881412e6c",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Café",
+        "Coffee Shop",
+        "Bakery"
+      ]
+    },
+    {
+      "id": "fsq-6a5c628f5bea561dc9da0167",
+      "name": "Miếu Cụ Lích Dê",
+      "coordinates": {
+        "lat": 20.246064,
+        "lng": 105.974508
+      },
+      "address": "63, Bui Thi Xuan Street, P. Hoa Lư, Tỉnh Ninh Bình",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Historic and Protected Site",
+      "foursquareId": "6a5c628f5bea561dc9da0167",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": "0367 367 367",
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Historic and Protected Site"
+      ]
+    },
+    {
+      "id": "fsq-6a5c62fb3d670f6c0df1c06c",
+      "name": "Miếu Cụ Lịch Dê",
+      "coordinates": {
+        "lat": 20.246064,
+        "lng": 105.974508
+      },
+      "address": "63, Bui Thi Xuan Street, P. Hoa Lư, Tỉnh Ninh Bình",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Historic and Protected Site",
+      "foursquareId": "6a5c62fb3d670f6c0df1c06c",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": "0367 367 367",
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Historic and Protected Site"
+      ]
+    },
+    {
+      "id": "fsq-6a5c60539a35926de994539f",
+      "name": "Miêu Cụ Lịch Đế",
+      "coordinates": {
+        "lat": 20.245858,
+        "lng": 105.974459
+      },
+      "address": "63, P. Hoa Lư, Tỉnh Ninh Bình",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Historic and Protected Site",
+      "foursquareId": "6a5c60539a35926de994539f",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": "0367 367 367",
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Historic and Protected Site"
+      ]
+    },
+    {
+      "id": "fsq-63033c3b515a0d5eed649541",
+      "name": "Minh Quân Restaurant",
+      "coordinates": {
+        "lat": 20.242584,
+        "lng": 105.974085
+      },
+      "address": "Thành Phố Ninh Bình, Tỉnh Ninh Bình",
+      "categoryGroup": "food",
+      "categoryLabel": "Nhà hàng Việt",
+      "foursquareId": "63033c3b515a0d5eed649541",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Vietnamese Restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-4493772489",
+      "name": "Minh Vinh restaurant",
+      "coordinates": {
+        "lat": 20.2184138,
+        "lng": 105.9172659
+      },
+      "address": "",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (vietnamese)",
+      "osmId": "node/4493772489",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "0303618167",
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "vietnamese",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "fsq-662e0a1b70bbdf1caa95c4de",
+      "name": "Mini Mart",
+      "coordinates": {
+        "lat": 20.242088,
+        "lng": 105.974627
+      },
+      "address": "ニンビン, Tỉnh Ninh Bình",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Convenience Store",
+      "foursquareId": "662e0a1b70bbdf1caa95c4de",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Convenience Store"
+      ]
+    },
+    {
+      "id": "fsq-5403320f498e69efd3a5a28c",
+      "name": "Mojito - Nước ép trái cây",
+      "coordinates": {
+        "lat": 20.259164,
+        "lng": 105.975737
+      },
+      "address": "21 (Đinh Tiên Hoàng), Thành Phố Ninh Bình, Tỉnh Ninh Bình",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Food and Beverage Retail",
+      "foursquareId": "5403320f498e69efd3a5a28c",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Food and Beverage Retail"
+      ]
+    },
+    {
+      "id": "osm-node-10736266854",
+      "name": "Moon Garden",
+      "coordinates": {
+        "lat": 20.2454467,
+        "lng": 105.93454
+      },
+      "address": "",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực",
+      "osmId": "node/10736266854",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "0967172550",
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "restaurant"
+      ]
+    },
+    {
+      "id": "fsq-4f07ee89e4b09a8a3e788b73",
+      "name": "Mua Caves (Hang Múa)",
+      "coordinates": {
+        "lat": 20.230071640410934,
+        "lng": 105.93598008155823
+      },
+      "address": "Khe Ha, Ninh Xuan, Hoa Lu, Thành Phố Ninh Bình, Tỉnh Ninh Bình",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Cave",
+      "foursquareId": "4f07ee89e4b09a8a3e788b73",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": "1678 699330",
+      "website": "http://www.hangmua.vn",
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Cave"
+      ]
+    },
+    {
+      "id": "osm-node-13852417301",
+      "name": "Mũi đá Lớn",
+      "coordinates": {
+        "lat": 20.2630411,
+        "lng": 105.920931
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/13852417301",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "attraction"
+      ]
+    },
+    {
+      "id": "osm-way-1275484622",
+      "name": "Museum Ninh Binh",
+      "coordinates": {
+        "lat": 20.258795,
+        "lng": 105.9807146
+      },
+      "address": "",
+      "categoryGroup": "culture",
+      "categoryLabel": "Văn hóa",
+      "osmId": "way/1275484622",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "museum"
+      ]
+    },
+    {
+      "id": "fsq-5d50e26f32ac8d00089d6303",
+      "name": "My kingdom",
+      "coordinates": {
+        "lat": 20.256242,
+        "lng": 105.971936
+      },
+      "address": "923 QL1A, Thanh bình, Thành Phố Ninh Bình, Tỉnh Ninh Bình",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Toy Store",
+      "foursquareId": "5d50e26f32ac8d00089d6303",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Toy Store"
+      ]
+    },
+    {
+      "id": "osm-node-12178589598",
+      "name": "Ngo Dong Vegan restaurant",
+      "coordinates": {
+        "lat": 20.2159325,
+        "lng": 105.9354097
+      },
+      "address": "Thai Vi, Hoa Lư",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực",
+      "osmId": "node/12178589598",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "+84886786396",
+      "website": null,
+      "openingHours": "Mo-Su 07:30-22:00",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-7001242334",
+      "name": "Ngoc Linh",
+      "coordinates": {
+        "lat": 20.2152808,
+        "lng": 105.9371336
+      },
+      "address": "",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (coffee_shop;pizza;vietnamese)",
+      "osmId": "node/7001242334",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "+84 829 949 477",
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "coffee_shop;pizza;vietnamese",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-4491857690",
+      "name": "Nha Hang Bien Bach",
+      "coordinates": {
+        "lat": 20.2537897,
+        "lng": 105.9745814
+      },
+      "address": "20, Trần Phú",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Cà phê",
+      "osmId": "node/4491857690",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "vietnamese",
+        "cafe"
+      ]
+    },
+    {
+      "id": "osm-node-6081283987",
+      "name": "Nhà Hàng Hang Cọ",
+      "coordinates": {
+        "lat": 20.2519063,
+        "lng": 105.9274867
+      },
+      "address": "Ninh Xuân",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực",
+      "osmId": "node/6081283987",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "restaurant"
+      ]
+    },
+    {
+      "id": "fsq-5aae24932a7ab60d440b1cf9",
+      "name": "Nhà Hàng Hoàng Hải",
+      "coordinates": {
+        "lat": 20.253868,
+        "lng": 105.97194
+      },
+      "address": "36 Trương Hán Siêu (Trương Hán Siêu), Thành Phố Ninh Bình, Tỉnh Ninh Bình",
+      "categoryGroup": "food",
+      "categoryLabel": "Nhà hàng Việt",
+      "foursquareId": "5aae24932a7ab60d440b1cf9",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "0914 000 829",
+      "website": "http://ninhbinhhotel.com.vn",
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Vietnamese Restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-3889399634",
+      "name": "NHÀ HÀNG THĂNG LONG - ĐẶC SẢN DÊ NÚI NINH BÌNH",
+      "coordinates": {
+        "lat": 20.2895968,
+        "lng": 105.8891242
+      },
+      "address": "777, Tràng An, Ninh Bình",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (Đặc_Sản_Dê_Núi_Ninh_Bình)",
+      "osmId": "node/3889399634",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "0975155458",
+      "website": "nhahangthanglong.ninhbinh.vn",
+      "openingHours": "7h - 22h các ngày trong tuần",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Đặc_Sản_Dê_Núi_Ninh_Bình",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "fsq-589c5d73f16bb565be3ef808",
+      "name": "Nhà hàng Tùng Anh",
+      "coordinates": {
+        "lat": 20.261905,
+        "lng": 105.972024
+      },
+      "address": "No 58 (Luong Van Thang Street), Thành Phố Ninh Bình, Tỉnh Ninh Bình",
+      "categoryGroup": "food",
+      "categoryLabel": "Nhà hàng Việt",
+      "foursquareId": "589c5d73f16bb565be3ef808",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Vietnamese Restaurant"
+      ]
+    },
+    {
+      "id": "fsq-4fc36403e4b08acaf5567abe",
+      "name": "Nhà Hàng Vân Dung",
+      "coordinates": {
+        "lat": 20.258762,
+        "lng": 105.977192
+      },
+      "address": "Thành Phố Ninh Bình (Việt Nam)",
+      "categoryGroup": "food",
+      "categoryLabel": "Asian Restaurant",
+      "foursquareId": "4fc36403e4b08acaf5567abe",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Asian Restaurant"
+      ]
+    },
+    {
+      "id": "fsq-5131613ab0ed24bf485e394e",
+      "name": "Nhà thờ đá Phát Diệm",
+      "coordinates": {
+        "lat": 20.25484956583895,
+        "lng": 105.97362756729126
+      },
+      "address": "Tt Phát Diệm, Kim Sơn, Tỉnh Ninh Bình",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Historic and Protected Site",
+      "foursquareId": "5131613ab0ed24bf485e394e",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": "0303 862 058",
+      "website": "http://fine18.vn",
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Historic and Protected Site"
+      ]
+    },
+    {
+      "id": "osm-node-14114190213",
+      "name": "Nhà thờ giáo xứ Áng Sơn, giáo phận Phát Diệm",
+      "coordinates": {
+        "lat": 20.2772313,
+        "lng": 105.9351242
+      },
+      "address": "",
+      "categoryGroup": "culture",
+      "categoryLabel": "Văn hóa",
+      "osmId": "node/14114190213",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": "https://phatdiem.org/hat-ninh-binh/giao-xu-ang-son.html",
+      "openingHours": null,
+      "description": "Thuộc giáo hạt Ninh Bình, giáo xứ Phát Diệm.",
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "place_of_worship"
+      ]
+    },
+    {
+      "id": "fsq-63a97a6e4196cc7e826041f2",
+      "name": "Nha Thuoc Fpt Long Cha",
+      "coordinates": {
+        "lat": 20.245901,
+        "lng": 105.966225
+      },
+      "address": "Thành Phố Ninh Bình, Tỉnh Ninh Bình",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Pharmacy",
+      "foursquareId": "63a97a6e4196cc7e826041f2",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Pharmacy"
+      ]
+    },
+    {
+      "id": "osm-node-4829977125",
+      "name": "Nha Yang Minh Thiet",
+      "coordinates": {
+        "lat": 20.2155898,
+        "lng": 105.9375005
+      },
+      "address": "Tam Coc, Ninh Binh",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (vietnamese)",
+      "osmId": "node/4829977125",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "vietnamese",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-5346893021",
+      "name": "Nice, quiet, field",
+      "coordinates": {
+        "lat": 20.2159122,
+        "lng": 105.9135582
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/5346893021",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "viewpoint"
+      ]
+    },
+    {
+      "id": "osm-node-6232830285",
+      "name": "Ninh Loan",
+      "coordinates": {
+        "lat": 20.2151798,
+        "lng": 105.9360596
+      },
+      "address": "Thai Vi",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (seafood;tea;chicken;noodles;fish;vietnamese;breakfast;local)",
+      "osmId": "node/6232830285",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "seafood;tea;chicken;noodles;fish;vietnamese;breakfast;local",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "fsq-4f8a5f10e4b0202c0723a08f",
+      "name": "NinoMax",
+      "coordinates": {
+        "lat": 20.254823935811967,
+        "lng": 105.97320951602569
+      },
+      "address": "1040 Trần Hưng Đạo",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Clothing Store",
+      "foursquareId": "4f8a5f10e4b0202c0723a08f",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Clothing Store"
+      ]
+    },
+    {
+      "id": "osm-node-10223052621",
+      "name": "Nui Dia Linh",
+      "coordinates": {
+        "lat": 20.244504,
+        "lng": 105.9098705
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Địa điểm",
+      "osmId": "node/10223052621",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "information"
+      ]
+    },
+    {
+      "id": "fsq-54a65cb3498e9722fa444495",
+      "name": "Núi Kỳ Lân",
+      "coordinates": {
+        "lat": 20.264169692993164,
+        "lng": 105.9678726196289
+      },
+      "address": "Trần Hưng Đạo, Thành Phố Ninh Bình, Tỉnh Ninh Bình",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Mountain",
+      "foursquareId": "54a65cb3498e9722fa444495",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Mountain"
+      ]
+    },
+    {
+      "id": "fsq-55b47e58498ecb1af93c736c",
+      "name": "Núi Ngoạ Long (Lying Dragon Mountain)",
+      "coordinates": {
+        "lat": 20.230147142832717,
+        "lng": 105.93451023101807
+      },
+      "address": "Hang Múa (Thôn Khê Hạ), Hoa Lu District, Tỉnh Ninh Bình, Tỉnh Ninh Bình",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Mountain",
+      "foursquareId": "55b47e58498ecb1af93c736c",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Mountain"
+      ]
+    },
+    {
+      "id": "osm-node-7160088485",
+      "name": "Núi trầu",
+      "coordinates": {
+        "lat": 20.3192502,
+        "lng": 105.9221591
+      },
+      "address": "Đường 1A",
+      "categoryGroup": "culture",
+      "categoryLabel": "Văn hóa",
+      "osmId": "node/7160088485",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": "24/7",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "place_of_worship"
+      ]
+    },
+    {
+      "id": "fsq-5360cd3c498e823eed1738bd",
+      "name": "Oceanmart Ninh Bình",
+      "coordinates": {
+        "lat": 20.259116,
+        "lng": 105.969807
+      },
+      "address": "484 Trần Hưng Đạo, Thành Phố Ninh Bình, Tỉnh Ninh Bình",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Supermarket",
+      "foursquareId": "5360cd3c498e823eed1738bd",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Supermarket",
+        "Market"
+      ]
+    },
+    {
+      "id": "fsq-69dcd4b1efe1753ff76764aa",
+      "name": "Old Town",
+      "coordinates": {
+        "lat": 20.26402,
+        "lng": 105.96748
+      },
+      "address": "Hoa Lư, Tỉnh Ninh Bình",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Neighborhood",
+      "foursquareId": "69dcd4b1efe1753ff76764aa",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Neighborhood"
+      ]
+    },
+    {
+      "id": "osm-node-4169111190",
+      "name": "Old Trang An Tour",
+      "coordinates": {
+        "lat": 20.2735016,
+        "lng": 105.9103924
+      },
+      "address": "",
+      "categoryGroup": "culture",
+      "categoryLabel": "Văn hóa",
+      "osmId": "node/4169111190",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": "0916910480",
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "place_of_worship"
+      ]
+    },
+    {
+      "id": "osm-node-5423777421",
+      "name": "Old village of Kong Skull Island",
+      "coordinates": {
+        "lat": 20.248496,
+        "lng": 105.9171103
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/5423777421",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "attraction"
+      ]
+    },
+    {
+      "id": "osm-node-12728012201",
+      "name": "Pagoda",
+      "coordinates": {
+        "lat": 20.2616975,
+        "lng": 105.9820824
+      },
+      "address": "",
+      "categoryGroup": "culture",
+      "categoryLabel": "Văn hóa",
+      "osmId": "node/12728012201",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "place_of_worship"
+      ]
+    },
+    {
+      "id": "osm-node-6649958885",
+      "name": "Park in front of restaurants, don’t pay here",
+      "coordinates": {
+        "lat": 20.2183416,
+        "lng": 105.9167433
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Địa điểm",
+      "osmId": "node/6649958885",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "information"
+      ]
+    },
+    {
+      "id": "fsq-6908be7dccd1176668333c7f",
+      "name": "Paul's Pizza",
+      "coordinates": {
+        "lat": 20.246731,
+        "lng": 105.986613
+      },
+      "address": "Hoa Lu, Tỉnh Ninh Bình",
+      "categoryGroup": "food",
+      "categoryLabel": "Pizzeria",
+      "foursquareId": "6908be7dccd1176668333c7f",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Pizzeria"
+      ]
+    },
+    {
+      "id": "fsq-6a3fbcf2e70fc40aa0251b34",
+      "name": "Peak A Bowl",
+      "coordinates": {
+        "lat": 20.259203,
+        "lng": 105.962221
+      },
+      "address": "205 Xuan Thanh, Hoa Lu, Tỉnh Ninh Bình",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Desert",
+      "foursquareId": "6a3fbcf2e70fc40aa0251b34",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Desert",
+        "Cafe, Coffee, and Tea House"
+      ]
+    },
+    {
+      "id": "osm-node-10680511579",
+      "name": "Phở An",
+      "coordinates": {
+        "lat": 20.2582829,
+        "lng": 105.9706797
+      },
+      "address": "862, Đường Trân Hưng Đạo",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (vietnamese)",
+      "osmId": "node/10680511579",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "vietnamese",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-13794646731",
+      "name": "Phở Kitchen Tam Cốc - Ninh Bình",
+      "coordinates": {
+        "lat": 20.2166876,
+        "lng": 105.9409163
+      },
+      "address": "02, Tam Coc Rd",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (vietnamese;coffee_shop;noodle;breakfast;hotpot;diner)",
+      "osmId": "node/13794646731",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": "https://maps.app.goo.gl/TNKn3rJJWeKMkWLf8",
+      "openingHours": "Mo-Su 07:00-22:00",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "vietnamese;coffee_shop;noodle;breakfast;hotpot;diner",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "fsq-5805989c38fa56caddfd3d68",
+      "name": "Pico Ninh Bình",
+      "coordinates": {
+        "lat": 20.257783,
+        "lng": 105.974332
+      },
+      "address": "Lê Hồng Phong, Thành Phố Ninh Bình, Tỉnh Ninh Bình",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Electronics Store",
+      "foursquareId": "5805989c38fa56caddfd3d68",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": "0904 882 261",
+      "website": "http://pico.vn",
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Electronics Store"
+      ]
+    },
+    {
+      "id": "osm-node-5608881059",
+      "name": "PNJ",
+      "coordinates": {
+        "lat": 20.28296,
+        "lng": 105.960349
+      },
+      "address": "",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Mua sắm",
+      "osmId": "node/5608881059",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": "https://www.pnj.com.vn/",
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "jewelry"
+      ]
+    },
+    {
+      "id": "osm-node-4949207722",
+      "name": "Quán dê Chính Thư",
+      "coordinates": {
+        "lat": 20.2474791,
+        "lng": 105.9342071
+      },
+      "address": "",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (asian)",
+      "osmId": "node/4949207722",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "+84916910480",
+      "website": "http://ninhbinhguide.com",
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "asian",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "fsq-69c22b9c16ede0706da3d0f5",
+      "name": "Quán Gỏi Nhệch 35 Ngô Gia Tự Tp Ninh Bình",
+      "coordinates": {
+        "lat": 20.240213,
+        "lng": 105.97318
+      },
+      "address": "35 Ngô Gia Tự, Hoa Lư, Tỉnh Ninh Bình",
+      "categoryGroup": "food",
+      "categoryLabel": "Sushi Restaurant",
+      "foursquareId": "69c22b9c16ede0706da3d0f5",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Sushi Restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-13727128031",
+      "name": "Quán Nhậu 19",
+      "coordinates": {
+        "lat": 20.2426681,
+        "lng": 106.0078676
+      },
+      "address": "1109, Đường Nguyễn Công Trứ, Phường Đông Hoa Lư",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (asian;regional)",
+      "osmId": "node/13727128031",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "0877773493",
+      "website": "https://www.facebook.com/share/1DaYP8K7yY/?mibextid=wwXIfr",
+      "openingHours": "24/7",
+      "description": "các món nhậu bình dân,ăn sáng ăn đêm",
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "asian;regional",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "fsq-4f65df17e4b09987d29ce0f1",
+      "name": "Quán Nướng Phố Vịt",
+      "coordinates": {
+        "lat": 20.263294305722525,
+        "lng": 105.97553335246552
+      },
+      "address": "UBND phường Đông Thành - TP. Ninh Bình",
+      "categoryGroup": "food",
+      "categoryLabel": "Asian Restaurant",
+      "foursquareId": "4f65df17e4b09987d29ce0f1",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Asian Restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-5318428821",
+      "name": "Restaurant Dúc Nhât",
+      "coordinates": {
+        "lat": 20.2516263,
+        "lng": 105.9787598
+      },
+      "address": "12, Đuờng Hoàng Hoa Thám",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (sandwich;breakfast;vietnamese)",
+      "osmId": "node/5318428821",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "sandwich;breakfast;vietnamese",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-12459496707",
+      "name": "Riverside restaurant",
+      "coordinates": {
+        "lat": 20.2469388,
+        "lng": 105.9352222
+      },
+      "address": "",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực",
+      "osmId": "node/12459496707",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "+84941243997",
+      "website": null,
+      "openingHours": "Mo-Su 09:00-22:00",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-12727540402",
+      "name": "Rock pile",
+      "coordinates": {
+        "lat": 20.2600054,
+        "lng": 105.9816107
+      },
+      "address": "",
+      "categoryGroup": "culture",
+      "categoryLabel": "Di tích lịch sử",
+      "osmId": "node/12727540402",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "monument"
+      ]
+    },
+    {
+      "id": "osm-node-4462384962",
+      "name": "Route 1 - Cave 2 Entrance",
+      "coordinates": {
+        "lat": 20.2614926,
+        "lng": 105.8995983
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/4462384962",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "attraction"
+      ]
+    },
+    {
+      "id": "osm-node-4462384935",
+      "name": "Route 1 - Cave 3 Entrance",
+      "coordinates": {
+        "lat": 20.260256,
+        "lng": 105.8972646
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/4462384935",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "attraction"
+      ]
+    },
+    {
+      "id": "osm-node-4462384906",
+      "name": "Route 1 - Cave 4 Entrance",
+      "coordinates": {
+        "lat": 20.2631498,
+        "lng": 105.8990793
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/4462384906",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "attraction"
+      ]
+    },
+    {
+      "id": "osm-node-4462384945",
+      "name": "Route 1 - Cave 4 Exit",
+      "coordinates": {
+        "lat": 20.262328,
+        "lng": 105.9001026
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/4462384945",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "attraction"
+      ]
+    },
+    {
+      "id": "osm-node-5352416124",
+      "name": "Route 1 - Cave 5 Entrance",
+      "coordinates": {
+        "lat": 20.2616905,
+        "lng": 105.9011624
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/5352416124",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "attraction"
+      ]
+    },
+    {
+      "id": "osm-node-5352427021",
+      "name": "Route 1 - Cave 5 Exit",
+      "coordinates": {
+        "lat": 20.2622566,
+        "lng": 105.9016572
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/5352427021",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "attraction"
+      ]
+    },
+    {
+      "id": "osm-node-4424766843",
+      "name": "Route 1 - Cave 7 Entrance - Walk over this Cave",
+      "coordinates": {
+        "lat": 20.2680932,
+        "lng": 105.904331
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/4424766843",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "attraction"
+      ]
+    },
+    {
+      "id": "osm-node-4462385034",
+      "name": "Route 1 - Cave 8 Entrance",
+      "coordinates": {
+        "lat": 20.26539,
+        "lng": 105.908913
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/4462385034",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "attraction"
+      ]
+    },
+    {
+      "id": "osm-node-4414728376",
+      "name": "Route 1 - Cave 9 Entrance",
+      "coordinates": {
+        "lat": 20.2634163,
+        "lng": 105.9091486
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/4414728376",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "attraction"
+      ]
+    },
+    {
+      "id": "osm-node-11959083069",
+      "name": "Ruins of old machine gun shooting turret",
+      "coordinates": {
+        "lat": 20.2619748,
+        "lng": 105.9825843
+      },
+      "address": "",
+      "categoryGroup": "culture",
+      "categoryLabel": "Di tích lịch sử",
+      "osmId": "node/11959083069",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "ruins"
+      ]
+    },
+    {
+      "id": "fsq-62361361ad00d3773e7ea54b",
+      "name": "Sakura Flower - Hoa Tươi Ninh Bình",
+      "coordinates": {
+        "lat": 20.25381,
+        "lng": 105.977384
+      },
+      "address": "97 Lê Đại Hành (Thanh Bình), TP. Ninh Bình, Tỉnh Ninh Bình",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Flower Store",
+      "foursquareId": "62361361ad00d3773e7ea54b",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": "0337 656 569",
+      "website": "http://sakuraninhbinh.vn",
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Flower Store",
+        "Shopping Mall"
+      ]
+    },
+    {
+      "id": "osm-node-10538442209",
+      "name": "Scenic Viewpoint",
+      "coordinates": {
+        "lat": 20.2278025,
+        "lng": 105.9255819
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/10538442209",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "viewpoint"
+      ]
+    },
+    {
+      "id": "osm-node-9938306395",
+      "name": "Spice Garden Tamcoc",
+      "coordinates": {
+        "lat": 20.2141976,
+        "lng": 105.9309262
+      },
+      "address": "",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (regional)",
+      "osmId": "node/9938306395",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "0973110088",
+      "website": null,
+      "openingHours": null,
+      "description": "Tourist restaurant. Expensive drinks.",
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "regional",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-11959083269",
+      "name": "Step to climb to viewpoint area",
+      "coordinates": {
+        "lat": 20.2615953,
+        "lng": 105.9823548
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/11959083269",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "bench",
+        "viewpoint"
+      ]
+    },
+    {
+      "id": "osm-node-9942272682",
+      "name": "Suôi ngoc trai;Hang Muá",
+      "coordinates": {
+        "lat": 20.2286698,
+        "lng": 105.935161
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/9942272682",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "attraction"
+      ]
+    },
+    {
+      "id": "osm-node-13386634001",
+      "name": "Tam Coc Agency",
+      "coordinates": {
+        "lat": 20.2165509,
+        "lng": 105.938476
+      },
+      "address": "",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Mua sắm",
+      "osmId": "node/13386634001",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": "0855701998",
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "travel_agency"
+      ]
+    },
+    {
+      "id": "osm-way-1167351211",
+      "name": "Tam Coc Museum",
+      "coordinates": {
+        "lat": 20.2160066,
+        "lng": 105.932619
+      },
+      "address": "",
+      "categoryGroup": "culture",
+      "categoryLabel": "Văn hóa",
+      "osmId": "way/1167351211",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "museum"
+      ]
+    },
+    {
+      "id": "osm-node-4894384226",
+      "name": "Tam Coc Restaurant Vegan",
+      "coordinates": {
+        "lat": 20.2164582,
+        "lng": 105.9381077
+      },
+      "address": "491 C",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực",
+      "osmId": "node/4894384226",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-13399339701",
+      "name": "Tam Cốc",
+      "coordinates": {
+        "lat": 20.2160052,
+        "lng": 105.9326152
+      },
+      "address": "",
+      "categoryGroup": "culture",
+      "categoryLabel": "Văn hóa",
+      "osmId": "node/13399339701",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": "+849166122078",
+      "website": "http://tamcocmuseum.com",
+      "openingHours": "Mo-Su 09:00-17:00",
+      "description": null,
+      "needsReview": true,
+      "conflictNote": "Tọa độ cách 505m giữa FSQ và OSM",
+      "tags": [
+        "museum"
+      ]
+    },
+    {
+      "id": "fsq-4da8fe2c5da3ba8a47673b04",
+      "name": "Tam Cốc",
+      "coordinates": {
+        "lat": 20.216467449474308,
+        "lng": 105.93743175688468
+      },
+      "address": "Ninh Hải, Thành Phố Ninh Bình, Tỉnh Ninh Bình",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Cave",
+      "foursquareId": "4da8fe2c5da3ba8a47673b04",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": true,
+      "conflictNote": "Tọa độ cách 505m giữa FSQ và OSM",
+      "tags": [
+        "Cave",
+        "Village"
+      ]
+    },
+    {
+      "id": "osm-node-4567308091",
+      "name": "Tam Cốc -Bích Động",
+      "coordinates": {
+        "lat": 20.2163426,
+        "lng": 105.937457
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/4567308091",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": "+84916910480",
+      "website": "http://ninhbinhguide.com",
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "attraction"
+      ]
+    },
+    {
+      "id": "osm-node-6920380385",
+      "name": "Tam Cốc Moonlight Coffee",
+      "coordinates": {
+        "lat": 20.2172921,
+        "lng": 105.9448772
+      },
+      "address": "Thôn Tuân Cáo",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Cà phê",
+      "osmId": "node/6920380385",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": "0972762007",
+      "website": "https://www.facebook.com/tamcocmoonlightcoffee",
+      "openingHours": "Mo-Su 07:00-22:00",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "coffee_shop;cake;tea;vietnamese;breakfast",
+        "cafe"
+      ]
+    },
+    {
+      "id": "osm-node-13399186801",
+      "name": "Tam Côc Viêt Hà",
+      "coordinates": {
+        "lat": 20.2062132,
+        "lng": 105.9315822
+      },
+      "address": "",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Mua sắm",
+      "osmId": "node/13399186801",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": "0828326236",
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "massage"
+      ]
+    },
+    {
+      "id": "osm-node-6669331486",
+      "name": "Temple",
+      "coordinates": {
+        "lat": 20.2457681,
+        "lng": 105.9061967
+      },
+      "address": "",
+      "categoryGroup": "culture",
+      "categoryLabel": "Văn hóa",
+      "osmId": "node/6669331486",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "place_of_worship"
+      ]
+    },
+    {
+      "id": "osm-node-11914528165",
+      "name": "THÀNH ĐẠT PHỞ - BÚN",
+      "coordinates": {
+        "lat": 20.2579228,
+        "lng": 105.9741945
+      },
+      "address": "117, Đuờng Lê Hồng Phong, Ninh Bình",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (noodle;beef_noodle;fish)",
+      "osmId": "node/11914528165",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "84888312122",
+      "website": "https://www.facebook.com/rieucuabapbo",
+      "openingHours": "24/7",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "noodle;beef_noodle;fish",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-6528047104",
+      "name": "Thảo béo restaurant bar",
+      "coordinates": {
+        "lat": 20.2108399,
+        "lng": 105.9371605
+      },
+      "address": "Thai Vi;Đội 4 -Văn lâm-Ninh Hải -Hoa lư -Ninh Bình",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (savory_pancakes;chicken;american;local;tea;barbecue;pizza;burger;international;seafood;italian_pizza;crepe;asian;pancake;sandwich;vietnamese;coffee_shop;fish;kebab;breakfast;grill;diner;noodle;hot_dog)",
+      "osmId": "node/6528047104",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "+84 832 622 667",
+      "website": null,
+      "openingHours": "Mo-Su 08:00-23:00",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "savory_pancakes;chicken;american;local;tea;barbecue;pizza;burger;international;seafood;italian_pizza;crepe;asian;pancake;sandwich;vietnamese;coffee_shop;fish;kebab;breakfast;grill;diner;noodle;hot_dog",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "fsq-59cf5df42105c3413d39201d",
+      "name": "The Admiral Benbow Cafe",
+      "coordinates": {
+        "lat": 20.242914,
+        "lng": 105.972295
+      },
+      "address": "Thành Phố Ninh Bình, Tỉnh Ninh Bình",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Café",
+      "foursquareId": "59cf5df42105c3413d39201d",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Café"
+      ]
+    },
+    {
+      "id": "fsq-5decccaa80f3150007d849a9",
+      "name": "The Exhibition House of Palace Floors (Archaeological Relics of Dinh)",
+      "coordinates": {
+        "lat": 20.286015,
+        "lng": 105.90537
+      },
+      "address": "Tỉnh Ninh Bình",
+      "categoryGroup": "culture",
+      "categoryLabel": "Museum",
+      "foursquareId": "5decccaa80f3150007d849a9",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Museum"
+      ]
+    },
+    {
+      "id": "osm-node-12751856792",
+      "name": "The Farm",
+      "coordinates": {
+        "lat": 20.2152389,
+        "lng": 105.9366299
+      },
+      "address": "",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (vietnamese)",
+      "osmId": "node/12751856792",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "+84 367567899",
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "vietnamese",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-13532131737",
+      "name": "The Gate Tam Coc",
+      "coordinates": {
+        "lat": 20.2165429,
+        "lng": 105.9458045
+      },
+      "address": "Cổng làng Tuân Cáo, Ninh Bình",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Mua sắm",
+      "osmId": "node/13532131737",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": "0839290193",
+      "website": null,
+      "openingHours": "08:00 - 22:00",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "clothes"
+      ]
+    },
+    {
+      "id": "merged-5166b484e4b09b7cc59685ce",
+      "name": "The Gioi Di Dong",
+      "coordinates": {
+        "lat": 20.250521,
+        "lng": 105.974388
+      },
+      "address": "Tran Hung Dao, Thành Phố Ninh Bình, Tỉnh Ninh Bình",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Electronics Store",
+      "foursquareId": "5166b484e4b09b7cc59685ce",
+      "osmId": "node/11846432968",
+      "dataSource": "merged",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Electronics Store",
+        "electronics"
+      ]
+    },
+    {
+      "id": "osm-node-5303305522",
+      "name": "The Moving Banyan Tree",
+      "coordinates": {
+        "lat": 20.2206773,
+        "lng": 105.8913839
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/5303305522",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "attraction"
+      ]
+    },
+    {
+      "id": "osm-node-936706040",
+      "name": "Thien Huống Dong",
+      "coordinates": {
+        "lat": 20.2236497,
+        "lng": 105.9314843
+      },
+      "address": "",
+      "categoryGroup": "culture",
+      "categoryLabel": "Di tích lịch sử",
+      "osmId": "node/936706040",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": "Little Temple",
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "place_of_worship",
+        "monument"
+      ]
+    },
+    {
+      "id": "osm-way-1362964177",
+      "name": "Thung Nham Bird Park",
+      "coordinates": {
+        "lat": 20.2212391,
+        "lng": 105.8889679
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "way/1362964177",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "attraction",
+        "nature_reserve"
+      ]
+    },
+    {
+      "id": "fsq-531aa5b2498edc8b2b9f6255",
+      "name": "Thung Nham Nature Preserve",
+      "coordinates": {
+        "lat": 20.21986778379067,
+        "lng": 105.88460366525112
+      },
+      "address": "Hoa Lư, Thành Phố Ninh Bình, Tỉnh Ninh Bình",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Nature Preserve",
+      "foursquareId": "531aa5b2498edc8b2b9f6255",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Nature Preserve"
+      ]
+    },
+    {
+      "id": "osm-node-10538510209",
+      "name": "Thung Sen",
+      "coordinates": {
+        "lat": 20.2266052,
+        "lng": 105.9270266
+      },
+      "address": "",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (coffee_shop;vietnamese)",
+      "osmId": "node/10538510209",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "+84777248022",
+      "website": "https://thungsentamcoc.com/",
+      "openingHours": "Mo-Su 08:00-23:00",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "coffee_shop;vietnamese",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "fsq-625e863adb8cf008d7bbce50",
+      "name": "Thuy Son",
+      "coordinates": {
+        "lat": 20.260447,
+        "lng": 105.981824
+      },
+      "address": "Thành Phố Ninh Bình, Tỉnh Ninh Bình",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Park",
+      "foursquareId": "625e863adb8cf008d7bbce50",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Park"
+      ]
+    },
+    {
+      "id": "osm-node-10295071610",
+      "name": "Ticket Office",
+      "coordinates": {
+        "lat": 20.2845075,
+        "lng": 105.9088635
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Địa điểm",
+      "osmId": "node/10295071610",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "information"
+      ]
+    },
+    {
+      "id": "osm-node-2194640876",
+      "name": "Tien Dat",
+      "coordinates": {
+        "lat": 20.216694,
+        "lng": 105.9396144
+      },
+      "address": "Bich Dong;Thai Vi",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (fish;noodles;vietnamese;tea;seafood;local)",
+      "osmId": "node/2194640876",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "+84 303 618 285",
+      "website": null,
+      "openingHours": "Mo-Su 09:00-21:00",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "fish;noodles;vietnamese;tea;seafood;local",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "fsq-52ee3ed8498e555af613c7d5",
+      "name": "Time Cafe and Bakery",
+      "coordinates": {
+        "lat": 20.25731320986999,
+        "lng": 105.97275622777562
+      },
+      "address": "Thành Phố Ninh Bình, Tỉnh Ninh Bình",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Café",
+      "foursquareId": "52ee3ed8498e555af613c7d5",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": "0914 776 999",
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Café"
+      ]
+    },
+    {
+      "id": "osm-node-5765863553",
+      "name": "Tiny building in the rock",
+      "coordinates": {
+        "lat": 20.2543719,
+        "lng": 105.9354466
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/5765863553",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "attraction"
+      ]
+    },
+    {
+      "id": "osm-node-5358516721",
+      "name": "To Quoc Ghi Cong",
+      "coordinates": {
+        "lat": 20.2609561,
+        "lng": 105.9810393
+      },
+      "address": "",
+      "categoryGroup": "culture",
+      "categoryLabel": "Di tích lịch sử",
+      "osmId": "node/5358516721",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "monument"
+      ]
+    },
+    {
+      "id": "osm-way-1362974361",
+      "name": "Tomb of Emperor Lê Đại Hành",
+      "coordinates": {
+        "lat": 20.2790864,
+        "lng": 105.9066541
+      },
+      "address": "",
+      "categoryGroup": "culture",
+      "categoryLabel": "Di tích lịch sử",
+      "osmId": "way/1362974361",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "attraction",
+        "tomb"
+      ]
+    },
+    {
+      "id": "osm-node-5350591721",
+      "name": "Tổ QUỐC GHI CÔNG",
+      "coordinates": {
+        "lat": 20.2150016,
+        "lng": 105.9329142
+      },
+      "address": "",
+      "categoryGroup": "culture",
+      "categoryLabel": "Di tích lịch sử",
+      "osmId": "node/5350591721",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "memorial"
+      ]
+    },
+    {
+      "id": "fsq-4f2fd096e4b04297f9b0c9cb",
+      "name": "Trà Đá Phố Vịt",
+      "coordinates": {
+        "lat": 20.25837378577701,
+        "lng": 105.97530957439052
+      },
+      "address": "Vỉa hè (Phố Vịt), Thành Phố Ninh Bình, Tỉnh Ninh Bình",
+      "categoryGroup": "food",
+      "categoryLabel": "Diner",
+      "foursquareId": "4f2fd096e4b04297f9b0c9cb",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Diner"
+      ]
+    },
+    {
+      "id": "osm-node-4738232630",
+      "name": "Tran Temple",
+      "coordinates": {
+        "lat": 20.255215,
+        "lng": 105.8985847
+      },
+      "address": "",
+      "categoryGroup": "culture",
+      "categoryLabel": "Văn hóa",
+      "osmId": "node/4738232630",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "place_of_worship"
+      ]
+    },
+    {
+      "id": "fsq-4ea3a62030f8b9d5acdf9baa",
+      "name": "Tràng An",
+      "coordinates": {
+        "lat": 20.253392082935672,
+        "lng": 105.91797943108605
+      },
+      "address": "Tỉnh Lộ 491B, Hoa Lư, Tỉnh Ninh Bình",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "River",
+      "foursquareId": "4ea3a62030f8b9d5acdf9baa",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "River",
+        "Mountain",
+        "Cave"
+      ]
+    },
+    {
+      "id": "osm-node-4542695089",
+      "name": "Trang phục văn nghệ",
+      "coordinates": {
+        "lat": 20.2756065,
+        "lng": 105.9614422
+      },
+      "address": "đường 9, phố Khánh Bình, phường Ninh Khánh, tp Ninh Bình",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Mua sắm",
+      "osmId": "node/4542695089",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": "0963433589",
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "clothes"
+      ]
+    },
+    {
+      "id": "osm-node-5358515322",
+      "name": "Trong Khu Vuc Chua",
+      "coordinates": {
+        "lat": 20.2645663,
+        "lng": 105.9676892
+      },
+      "address": "",
+      "categoryGroup": "culture",
+      "categoryLabel": "Văn hóa",
+      "osmId": "node/5358515322",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "place_of_worship"
+      ]
+    },
+    {
+      "id": "fsq-6302def90e586b52d591b1d0",
+      "name": "Trung Quyet Restaurant",
+      "coordinates": {
+        "lat": 20.242685,
+        "lng": 105.973967
+      },
+      "address": "Thành Phố Ninh Bình, Tỉnh Ninh Bình",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Nhà hàng Việt",
+      "foursquareId": "6302def90e586b52d591b1d0",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Vietnamese Restaurant",
+        "Café"
+      ]
+    },
+    {
+      "id": "osm-node-5662890421",
+      "name": "TRUNG TAM Massage Centre(blind massage 100.000 vnd)",
+      "coordinates": {
+        "lat": 20.2638147,
+        "lng": 105.9739642
+      },
+      "address": "183, 183 Dinh Tien Hoang, Phó 9, Dong thanh",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Mua sắm",
+      "osmId": "node/5662890421",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": "Mo-Su 08:00-20:00",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "massage"
+      ]
+    },
+    {
+      "id": "osm-node-5448594422",
+      "name": "Trung Tuyet Restaurant ( No.1 Tripadvisor )",
+      "coordinates": {
+        "lat": 20.2516139,
+        "lng": 105.97874
+      },
+      "address": "14, Đuờng Hoàng Hoa Thám",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (pancake;pizza;diner;breakfast;coffee_shop;fish;chicken;seafood;noodles;curry;deli;tea;asian;international;vietnamese)",
+      "osmId": "node/5448594422",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "+84 949358885",
+      "website": null,
+      "openingHours": "Mo-Su 08:00-21:30",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "pancake;pizza;diner;breakfast;coffee_shop;fish;chicken;seafood;noodles;curry;deli;tea;asian;international;vietnamese",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "merged-5aaa13f48194fc26fcb6d0c3",
+      "name": "Tu Tu Coffee",
+      "coordinates": {
+        "lat": 20.251225,
+        "lng": 105.978577
+      },
+      "address": "Thành Phố Ninh Bình, Tỉnh Ninh Bình",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Café",
+      "foursquareId": "5aaa13f48194fc26fcb6d0c3",
+      "osmId": "node/4706290191",
+      "dataSource": "merged",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": "0988 358 635",
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Café",
+        "Vietnamese Restaurant",
+        "cafe"
+      ]
+    },
+    {
+      "id": "osm-node-4491875489",
+      "name": "Tuần Phone;Thu Guest House",
+      "coordinates": {
+        "lat": 20.2543302,
+        "lng": 105.9746897
+      },
+      "address": "67;02, Phố 10;Đường Kim Đồng, Ninh Binh",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Mua sắm",
+      "osmId": "node/4491875489",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": "0981351888;+84949382590",
+      "website": "https://www.facebook.com/ThuGuestHouse/?ref=hl",
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "hotel",
+        "mobile_phone"
+      ]
+    },
+    {
+      "id": "fsq-50a8478de4b0ee89cfed27cb",
+      "name": "UBND xã Văn Hải, Kim Sơn, Ninh Bình",
+      "coordinates": {
+        "lat": 20.265306115617722,
+        "lng": 105.97602107482106
+      },
+      "address": "Văn Hải (Kim Sơn), Thành Phố Ninh Bình, Tỉnh Ninh Bình",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Structure",
+      "foursquareId": "50a8478de4b0ee89cfed27cb",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Structure"
+      ]
+    },
+    {
+      "id": "osm-node-6296921285",
+      "name": "Ui Valley",
+      "coordinates": {
+        "lat": 20.2580431,
+        "lng": 105.8789307
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/6296921285",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "viewpoint"
+      ]
+    },
+    {
+      "id": "osm-node-13575072001",
+      "name": "Vi Food & Drinks",
+      "coordinates": {
+        "lat": 20.2138722,
+        "lng": 105.9340874
+      },
+      "address": "",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực",
+      "osmId": "node/13575072001",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": "https://www.tripadvisor.com/Restaurant_Review-g303945-d27949301-Reviews-Vi_Food_drinks-Ninh_Binh_Ninh_Binh_Province.html",
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-7116866386",
+      "name": "Viet cuisine restaurant",
+      "coordinates": {
+        "lat": 20.2466757,
+        "lng": 105.9353476
+      },
+      "address": "Khê Thượng",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực (seafood;chicken;diner;hotdog;noodles;beef_bowl;asian;fish_and_chips;sandwich;sausage;vietnamese;coffee_shop;ice_cream;local;deli;barbecue;tea;pizza;friture;burger;cake)",
+      "osmId": "node/7116866386",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": "+84 97 332 45 71",
+      "website": null,
+      "openingHours": "Mo-Su 09:00-22:00",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "seafood;chicken;diner;hotdog;noodles;beef_bowl;asian;fish_and_chips;sandwich;sausage;vietnamese;coffee_shop;ice_cream;local;deli;barbecue;tea;pizza;friture;burger;cake",
+        "restaurant"
+      ]
+    },
+    {
+      "id": "osm-node-7179065385",
+      "name": "Vietnamese Ancient Village",
+      "coordinates": {
+        "lat": 20.218838,
+        "lng": 105.9361614
+      },
+      "address": "",
+      "categoryGroup": "culture",
+      "categoryLabel": "Văn hóa",
+      "osmId": "node/7179065385",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "museum"
+      ]
+    },
+    {
+      "id": "osm-node-4366255094",
+      "name": "Viettel Store",
+      "coordinates": {
+        "lat": 20.2616174,
+        "lng": 105.9694656
+      },
+      "address": "Đường Trân Hưng Đạo",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Mua sắm",
+      "osmId": "node/4366255094",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "mobile_phone"
+      ]
+    },
+    {
+      "id": "fsq-4e62dda61838ad3d0eff421b",
+      "name": "Việt Hương Coffee",
+      "coordinates": {
+        "lat": 20.252360370264906,
+        "lng": 105.97381198941927
+      },
+      "address": "Ninh Binh, Ninh Bình Province",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Café",
+      "foursquareId": "4e62dda61838ad3d0eff421b",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Café"
+      ]
+    },
+    {
+      "id": "osm-node-11354673969",
+      "name": "Việt Tân Restaurant",
+      "coordinates": {
+        "lat": 20.2197285,
+        "lng": 105.928888
+      },
+      "address": "Ninh Hải, Hoa Lư District, Ninh Bình",
+      "categoryGroup": "food",
+      "categoryLabel": "Ẩm thực",
+      "osmId": "node/11354673969",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "/images/food-placeholder.svg",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "restaurant"
+      ]
+    },
+    {
+      "id": "fsq-6542475a3782d964cff96be0",
+      "name": "Vinaphone Ninh Binh",
+      "coordinates": {
+        "lat": 20.251242,
+        "lng": 105.97411
+      },
+      "address": "Thành Phố Ninh Bình, Tỉnh Ninh Bình",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Mobile Phone Store",
+      "foursquareId": "6542475a3782d964cff96be0",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Mobile Phone Store"
+      ]
+    },
+    {
+      "id": "fsq-5a5a5f7e5c683829c61ac8b6",
+      "name": "Vinmart Ninh Bình",
+      "coordinates": {
+        "lat": 20.259275,
+        "lng": 105.97021
+      },
+      "address": "848 Trần Hưng Đạo (Tân Thành), Thành Phố Ninh Bình, Tỉnh Ninh Bình",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Supermarket",
+      "foursquareId": "5a5a5f7e5c683829c61ac8b6",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Supermarket"
+      ]
+    },
+    {
+      "id": "osm-node-7043053487",
+      "name": "Vu Lam Royal Steps",
+      "coordinates": {
+        "lat": 20.2474715,
+        "lng": 105.9144271
+      },
+      "address": "",
+      "categoryGroup": "sightseeing",
+      "categoryLabel": "Tham quan",
+      "osmId": "node/7043053487",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "attraction"
+      ]
+    },
+    {
+      "id": "osm-node-13842230602",
+      "name": "Wild Lotus",
+      "coordinates": {
+        "lat": 20.2168779,
+        "lng": 105.9439089
+      },
+      "address": "",
+      "categoryGroup": "cafe",
+      "categoryLabel": "Cà phê",
+      "osmId": "node/13842230602",
+      "dataSource": "osm",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": "+84 827 776 866",
+      "website": null,
+      "openingHours": "Mo-Su 08:00-23:00",
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "coffee_shop;sandwich;vietnamese",
+        "cafe"
+      ]
+    },
+    {
+      "id": "merged-62ada0f500721d56b041e578",
+      "name": "Winmart +",
+      "coordinates": {
+        "lat": 20.251782,
+        "lng": 105.978393
+      },
+      "address": "ニンビン, Tỉnh Ninh Bình",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Convenience Store",
+      "foursquareId": "62ada0f500721d56b041e578",
+      "osmId": "node/12725981601",
+      "dataSource": "merged",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Convenience Store",
+        "convenience"
+      ]
+    },
+    {
+      "id": "fsq-65424cfc2ce96e4b1ca34a46",
+      "name": "Winmrt+",
+      "coordinates": {
+        "lat": 20.24677,
+        "lng": 105.97263
+      },
+      "address": "Thành Phố Ninh Bình, Tỉnh Ninh Bình",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Convenience Store",
+      "foursquareId": "65424cfc2ce96e4b1ca34a46",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Convenience Store"
+      ]
+    },
+    {
+      "id": "fsq-4ff8fe25e4b0cdc6b909905f",
+      "name": "Yến Model",
+      "coordinates": {
+        "lat": 20.250065,
+        "lng": 105.976138
+      },
+      "address": "Số 08 (Nguyễn Công Trứ), Ninh Bình, Viet Bam",
+      "categoryGroup": "shopping",
+      "categoryLabel": "Men's Store",
+      "foursquareId": "4ff8fe25e4b0cdc6b909905f",
+      "dataSource": "foursquare",
+      "rating": null,
+      "reviewCount": null,
+      "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop",
+      "isPlaceholderImage": true,
+      "phone": null,
+      "website": null,
+      "openingHours": null,
+      "description": null,
+      "needsReview": false,
+      "conflictNote": null,
+      "tags": [
+        "Men's Store"
+      ]
+    }
+  ],
+  "attribution": {
+    "foursquare": "Foursquare Places API",
+    "osm": "Data © OpenStreetMap contributors (ODbL)"
+  }
+}

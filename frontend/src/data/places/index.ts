@@ -122,6 +122,11 @@ function mergedToNearbyPlace(
   mp: MergedPlaceJSON,
   searchCenter: { lat: number; lng: number }
 ): NearbyPlace {
+  const isStay = /campground|camping|hotel|hostel|homestay|guesthouse|guest house|lodging|resort|motel/i.test(mp.categoryLabel);
+  const categoryGroup = isStay ? 'stay' : mp.categoryGroup;
+  const categoryLabel = isStay ? 'Lưu trú' : mp.categoryLabel === 'Vietnamese Restaurant' ? 'Nhà hàng Việt' : mp.categoryLabel;
+  const imageUrl = mp.isPlaceholderImage && categoryGroup === 'food' ? '/images/food-placeholder.svg'
+    : mp.isPlaceholderImage && categoryGroup === 'stay' ? '/images/stay-placeholder.svg' : mp.imageUrl || '';
   const distKm = calculateDistanceKm(
     searchCenter.lat, searchCenter.lng,
     mp.coordinates.lat, mp.coordinates.lng
@@ -132,14 +137,14 @@ function mergedToNearbyPlace(
     itemType: 'poi',
     id: mp.id,
     name: mp.name,
-    category: mp.categoryLabel as any,
+    category: categoryLabel as any,
     coordinates: mp.coordinates,
     address: mp.address,
     openingHours: mp.openingHours || '',
     ticketPrice: undefined,
     estimatedTime: '',
     description: mp.description || '',
-    imageUrl: mp.imageUrl || '',
+    imageUrl,
     tags: mp.tags,
     localTips: '',
     rating: mp.rating,
@@ -153,14 +158,14 @@ function mergedToNearbyPlace(
   return {
     id: mp.id,
     name: mp.name,
-    subtitle: mp.categoryLabel,
-    categoryGroup: mp.categoryGroup,
-    categoryLabel: mp.categoryLabel,
+    subtitle: categoryLabel,
+    categoryGroup,
+    categoryLabel,
     coordinates: mp.coordinates,
     address: mp.address,
     provinceName: '',
     provinceId: '',
-    imageUrl: mp.imageUrl || '',
+    imageUrl,
     rating: mp.rating,
     reviewCount: mp.reviewCount,
     openingHours: mp.openingHours ?? undefined,
