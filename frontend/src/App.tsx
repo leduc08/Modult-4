@@ -8,11 +8,12 @@ import { ItemDetailModal, DetailItem } from './components/ItemDetailModal';
 import { AccountDrawer } from './components/AccountDrawer';
 import { BookingModal } from './components/BookingModal';
 import { SOSModal } from './components/SOSModal';
+import { BudgetTracker } from './components/BudgetTracker';
 import { LanguageCode } from './types';
 
 export default function App() {
-  // Navigation tabs: 'explore' (default) | 'nearby' | 'ai' | 'itinerary' | 'account'
-  const [activeTab, setActiveTab] = useState<'explore' | 'nearby' | 'ai' | 'itinerary' | 'account'>('explore');
+  // Navigation tabs: 'explore' (default) | 'nearby' | 'ai' | 'itinerary' | 'account' | 'budget'
+  const [activeTab, setActiveTab] = useState<'explore' | 'nearby' | 'ai' | 'itinerary' | 'account' | 'budget'>('explore');
   const [language, setLanguage] = useState<LanguageCode>('vi');
 
   // Wishlist state (persisted in localStorage)
@@ -71,6 +72,11 @@ export default function App() {
 
   // Handlers
   const handleOpenAccount = (tab: 'wishlist' | 'dna' | 'budget' | 'emergency' = 'wishlist') => {
+    if (tab === 'budget') {
+      setActiveTab('budget');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
     setAccountDrawerTab(tab);
     setAccountDrawerOpen(true);
   };
@@ -154,7 +160,7 @@ export default function App() {
           />
         )}
 
-        {/* Page 3: Lịch trình (ItineraryPage with Split-screen Leaflet Map & Survival Tips) */}
+        {/* Page 4: Lịch trình (ItineraryPage with Split-screen Leaflet Map & Survival Tips) */}
         {activeTab === 'itinerary' && (
           <ItineraryPage
             initialPlanParams={itineraryParams}
@@ -167,6 +173,11 @@ export default function App() {
             pendingAddItem={pendingAddItem}
             onClearPendingItem={() => setPendingAddItem(null)}
           />
+        )}
+
+        {/* Page 5: Quản lý chi tiêu (BudgetTracker) */}
+        {activeTab === 'budget' && (
+          <BudgetTracker />
         )}
       </main>
 
@@ -219,7 +230,7 @@ export default function App() {
               Hồ sơ du khách
             </span>
             <span>•</span>
-            <span className="hover:underline cursor-pointer" onClick={() => handleOpenAccount('budget')}>
+            <span className="hover:underline cursor-pointer" onClick={() => setActiveTab('budget')}>
               Quản lý chi tiêu
             </span>
             <span>•</span>

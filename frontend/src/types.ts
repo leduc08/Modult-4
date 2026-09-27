@@ -200,6 +200,19 @@ export interface ExpenseItem {
   dayNumber?: number;
   timestamp?: string;
   paidBy?: string;
+  paymentMethod?: 'cash' | 'transfer' | 'card';
+  note?: string;
+  receiptImage?: string;
+  tripId?: string;
+}
+
+export interface TripBudget {
+  id: string;
+  name: string;
+  destination: string;
+  duration: string;
+  totalBudget: number;
+  startDate?: string;
 }
 
 export interface UserProfile {

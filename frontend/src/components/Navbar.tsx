@@ -18,8 +18,8 @@ import {
 import { LanguageCode } from '../types';
 
 interface NavbarProps {
-  activeTab: 'explore' | 'nearby' | 'ai' | 'itinerary' | 'account';
-  setActiveTab: (tab: 'explore' | 'nearby' | 'ai' | 'itinerary' | 'account') => void;
+  activeTab: 'explore' | 'nearby' | 'ai' | 'itinerary' | 'account' | 'budget';
+  setActiveTab: (tab: 'explore' | 'nearby' | 'ai' | 'itinerary' | 'account' | 'budget') => void;
   wishlistCount: number;
   onOpenWishlist: () => void;
   onOpenAccount: (tab?: 'wishlist' | 'dna' | 'budget' | 'emergency') => void;
@@ -45,6 +45,7 @@ export const Navbar: React.FC<NavbarProps> = ({
     { id: 'nearby' as const, label: 'Xung quanh', icon: MapPin },
     { id: 'ai' as const, label: 'Trợ lý AI', icon: Bot },
     { id: 'itinerary' as const, label: 'Lịch trình', icon: Calendar },
+    { id: 'budget' as const, label: 'Quản lý chi tiêu', icon: Wallet },
   ];
 
   return (
