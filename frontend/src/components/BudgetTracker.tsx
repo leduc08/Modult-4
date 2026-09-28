@@ -707,9 +707,6 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
           >
             <Calendar className="w-3.5 h-3.5 text-stone-500 group-hover:text-[#FF385C] transition-colors" />
             <span>Thời lượng: <strong className="text-stone-900">{activeTrip.duration}</strong></span>
-            <span className="text-[10px] text-stone-500 group-hover:text-[#FF385C] font-semibold bg-white px-1.5 py-0.5 rounded-md border border-stone-200 transition-colors">
-              Chọn lịch
-            </span>
           </button>
         </div>
 
@@ -2019,7 +2016,7 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
                   <Calendar className="w-4 h-4" />
                 </div>
                 <div>
-                  <h3 className="font-extrabold text-base text-stone-900">Chọn lịch trình chuyến đi</h3>
+                  <h3 className="font-extrabold text-base text-stone-900">Lịch trình chuyến đi</h3>
                   <div className="text-[11px] text-stone-500 truncate max-w-[200px]">{activeTrip.name}</div>
                 </div>
               </div>
@@ -2089,35 +2086,6 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
                 </div>
               </div>
 
-              {/* Phím bấm chọn nhanh thời lượng */}
-              <div className="space-y-1.5">
-                <div className="text-[10px] font-bold text-stone-500 uppercase tracking-wider">Chọn nhanh số ngày & đêm:</div>
-                <div className="grid grid-cols-4 gap-1.5">
-                  {[
-                    { label: 'Trong ngày', addDays: 0 },
-                    { label: '2N1Đ', addDays: 1 },
-                    { label: '3N2Đ', addDays: 2 },
-                    { label: '4N3Đ', addDays: 3 }
-                  ].map((item) => (
-                    <button
-                      key={item.label}
-                      type="button"
-                      onClick={() => {
-                        const start = new Date(editStartDate || '2026-10-15');
-                        const end = new Date(start);
-                        end.setDate(start.getDate() + item.addDays);
-                        const yyyy = end.getFullYear();
-                        const mm = String(end.getMonth() + 1).padStart(2, '0');
-                        const dd = String(end.getDate()).padStart(2, '0');
-                        setEditEndDate(`${yyyy}-${mm}-${dd}`);
-                      }}
-                      className="py-1.5 px-1 bg-stone-100 hover:bg-[#FF385C]/10 hover:text-[#FF385C] border border-stone-200 rounded-xl text-[11px] font-bold text-stone-700 transition-colors cursor-pointer text-center"
-                    >
-                      {item.label}
-                    </button>
-                  ))}
-                </div>
-              </div>
 
               <div className="flex gap-2.5 pt-2 border-t border-stone-100">
                 <button

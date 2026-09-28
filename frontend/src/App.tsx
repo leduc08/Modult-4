@@ -33,9 +33,16 @@ export default function App() {
   }, [wishlist]);
 
   const handleToggleWishlist = (id: string) => {
-    setWishlist(prev => 
-      prev.includes(id) ? prev.filter(item => item !== id) : [...prev, id]
-    );
+    setWishlist(prev => {
+      if (prev.includes(id)) {
+        return prev.filter(item => item !== id);
+      }
+      if (prev.length >= 50) {
+        alert('Danh sách yêu thích đã đạt giới hạn tối đa (50 mục). Vui lòng xóa bớt để lưu thêm.');
+        return prev;
+      }
+      return [...prev, id];
+    });
   };
 
   // Selected Detail Item Modal
