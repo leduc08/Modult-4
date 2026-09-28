@@ -26,12 +26,20 @@ import {
   Download, 
   RefreshCw,
   Plus,
+  Minus,
   Video,
   VideoOff,
   ImageIcon,
   ArrowLeft
 } from 'lucide-react';
 import { ExpenseItem, TripBudget } from '../types';
+
+// 3 mốc thời lượng phổ biến
+const PRESET_DURATIONS = [
+  { label: '2 ngày 1 đêm', days: 2, nights: 1, desc: 'Cuối tuần' },
+  { label: '3 ngày 2 đêm', days: 3, nights: 2, desc: 'Phổ biến nhất' },
+  { label: '4 ngày 3 đêm', days: 4, nights: 3, desc: 'Kỳ nghỉ dài' }
+];
 
 // Danh sách chuyến đi mặc định
 const INITIAL_TRIPS: TripBudget[] = [
@@ -204,10 +212,24 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
   const [newBudgetValue, setNewBudgetValue] = useState(activeTrip.totalBudget.toString());
   const [isEditDurationOpen, setIsEditDurationOpen] = useState(false);
   const [newDurationValue, setNewDurationValue] = useState(activeTrip.duration);
+  const [durationDays, setDurationDays] = useState<number>(4);
+  const [durationNights, setDurationNights] = useState<number>(3);
   const [selectedReceiptView, setSelectedReceiptView] = useState<string | null>(null);
+
+  // Hàm trích xuất ngày & đêm từ chuỗi thời lượng
+  const parseDaysAndNights = (durationStr: string) => {
+    const daysMatch = durationStr.match(/(\d+)\s*ngày/i);
+    const nightsMatch = durationStr.match(/(\d+)\s*đêm/i);
+    const d = daysMatch ? parseInt(daysMatch[1], 10) : 3;
+    const n = nightsMatch ? parseInt(nightsMatch[1], 10) : Math.max(0, d - 1);
+    return { days: d, nights: n };
+  };
 
   // Đồng bộ giá trị khi đổi chuyến đi
   useEffect(() => {
+    const parsed = parseDaysAndNights(activeTrip.duration);
+    setDurationDays(parsed.days);
+    setDurationNights(parsed.nights);
     setNewDurationValue(activeTrip.duration);
     setNewBudgetValue(activeTrip.totalBudget.toString());
   }, [activeTrip.duration, activeTrip.totalBudget, currentTripId]);
@@ -481,13 +503,64 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
     setIsEditBudgetOpen(false);
   };
 
+  // Cập nhật thời lượng theo ngày
+  const handleSetDays = (val: number) => {
+    const d = Math.max(1, Math.min(30, val));
+    setDurationDays(d);
+    const text = durationNights === 0 ? `${d} ngày` : `${d} ngày ${durationNights} đêm`;
+    setNewDurationValue(text);
+  };
+
+  // Cập nhật thời lượng theo đêm
+  const handleSetNights = (val: number) => {
+    const n = Math.max(0, Math.min(30, val));
+    setDurationNights(n);
+    const text = n === 0 ? `${durationDays} ngày` : `${durationDays} ngày ${n} đêm`;
+    setNewDurationValue(text);
+  };
+
+  // Chọn 1 trong 3 mốc thời lượng
+  const handleSelectPreset = (preset: { label: string; days: number; nights: number }) => {
+    setDurationDays(preset.days);
+    setDurationNights(preset.nights);
+    setNewDurationValue(preset.label);
+  };
+
   // Cập nhật thời lượng chuyến đi
   const handleSaveDuration = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!newDurationValue.trim()) return;
+    const finalVal = newDurationValue.trim() || `${durationDays} ngày ${durationNights} đêm`;
 
-    setTrips(prev => prev.map(t => t.id === currentTripId ? { ...t, duration: newDurationValue.trim() } : t));
+    setTrips(prev => prev.map(t => t.id === currentTripId ? { ...t, duration: finalVal } : t));
     setIsEditDurationOpen(false);
+  };
+
+  // Xóa chuyến đi
+  const handleDeleteTrip = (tripIdToDelete: string, tripName: string) => {
+    if (trips.length <= 1) {
+      alert('Không thể xóa chuyến đi duy nhất còn lại! Bạn hãy tạo chuyến đi mới trước khi xóa chuyến này.');
+      return;
+    }
+
+    if (!window.confirm(`Bạn có chắc chắn muốn xóa chuyến đi "${tripName}" cùng toàn bộ dữ liệu chi tiêu liên quan?`)) {
+      return;
+    }
+
+    const updatedTrips = trips.filter(t => t.id !== tripIdToDelete);
+    setTrips(updatedTrips);
+
+    // Nếu đang chọn chuyến bị xóa, tự động chuyển sang chuyến đầu tiên còn lại
+    if (tripIdToDelete === currentTripId) {
+      const nextTrip = updatedTrips[0];
+      setCurrentTripId(nextTrip.id);
+    }
+
+    // Xóa toàn bộ chi tiêu của chuyến bị xóa
+    setAllExpenses(prev => {
+      const next = { ...prev };
+      delete next[tripIdToDelete];
+      return next;
+    });
   };
 
   // Xuất báo cáo CSV
@@ -1575,7 +1648,7 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
                       setCurrentTripId(t.id);
                       setIsSwitchTripOpen(false);
                     }}
-                    className={`p-3.5 rounded-2xl border transition-all cursor-pointer flex items-center justify-between ${
+                    className={`p-3.5 rounded-2xl border transition-all cursor-pointer flex items-center justify-between group ${
                       isSelected
                         ? 'border-[#FF385C] bg-[#FF385C]/5 shadow-xs'
                         : 'border-stone-200 hover:border-stone-300 hover:bg-stone-50'
@@ -1588,9 +1661,25 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
                         Ngân sách: {t.totalBudget.toLocaleString('vi-VN')} ₫ (Đã chi: {spent.toLocaleString('vi-VN')} ₫)
                       </div>
                     </div>
-                    {isSelected && (
-                      <CheckCircle2 className="w-5 h-5 text-[#FF385C] shrink-0" />
-                    )}
+                    
+                    <div className="flex items-center gap-2">
+                      {isSelected && (
+                        <CheckCircle2 className="w-5 h-5 text-[#FF385C] shrink-0" />
+                      )}
+                      
+                      {/* Nút Xóa chuyến đi */}
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleDeleteTrip(t.id, t.name);
+                        }}
+                        className="p-1.5 rounded-lg text-stone-400 hover:text-rose-600 hover:bg-rose-50 transition-colors cursor-pointer"
+                        title="Xóa chuyến đi này"
+                      >
+                        <Trash2 className="w-4 h-4" />
+                      </button>
+                    </div>
                   </div>
                 );
               })}
@@ -1677,11 +1766,16 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
       {/* ============================================================== */}
       {isEditDurationOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-in fade-in duration-150">
-          <div className="bg-white rounded-3xl max-w-sm w-full p-6 shadow-2xl space-y-4 border border-stone-200">
+          <div className="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl space-y-4 border border-stone-200">
             <div className="flex items-center justify-between border-b border-stone-100 pb-3">
               <div className="flex items-center gap-2">
-                <Calendar className="w-4 h-4 text-[#FF385C]" />
-                <h3 className="font-extrabold text-sm text-stone-900">Điều chỉnh thời lượng</h3>
+                <div className="w-8 h-8 rounded-xl bg-[#FF385C]/10 text-[#FF385C] flex items-center justify-center font-bold">
+                  <Calendar className="w-4 h-4" />
+                </div>
+                <div>
+                  <h3 className="font-extrabold text-base text-stone-900">Điều chỉnh thời lượng</h3>
+                  <div className="text-[11px] text-stone-500">{activeTrip.name}</div>
+                </div>
               </div>
               <button 
                 onClick={() => setIsEditDurationOpen(false)} 
@@ -1691,38 +1785,101 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
               </button>
             </div>
 
-            <form onSubmit={handleSaveDuration} className="space-y-3.5">
+            <form onSubmit={handleSaveDuration} className="space-y-4">
+              {/* 1. 3 mốc chọn nhanh */}
+              <div className="space-y-1.5">
+                <div className="text-xs font-bold text-stone-700 flex items-center justify-between">
+                  <span>3 mốc thời lượng phổ biến:</span>
+                  <span className="text-[11px] text-stone-400 font-normal">Bấm chọn nhanh</span>
+                </div>
+                <div className="grid grid-cols-3 gap-2">
+                  {PRESET_DURATIONS.map((preset) => {
+                    const isSelected = durationDays === preset.days && durationNights === preset.nights;
+                    return (
+                      <button
+                        key={preset.label}
+                        type="button"
+                        onClick={() => handleSelectPreset(preset)}
+                        className={`p-2.5 rounded-2xl border text-center transition-all cursor-pointer ${
+                          isSelected
+                            ? 'border-[#FF385C] bg-[#FF385C]/10 text-[#FF385C] shadow-xs ring-1 ring-[#FF385C]'
+                            : 'border-stone-200 hover:border-stone-300 hover:bg-stone-50 text-stone-800'
+                        }`}
+                      >
+                        <div className="text-xs font-black">{preset.label}</div>
+                        <div className="text-[10px] text-stone-500 font-medium mt-0.5">{preset.desc}</div>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* 2. Điều chỉnh chi tiết theo Ngày & Đêm */}
+              <div className="p-4 rounded-2xl bg-stone-50 border border-stone-200/80 space-y-3">
+                <div className="text-xs font-bold text-stone-700">Tùy chỉnh chọn theo Ngày & Đêm:</div>
+                
+                <div className="grid grid-cols-2 gap-3">
+                  {/* Bộ chọn Ngày */}
+                  <div className="bg-white p-3 rounded-xl border border-stone-200 space-y-1.5 shadow-xs">
+                    <div className="text-[11px] font-semibold text-stone-500">Số Ngày</div>
+                    <div className="flex items-center justify-between">
+                      <button
+                        type="button"
+                        onClick={() => handleSetDays(durationDays - 1)}
+                        disabled={durationDays <= 1}
+                        className="w-7 h-7 rounded-lg bg-stone-100 hover:bg-stone-200 disabled:opacity-40 text-stone-700 flex items-center justify-center font-black cursor-pointer transition-colors"
+                      >
+                        <Minus className="w-3.5 h-3.5" />
+                      </button>
+                      <span className="font-extrabold text-stone-900 text-sm">{durationDays} ngày</span>
+                      <button
+                        type="button"
+                        onClick={() => handleSetDays(durationDays + 1)}
+                        disabled={durationDays >= 30}
+                        className="w-7 h-7 rounded-lg bg-stone-100 hover:bg-stone-200 disabled:opacity-40 text-stone-700 flex items-center justify-center font-black cursor-pointer transition-colors"
+                      >
+                        <Plus className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
+                  </div>
+
+                  {/* Bộ chọn Đêm */}
+                  <div className="bg-white p-3 rounded-xl border border-stone-200 space-y-1.5 shadow-xs">
+                    <div className="text-[11px] font-semibold text-stone-500">Số Đêm</div>
+                    <div className="flex items-center justify-between">
+                      <button
+                        type="button"
+                        onClick={() => handleSetNights(durationNights - 1)}
+                        disabled={durationNights <= 0}
+                        className="w-7 h-7 rounded-lg bg-stone-100 hover:bg-stone-200 disabled:opacity-40 text-stone-700 flex items-center justify-center font-black cursor-pointer transition-colors"
+                      >
+                        <Minus className="w-3.5 h-3.5" />
+                      </button>
+                      <span className="font-extrabold text-stone-900 text-sm">{durationNights} đêm</span>
+                      <button
+                        type="button"
+                        onClick={() => handleSetNights(durationNights + 1)}
+                        disabled={durationNights >= 30}
+                        className="w-7 h-7 rounded-lg bg-stone-100 hover:bg-stone-200 disabled:opacity-40 text-stone-700 flex items-center justify-center font-black cursor-pointer transition-colors"
+                      >
+                        <Plus className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* 3. Hiển thị kết quả & cho phép ghi chú text */}
               <div className="space-y-1">
-                <label className="text-xs font-bold text-stone-600">Thời lượng chuyến đi</label>
+                <label className="text-xs font-bold text-stone-600">Thời lượng áp dụng</label>
                 <input
                   type="text"
                   value={newDurationValue}
                   onChange={(e) => setNewDurationValue(e.target.value)}
-                  placeholder="VD: 3 ngày 2 đêm, 4 ngày 3 đêm..."
+                  placeholder="VD: 3 ngày 2 đêm"
                   className="w-full p-2.5 bg-stone-50 border border-stone-200 rounded-xl text-xs font-bold text-stone-900 focus:outline-hidden focus:border-[#FF385C]"
                   required
                 />
-              </div>
-
-              {/* Gợi ý chọn nhanh */}
-              <div className="space-y-1.5">
-                <div className="text-[11px] font-semibold text-stone-500">Gợi ý chọn nhanh:</div>
-                <div className="flex flex-wrap gap-1.5">
-                  {['2 ngày 1 đêm', '3 ngày 2 đêm', '4 ngày 3 đêm', '5 ngày 4 đêm', '7 ngày 6 đêm', 'Tự do'].map(d => (
-                    <button
-                      key={d}
-                      type="button"
-                      onClick={() => setNewDurationValue(d)}
-                      className={`px-2.5 py-1 rounded-lg text-[11px] font-bold transition-all cursor-pointer ${
-                        newDurationValue === d
-                          ? 'bg-[#FF385C] text-white shadow-xs'
-                          : 'bg-stone-100 hover:bg-stone-200 text-stone-700'
-                      }`}
-                    >
-                      {d}
-                    </button>
-                  ))}
-                </div>
               </div>
 
               <div className="flex gap-2 pt-2 border-t border-stone-100">
