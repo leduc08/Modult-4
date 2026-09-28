@@ -11,18 +11,21 @@ import {
   Globe, 
   Check, 
   ShieldAlert,
+  ShieldCheck,
   Wallet,
-  UserCheck,
-  Search
+  ChevronRight,
+  LogIn
 } from 'lucide-react';
-import { LanguageCode } from '../types';
+import { LanguageCode, AccountTab, AuthUser } from '../types';
+import { AvatarContent, isVerifiedUser } from './AccountDrawer';
 
 interface NavbarProps {
   activeTab: 'explore' | 'nearby' | 'ai' | 'itinerary' | 'account' | 'budget';
   setActiveTab: (tab: 'explore' | 'nearby' | 'ai' | 'itinerary' | 'account' | 'budget') => void;
   wishlistCount: number;
   onOpenWishlist: () => void;
-  onOpenAccount: (tab?: 'wishlist' | 'dna' | 'budget' | 'emergency') => void;
+  onOpenAccount: (tab?: AccountTab) => void;
+  currentUser: AuthUser | null;
   onOpenSOS: () => void;
   language: LanguageCode;
   setLanguage: (lang: LanguageCode) => void;
@@ -34,6 +37,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   wishlistCount,
   onOpenWishlist,
   onOpenAccount,
+  currentUser,
   onOpenSOS,
   language,
   setLanguage,
@@ -155,8 +159,10 @@ export const Navbar: React.FC<NavbarProps> = ({
               >
                 <Menu className="w-4 h-4 text-[#717171]" />
                 <div className="relative">
-                  <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#222222] text-white text-xs font-black flex items-center justify-center shadow-xs">
-                    VA
+                  <div className={`w-7 h-7 sm:w-8 sm:h-8 rounded-full overflow-hidden text-white text-xs font-black flex items-center justify-center shadow-xs ${
+                    currentUser ? 'bg-gradient-to-tr from-[#FF385C] to-orange-400' : 'bg-[#717171]'
+                  }`}>
+                    {currentUser ? <AvatarContent user={currentUser} /> : <User className="w-4 h-4" />}
                   </div>
                   {activeTab === 'budget' && (
                     <span className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-emerald-500 rounded-full border-2 border-white" />
@@ -167,28 +173,52 @@ export const Navbar: React.FC<NavbarProps> = ({
               {/* Account Dropdown Menu */}
               {accountMenuOpen && (
                 <div 
-                  className="absolute right-0 top-12 w-60 bg-white rounded-2xl shadow-xl border border-[#E5E5E5] py-2 z-50 animate-in fade-in zoom-in-95 duration-150"
+                  className="absolute right-0 top-12 w-72 bg-white rounded-3xl shadow-xl border border-[#E5E5E5] p-2 z-50 animate-in fade-in zoom-in-95 duration-150"
                   onClick={() => setAccountMenuOpen(false)}
                 >
-                  <div className="px-4 py-2 border-b border-[#E5E5E5]">
-                    <div className="text-xs font-bold text-[#222222]">Nguyễn Văn An</div>
-                    <div className="text-[11px] text-[#717171] truncate">traveler.an@vietgo.ai</div>
-                  </div>
+                  {/* 1. Header Profile — bấm để mở Hồ sơ cá nhân (hoặc form đăng nhập) */}
+                  <button
+                    onClick={() => onOpenAccount('profile')}
+                    className="w-full text-left p-3 mb-1 rounded-2xl bg-[#F7F7F7] hover:bg-[#EFEFEF] flex items-center gap-3 cursor-pointer transition-colors group"
+                  >
+                    {currentUser ? (
+                      <>
+                        <div className="w-10 h-10 rounded-full overflow-hidden bg-gradient-to-tr from-[#FF385C] to-orange-400 text-white text-sm font-black flex items-center justify-center shrink-0">
+                          <AvatarContent user={currentUser} />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center gap-1 text-sm font-black text-[#222222]">
+                            <span className="truncate">{currentUser.name}</span>
+                            {isVerifiedUser(currentUser) && <ShieldCheck className="w-3.5 h-3.5 text-emerald-600 shrink-0" />}
+                          </div>
+                          <div className="text-xs text-[#717171] truncate pt-0.5">
+                            {currentUser.email || currentUser.phone || `@${currentUser.username}`}
+                          </div>
+                        </div>
+                      </>
+                    ) : (
+                      <>
+                        <div className="w-10 h-10 rounded-full bg-[#FF385C] text-white flex items-center justify-center shrink-0">
+                          <LogIn className="w-4 h-4" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="text-sm font-black text-[#222222]">Đăng nhập / Đăng ký</div>
+                          <div className="text-xs text-[#717171] truncate pt-0.5">Qua Gmail hoặc số điện thoại</div>
+                        </div>
+                      </>
+                    )}
+                    <ChevronRight className="w-4 h-4 text-[#717171] group-hover:translate-x-0.5 transition-transform shrink-0" />
+                  </button>
 
                   <button
-                    onClick={() => onOpenAccount('wishlist')}
+                    onClick={() => {
+                      onOpenAccount('wishlist');
+                      setAccountMenuOpen(false);
+                    }}
                     className="w-full px-4 py-2.5 text-xs text-[#222222] hover:bg-[#F7F7F7] flex items-center gap-2.5 font-semibold text-left cursor-pointer transition-colors"
                   >
                     <Heart className="w-4 h-4 text-[#FF385C]" />
                     <span>Danh sách yêu thích ({wishlistCount})</span>
-                  </button>
-
-                  <button
-                    onClick={() => onOpenAccount('dna')}
-                    className="w-full px-4 py-2.5 text-xs text-[#222222] hover:bg-[#F7F7F7] flex items-center gap-2.5 font-semibold text-left cursor-pointer transition-colors"
-                  >
-                    <UserCheck className="w-4 h-4 text-[#FF385C]" />
-                    <span>Hồ sơ Travel DNA</span>
                   </button>
 
                   <button

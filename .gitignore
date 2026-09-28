@@ -8,3 +8,6 @@ coverage/
 .env*
 !.env.example
 tools/
+
+# Kết quả chạy test (tạo lại mỗi lần chạy)
+tests/reports/
