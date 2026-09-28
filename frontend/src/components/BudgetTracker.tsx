@@ -503,19 +503,29 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
     setIsEditBudgetOpen(false);
   };
 
-  // Cập nhật thời lượng theo ngày
+  // Cập nhật thời lượng theo ngày (tự động điều chỉnh đêm để chênh lệch tối đa +-1)
   const handleSetDays = (val: number) => {
     const d = Math.max(1, Math.min(30, val));
     setDurationDays(d);
-    const text = durationNights === 0 ? `${d} ngày` : `${d} ngày ${durationNights} đêm`;
+    
+    // Đảm bảo số đêm chênh lệch trong khoảng [d - 1, d + 1]
+    let n = durationNights;
+    if (n < Math.max(0, d - 1)) n = Math.max(0, d - 1);
+    if (n > d + 1) n = d + 1;
+    setDurationNights(n);
+
+    const text = n === 0 ? `${d} ngày (trong ngày)` : `${d} ngày ${n} đêm`;
     setNewDurationValue(text);
   };
 
-  // Cập nhật thời lượng theo đêm
+  // Cập nhật thời lượng theo đêm (ràng buộc chênh lệch +-1 so với số ngày)
   const handleSetNights = (val: number) => {
-    const n = Math.max(0, Math.min(30, val));
+    const minN = Math.max(0, durationDays - 1);
+    const maxN = durationDays + 1;
+    const n = Math.max(minN, Math.min(maxN, val));
     setDurationNights(n);
-    const text = n === 0 ? `${durationDays} ngày` : `${durationDays} ngày ${n} đêm`;
+
+    const text = n === 0 ? `${durationDays} ngày (trong ngày)` : `${durationDays} ngày ${n} đêm`;
     setNewDurationValue(text);
   };
 
@@ -529,7 +539,14 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
   // Cập nhật thời lượng chuyến đi
   const handleSaveDuration = (e: React.FormEvent) => {
     e.preventDefault();
-    const finalVal = newDurationValue.trim() || `${durationDays} ngày ${durationNights} đêm`;
+    let d = durationDays;
+    let n = durationNights;
+    if (Math.abs(d - n) > 1) {
+      n = Math.max(0, d - 1);
+      setDurationNights(n);
+    }
+    const fallbackText = n === 0 ? `${d} ngày (trong ngày)` : `${d} ngày ${n} đêm`;
+    const finalVal = newDurationValue.trim() || fallbackText;
 
     setTrips(prev => prev.map(t => t.id === currentTripId ? { ...t, duration: finalVal } : t));
     setIsEditDurationOpen(false);
@@ -1850,8 +1867,9 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
                       <button
                         type="button"
                         onClick={() => handleSetNights(durationNights - 1)}
-                        disabled={durationNights <= 0}
-                        className="w-7 h-7 rounded-lg bg-stone-100 hover:bg-stone-200 disabled:opacity-40 text-stone-700 flex items-center justify-center font-black cursor-pointer transition-colors"
+                        disabled={durationNights <= Math.max(0, durationDays - 1)}
+                        className="w-7 h-7 rounded-lg bg-stone-100 hover:bg-stone-200 disabled:opacity-30 disabled:cursor-not-allowed text-stone-700 flex items-center justify-center font-black cursor-pointer transition-colors"
+                        title={durationNights <= Math.max(0, durationDays - 1) ? 'Số đêm không thể thấp hơn số ngày - 1' : 'Giảm 1 đêm'}
                       >
                         <Minus className="w-3.5 h-3.5" />
                       </button>
@@ -1859,13 +1877,20 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
                       <button
                         type="button"
                         onClick={() => handleSetNights(durationNights + 1)}
-                        disabled={durationNights >= 30}
-                        className="w-7 h-7 rounded-lg bg-stone-100 hover:bg-stone-200 disabled:opacity-40 text-stone-700 flex items-center justify-center font-black cursor-pointer transition-colors"
+                        disabled={durationNights >= durationDays + 1}
+                        className="w-7 h-7 rounded-lg bg-stone-100 hover:bg-stone-200 disabled:opacity-30 disabled:cursor-not-allowed text-stone-700 flex items-center justify-center font-black cursor-pointer transition-colors"
+                        title={durationNights >= durationDays + 1 ? 'Số đêm không thể vượt quá số ngày + 1' : 'Tăng 1 đêm'}
                       >
                         <Plus className="w-3.5 h-3.5" />
                       </button>
                     </div>
                   </div>
+                </div>
+
+                {/* Gợi ý quy chuẩn chênh lệch +-1 */}
+                <div className="flex items-center gap-2 text-[11px] text-stone-500 bg-white px-2.5 py-1.5 rounded-xl border border-stone-200/80">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0"></span>
+                  <span>Quy chuẩn: Số ngày & số đêm chênh lệch <strong>±1</strong> (VD: {durationDays}N{Math.max(0, durationDays - 1)}Đ, {durationDays}N{durationDays}Đ, {durationDays}N{durationDays + 1}Đ)</span>
                 </div>
               </div>
 
