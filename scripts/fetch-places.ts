@@ -8,9 +8,15 @@
  *
  * Output: frontend/src/data/places/{city-id}.json
  *
+ * Ảnh địa điểm (pre-fetch tại build time):
+ *   - Foursquare: Gọi Photos endpoint cho từng place → lấy ảnh đầu tiên
+ *   - OSM: Đọc tag wikimedia_commons / image → resolve qua Wikimedia API
+ *   - Chỉ gán isPlaceholderImage = true khi cả hai nguồn không có ảnh
+ *
  * Giấy phép:
  *   - Foursquare: Places API (see provider terms)
  *   - OSM: ODbL (OpenStreetMap contributors)
+ *   - Wikimedia Commons: CC BY-SA (xem giấy phép từng ảnh)
  */
 
 import dotenv from 'dotenv';
@@ -97,6 +103,225 @@ function osmTagsToCategory(tags: Record<string, string>): { group: PlaceCategory
     return { group: 'shopping', label: 'Mua sắm' };
   }
   return { group: 'sightseeing', label: 'Địa điểm' };
+}
+
+// ---------------------------------------------------------------------------
+// Foursquare Photos fetcher — gọi Photos endpoint, lấy ảnh đầu tiên
+// ---------------------------------------------------------------------------
+
+interface FoursquarePhoto {
+  id: string;
+  prefix: string;
+  suffix: string;
+  width?: number;
+  height?: number;
+}
+
+function buildFsqPhotoUrl(photo: FoursquarePhoto, size = '600x400'): string {
+  return `${photo.prefix}${size}${photo.suffix}`;
+}
+
+/**
+ * Fetch ảnh thật cho một danh sách MergedPlace có foursquareId.
+ * Gọi GET /places/{fsq_id}/photos?limit=1 cho mỗi place.
+ * Rate limit: ~300ms giữa các request để tránh 429.
+ */
+async function fetchFoursquarePhotos(
+  places: MergedPlace[],
+): Promise<void> {
+  if (!FSQ_API_KEY) return;
+
+  const fsqPlaces = places.filter(p => p.foursquareId && p.isPlaceholderImage);
+  if (fsqPlaces.length === 0) return;
+
+  console.log(`  📸 Đang fetch ảnh Foursquare cho ${fsqPlaces.length} địa điểm...`);
+  let fetched = 0;
+  let failed = 0;
+
+  for (const place of fsqPlaces) {
+    try {
+      const res = await fetch(
+        `${FSQ_BASE}/places/${place.foursquareId}/photos?limit=1`,
+        {
+          signal: AbortSignal.timeout(10000),
+          headers: {
+            Authorization: FSQ_API_KEY.startsWith('Bearer') ? FSQ_API_KEY : `Bearer ${FSQ_API_KEY}`,
+            Accept: 'application/json',
+            'X-Places-Api-Version': '2025-06-17',
+          },
+        }
+      );
+
+      if (!res.ok) {
+        if (res.status === 429) {
+          console.warn(`  ⚠ Foursquare quota exceeded at photo ${fetched + failed}/${fsqPlaces.length}. Stopping photo fetch.`);
+          break;
+        }
+        failed++;
+        continue;
+      }
+
+      const photos: FoursquarePhoto[] = await res.json();
+      if (photos.length > 0) {
+        place.imageUrl = buildFsqPhotoUrl(photos[0]);
+        place.isPlaceholderImage = false;
+        fetched++;
+      }
+    } catch {
+      failed++;
+    }
+
+    // Rate limiting
+    await sleep(300);
+  }
+
+  console.log(`  📸 Foursquare photos: ${fetched} thành công, ${failed} lỗi, ${fsqPlaces.length - fetched - failed} không có ảnh`);
+}
+
+// ---------------------------------------------------------------------------
+// Wikimedia Commons URL resolver — convert tag → direct image URL
+// ---------------------------------------------------------------------------
+
+/**
+ * Chuyển đổi giá trị tag wikimedia_commons ("File:Example.jpg")
+ * thành URL ảnh thumbnail qua Wikimedia Action API.
+ *
+ * Batch xử lý tối đa 50 titles mỗi request (giới hạn API).
+ */
+async function resolveWikimediaUrls(
+  titles: string[]
+): Promise<Map<string, string>> {
+  const result = new Map<string, string>();
+  if (titles.length === 0) return result;
+
+  // Batch 50 titles mỗi request
+  const BATCH_SIZE = 50;
+  for (let i = 0; i < titles.length; i += BATCH_SIZE) {
+    const batch = titles.slice(i, i + BATCH_SIZE);
+    const titlesParam = batch.map(t => {
+      // Đảm bảo format "File:..." 
+      if (!t.startsWith('File:') && !t.startsWith('Category:')) {
+        return `File:${t}`;
+      }
+      return t;
+    }).join('|');
+
+    try {
+      const url = `https://commons.wikimedia.org/w/api.php?` + new URLSearchParams({
+        action: 'query',
+        titles: titlesParam,
+        prop: 'imageinfo',
+        iiprop: 'url',
+        iiurlwidth: '600',
+        format: 'json',
+        origin: '*',
+      });
+
+      const res = await fetch(url, {
+        signal: AbortSignal.timeout(15000),
+        headers: { 'User-Agent': 'VietGo/1.0 (travel app; contact@vietgo.app)' },
+      });
+
+      if (!res.ok) continue;
+
+      const data = await res.json();
+      const pages = data?.query?.pages;
+      if (!pages) continue;
+
+      for (const pageId of Object.keys(pages)) {
+        const page = pages[pageId];
+        if (page.imageinfo && page.imageinfo.length > 0) {
+          const info = page.imageinfo[0];
+          // Ưu tiên thumbnail (nhỏ hơn), fallback full URL
+          const imageUrl = info.thumburl || info.url;
+          if (imageUrl && page.title) {
+            result.set(page.title, imageUrl);
+            // Map cả dạng không có "File:" prefix
+            const withoutPrefix = page.title.replace(/^File:/, '');
+            result.set(withoutPrefix, imageUrl);
+          }
+        }
+      }
+    } catch {
+      // Ignore errors for individual batches
+    }
+
+    // Rate limiting cho Wikimedia
+    await sleep(200);
+  }
+
+  return result;
+}
+
+/**
+ * Resolve ảnh cho các OSM places dựa trên tag wikimedia_commons và image.
+ * - wikimedia_commons → gọi Wikimedia API để lấy direct URL
+ * - image → nếu là URL http(s) trực tiếp thì dùng luôn
+ */
+async function resolveOSMPhotos(
+  places: MergedPlace[],
+  osmRawTags: Map<string, Record<string, string>>,
+): Promise<void> {
+  // Bước 1: Tìm các places có tag ảnh
+  const wikimediaTitles: string[] = [];
+  const placeToWikimedia = new Map<string, string>();
+  const placeToDirectUrl = new Map<string, string>();
+
+  for (const place of places) {
+    if (!place.isPlaceholderImage) continue; // đã có ảnh thật rồi
+    if (!place.osmId) continue;
+
+    const tags = osmRawTags.get(place.osmId);
+    if (!tags) continue;
+
+    // Ưu tiên 1: wikimedia_commons tag ("File:Example.jpg")
+    const wikiTag = tags.wikimedia_commons || tags['wikimedia_commons'];
+    if (wikiTag && wikiTag.startsWith('File:')) {
+      wikimediaTitles.push(wikiTag);
+      placeToWikimedia.set(place.id, wikiTag);
+      continue;
+    }
+
+    // Ưu tiên 2: image tag (URL trực tiếp)
+    const imageTag = tags.image;
+    if (imageTag && /^https?:\/\//i.test(imageTag)) {
+      placeToDirectUrl.set(place.id, imageTag);
+    }
+  }
+
+  console.log(`  📸 OSM: ${placeToWikimedia.size} có wikimedia_commons, ${placeToDirectUrl.size} có image URL trực tiếp`);
+
+  // Bước 2: Batch resolve Wikimedia URLs
+  const uniqueTitles = [...new Set(wikimediaTitles)];
+  const resolvedUrls = await resolveWikimediaUrls(uniqueTitles);
+
+  // Bước 3: Gán ảnh cho places
+  let resolved = 0;
+  for (const place of places) {
+    if (!place.isPlaceholderImage) continue;
+
+    // Check wikimedia_commons
+    const wikiTitle = placeToWikimedia.get(place.id);
+    if (wikiTitle) {
+      const url = resolvedUrls.get(wikiTitle);
+      if (url) {
+        place.imageUrl = url;
+        place.isPlaceholderImage = false;
+        resolved++;
+        continue;
+      }
+    }
+
+    // Check direct image URL
+    const directUrl = placeToDirectUrl.get(place.id);
+    if (directUrl) {
+      place.imageUrl = directUrl;
+      place.isPlaceholderImage = false;
+      resolved++;
+    }
+  }
+
+  console.log(`  📸 OSM photos: ${resolved} ảnh thật được gán`);
 }
 
 // ---------------------------------------------------------------------------
@@ -224,6 +449,7 @@ interface OverpassElement {
 }
 
 function buildOverpassQuery(lat: number, lng: number, radiusMeters = 10000): string {
+  // Yêu cầu body để nhận đầy đủ tags bao gồm wikimedia_commons và image
   return `
 [out:json][timeout:30];
 (
@@ -325,7 +551,16 @@ async function fetchOverpassArea(
   }
 }
 
-async function fetchOSMPlaces(city: typeof CITIES[0]): Promise<MergedPlace[]> {
+/**
+ * Fetch OSM places + lưu lại raw tags để sau này resolve ảnh.
+ * Trả về { places, rawTags } — rawTags map osmId → full tags.
+ */
+async function fetchOSMPlaces(city: typeof CITIES[0]): Promise<{
+  places: MergedPlace[];
+  rawTags: Map<string, Record<string, string>>;
+}> {
+  const rawTags = new Map<string, Record<string, string>>();
+
   try {
     let elements: OverpassElement[];
     try {
@@ -358,7 +593,7 @@ async function fetchOSMPlaces(city: typeof CITIES[0]): Promise<MergedPlace[]> {
       elements = [...byId.values()];
     }
 
-    return elements
+    const places = elements
       .filter(el => {
         // Chỉ giữ các element có tên
         return (el.tags?.name || el.tags?.['name:vi'] || el.tags?.['name:en']) &&
@@ -372,6 +607,10 @@ async function fetchOSMPlaces(city: typeof CITIES[0]): Promise<MergedPlace[]> {
         const name = tags['name:vi'] || tags.name || tags['name:en'] || 'Không rõ tên';
         const { group, label } = osmTagsToCategory(tags);
         const address = parseOSMAddress(tags);
+        const osmId = `${el.type}/${el.id}`;
+
+        // Lưu raw tags để resolve ảnh sau
+        rawTags.set(osmId, tags);
 
         return {
           id: `osm-${el.type}-${el.id}`,
@@ -381,7 +620,7 @@ async function fetchOSMPlaces(city: typeof CITIES[0]): Promise<MergedPlace[]> {
           categoryGroup: group,
           categoryLabel: label,
           foursquareId: undefined,
-          osmId: `${el.type}/${el.id}`,
+          osmId,
           dataSource: 'osm',
           rating: null,       // OSM không có rating — KHÔNG fabricate
           reviewCount: null,
@@ -399,6 +638,8 @@ async function fetchOSMPlaces(city: typeof CITIES[0]): Promise<MergedPlace[]> {
           ].filter(Boolean) as string[],
         };
       });
+
+    return { places, rawTags };
   } catch (err) {
     console.warn(`  ⚠ Overpass error:`, (err as Error).message);
     throw err;
@@ -419,7 +660,9 @@ async function processCity(city: typeof CITIES[0]): Promise<CityPlacesData> {
   ]);
 
   const fsqPlaces = fsqResult.status === 'fulfilled' ? fsqResult.value : [];
-  const osmPlaces = osmResult.status === 'fulfilled' ? osmResult.value : [];
+  const osmData = osmResult.status === 'fulfilled' ? osmResult.value : { places: [], rawTags: new Map<string, Record<string, string>>() };
+  const osmPlaces = osmData.places;
+  const osmRawTags = osmData.rawTags;
 
   console.log(`  📦 Foursquare: ${fsqPlaces.length} địa điểm`);
   console.log(`  📦 OSM: ${osmPlaces.length} địa điểm`);
@@ -438,16 +681,32 @@ async function processCity(city: typeof CITIES[0]): Promise<CityPlacesData> {
   const merged = mergePlaces(fsqPlaces, osmPlaces);
   const { places, stats, removed } = prunePlaces(merged.places);
 
-  // Assign placeholder images for places without photos
+  console.log(`  ✅ Kết quả: ${stats.total} tổng (${stats.fromFoursquare} FSQ, ${stats.fromOSM} OSM, ${stats.merged} merged, ${stats.needsReview} cần kiểm tra)`);
+  console.log(`  🧹 Đã loại ${removed} địa điểm thiếu thông tin hoặc ghi rõ đã đóng cửa`);
+
+  // -----------------------------------------------------------------------
+  // PHOTO FETCHING — Lấy ảnh thật từ Foursquare + OSM wikimedia/image
+  // -----------------------------------------------------------------------
+  console.log(`  📸 Đang lấy ảnh thật cho các địa điểm...`);
+
+  // 1. Foursquare Photos API — cho các place có foursquareId
+  await fetchFoursquarePhotos(places);
+
+  // 2. OSM wikimedia_commons / image tags — cho các place có osmId
+  await resolveOSMPhotos(places, osmRawTags);
+
+  // 3. Fallback: gán placeholder cho những place vẫn chưa có ảnh
+  let placeholderCount = 0;
   for (const place of places) {
-    if (!place.imageUrl) {
+    if (!place.imageUrl || place.isPlaceholderImage) {
       place.imageUrl = getPlaceholderImage(place.categoryGroup);
       place.isPlaceholderImage = true;
+      placeholderCount++;
     }
   }
 
-  console.log(`  ✅ Kết quả: ${stats.total} tổng (${stats.fromFoursquare} FSQ, ${stats.fromOSM} OSM, ${stats.merged} merged, ${stats.needsReview} cần kiểm tra)`);
-  console.log(`  🧹 Đã loại ${removed} địa điểm thiếu thông tin hoặc ghi rõ đã đóng cửa`);
+  const realPhotoCount = places.length - placeholderCount;
+  console.log(`  📸 Tổng kết: ${realPhotoCount}/${places.length} có ảnh thật (${placeholderCount} dùng ảnh minh họa)`);
 
   const now = new Date().toISOString();
 

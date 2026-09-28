@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Navbar } from './components/Navbar';
-import { ExplorePage } from './components/ExplorePage';
+import { VerifiedExplorePage } from './components/VerifiedExplorePage';
+import { PlannerHome } from './components/PlannerHome';
+import { VerifiedPlanPage } from './components/VerifiedPlanPage';
+import { CITY_NAMES, type VerifiedTrip } from './data/tripPlaces';
 import { NearbyPage } from './components/NearbyPage';
 import { AIAssistantPage } from './components/AIAssistantPage';
 import { ItineraryPage } from './components/ItineraryPage';
@@ -16,7 +19,10 @@ import { LegalModal, LegalDocId } from './components/LegalModal';
 
 export default function App() {
   // Navigation tabs: 'explore' (default) | 'nearby' | 'ai' | 'itinerary' | 'account' | 'budget'
-  const [activeTab, setActiveTab] = useState<'explore' | 'nearby' | 'ai' | 'itinerary' | 'account' | 'budget'>('explore');
+  const [activeTab, setActiveTab] = useState<'home' | 'explore' | 'nearby' | 'ai' | 'itinerary' | 'account' | 'budget'>('home');
+  const [preselectedCity, setPreselectedCity] = useState('');
+  const [verifiedTrip, setVerifiedTrip] = useState<VerifiedTrip | null>(() => { try { const saved = localStorage.getItem('vietgo_verified_trip'); return saved ? JSON.parse(saved) : null; } catch { return null; } });
+  const [savedTrip, setSavedTrip] = useState<VerifiedTrip | null>(() => { try { const saved = localStorage.getItem('vietgo_verified_trip'); return saved ? JSON.parse(saved) : null; } catch { return null; } });
   const [language, setLanguage] = useState<LanguageCode>('vi');
 
   // Wishlist state (persisted in localStorage)
@@ -105,6 +111,8 @@ export default function App() {
   // Query to seed into AI Assistant
   const [aiAssistantSeedQuery, setAiAssistantSeedQuery] = useState<string>('');
 
+  useEffect(() => { try { if (verifiedTrip) localStorage.setItem('vietgo_verified_trip', JSON.stringify(verifiedTrip)); } catch {} }, [verifiedTrip]);
+
   // Handlers
   const handleOpenAccount = (tab: AccountTab = 'wishlist') => {
     if (tab === 'budget') {
@@ -116,17 +124,16 @@ export default function App() {
     setAccountDrawerOpen(true);
   };
 
+  const cityIdFor = (destination: string) => Object.entries(CITY_NAMES).find(([, name]) => name.toLocaleLowerCase('vi').includes(destination.toLocaleLowerCase('vi')) || destination.toLocaleLowerCase('vi').includes(name.toLocaleLowerCase('vi')))?.[0] || '';
+
   const handleQuickPlanTrip = (params: { destination: string; days: number; guests: number }) => {
     setItineraryParams(params);
-    setActiveTab('itinerary');
+    setPreselectedCity(cityIdFor(params.destination));
+    setActiveTab('home');
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const handleProceedToItineraryFromAI = (params: { destination: string; days: number; guests: number; style?: string }) => {
-    setItineraryParams(params);
-    setActiveTab('itinerary');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+  const handleProceedToItineraryFromAI = (params: { destination: string; days: number; guests: number; style?: string }) => handleQuickPlanTrip(params);
 
   const handleAddToItinerary = (item: DetailItem) => {
     setPendingAddItem(item);
@@ -164,16 +171,9 @@ export default function App() {
 
       {/* 2. Main Page View Container */}
       <main className={`flex-1 ${activeTab === 'nearby' ? 'pb-16 md:pb-0' : 'pb-20 md:pb-8'}`}>
-        {/* Page 1: Khám phá (Explore Page - Default) */}
-        {activeTab === 'explore' && (
-          <ExplorePage
-            wishlist={wishlist}
-            onToggleWishlist={handleToggleWishlist}
-            onSelectItem={(item) => setSelectedDetailItem(item)}
-            onQuickPlanTrip={handleQuickPlanTrip}
-            onNavigateToNearby={() => setActiveTab('nearby')}
-          />
-        )}
+        {activeTab === 'home' && <PlannerHome onPlan={(trip) => { setVerifiedTrip(trip); setSavedTrip(trip); setActiveTab('itinerary'); }} savedTrip={savedTrip} onContinue={() => { if (savedTrip) { setVerifiedTrip(savedTrip); setActiveTab('itinerary'); } }} preselectedCity={preselectedCity} initialTrip={verifiedTrip} />}
+
+        {activeTab === 'explore' && <VerifiedExplorePage onPlanCity={(cityId) => { setPreselectedCity(cityId); setActiveTab('home'); }} onSelectItem={(item) => setSelectedDetailItem(item)} />}
 
         {/* Page 2: Xung quanh (NearbyPage - Interactive Map & Nearby Places) */}
         {activeTab === 'nearby' && (
@@ -195,20 +195,7 @@ export default function App() {
           />
         )}
 
-        {/* Page 4: Lịch trình (ItineraryPage with Split-screen Leaflet Map & Survival Tips) */}
-        {activeTab === 'itinerary' && (
-          <ItineraryPage
-            initialPlanParams={itineraryParams}
-            onSelectItem={(item) => setSelectedDetailItem(item)}
-            onOpenBooking={handleOpenBooking}
-            onAskAIAboutTrip={(question) => {
-              setAiAssistantSeedQuery(question);
-              setActiveTab('ai');
-            }}
-            pendingAddItem={pendingAddItem}
-            onClearPendingItem={() => setPendingAddItem(null)}
-          />
-        )}
+        {activeTab === 'itinerary' && (verifiedTrip ? <VerifiedPlanPage trip={verifiedTrip} onChange={setVerifiedTrip} onBack={() => setActiveTab('home')} onSave={(trip) => { setSavedTrip(trip); setVerifiedTrip(trip); }} /> : <ItineraryPage initialPlanParams={itineraryParams} onSelectItem={(item) => setSelectedDetailItem(item)} onOpenBooking={handleOpenBooking} onAskAIAboutTrip={(question) => { setAiAssistantSeedQuery(question); setActiveTab('ai'); }} pendingAddItem={pendingAddItem} onClearPendingItem={() => setPendingAddItem(null)} />)}
 
         {/* Page 5: Quản lý chi tiêu (BudgetTracker) */}
         {activeTab === 'budget' && (

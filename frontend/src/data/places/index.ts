@@ -120,7 +120,8 @@ export async function loadCityPlaces(cityId: string): Promise<CityPlacesData | n
 
 function mergedToNearbyPlace(
   mp: MergedPlaceJSON,
-  searchCenter: { lat: number; lng: number }
+  searchCenter: { lat: number; lng: number },
+  fetchedAt: string
 ): NearbyPlace {
   const isStay = /campground|camping|hotel|hostel|homestay|guesthouse|guest house|lodging|resort|motel/i.test(mp.categoryLabel);
   const categoryGroup = isStay ? 'stay' : mp.categoryGroup;
@@ -143,16 +144,19 @@ function mergedToNearbyPlace(
     openingHours: mp.openingHours || '',
     ticketPrice: undefined,
     estimatedTime: '',
-    description: mp.description || '',
-    imageUrl,
+    description: `${mp.description || 'Chưa có mô tả.'} Nguồn: ${mp.dataSource === 'osm' ? 'OpenStreetMap' : mp.dataSource === 'foursquare' ? 'Foursquare' : 'Foursquare + OpenStreetMap'}. Dữ liệu cập nhật: ${new Date(fetchedAt).toLocaleDateString('vi-VN')}.`,
+    imageUrl: mp.isPlaceholderImage ? '' : imageUrl,
     tags: mp.tags,
     localTips: '',
     rating: mp.rating,
     reviewCount: mp.reviewCount,
     isPlaceholderImage: mp.isPlaceholderImage,
     dataSource: mp.dataSource,
+    fetchedAt,
     phone: mp.phone,
     website: mp.website,
+    // Truyền foursquareId → ItemDetailModal dùng để lazy-load ảnh hi-res + details
+    googlePlaceId: mp.foursquareId,
   } as any;
 
   return {
@@ -212,7 +216,7 @@ export function filterCityPlaces(
   const queryLower = (searchQuery || '').trim().toLowerCase();
 
   // Convert and calculate distances
-  let places = data.places.map(mp => mergedToNearbyPlace(mp, center));
+  let places = data.places.map(mp => mergedToNearbyPlace(mp, center, data.fetchedAt));
 
   // Filter
   places = places.filter(place => {

@@ -70,6 +70,36 @@ export const AutoTripPlanner: React.FC<AutoTripPlannerProps> = ({
   const [modifyPrompt, setModifyPrompt] = useState('');
   const [isModifying, setIsModifying] = useState(false);
 
+  // Airbnb style dropdown state
+  const [activeDropdown, setActiveDropdown] = useState<'destination' | 'dates' | 'guests' | null>(null);
+  const [adults, setAdults] = useState(2);
+  const [childrenCount, setChildrenCount] = useState(0);
+  const [infants, setInfants] = useState(0);
+  const [pets, setPets] = useState(0);
+  const searchRef = useRef<HTMLDivElement>(null);
+
+  // Sync peopleCount and companion
+  useEffect(() => {
+    const total = adults + childrenCount;
+    setPeopleCount(total);
+    
+    if (total === 1) setCompanion('Một mình (Solo)');
+    else if (total === 2 && childrenCount === 0 && infants === 0) setCompanion('Cặp đôi (Couple)');
+    else if (childrenCount > 0 || infants > 0) setCompanion('Gia đình có trẻ nhỏ/người lớn');
+    else setCompanion('Nhóm bạn (Friends)');
+  }, [adults, childrenCount, infants]);
+
+  // Click outside to close dropdown
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (searchRef.current && !searchRef.current.contains(event.target as Node)) {
+        setActiveDropdown(null);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+
   // Tips Search and Category Filtering
   const [tipSearchQuery, setTipSearchQuery] = useState('');
   const [selectedTipCategory, setSelectedTipCategory] = useState<string>('destination');
@@ -523,88 +553,235 @@ Bạn muốn lên kế hoạch đi đâu hay cần hỏi gì về chuyến đi s
           </div>
         </div>
 
-        {/* Airbnb-style Trip Setup Inputs Grid */}
-        <form onSubmit={handleGeneratePlan} className="mt-5 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-3">
-          {/* Destination */}
-          <div className="bg-stone-50 hover:bg-stone-100/80 transition-colors p-3.5 rounded-2xl border border-stone-200/70">
-            <label className="block text-[11px] font-extrabold uppercase tracking-wider text-stone-500">
-              1. Bạn muốn đi đâu?
-            </label>
-            <div className="flex items-center gap-2 mt-1">
-              <MapPin className="w-4 h-4 text-[#FF385C] shrink-0" />
-              <select
-                id="select-destination"
-                value={destination}
-                onChange={(e) => setDestination(e.target.value)}
-                className="w-full bg-transparent font-bold text-sm text-stone-900 focus:outline-hidden cursor-pointer"
+        {/* Airbnb-style Trip Setup Search Bar */}
+        <div ref={searchRef} className="mt-8 relative max-w-4xl mx-auto z-40">
+          <form 
+            onSubmit={(e) => {
+              setActiveDropdown(null);
+              handleGeneratePlan(e);
+            }} 
+            className="flex items-center bg-white rounded-full shadow-[0_3px_12px_0_rgba(0,0,0,0.1),0_1px_2px_0_rgba(0,0,0,0.08)] border border-stone-200 h-[66px] relative"
+          >
+            {/* Destination */}
+            <div 
+              className={`relative flex-[1.2] h-full px-8 py-3 flex flex-col justify-center rounded-full cursor-pointer transition-colors ${activeDropdown === 'destination' ? 'bg-white shadow-[0_6px_20px_rgba(0,0,0,0.2)]' : 'hover:bg-stone-100'}`}
+              onClick={() => setActiveDropdown('destination')}
+            >
+              <label className="text-xs font-extrabold text-stone-800 cursor-pointer">Địa điểm</label>
+              <input 
+                type="text" 
+                value={destination} 
+                onChange={(e) => setDestination(e.target.value)} 
+                placeholder="Tìm kiếm điểm đến" 
+                className="bg-transparent text-sm text-stone-500 focus:outline-none w-full truncate p-0 border-none placeholder-stone-400"
+              />
+            </div>
+
+            <div className="w-[1px] h-8 bg-stone-200 shrink-0"></div>
+
+            {/* Dates */}
+            <div 
+              className={`relative flex-1 h-full px-8 py-3 flex flex-col justify-center rounded-full cursor-pointer transition-colors ${activeDropdown === 'dates' ? 'bg-white shadow-[0_6px_20px_rgba(0,0,0,0.2)]' : 'hover:bg-stone-100'}`}
+              onClick={() => setActiveDropdown('dates')}
+            >
+              <label className="text-xs font-extrabold text-stone-800 cursor-pointer">Thời gian</label>
+              <div className="text-sm text-stone-500 truncate">
+                {days ? `${days} ngày` : 'Thêm ngày'}
+              </div>
+            </div>
+
+            <div className="w-[1px] h-8 bg-stone-200 shrink-0"></div>
+
+            {/* Guests */}
+            <div 
+              className={`relative flex-[1.5] h-full pl-8 pr-2 py-2 flex items-center justify-between rounded-full cursor-pointer transition-colors ${activeDropdown === 'guests' ? 'bg-white shadow-[0_6px_20px_rgba(0,0,0,0.2)]' : 'hover:bg-stone-100'}`}
+              onClick={() => setActiveDropdown('guests')}
+            >
+              <div className="flex flex-col justify-center h-full truncate">
+                <label className="text-xs font-extrabold text-stone-800 cursor-pointer">Khách</label>
+                <div className="text-sm text-stone-500 truncate">
+                  {adults + childrenCount > 0 ? `${adults + childrenCount} khách${infants > 0 ? `, ${infants} em bé` : ''}${pets > 0 ? `, ${pets} thú cưng` : ''}` : 'Thêm khách'}
+                </div>
+              </div>
+              
+              {/* Search Button */}
+              <button
+                id="generate-plan-submit"
+                type="submit"
+                disabled={isGenerating}
+                className={`h-12 ${isGenerating ? 'px-6' : 'w-12 md:w-auto md:px-6'} bg-[#FF385C] hover:bg-[#E00B41] text-white rounded-full flex items-center justify-center gap-2 font-bold transition-all shadow-md shrink-0`}
               >
-                {PROVINCES.map(p => (
-                  <option key={p.id} value={p.name}>{p.name} ({p.region})</option>
+                {isGenerating ? (
+                  <Sparkles className="w-5 h-5 text-amber-300 animate-spin" />
+                ) : (
+                  <Search className="w-5 h-5 text-white stroke-[3]" />
+                )}
+                <span className={`hidden ${isGenerating ? 'block' : 'md:block'}`}>
+                  {isGenerating ? 'Đang Tính...' : 'Tìm kiếm'}
+                </span>
+              </button>
+            </div>
+          </form>
+
+          {/* Dropdowns */}
+          {activeDropdown === 'destination' && (
+            <div className="absolute top-[80px] left-0 w-[400px] bg-white rounded-3xl shadow-[0_8px_28px_rgba(0,0,0,0.28)] border border-stone-200 p-4 z-50">
+              <h3 className="text-xs font-extrabold text-stone-800 mb-2 px-4">Điểm đến được đề xuất</h3>
+              <div className="space-y-1 max-h-[350px] overflow-y-auto scrollbar-thin">
+                <div 
+                  className="flex items-center gap-4 p-3 hover:bg-stone-100 rounded-2xl cursor-pointer"
+                  onClick={() => { setDestination('Lân cận'); setActiveDropdown(null); }}
+                >
+                  <div className="w-12 h-12 bg-stone-100 rounded-xl flex items-center justify-center border border-stone-200">
+                    <Compass className="w-6 h-6 text-stone-700" />
+                  </div>
+                  <div>
+                    <div className="font-bold text-stone-800 text-base">Lân cận</div>
+                    <div className="text-sm text-stone-500">Tìm xung quanh bạn</div>
+                  </div>
+                </div>
+                {PROVINCES.slice(0, 8).map(p => (
+                  <div 
+                    key={p.id} 
+                    className="flex items-center gap-4 p-3 hover:bg-stone-100 rounded-2xl cursor-pointer" 
+                    onClick={() => { setDestination(p.name); setActiveDropdown(null); }}
+                  >
+                    <div className="w-12 h-12 bg-stone-100 rounded-xl flex items-center justify-center border border-stone-200">
+                      <MapPin className="w-6 h-6 text-stone-700" />
+                    </div>
+                    <div>
+                      <div className="font-bold text-stone-800 text-base">{p.name}</div>
+                      <div className="text-sm text-stone-500">{p.region}</div>
+                    </div>
+                  </div>
                 ))}
-              </select>
+              </div>
             </div>
+          )}
+
+          {activeDropdown === 'dates' && (
+            <div className="absolute top-[80px] left-1/2 -translate-x-1/2 w-[350px] bg-white rounded-3xl shadow-[0_8px_28px_rgba(0,0,0,0.28)] border border-stone-200 p-6 z-50">
+               {/* Simplified Days Selector styled like calendar tabs */}
+               <div className="flex justify-center mb-6">
+                 <div className="bg-stone-100 rounded-full p-1 inline-flex">
+                   <button className="px-5 py-2 bg-white rounded-full text-sm font-bold shadow-sm">Ngày</button>
+                   <button className="px-5 py-2 text-stone-600 rounded-full text-sm font-bold hover:bg-stone-200">Linh hoạt</button>
+                 </div>
+               </div>
+               
+               <h3 className="text-base font-extrabold text-stone-800 mb-4">Thời gian chuyến đi</h3>
+               <div className="grid grid-cols-3 gap-2">
+                 {[1, 2, 3, 4, 5, 7].map(d => (
+                   <button
+                     key={d}
+                     type="button"
+                     onClick={() => { setDays(d); setActiveDropdown(null); }}
+                     className={`py-3 rounded-xl border ${days === d ? 'border-black bg-stone-50' : 'border-stone-200 hover:border-stone-400'} font-bold text-stone-800 transition-colors flex flex-col items-center justify-center gap-1`}
+                   >
+                     <span className="text-lg">{d}</span>
+                     <span className="text-xs text-stone-500 font-normal">Ngày</span>
+                   </button>
+                 ))}
+               </div>
+            </div>
+          )}
+
+          {activeDropdown === 'guests' && (
+            <div className="absolute top-[80px] right-0 w-[400px] bg-white rounded-3xl shadow-[0_8px_28px_rgba(0,0,0,0.28)] border border-stone-200 p-6 z-50">
+              <div className="space-y-6">
+                {/* Adults */}
+                <div className="flex items-center justify-between pb-4 border-b border-stone-100">
+                  <div>
+                    <div className="font-bold text-stone-800 text-base">Người lớn</div>
+                    <div className="text-sm text-stone-500">Từ 13 tuổi trở lên</div>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <button type="button" onClick={() => setAdults(Math.max(1, adults - 1))} className={`w-8 h-8 rounded-full border border-stone-300 flex items-center justify-center text-stone-500 hover:border-stone-800 hover:text-stone-800 ${adults <= 1 ? 'opacity-30 cursor-not-allowed' : ''}`} disabled={adults <= 1}>-</button>
+                    <span className="w-4 text-center font-normal">{adults}</span>
+                    <button type="button" onClick={() => setAdults(adults + 1)} className="w-8 h-8 rounded-full border border-stone-300 flex items-center justify-center text-stone-500 hover:border-stone-800 hover:text-stone-800">+</button>
+                  </div>
+                </div>
+
+                {/* Children */}
+                <div className="flex items-center justify-between pb-4 border-b border-stone-100">
+                  <div>
+                    <div className="font-bold text-stone-800 text-base">Trẻ em</div>
+                    <div className="text-sm text-stone-500">Độ tuổi 2 – 12</div>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <button type="button" onClick={() => setChildrenCount(Math.max(0, childrenCount - 1))} className={`w-8 h-8 rounded-full border border-stone-300 flex items-center justify-center text-stone-500 hover:border-stone-800 hover:text-stone-800 ${childrenCount <= 0 ? 'opacity-30 cursor-not-allowed' : ''}`} disabled={childrenCount <= 0}>-</button>
+                    <span className="w-4 text-center font-normal">{childrenCount}</span>
+                    <button type="button" onClick={() => setChildrenCount(childrenCount + 1)} className="w-8 h-8 rounded-full border border-stone-300 flex items-center justify-center text-stone-500 hover:border-stone-800 hover:text-stone-800">+</button>
+                  </div>
+                </div>
+
+                {/* Infants */}
+                <div className="flex items-center justify-between pb-4 border-b border-stone-100">
+                  <div>
+                    <div className="font-bold text-stone-800 text-base">Em bé</div>
+                    <div className="text-sm text-stone-500">Dưới 2 tuổi</div>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <button type="button" onClick={() => setInfants(Math.max(0, infants - 1))} className={`w-8 h-8 rounded-full border border-stone-300 flex items-center justify-center text-stone-500 hover:border-stone-800 hover:text-stone-800 ${infants <= 0 ? 'opacity-30 cursor-not-allowed' : ''}`} disabled={infants <= 0}>-</button>
+                    <span className="w-4 text-center font-normal">{infants}</span>
+                    <button type="button" onClick={() => setInfants(infants + 1)} className="w-8 h-8 rounded-full border border-stone-300 flex items-center justify-center text-stone-500 hover:border-stone-800 hover:text-stone-800">+</button>
+                  </div>
+                </div>
+
+                {/* Pets */}
+                <div className="flex items-center justify-between">
+                  <div>
+                    <div className="font-bold text-stone-800 text-base">Thú cưng</div>
+                    <div className="text-sm text-stone-500 underline cursor-pointer">Bạn sẽ mang theo động vật phục vụ?</div>
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <button type="button" onClick={() => setPets(Math.max(0, pets - 1))} className={`w-8 h-8 rounded-full border border-stone-300 flex items-center justify-center text-stone-500 hover:border-stone-800 hover:text-stone-800 ${pets <= 0 ? 'opacity-30 cursor-not-allowed' : ''}`} disabled={pets <= 0}>-</button>
+                    <span className="w-4 text-center font-normal">{pets}</span>
+                    <button type="button" onClick={() => setPets(pets + 1)} className="w-8 h-8 rounded-full border border-stone-300 flex items-center justify-center text-stone-500 hover:border-stone-800 hover:text-stone-800">+</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+        </div>
+
+        {/* Travel Style & Budget Selection */}
+        <div className="mt-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+          {/* Style Pills */}
+          <div className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none flex-1 max-w-full">
+            <span className="text-xs font-bold text-stone-400 whitespace-nowrap mr-1 flex items-center gap-1">
+              <SlidersHorizontal className="w-3.5 h-3.5" />
+              Gu du lịch:
+            </span>
+            {styleOptions.map((opt) => {
+              const isSelected = travelStyle === opt.label;
+              const Icon = opt.icon;
+              return (
+                <button
+                  key={opt.label}
+                  type="button"
+                  onClick={() => setTravelStyle(opt.label)}
+                  className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all cursor-pointer ${
+                    isSelected
+                      ? 'bg-stone-900 text-white shadow-[0_2px_8px_rgba(0,0,0,0.1)]'
+                      : 'bg-stone-100/90 text-stone-600 hover:bg-stone-200'
+                  }`}
+                >
+                  <Icon className={`w-3.5 h-3.5 ${isSelected ? 'text-[#FF385C]' : 'text-stone-500'}`} />
+                  <span>{opt.label}</span>
+                </button>
+              );
+            })}
           </div>
 
-          {/* Days */}
-          <div className="bg-stone-50 hover:bg-stone-100/80 transition-colors p-3.5 rounded-2xl border border-stone-200/70">
-            <label className="block text-[11px] font-extrabold uppercase tracking-wider text-stone-500">
-              2. Thời gian
-            </label>
-            <div className="flex items-center gap-2 mt-1">
-              <Clock className="w-4 h-4 text-[#FF385C] shrink-0" />
+          {/* Budget Dropdown */}
+          <div className="flex items-center gap-2 shrink-0">
+            <span className="text-xs font-bold text-stone-400">Ngân sách:</span>
+            <div className="relative group">
               <select
-                id="select-days"
-                value={days}
-                onChange={(e) => setDays(Number(e.target.value))}
-                className="w-full bg-transparent font-bold text-sm text-stone-900 focus:outline-hidden cursor-pointer"
-              >
-                <option value={1}>1 Ngày (Đi về trong ngày)</option>
-                <option value={2}>2 Ngày 1 Đêm (Cuối tuần)</option>
-                <option value={3}>3 Ngày 2 Đêm (Lý tưởng)</option>
-                <option value={4}>4 Ngày 3 Đêm (Trọn vẹn)</option>
-                <option value={5}>5 Ngày 4 Đêm (Khám phá sâu)</option>
-                <option value={7}>7 Ngày (Xuyên Việt ngắn)</option>
-              </select>
-            </div>
-          </div>
-
-          {/* Travelers */}
-          <div className="bg-stone-50 hover:bg-stone-100/80 transition-colors p-3.5 rounded-2xl border border-stone-200/70">
-            <label className="block text-[11px] font-extrabold uppercase tracking-wider text-stone-500">
-              3. Số khách & Đi cùng
-            </label>
-            <div className="flex items-center gap-2 mt-1">
-              <Users className="w-4 h-4 text-[#FF385C] shrink-0" />
-              <select
-                id="select-companion"
-                value={companion}
-                onChange={(e) => {
-                  setCompanion(e.target.value as CompanionType);
-                  if (e.target.value.includes('Solo')) setPeopleCount(1);
-                  else if (e.target.value.includes('Couple')) setPeopleCount(2);
-                  else setPeopleCount(4);
-                }}
-                className="w-full bg-transparent font-bold text-sm text-stone-900 focus:outline-hidden cursor-pointer"
-              >
-                {companionOptions.map(c => (
-                  <option key={c} value={c}>{c}</option>
-                ))}
-              </select>
-            </div>
-          </div>
-
-          {/* Budget */}
-          <div className="bg-stone-50 hover:bg-stone-100/80 transition-colors p-3.5 rounded-2xl border border-stone-200/70">
-            <label className="block text-[11px] font-extrabold uppercase tracking-wider text-stone-500">
-              4. Ngân sách tổng (VND)
-            </label>
-            <div className="flex items-center gap-2 mt-1">
-              <DollarSign className="w-4 h-4 text-[#FF385C] shrink-0" />
-              <select
-                id="select-budget"
                 value={budget}
                 onChange={(e) => setBudget(Number(e.target.value))}
-                className="w-full bg-transparent font-bold text-sm text-stone-900 focus:outline-hidden cursor-pointer"
+                className="appearance-none bg-stone-100/90 hover:bg-stone-200 text-stone-700 font-bold text-xs px-3.5 py-1.5 pr-8 rounded-full focus:outline-hidden cursor-pointer transition-colors border border-transparent"
               >
                 <option value={2000000}>2.000.000 ₫ (Tiết kiệm)</option>
                 <option value={5000000}>5.000.000 ₫ (Cân đối)</option>
@@ -612,48 +789,11 @@ Bạn muốn lên kế hoạch đi đâu hay cần hỏi gì về chuyến đi s
                 <option value={15000000}>15.000.000 ₫ (Nghỉ dưỡng VIP)</option>
                 <option value={25000000}>25.000.000 ₫ (Cao cấp)</option>
               </select>
+              <div className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-stone-500">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="m6 9 6 6 6-6"/></svg>
+              </div>
             </div>
           </div>
-
-          {/* Submit Button */}
-          <div className="flex items-end">
-            <button
-              id="generate-plan-submit"
-              type="submit"
-              disabled={isGenerating}
-              className="w-full h-full min-h-[52px] px-5 py-3 bg-gradient-to-r from-[#FF385C] via-[#E00B41] to-[#D70466] hover:opacity-95 text-white font-extrabold rounded-2xl shadow-md shadow-rose-500/20 flex items-center justify-center gap-2 cursor-pointer transition-transform active:scale-95 disabled:opacity-50"
-            >
-              <Sparkles className={`w-4 h-4 text-amber-300 ${isGenerating ? 'animate-spin' : ''}`} />
-              <span>{isGenerating ? 'AI Đang Tính Toán...' : 'Tạo Lịch Trình 30s'}</span>
-            </button>
-          </div>
-        </form>
-
-        {/* Travel Style Pills Selection */}
-        <div className="mt-4 pt-4 border-t border-stone-100 flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none">
-          <span className="text-xs font-bold text-stone-400 whitespace-nowrap mr-1 flex items-center gap-1">
-            <SlidersHorizontal className="w-3.5 h-3.5" />
-            Gu du lịch:
-          </span>
-          {styleOptions.map((opt) => {
-            const isSelected = travelStyle === opt.label;
-            const Icon = opt.icon;
-            return (
-              <button
-                key={opt.label}
-                type="button"
-                onClick={() => setTravelStyle(opt.label)}
-                className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-bold whitespace-nowrap transition-all cursor-pointer ${
-                  isSelected
-                    ? 'bg-stone-900 text-white shadow-xs'
-                    : 'bg-stone-100/90 text-stone-600 hover:bg-stone-200'
-                }`}
-              >
-                <Icon className={`w-3.5 h-3.5 ${isSelected ? 'text-[#FF385C]' : 'text-stone-500'}`} />
-                <span>{opt.label}</span>
-              </button>
-            );
-          })}
         </div>
       </div>
 

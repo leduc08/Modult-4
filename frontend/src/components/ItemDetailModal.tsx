@@ -60,6 +60,8 @@ export const ItemDetailModal: React.FC<ItemDetailModalProps> = ({
   // Live detail state (chỉ active khi có googlePlaceId và không phải sample mode)
   const [liveDetail, setLiveDetail] = useState<GooglePlaceDetail | FoursquareDetail | null>(null);
   const [detailLoading, setDetailLoading] = useState(false);
+  const [imageFailed, setImageFailed] = useState(false);
+  useEffect(() => setImageFailed(false), [item?.id]);
 
   // Close on Escape
   useEffect(() => {
@@ -223,16 +225,15 @@ export const ItemDetailModal: React.FC<ItemDetailModalProps> = ({
             {detailLoading ? (
               // Loading skeleton trong khi fetch Live Photo
               <div className="w-full h-full bg-gradient-to-r from-[#F7F7F7] via-[#EFEFEF] to-[#F7F7F7] animate-pulse" />
-            ) : (
+            ) : (liveDetail?.photoUrl || imageUrl) && !imageFailed ? (
               <img
                 src={liveDetail?.photoUrl ?? imageUrl}
                 alt={title}
                 className="w-full h-full object-cover"
-                onError={(e) => {
-                  // Fallback ảnh tĩnh nếu Live Photo lỗi
-                  (e.target as HTMLImageElement).src = imageUrl || 'https://images.unsplash.com/photo-1528127269322-539801943592?w=1000&auto=format&fit=crop&q=80';
-                }}
+                onError={() => setImageFailed(true)}
               />
+            ) : (
+              <div className="flex h-full w-full flex-col items-center justify-center gap-2 bg-rose-50 text-sm font-semibold text-rose-700"><MapPin className="h-6 w-6" />Chưa có ảnh địa điểm</div>
             )}
             {/* Attribution tác giả ảnh (Google Places policy) */}
             {'isPlaceholderImage' in item && item.isPlaceholderImage === true && !liveDetail?.photoUrl && (
@@ -300,7 +301,7 @@ export const ItemDetailModal: React.FC<ItemDetailModalProps> = ({
                         <Clock className="w-4 h-4 text-[#717171]" />
                         <span>Giờ mở cửa</span>
                       </div>
-                      <p className="text-[#717171]">{item.openingHours}</p>
+                      <p className="text-[#717171]">{item.openingHours || 'Chưa có — cần kiểm tra trước khi đi'}</p>
                     </div>
                   )}
 

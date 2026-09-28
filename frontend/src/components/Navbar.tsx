@@ -20,8 +20,8 @@ import { LanguageCode, AccountTab, AuthUser } from '../types';
 import { AvatarContent, isVerifiedUser } from './AccountDrawer';
 
 interface NavbarProps {
-  activeTab: 'explore' | 'nearby' | 'ai' | 'itinerary' | 'account' | 'budget';
-  setActiveTab: (tab: 'explore' | 'nearby' | 'ai' | 'itinerary' | 'account' | 'budget') => void;
+  activeTab: 'home' | 'explore' | 'nearby' | 'ai' | 'itinerary' | 'account' | 'budget';
+  setActiveTab: (tab: 'home' | 'explore' | 'nearby' | 'ai' | 'itinerary' | 'account' | 'budget') => void;
   wishlistCount: number;
   onOpenWishlist: () => void;
   onOpenAccount: (tab?: AccountTab) => void;
@@ -45,6 +45,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   const [accountMenuOpen, setAccountMenuOpen] = useState(false);
 
   const mainNavItems = [
+    { id: 'home' as const, label: 'L\u1eadp l\u1ecbch', icon: Calendar },
     { id: 'explore' as const, label: 'Khám phá', icon: Compass },
     { id: 'nearby' as const, label: 'Xung quanh', icon: MapPin },
     { id: 'ai' as const, label: 'Trợ lý AI', icon: Bot },
@@ -257,6 +258,11 @@ export const Navbar: React.FC<NavbarProps> = ({
       {/* 2. Mobile Fixed Bottom Navigation Bar (Airbnb Style) */}
       <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/98 backdrop-blur-md border-t border-[#E5E5E5] px-2 py-1.5 flex items-center justify-around shadow-lg">
         {/* Item 1: Khám phá */}
+        <button onClick={() => setActiveTab('home')} className={`flex flex-col items-center gap-1 py-1 px-2 rounded-xl transition-all cursor-pointer min-w-[56px] ${activeTab === 'home' ? 'text-[#FF385C]' : 'text-[#717171] hover:text-[#222222]'}`}>
+          <Calendar className={`w-5 h-5 ${activeTab === 'home' ? 'stroke-[2.5]' : 'stroke-2'}`} />
+          <span className="text-[10px] font-bold">Lập lịch</span>
+        </button>
+
         <button
           onClick={() => setActiveTab('explore')}
           className={`flex flex-col items-center gap-1 py-1 px-2 rounded-xl transition-all cursor-pointer min-w-[56px] ${

@@ -1016,18 +1016,14 @@ export const NearbyPage: React.FC<NearbyPageProps> = ({
                   >
                     {/* Thumbnail Image */}
                     <button type="button" aria-label={`Xem chi tiết ${place.name}`} onClick={(e) => { e.stopPropagation(); onSelectItem(place.sourceItem); }} className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-xl overflow-hidden shrink-0 bg-stone-100 text-left">
-                      <img
+                      <div className="absolute inset-0 flex items-center justify-center bg-rose-50 p-2 text-center text-[11px] font-semibold text-rose-700">Chưa có ảnh địa điểm</div>
+                      {!place.isPlaceholderImage && place.imageUrl && <img
                         src={place.imageUrl}
                         alt={place.name}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                        className="relative w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                         loading="lazy"
-                      />
-                      {/* Placeholder image label */}
-                      {place.isPlaceholderImage && (
-                        <span className="absolute bottom-1 left-1 px-2 py-0.5 rounded text-[11px] font-semibold bg-black/75 text-white">
-                          Ảnh minh họa
-                        </span>
-                      )}
+                        onError={e => { e.currentTarget.style.display = 'none'; }}
+                      />}
                       <div className="absolute top-1.5 left-1.5 right-1.5 flex flex-wrap items-center gap-1">
                         <span className="px-2 py-0.5 rounded-md text-[10px] font-bold bg-black/60 backdrop-blur-xs text-white uppercase">
                           {place.categoryGroup === 'food'
@@ -1315,8 +1311,8 @@ export const NearbyPage: React.FC<NearbyPageProps> = ({
 
               <div className="flex gap-3">
                 <button type="button" onClick={() => onSelectItem(selectedPlace.sourceItem)} aria-label={`Xem chi tiết ${selectedPlace.name}`} className="relative w-20 h-20 shrink-0 text-left">
-                  <img src={selectedPlace.imageUrl} alt={selectedPlace.name} className="w-full h-full rounded-2xl object-cover" />
-                  {selectedPlace.isPlaceholderImage && <span className="absolute bottom-0 inset-x-0 bg-black/75 text-white text-[11px] font-semibold text-center">Ảnh minh họa</span>}
+                  <div className="absolute inset-0 flex items-center justify-center rounded-2xl bg-rose-50 text-xs font-semibold text-rose-700">Chưa có ảnh địa điểm</div>
+                  {!selectedPlace.isPlaceholderImage && selectedPlace.imageUrl && <img src={selectedPlace.imageUrl} alt={selectedPlace.name} className="relative w-full h-full rounded-2xl object-cover" onError={e => { e.currentTarget.style.display = 'none'; }} />}
                 </button>
                 <div className="flex-1 min-w-0 space-y-1">
                   <button type="button" onClick={() => onSelectItem(selectedPlace.sourceItem)} className="text-xs sm:text-sm font-bold text-[#222222] truncate text-left w-full hover:text-[#FF385C]">

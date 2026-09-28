@@ -71,13 +71,12 @@ export const AIAssistantPage: React.FC<AIAssistantPageProps> = ({
     {
       id: 'welcome-msg',
       sender: 'ai',
-      text: `Xin chào! Tôi là Trợ lý AI Du lịch VietGo. 🇻🇳\n\nTôi có thể giúp bạn tìm quán ăn chuẩn vị không chặt chém, quy định hàng không mang đặc sản, kinh nghiệm săn mây hoặc lên kế hoạch chi tiết cho chuyến đi của bạn.`,
+      text: `Xin chào! Tôi có thể gợi ý nơi tham quan và ăn uống từ dữ liệu địa điểm VietGo đã lưu. Hãy cho tôi biết thành phố bạn muốn tìm hiểu.`,
       timestamp: 'Bây giờ',
       suggestedActions: [
-        { label: '🍲 Quán ăn ngon gần Hồ Gươm không chặt chém', action: 'ask_hanoi_food' },
-        { label: '✈️ Quy định mang nước mắm Phú Quốc lên máy bay', action: 'ask_fish_sauce' },
-        { label: '📅 Lên lịch trình 3N2Đ Đà Nẵng cho 2 người', action: 'plan_danang' },
-        { label: '🛵 Thuê xe máy an toàn phượt đèo Hà Giang', action: 'ask_hagiang' }
+        { label: '🍲 Quán ăn tại Hà Nội', action: 'ask_hanoi_food' },
+        { label: '🏛️ Điểm tham quan tại Huế', action: 'ask_hue_sights' },
+        { label: '📅 Tạo lịch trình Đà Nẵng', action: 'plan_danang' }
       ]
     }
   ]);
@@ -105,11 +104,10 @@ export const AIAssistantPage: React.FC<AIAssistantPageProps> = ({
 
   // Topic prompt chips for quick discovery
   const topicChips = [
-    { label: '🏛️ Văn hóa & Danh thắng', prompt: 'Top 3 di tích lịch sử và văn hóa ngàn năm đặc sắc nhất ở Huế và Hội An?' },
-    { label: '🍲 Ẩm thực chuẩn vị', prompt: 'Gợi ý các quán ăn gia truyền tại Đà Nẵng giá chuẩn, không phụ thu?' },
-    { label: '✈️ Quy định hàng không', prompt: 'Quy định đóng thùng xốp mang nước mắm và sầu riêng lên máy bay Vietnam Airlines và Vietjet?' },
-    { label: '🛡️ Tránh bẫy du lịch', prompt: 'Mẹo tránh bẫy taxi dù tại sân bay Nội Bài và Tân Sơn Nhất?' },
-    { label: '📅 Lập lịch trình', prompt: 'Lập lịch trình du lịch Đà Lạt 3 ngày 2 đêm cho cặp đôi ngân sách 5 triệu' }
+    { label: '🏛️ Văn hóa & Danh thắng', prompt: 'Gợi ý địa điểm văn hóa trong dữ liệu VietGo tại Huế' },
+    { label: '🍲 Ăn uống', prompt: 'Gợi ý quán ăn trong dữ liệu VietGo tại Đà Nẵng' },
+    { label: '🌿 Tham quan', prompt: 'Gợi ý điểm tham quan trong dữ liệu VietGo tại Ninh Bình' },
+    { label: '☕ Cà phê', prompt: 'Gợi ý quán cà phê trong dữ liệu VietGo tại Hà Nội' }
   ];
 
   const handleSendMessage = async (customText?: string) => {
@@ -152,7 +150,8 @@ export const AIAssistantPage: React.FC<AIAssistantPageProps> = ({
       const lower = textToSend.toLowerCase();
       let extractedTrip: any = undefined;
       if (lower.includes('lịch trình') || lower.includes('lên kế hoạch') || lower.includes('ngày') || lower.includes('tour')) {
-        let dest = 'Đà Nẵng';
+        let dest = '';
+        if (lower.includes('đà nẵng')) dest = 'Đà Nẵng';
         if (lower.includes('hà nội')) dest = 'Hà Nội';
         else if (lower.includes('đà lạt')) dest = 'Đà Lạt';
         else if (lower.includes('phú quốc')) dest = 'Phú Quốc';
@@ -160,7 +159,8 @@ export const AIAssistantPage: React.FC<AIAssistantPageProps> = ({
         else if (lower.includes('hội an')) dest = 'Hội An';
         else if (lower.includes('ninh bình')) dest = 'Ninh Bình';
         else if (lower.includes('huế')) dest = 'Huế';
-        else if (lower.includes('hà giang')) dest = 'Hà Giang';
+        else if (lower.includes('nha trang')) dest = 'Nha Trang';
+        else if (lower.includes('hồ chí minh') || lower.includes('tp.hcm') || lower.includes('sài gòn')) dest = 'TP. Hồ Chí Minh';
 
         let days = 3;
         const daysMatch = lower.match(/(\d+)\s*ngày/);
@@ -170,7 +170,7 @@ export const AIAssistantPage: React.FC<AIAssistantPageProps> = ({
         const guestsMatch = lower.match(/(\d+)\s*(người|khách)/);
         if (guestsMatch) guests = parseInt(guestsMatch[1]);
 
-        extractedTrip = {
+        if (dest) extractedTrip = {
           destination: dest,
           days,
           guests,
@@ -470,13 +470,13 @@ export const AIAssistantPage: React.FC<AIAssistantPageProps> = ({
                           key={i}
                           onClick={() => {
                             if (act.action === 'ask_hanoi_food') {
-                              handleSendMessage('Quán phở và bún chả ngon không chặt chém gần Hồ Gươm');
-                            } else if (act.action === 'ask_fish_sauce') {
-                              handleSendMessage('Quy định đóng thùng xốp mang nước mắm Phú Quốc lên máy bay');
+                              handleSendMessage('Gợi ý quán ăn trong dữ liệu VietGo tại Hà Nội');
+                            } else if (act.action === 'ask_hue_sights') {
+                              handleSendMessage('Gợi ý điểm tham quan trong dữ liệu VietGo tại Huế');
                             } else if (act.action === 'plan_danang') {
                               onProceedToItinerary({ destination: 'Đà Nẵng', days: 3, guests: 2, style: 'Cặp đôi & Chill' });
-                            } else if (act.action === 'ask_hagiang') {
-                              handleSendMessage('Kinh nghiệm thuê xe máy tự lái và phượt an toàn cung đèo Mã Pí Lèng Hà Giang');
+                            } else if (act.action === 'open_planner') {
+                              onProceedToItinerary({ destination: '', days: 3, guests: 2 });
                             } else {
                               handleSendMessage(act.label);
                             }
@@ -500,7 +500,7 @@ export const AIAssistantPage: React.FC<AIAssistantPageProps> = ({
               </div>
               <div className="bg-[#F7F7F7] border border-[#E5E5E5] rounded-2xl px-4 py-2.5 text-xs text-[#717171] flex items-center gap-2">
                 <div className="w-2 h-2 rounded-full bg-[#FF385C] animate-ping"></div>
-                <span>VietGo AI đang tra cứu bách khoa du lịch bản xứ...</span>
+                <span>Đang tìm trong dữ liệu địa điểm VietGo...</span>
               </div>
             </div>
           )}

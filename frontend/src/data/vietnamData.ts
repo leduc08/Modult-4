@@ -146,7 +146,7 @@ export const PROVINCES: Province[] = [
       avgBikeRental: '100.000 - 150.000đ/ngày',
       avgTaxiRate: '12.000 - 15.000đ/km'
     },
-    imageUrl: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=900&auto=format&fit=crop&q=80',
+    imageUrl: '/images/cities/ha-noi.jpg',
     pois: [
       {
         id: 'hn-poi-1',
@@ -231,7 +231,7 @@ export const PROVINCES: Province[] = [
         isSeasonal: false,
         isLocalFavorite: true,
         description: 'Chả băm và chả miếng nướng than hoa vàng óng, ngập trong bát nước mắm chua ngọt ấm nóng kèm đu đủ giòn và đĩa nem cua bể giòn rụm.',
-        imageUrl: 'https://images.unsplash.com/photo-1569058242253-92a9c755a0ec?w=600&auto=format&fit=crop&q=80',
+        imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Bun-cha-hanoi.jpg?width=600',
         rating: 4.6,
         reviewCount: 2100,
         signatureDish: 'Bún chả nem cua bể đặc biệt'
@@ -250,7 +250,7 @@ export const PROVINCES: Province[] = [
         isSeasonal: false,
         isLocalFavorite: true,
         description: 'Nơi khai sinh món cà phê trứng trứ danh từ năm 1946 do cụ Nguyễn Văn Giảng sáng tạo. Lớp kem trứng đánh bông mịn ngậy béo hòa quyện cà phê Robusta đậm đà.',
-        imageUrl: 'https://images.unsplash.com/photo-1514432324607-a09d9b4aefdd?w=600&auto=format&fit=crop&q=80',
+        imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Vietnam-Hanoi-Egg_coffee-P1280590.jpg?width=600',
         rating: 4.9,
         reviewCount: 3890,
         signatureDish: 'Cà phê trứng nóng / Cacao trứng'
@@ -336,7 +336,7 @@ export const PROVINCES: Province[] = [
       avgBikeRental: '120.000 - 150.000đ/ngày',
       avgTaxiRate: '13.000 - 16.000đ/km'
     },
-    imageUrl: 'https://images.unsplash.com/photo-1559592413-7cec4d0cae2b?w=900&auto=format&fit=crop&q=80',
+    imageUrl: '/images/cities/da-nang.jpg',
     pois: [
       {
         id: 'dn-poi-1',
@@ -402,7 +402,7 @@ export const PROVINCES: Province[] = [
         isSeasonal: false,
         isLocalFavorite: true,
         description: 'Sợi mì gạo mềm mượt hòa quyện nước nhưỡng đậm đà vừa xăm xắp, đậu phộng rang thơm lừng, bánh tráng nướng giòn rụm và đĩa rau sống bắp chuối tươi mát.',
-        imageUrl: 'https://images.unsplash.com/photo-1569058242253-92a9c755a0ec?w=600&auto=format&fit=crop&q=80',
+        imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/M%C3%AC_Qu%E1%BA%A3ng.jpg?width=600',
         rating: 4.8,
         reviewCount: 2310,
         signatureDish: 'Mì Quảng đặc biệt thập cẩm tôm thịt trứng'
@@ -940,7 +940,7 @@ export const PROVINCES: Province[] = [
       avgBikeRental: '100.000 - 130.000đ/ngày',
       avgTaxiRate: '12.500đ/km'
     },
-    imageUrl: 'https://images.unsplash.com/photo-1583417319070-4a69db38a482?w=900&auto=format&fit=crop&q=80',
+    imageUrl: '/images/cities/hue.jpg',
     pois: [
       {
         id: 'hue-poi-1',
@@ -952,7 +952,7 @@ export const PROVINCES: Province[] = [
         ticketPrice: 200000,
         estimatedTime: '3 - 4 giờ',
         description: 'Quần thể cung điện nguy nga bậc nhất Việt Nam với Ngọ Môn, Điện Thái Hòa, Thế Miếu nơi các Hoàng đế triều Nguyễn ngự trị.',
-        imageUrl: 'https://images.unsplash.com/photo-1583417319070-4a69db38a482?w=700&auto=format&fit=crop&q=80',
+        imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Imperial_City%2C_Hue%2C_Vietnam_%286927421308%29.jpg?width=700',
         tags: ['đại nội', 'hoàng cung', 'di sản unesco', 'lịch sử'],
         localTips: 'Thuê cổ phục triều Nguyễn (Áo Nhật Bình, Áo Tấc) tại cổng Ngọ Môn để có những bức ảnh cung đình tuyệt mỹ.',
         rating: 4.9,
@@ -1150,7 +1150,7 @@ export const PROVINCES: Province[] = [
       avgBikeRental: '100.000 - 130.000đ/ngày',
       avgTaxiRate: '12.000đ/km'
     },
-    imageUrl: 'https://images.unsplash.com/photo-1528127269322-539801943592?w=900&auto=format&fit=crop&q=80',
+    imageUrl: '/images/cities/ninh-binh.jpg',
     pois: [
       {
         id: 'nb-poi-1',
@@ -1162,7 +1162,7 @@ export const PROVINCES: Province[] = [
         ticketPrice: 250000,
         estimatedTime: '3 giờ',
         description: 'Ngồi thuyền nan trôi theo dòng nước biếc xuyên qua 9 hang động huyền ảo và thăm phim trường King Kong: Skull Island.',
-        imageUrl: 'https://images.unsplash.com/photo-1528127269322-539801943592?w=700&auto=format&fit=crop&q=80',
+        imageUrl: 'https://commons.wikimedia.org/wiki/Special:FilePath/Trang_An%2C_Ninh_Binh.jpg?width=700',
         tags: ['tràng an', 'di sản kép unesco', 'thuyền chèo', 'hang động'],
         localTips: 'Chọn Tuyến 3 (Hang Mây dài 1.000m) hoặc Tuyến 2 để có hành trình hang động đẹp và ít đông nhất.',
         rating: 4.9,

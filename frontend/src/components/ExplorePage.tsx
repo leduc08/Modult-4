@@ -3,24 +3,18 @@ import {
   Search, 
   MapPin, 
   Navigation,
-  Calendar, 
-  Users, 
   Heart, 
-  Star, 
   SlidersHorizontal, 
-  Sparkles, 
   Palmtree, 
   Trees, 
   Landmark, 
   Utensils, 
   PartyPopper, 
   Layers, 
-  ArrowRight,
-  Check,
   X
 } from 'lucide-react';
 import { PROVINCES } from '../data/vietnamData';
-import { POI, FoodSpot, Festival, Province } from '../types';
+import { POI, FoodSpot, Festival } from '../types';
 import { DetailItem } from './ItemDetailModal';
 
 interface ExplorePageProps {
@@ -31,6 +25,25 @@ interface ExplorePageProps {
   onNavigateToNearby?: () => void;
 }
 
+const ExploreImage: React.FC<{ src: string; alt: string; className: string }> = ({ src, alt, className }) => {
+  const [loaded, setLoaded] = useState(false);
+  const [failed, setFailed] = useState(false);
+
+  return (
+    <div className="h-full w-full bg-rose-50">
+      {!loaded && !failed && <div className="absolute inset-0 animate-pulse bg-rose-50" role="status" aria-label={`Đang tải ảnh ${alt}`} />}
+      {failed ? (
+        <div className="flex h-full w-full flex-col items-center justify-center gap-2 bg-rose-50 px-4 text-center text-rose-700">
+          <MapPin className="h-6 w-6" aria-hidden="true" />
+          <span className="text-xs font-semibold">Chưa có ảnh phù hợp cho {alt}</span>
+        </div>
+      ) : (
+        <img src={src} alt={alt} className={`${className} ${loaded ? 'opacity-100' : 'opacity-0'}`} loading="lazy" onLoad={() => setLoaded(true)} onError={() => setFailed(true)} />
+      )}
+    </div>
+  );
+};
+
 export const ExplorePage: React.FC<ExplorePageProps> = ({
   wishlist,
   onToggleWishlist,
@@ -40,8 +53,6 @@ export const ExplorePage: React.FC<ExplorePageProps> = ({
 }) => {
   // Search Bar States
   const [destinationQuery, setDestinationQuery] = useState('');
-  const [selectedDuration, setSelectedDuration] = useState<number | null>(3);
-  const [selectedGuests, setSelectedGuests] = useState<number>(2);
   const [isSearchOpen, setIsSearchOpen] = useState(false); // Mobile search modal
 
   // Category filter: 'all' | 'nature' | 'beach' | 'culture' | 'food' | 'festival'
@@ -136,8 +147,8 @@ export const ExplorePage: React.FC<ExplorePageProps> = ({
       const matchSearch = matchesSearch(poi.name, poi.provinceName);
       const matchReg = matchesRegion(poi.region);
       const matchPrice = poi.ticketPrice <= filterMaxPrice;
-      
-      if (activeCategory === 'all') return matchSearch && matchReg && matchPrice;
+      if (!matchSearch || !matchReg || !matchPrice) return false;
+      if (activeCategory === 'all') return true;
       if (activeCategory === 'culture') return poi.category.includes('Văn hóa') || poi.category.includes('Tâm linh') || poi.category.includes('Di sản');
       if (activeCategory === 'nature') return poi.category.includes('Thiên nhiên') || poi.tags.some(t => ['núi', 'rừng', 'sông', 'thác'].includes(t));
       if (activeCategory === 'beach') return poi.tags.some(t => ['biển', 'đảo', 'bãi tắm', 'san hô'].includes(t));
@@ -171,15 +182,15 @@ export const ExplorePage: React.FC<ExplorePageProps> = ({
   return (
     <div className="min-h-screen bg-white text-[#222222]">
       {/* 1. Header & Airbnb Pill Search Bar Section */}
-      <section className="border-b border-[#E5E5E5] bg-white pt-6 pb-8 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-6xl mx-auto space-y-6">
+      <section className="border-b border-[#E5E5E5] bg-white pt-4 pb-4 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto space-y-4">
           {/* Welcoming Greeting */}
           <div className="text-center space-y-1.5">
             <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-[#222222] tracking-tight">
-              Chuyến đi Việt Nam tiếp theo của bạn bắt đầu ở đâu?
+              Chuyến đi tiếp theo của bạn bắt đầu ở đâu?
             </h1>
             <p className="text-xs sm:text-sm text-[#717171] max-w-xl mx-auto">
-              Khám phá danh thắng, ẩm thực chuẩn vị và văn hóa bản địa được AI kiểm chứng trên 34+ tỉnh thành.
+              Khám phá điểm đến, ẩm thực và văn hóa địa phương cùng VietGo.
             </p>
           </div>
 
@@ -187,7 +198,7 @@ export const ExplorePage: React.FC<ExplorePageProps> = ({
           <div className="hidden sm:block">
             <form 
               onSubmit={handleSearchSubmit}
-              className="max-w-4xl mx-auto bg-white rounded-full border border-[#E5E5E5] shadow-md hover:shadow-lg transition-all p-2 flex items-center justify-between divide-x divide-[#E5E5E5]"
+              className="max-w-3xl mx-auto bg-white rounded-full border border-[#E5E5E5] shadow-md hover:shadow-lg transition-all p-2 flex items-center justify-between divide-x divide-[#E5E5E5]"
             >
               {/* Field 1: Destination */}
               <div className="flex-1 px-5 py-1.5 hover:bg-[#F7F7F7] rounded-full transition-colors cursor-pointer group">
@@ -203,38 +214,10 @@ export const ExplorePage: React.FC<ExplorePageProps> = ({
                 />
               </div>
 
-              {/* Field 2: Duration */}
-              <div className="px-5 py-1.5 hover:bg-[#F7F7F7] rounded-full transition-colors cursor-pointer min-w-[170px]">
-                <label className="block text-[11px] font-bold text-[#222222] uppercase tracking-wider">
-                  Thời gian
-                </label>
-                <select
-                  value={selectedDuration || 3}
-                  onChange={(e) => setSelectedDuration(Number(e.target.value))}
-                  className="w-full bg-transparent text-xs sm:text-sm text-[#222222] font-semibold focus:outline-hidden cursor-pointer"
-                >
-                  <option value={2}>2 ngày (Cuối tuần)</option>
-                  <option value={3}>3 ngày 2 đêm</option>
-                  <option value={4}>4 ngày 3 đêm</option>
-                  <option value={5}>5 ngày 4 đêm</option>
-                  <option value={7}>7 ngày (Trọn vẹn)</option>
-                </select>
-              </div>
-
-              {/* Field 3: Guests */}
-              <div className="px-5 py-1.5 hover:bg-[#F7F7F7] rounded-full transition-colors cursor-pointer min-w-[150px]">
-                <label className="block text-[11px] font-bold text-[#222222] uppercase tracking-wider">
-                  Số người
-                </label>
-                <select
-                  value={selectedGuests}
-                  onChange={(e) => setSelectedGuests(Number(e.target.value))}
-                  className="w-full bg-transparent text-xs sm:text-sm text-[#222222] font-semibold focus:outline-hidden cursor-pointer"
-                >
-                  <option value={1}>1 khách (Solo)</option>
-                  <option value={2}>2 khách (Cặp đôi)</option>
-                  <option value={4}>4 khách (Gia đình)</option>
-                  <option value={6}>6+ khách (Nhóm)</option>
+              <div className="px-5 py-1.5 hover:bg-[#F7F7F7] rounded-full transition-colors min-w-[160px]">
+                <label className="block text-[11px] font-bold text-[#222222] uppercase tracking-wider" htmlFor="explore-interest">Sở thích</label>
+                <select id="explore-interest" value={activeCategory} onChange={(e) => setActiveCategory(e.target.value)} className="w-full bg-transparent text-xs sm:text-sm text-[#222222] font-semibold focus:outline-hidden cursor-pointer">
+                  {categories.map(cat => <option key={cat.id} value={cat.id}>{cat.label}</option>)}
                 </select>
               </div>
 
@@ -245,7 +228,7 @@ export const ExplorePage: React.FC<ExplorePageProps> = ({
                   className="bg-[#FF385C] hover:bg-[#E00B41] text-white p-3.5 rounded-full transition-all shadow-sm flex items-center justify-center gap-2 cursor-pointer font-bold text-xs sm:text-sm px-5"
                 >
                   <Search className="w-4 h-4" />
-                  <span className="hidden md:inline">Tìm kiếm</span>
+                  <span className="hidden md:inline">Khám phá</span>
                 </button>
               </div>
             </form>
@@ -266,7 +249,7 @@ export const ExplorePage: React.FC<ExplorePageProps> = ({
                     {destinationQuery || 'Bạn muốn đi đâu?'}
                   </div>
                   <div className="text-[11px] text-[#717171]">
-                    {selectedDuration} ngày • {selectedGuests} khách
+                    {categories.find(cat => cat.id === activeCategory)?.label}
                   </div>
                 </div>
               </div>
@@ -314,7 +297,7 @@ export const ExplorePage: React.FC<ExplorePageProps> = ({
       </section>
 
       {/* 2. Theme Filter Tabs Bar */}
-      <section className="sticky top-16 z-20 bg-white/95 backdrop-blur-xs border-b border-[#E5E5E5] py-3 px-4 sm:px-6 lg:px-8">
+      <section className="sticky top-[var(--site-header-height,89px)] z-30 bg-white/95 backdrop-blur-xs border-b border-[#E5E5E5] py-2 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto flex items-center justify-between gap-4">
           {/* Categories Horizontal Scroll */}
           <div className="flex items-center gap-6 overflow-x-auto scrollbar-none py-1">
@@ -353,7 +336,8 @@ export const ExplorePage: React.FC<ExplorePageProps> = ({
       </section>
 
       {/* 3. Main Content Sections */}
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-5 space-y-10">
+        <p className="text-[11px] text-[#717171]">Dữ liệu địa điểm và mức giá đang dùng cho bản demo. Hãy kiểm tra thông tin trước chuyến đi. <a href="/image-credits.html" className="underline">Nguồn ảnh</a></p>
         {/* SECTION A: Điểm đến nổi bật (Top Destinations) */}
         {(activeCategory === 'all' || activeCategory === 'beach' || activeCategory === 'nature' || activeCategory === 'culture') && filteredProvinces.length > 0 && (
           <section className="space-y-4">
@@ -363,14 +347,14 @@ export const ExplorePage: React.FC<ExplorePageProps> = ({
                   Điểm đến nổi bật Việt Nam
                 </h2>
                 <p className="text-xs sm:text-sm text-[#717171]">
-                  Những thành phố du lịch được yêu thích nhất với thông tin thời tiết & mẹo di chuyển chuẩn xác
+                  Gợi ý điểm đến cùng thông tin thời tiết và mẹo di chuyển để tham khảo
                 </p>
               </div>
             </div>
 
             {/* Grid 4 columns responsive */}
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-              {filteredProvinces.slice(0, 8).map((prov) => {
+              {filteredProvinces.map((prov) => {
                 const isSaved = wishlist.includes(prov.id);
                 return (
                   <div
@@ -380,15 +364,7 @@ export const ExplorePage: React.FC<ExplorePageProps> = ({
                   >
                     {/* Image with 4:3 ratio & 16-20px rounded */}
                     <div className="relative aspect-[4/3] rounded-[18px] overflow-hidden bg-[#F7F7F7] mb-2.5">
-                      <img
-                        src={prov.imageUrl}
-                        alt={prov.name}
-                        className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-300"
-                        loading="lazy"
-                        onError={(e) => {
-                          (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1528127269322-539801943592?w=600&auto=format&fit=crop&q=80';
-                        }}
-                      />
+                      <ExploreImage src={prov.imageUrl} alt={prov.name} className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-300" />
 
                       {/* Wishlist button top right */}
                       <button
@@ -410,33 +386,27 @@ export const ExplorePage: React.FC<ExplorePageProps> = ({
                     </div>
 
                     {/* Metadata */}
-                    <div className="space-y-0.5">
+                    <div className="flex flex-1 flex-col space-y-0.5">
                       <div className="flex items-center justify-between font-extrabold text-sm text-[#222222]">
                         <span>{prov.name}</span>
-                        <div className="flex items-center gap-1 text-xs font-bold text-[#222222]">
-                          <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                          <span>4.9</span>
-                        </div>
                       </div>
                       <p className="text-xs text-[#717171] line-clamp-1">
                         {prov.tagline}
                       </p>
-                      <div className="text-xs text-[#717171] pt-1 flex items-center justify-between">
-                        <span>Mùa đẹp: {prov.bestMonths}</span>
-                        <button
+                      <div className="text-xs text-[#717171] pt-1">Mùa đẹp: {prov.bestMonths}</div>
+                      <button
                           onClick={(e) => {
                             e.stopPropagation();
                             onQuickPlanTrip({
                               destination: prov.name,
-                              days: selectedDuration || 3,
-                              guests: selectedGuests || 2
+                              days: 3,
+                              guests: 2
                             });
                           }}
-                          className="text-[11px] font-bold text-[#FF385C] hover:underline"
+                          className="mt-auto self-start pt-2 whitespace-nowrap text-[11px] font-bold text-[#FF385C] hover:underline"
                         >
                           Lập lịch trình &rarr;
-                        </button>
-                      </div>
+                      </button>
                     </div>
                   </div>
                 );
@@ -475,15 +445,7 @@ export const ExplorePage: React.FC<ExplorePageProps> = ({
                   >
                     {/* Image with 4:3 ratio & 18px rounded */}
                     <div className="relative aspect-[4/3] rounded-[18px] overflow-hidden bg-[#F7F7F7] mb-2.5">
-                      <img
-                        src={poi.imageUrl}
-                        alt={poi.name}
-                        className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-300"
-                        loading="lazy"
-                        onError={(e) => {
-                          (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1599818817342-a8c6b245785a?w=600&auto=format&fit=crop&q=80';
-                        }}
-                      />
+                      <ExploreImage src={poi.imageUrl} alt={poi.name} className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-300" />
 
                       {/* Wishlist button */}
                       <button
@@ -508,11 +470,6 @@ export const ExplorePage: React.FC<ExplorePageProps> = ({
                     <div className="space-y-0.5">
                       <div className="flex items-center justify-between font-extrabold text-sm text-[#222222]">
                         <span className="truncate pr-2">{poi.name}</span>
-                        <div className="flex items-center gap-1 text-xs font-bold shrink-0">
-                          <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                          <span>{poi.rating.toFixed(1)}</span>
-                          <span className="text-[#717171] font-normal text-[11px]">({poi.reviewCount})</span>
-                        </div>
                       </div>
 
                       <div className="text-xs text-[#717171] flex items-center gap-1">
@@ -526,7 +483,7 @@ export const ExplorePage: React.FC<ExplorePageProps> = ({
 
                       <div className="text-xs pt-1 flex items-center justify-between">
                         <span className="font-extrabold text-[#222222]">
-                          {priceLabel}
+                          Giá tham khảo: {priceLabel}
                         </span>
                       </div>
                     </div>
@@ -546,7 +503,7 @@ export const ExplorePage: React.FC<ExplorePageProps> = ({
                   Khám phá ẩm thực chuẩn vị
                 </h2>
                 <p className="text-xs sm:text-sm text-[#717171]">
-                  Quán ngon gia truyền, địa chỉ bản địa và giá tiền minh bạch không lo chặt chém
+                  Khám phá món ngon địa phương cùng địa chỉ và mức giá tham khảo.
                 </p>
               </div>
             </div>
@@ -563,15 +520,7 @@ export const ExplorePage: React.FC<ExplorePageProps> = ({
                   >
                     {/* Image with 4:3 ratio & 18px rounded */}
                     <div className="relative aspect-[4/3] rounded-[18px] overflow-hidden bg-[#F7F7F7] mb-2.5">
-                      <img
-                        src={food.imageUrl}
-                        alt={food.dishName}
-                        className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-300"
-                        loading="lazy"
-                        onError={(e) => {
-                          (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1582878826629-29b7ad1cdc43?w=600&auto=format&fit=crop&q=80';
-                        }}
-                      />
+                      <ExploreImage src={food.imageUrl} alt={food.dishName} className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-300" />
 
                       {/* Wishlist button */}
                       <button
@@ -598,11 +547,6 @@ export const ExplorePage: React.FC<ExplorePageProps> = ({
                     <div className="space-y-0.5">
                       <div className="flex items-center justify-between font-extrabold text-sm text-[#222222]">
                         <span className="truncate pr-2">{food.dishName}</span>
-                        <div className="flex items-center gap-1 text-xs font-bold shrink-0">
-                          <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
-                          <span>{food.rating.toFixed(1)}</span>
-                          <span className="text-[#717171] font-normal text-[11px]">({food.reviewCount})</span>
-                        </div>
                       </div>
 
                       <div className="text-xs text-[#717171] truncate">
@@ -615,7 +559,7 @@ export const ExplorePage: React.FC<ExplorePageProps> = ({
 
                       <div className="text-xs pt-1 flex items-center justify-between">
                         <span className="font-extrabold text-[#222222]">
-                          {food.priceRange} / món
+                          Giá tham khảo: {food.priceRange} / món
                         </span>
                       </div>
                     </div>
@@ -651,15 +595,7 @@ export const ExplorePage: React.FC<ExplorePageProps> = ({
                     className="group flex flex-col cursor-pointer"
                   >
                     <div className="relative aspect-[4/3] rounded-[18px] overflow-hidden bg-[#F7F7F7] mb-2.5">
-                      <img
-                        src={fest.imageUrl}
-                        alt={fest.name}
-                        className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-300"
-                        loading="lazy"
-                        onError={(e) => {
-                          (e.target as HTMLImageElement).src = 'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=600&auto=format&fit=crop&q=80';
-                        }}
-                      />
+                      <ExploreImage src={fest.imageUrl} alt={fest.name} className="w-full h-full object-cover group-hover:scale-103 transition-transform duration-300" />
 
                       {/* Wishlist button */}
                       <button
@@ -690,7 +626,7 @@ export const ExplorePage: React.FC<ExplorePageProps> = ({
                         {fest.description}
                       </p>
                       <div className="text-xs pt-1 font-extrabold text-[#222222]">
-                        {fest.ticketPrice > 0 ? `${fest.ticketPrice.toLocaleString('vi-VN')} VNĐ / vé` : 'Miễn phí tham dự'}
+                        Giá tham khảo: {fest.ticketPrice > 0 ? `${fest.ticketPrice.toLocaleString('vi-VN')} VNĐ / vé` : 'Miễn phí tham dự'}
                       </div>
                     </div>
                   </div>
@@ -753,35 +689,11 @@ export const ExplorePage: React.FC<ExplorePageProps> = ({
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
-                <div className="space-y-1">
-                  <label className="text-xs font-bold text-[#222222]">Số ngày</label>
-                  <select
-                    value={selectedDuration || 3}
-                    onChange={(e) => setSelectedDuration(Number(e.target.value))}
-                    className="w-full p-3 rounded-2xl border border-[#E5E5E5] text-xs font-semibold text-[#222222] focus:outline-hidden"
-                  >
-                    <option value={2}>2 ngày</option>
-                    <option value={3}>3 ngày</option>
-                    <option value={4}>4 ngày</option>
-                    <option value={5}>5 ngày</option>
-                    <option value={7}>7 ngày</option>
-                  </select>
-                </div>
-
-                <div className="space-y-1">
-                  <label className="text-xs font-bold text-[#222222]">Số người</label>
-                  <select
-                    value={selectedGuests}
-                    onChange={(e) => setSelectedGuests(Number(e.target.value))}
-                    className="w-full p-3 rounded-2xl border border-[#E5E5E5] text-xs font-semibold text-[#222222] focus:outline-hidden"
-                  >
-                    <option value={1}>1 người</option>
-                    <option value={2}>2 người</option>
-                    <option value={4}>4 người</option>
-                    <option value={6}>6+ người</option>
-                  </select>
-                </div>
+              <div className="space-y-1">
+                <label className="text-xs font-bold text-[#222222]" htmlFor="mobile-explore-interest">Sở thích</label>
+                <select id="mobile-explore-interest" value={activeCategory} onChange={(e) => setActiveCategory(e.target.value)} className="w-full p-3 rounded-2xl border border-[#E5E5E5] text-xs font-semibold text-[#222222] focus:outline-hidden">
+                  {categories.map(cat => <option key={cat.id} value={cat.id}>{cat.label}</option>)}
+                </select>
               </div>
             </div>
 
@@ -796,7 +708,7 @@ export const ExplorePage: React.FC<ExplorePageProps> = ({
                 onClick={() => setIsSearchOpen(false)}
                 className="flex-1 py-3 px-4 rounded-2xl bg-[#FF385C] text-white text-xs font-bold shadow-sm"
               >
-                Tìm kiếm ngay
+                Khám phá
               </button>
             </div>
           </div>
