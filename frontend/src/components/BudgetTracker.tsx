@@ -202,7 +202,15 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
   const [isOptionsMenuOpen, setIsOptionsMenuOpen] = useState(false);
   const [isEditBudgetOpen, setIsEditBudgetOpen] = useState(false);
   const [newBudgetValue, setNewBudgetValue] = useState(activeTrip.totalBudget.toString());
+  const [isEditDurationOpen, setIsEditDurationOpen] = useState(false);
+  const [newDurationValue, setNewDurationValue] = useState(activeTrip.duration);
   const [selectedReceiptView, setSelectedReceiptView] = useState<string | null>(null);
+
+  // Đồng bộ giá trị khi đổi chuyến đi
+  useEffect(() => {
+    setNewDurationValue(activeTrip.duration);
+    setNewBudgetValue(activeTrip.totalBudget.toString());
+  }, [activeTrip.duration, activeTrip.totalBudget, currentTripId]);
 
   // Tab trong Modal Thêm chi tiêu: 'manual' | 'camera' | 'upload'
   const [addExpenseTab, setAddExpenseTab] = useState<'manual' | 'camera' | 'upload'>('manual');
@@ -473,6 +481,15 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
     setIsEditBudgetOpen(false);
   };
 
+  // Cập nhật thời lượng chuyến đi
+  const handleSaveDuration = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!newDurationValue.trim()) return;
+
+    setTrips(prev => prev.map(t => t.id === currentTripId ? { ...t, duration: newDurationValue.trim() } : t));
+    setIsEditDurationOpen(false);
+  };
+
   // Xuất báo cáo CSV
   const handleExportCSV = () => {
     const headers = 'ID,Ten Khoan Chi,So Tien (VND),Danh Muc,Ngay,Phuong Thuc,Ghi Chu\n';
@@ -507,11 +524,6 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
             <ArrowLeft className="w-4 h-4 text-stone-500 group-hover:-translate-x-0.5 transition-transform" />
             <span>Quay lại Khám phá</span>
           </button>
-          
-          <div className="hidden sm:flex items-center gap-2 text-xs text-stone-500 bg-stone-50 px-3 py-1.5 rounded-full border border-stone-200">
-            <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
-            <span>Đang mở từ <strong className="text-stone-700">Menu 3 gạch</strong></span>
-          </div>
         </div>
       )}
 
@@ -532,10 +544,20 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
             </div>
           </div>
 
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-stone-100 text-stone-700 text-xs font-semibold self-start sm:self-auto">
-            <Calendar className="w-3.5 h-3.5 text-stone-500" />
-            <span>Thời lượng: {activeTrip.duration}</span>
-          </div>
+          <button
+            onClick={() => {
+              setNewDurationValue(activeTrip.duration);
+              setIsEditDurationOpen(true);
+            }}
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-stone-100 hover:bg-stone-200 text-stone-700 hover:text-stone-900 text-xs font-semibold self-start sm:self-auto transition-all cursor-pointer border border-stone-200/80 hover:border-stone-400 group shadow-xs"
+            title="Bấm để điều chỉnh thời lượng chuyến đi"
+          >
+            <Calendar className="w-3.5 h-3.5 text-stone-500 group-hover:text-[#FF385C] transition-colors" />
+            <span>Thời lượng: <strong className="text-stone-900">{activeTrip.duration}</strong></span>
+            <span className="text-[10px] text-stone-500 group-hover:text-[#FF385C] font-semibold bg-white px-1.5 py-0.5 rounded-md border border-stone-200 transition-colors">
+              Chỉnh sửa
+            </span>
+          </button>
         </div>
 
         {/* 3 Thẻ Chỉ Số: Tổng Ngân Sách, Đã Chi, Còn Lại */}
@@ -730,7 +752,7 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
           </div>
         </div>
 
-        {/* Nút 2: + Thêm chi tiêu */}
+        {/* Nút 2: Thêm chi tiêu */}
         <button
           onClick={() => {
             setAddExpenseTab('manual');
@@ -739,7 +761,7 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
           className="inline-flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-[#FF385C] hover:bg-[#E00B41] text-white text-xs sm:text-sm font-black shadow-md hover:shadow-lg transition-all cursor-pointer transform hover:-translate-y-0.5 active:translate-y-0"
         >
           <PlusCircle className="w-4 h-4" />
-          <span>+ Thêm chi tiêu</span>
+          <span>Thêm chi tiêu</span>
         </button>
       </section>
 
@@ -845,7 +867,7 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
                   </div>
                   <div className="text-sm font-bold text-stone-700">Chưa có khoản chi nào trong mục này</div>
                   <p className="text-xs text-stone-500 max-w-sm mx-auto">
-                    Bấm nút <strong>"+ Thêm chi tiêu"</strong> để nhập tay hoặc tải ảnh hóa đơn bóc tách tự động.
+                    Bấm nút <strong>"Thêm chi tiêu"</strong> để nhập tay hoặc tải ảnh hóa đơn bóc tách tự động.
                   </p>
                   <button
                     onClick={() => {
@@ -1645,6 +1667,79 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
               >
                 Cập nhật ngân sách
               </button>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* ============================================================== */}
+      {/* MODAL: CHỈNH SỬA THỜI LƯỢNG CHUYẾN ĐI                          */}
+      {/* ============================================================== */}
+      {isEditDurationOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-in fade-in duration-150">
+          <div className="bg-white rounded-3xl max-w-sm w-full p-6 shadow-2xl space-y-4 border border-stone-200">
+            <div className="flex items-center justify-between border-b border-stone-100 pb-3">
+              <div className="flex items-center gap-2">
+                <Calendar className="w-4 h-4 text-[#FF385C]" />
+                <h3 className="font-extrabold text-sm text-stone-900">Điều chỉnh thời lượng</h3>
+              </div>
+              <button 
+                onClick={() => setIsEditDurationOpen(false)} 
+                className="p-1 text-stone-400 hover:text-stone-700 cursor-pointer rounded-full"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            <form onSubmit={handleSaveDuration} className="space-y-3.5">
+              <div className="space-y-1">
+                <label className="text-xs font-bold text-stone-600">Thời lượng chuyến đi</label>
+                <input
+                  type="text"
+                  value={newDurationValue}
+                  onChange={(e) => setNewDurationValue(e.target.value)}
+                  placeholder="VD: 3 ngày 2 đêm, 4 ngày 3 đêm..."
+                  className="w-full p-2.5 bg-stone-50 border border-stone-200 rounded-xl text-xs font-bold text-stone-900 focus:outline-hidden focus:border-[#FF385C]"
+                  required
+                />
+              </div>
+
+              {/* Gợi ý chọn nhanh */}
+              <div className="space-y-1.5">
+                <div className="text-[11px] font-semibold text-stone-500">Gợi ý chọn nhanh:</div>
+                <div className="flex flex-wrap gap-1.5">
+                  {['2 ngày 1 đêm', '3 ngày 2 đêm', '4 ngày 3 đêm', '5 ngày 4 đêm', '7 ngày 6 đêm', 'Tự do'].map(d => (
+                    <button
+                      key={d}
+                      type="button"
+                      onClick={() => setNewDurationValue(d)}
+                      className={`px-2.5 py-1 rounded-lg text-[11px] font-bold transition-all cursor-pointer ${
+                        newDurationValue === d
+                          ? 'bg-[#FF385C] text-white shadow-xs'
+                          : 'bg-stone-100 hover:bg-stone-200 text-stone-700'
+                      }`}
+                    >
+                      {d}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div className="flex gap-2 pt-2 border-t border-stone-100">
+                <button
+                  type="button"
+                  onClick={() => setIsEditDurationOpen(false)}
+                  className="flex-1 py-2.5 rounded-xl border border-stone-200 text-stone-600 hover:bg-stone-50 text-xs font-bold transition-colors cursor-pointer"
+                >
+                  Hủy
+                </button>
+                <button
+                  type="submit"
+                  className="flex-1 py-2.5 bg-[#FF385C] hover:bg-[#E00B41] text-white rounded-xl text-xs font-bold transition-colors cursor-pointer shadow-xs"
+                >
+                  Lưu thời lượng
+                </button>
+              </div>
             </form>
           </div>
         </div>
