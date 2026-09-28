@@ -15,7 +15,8 @@ import {
   PieChart, 
   DollarSign,
   Award,
-  Globe
+  Globe,
+  Search
 } from 'lucide-react';
 import { PROVINCES } from '../data/vietnamData';
 import { DetailItem } from './ItemDetailModal';
@@ -28,6 +29,7 @@ interface AccountDrawerProps {
   onToggleWishlist: (id: string) => void;
   onSelectItem: (item: DetailItem) => void;
   initialTab?: 'wishlist' | 'dna' | 'budget' | 'emergency';
+  onOpenFullBudget?: () => void;
 }
 
 export const AccountDrawer: React.FC<AccountDrawerProps> = ({
@@ -36,9 +38,11 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
   wishlist,
   onToggleWishlist,
   onSelectItem,
-  initialTab = 'wishlist'
+  initialTab = 'wishlist',
+  onOpenFullBudget
 }) => {
   const [activeTab, setActiveTab] = useState<'wishlist' | 'dna' | 'budget' | 'emergency'>(initialTab);
+  const [wishlistSearch, setWishlistSearch] = useState('');
 
   // Sync initial tab when opened
   React.useEffect(() => {
@@ -94,6 +98,11 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
     const amt = parseFloat(newExpenseAmount.replace(/[^0-9]/g, ''));
     if (!newExpenseTitle.trim() || isNaN(amt) || amt <= 0) return;
 
+    if (amt > remainingBudget) {
+      alert(`Số dư không đủ! Bạn chỉ còn lại ${remainingBudget.toLocaleString('vi-VN')} VNĐ trong ngân sách hiện tại.`);
+      return;
+    }
+
     const newItem: ExpenseItem = {
       id: `exp-${Date.now()}`,
       category: newExpenseCategory,
@@ -135,7 +144,7 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
         className="bg-white w-full max-w-3xl min-h-screen sm:min-h-0 sm:max-h-[90vh] sm:rounded-3xl shadow-2xl flex flex-col overflow-hidden relative border border-[#E5E5E5] my-auto"
         onClick={(e) => e.stopPropagation()}
       >
-        {/* Drawer Header */}
+        {/* Drawer Header — tiêu đề thay đổi theo tab */}
         <div className="p-5 border-b border-[#E5E5E5] flex items-center justify-between bg-white shrink-0">
           <div className="flex items-center gap-3">
             <div className="w-10 h-10 rounded-full bg-[#222222] text-white flex items-center justify-center font-bold text-sm">
@@ -143,7 +152,10 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
             </div>
             <div>
               <h2 className="text-base font-black text-[#222222]">
-                Tài khoản của bạn
+                {activeTab === 'wishlist' && 'Danh sách yêu thích'}
+                {activeTab === 'dna' && 'Hồ sơ Travel DNA'}
+                {activeTab === 'budget' && 'Quản lý chi tiêu'}
+                {activeTab === 'emergency' && 'Hotline cứu hộ SOS'}
               </h2>
               <p className="text-xs text-[#717171]">
                 {userProfile.email}
@@ -159,58 +171,7 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
           </button>
         </div>
 
-        {/* Navigation Tabs */}
-        <div className="px-5 border-b border-[#E5E5E5] flex items-center gap-6 overflow-x-auto scrollbar-none bg-[#F7F7F7]/50 shrink-0">
-          <button
-            onClick={() => setActiveTab('wishlist')}
-            className={`py-3.5 border-b-2 text-xs font-bold transition-colors cursor-pointer flex items-center gap-2 whitespace-nowrap ${
-              activeTab === 'wishlist'
-                ? 'border-[#222222] text-[#222222]'
-                : 'border-transparent text-[#717171] hover:text-[#222222]'
-            }`}
-          >
-            <Heart className={`w-4 h-4 ${activeTab === 'wishlist' ? 'fill-[#FF385C] text-[#FF385C]' : ''}`} />
-            <span>Yêu thích ({wishlist.length})</span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab('dna')}
-            className={`py-3.5 border-b-2 text-xs font-bold transition-colors cursor-pointer flex items-center gap-2 whitespace-nowrap ${
-              activeTab === 'dna'
-                ? 'border-[#222222] text-[#222222]'
-                : 'border-transparent text-[#717171] hover:text-[#222222]'
-            }`}
-          >
-            <UserCheck className="w-4 h-4 text-[#FF385C]" />
-            <span>Hồ sơ Travel DNA</span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab('budget')}
-            className={`py-3.5 border-b-2 text-xs font-bold transition-colors cursor-pointer flex items-center gap-2 whitespace-nowrap ${
-              activeTab === 'budget'
-                ? 'border-[#222222] text-[#222222]'
-                : 'border-transparent text-[#717171] hover:text-[#222222]'
-            }`}
-          >
-            <Wallet className="w-4 h-4 text-emerald-600" />
-            <span>Quản lý chi tiêu</span>
-          </button>
-
-          <button
-            onClick={() => setActiveTab('emergency')}
-            className={`py-3.5 border-b-2 text-xs font-bold transition-colors cursor-pointer flex items-center gap-2 whitespace-nowrap ${
-              activeTab === 'emergency'
-                ? 'border-[#222222] text-[#222222]'
-                : 'border-transparent text-[#717171] hover:text-[#222222]'
-            }`}
-          >
-            <ShieldAlert className="w-4 h-4 text-rose-600" />
-            <span>Hotline cứu hộ SOS</span>
-          </button>
-        </div>
-
-        {/* Tab Content */}
+        {/* Content — hiển thị thẳng theo tab được chọn, không có thanh tab */}
         <div className="flex-1 overflow-y-auto p-5 sm:p-6 space-y-6">
           {/* TAB 1: YÊU THÍCH (WISHLIST) */}
           {activeTab === 'wishlist' && (
@@ -229,6 +190,21 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                 </span>
               </div>
 
+              {wishlistedItems.length > 0 && (
+                <div className="relative">
+                  <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                    <Search className="h-4 w-4 text-stone-400" />
+                  </div>
+                  <input
+                    type="text"
+                    placeholder="Tìm kiếm địa điểm, món ăn..."
+                    value={wishlistSearch}
+                    onChange={(e) => setWishlistSearch(e.target.value)}
+                    className="block w-full pl-10 pr-3 py-2.5 border border-stone-200 rounded-xl leading-5 bg-white placeholder-stone-400 focus:outline-hidden focus:ring-1 focus:ring-[#FF385C] focus:border-[#FF385C] sm:text-sm text-stone-900 transition-colors"
+                  />
+                </div>
+              )}
+
               {wishlistedItems.length === 0 ? (
                 <div className="py-16 text-center space-y-3 bg-[#F7F7F7] rounded-3xl border border-[#E5E5E5]">
                   <Heart className="w-10 h-10 text-stone-300 mx-auto" />
@@ -237,52 +213,71 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                     Chạm vào biểu tượng trái tim ở các thẻ điểm đến, quán ăn hoặc lễ hội để lưu lại cho chuyến đi!
                   </p>
                 </div>
-              ) : (
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  {wishlistedItems.map((item) => {
-                    const title = 'dishName' in item ? `${item.dishName} (${item.name})` : item.name;
-                    const address = 'address' in item ? item.address : 'Việt Nam';
-                    return (
-                      <div
-                        key={item.id}
-                        onClick={() => {
-                          onClose();
-                          onSelectItem(item);
-                        }}
-                        className="bg-white border border-[#E5E5E5] rounded-2xl p-3 flex gap-3 hover:shadow-sm transition-all cursor-pointer group relative"
-                      >
-                        <img
-                          src={item.imageUrl}
-                          alt={title}
-                          className="w-20 h-20 rounded-xl object-cover shrink-0"
-                        />
-                        <div className="flex-1 min-w-0 space-y-1">
-                          <span className="text-[10px] font-bold uppercase tracking-wide text-[#FF385C]">
-                            {item.itemType === 'poi' ? 'Điểm đến' : item.itemType === 'food' ? 'Ẩm thực' : 'Lễ hội'}
-                          </span>
-                          <h4 className="text-xs font-bold text-[#222222] truncate">{title}</h4>
-                          <p className="text-[11px] text-[#717171] truncate">{address}</p>
-                          <div className="text-[11px] font-semibold text-[#222222] pt-1">
-                            Xem chi tiết &rarr;
-                          </div>
-                        </div>
+              ) : (() => {
+                const filteredWishlist = wishlistedItems.filter(item => {
+                  const title = 'dishName' in item ? `${item.dishName} ${item.name}` : item.name;
+                  const addr = 'address' in item ? item.address : '';
+                  const q = wishlistSearch.toLowerCase();
+                  return title.toLowerCase().includes(q) || addr.toLowerCase().includes(q);
+                });
 
-                        {/* Remove heart */}
-                        <button
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            onToggleWishlist(item.id);
+                if (filteredWishlist.length === 0) {
+                  return (
+                    <div className="py-12 text-center space-y-2">
+                      <Search className="w-8 h-8 text-stone-300 mx-auto" />
+                      <div className="text-sm font-bold text-stone-600">Không tìm thấy kết quả nào</div>
+                      <p className="text-xs text-stone-500">Thử tìm kiếm với từ khóa khác</p>
+                    </div>
+                  );
+                }
+
+                return (
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    {filteredWishlist.map((item) => {
+                      const title = 'dishName' in item ? `${item.dishName} (${item.name})` : item.name;
+                      const address = 'address' in item ? item.address : 'Việt Nam';
+                      return (
+                        <div
+                          key={item.id}
+                          onClick={() => {
+                            onClose();
+                            onSelectItem(item);
                           }}
-                          className="absolute top-3 right-3 p-1.5 rounded-full bg-white/80 hover:bg-white text-[#FF385C] cursor-pointer"
-                          title="Bỏ lưu"
+                          className="bg-white border border-[#E5E5E5] rounded-2xl p-3 flex gap-3 hover:shadow-sm transition-all cursor-pointer group relative"
                         >
-                          <Trash2 className="w-3.5 h-3.5" />
-                        </button>
-                      </div>
-                    );
-                  })}
-                </div>
-              )}
+                          <img
+                            src={item.imageUrl}
+                            alt={title}
+                            className="w-20 h-20 rounded-xl object-cover shrink-0"
+                          />
+                          <div className="flex-1 min-w-0 space-y-1">
+                            <span className="text-[10px] font-bold uppercase tracking-wide text-[#FF385C]">
+                              {item.itemType === 'poi' ? 'Điểm đến' : item.itemType === 'food' ? 'Ẩm thực' : 'Lễ hội'}
+                            </span>
+                            <h4 className="text-xs font-bold text-[#222222] truncate">{title}</h4>
+                            <p className="text-[11px] text-[#717171] truncate">{address}</p>
+                            <div className="text-[11px] font-semibold text-[#222222] pt-1">
+                              Xem chi tiết &rarr;
+                            </div>
+                          </div>
+
+                          {/* Remove heart */}
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              onToggleWishlist(item.id);
+                            }}
+                            className="absolute top-3 right-3 p-1.5 rounded-full bg-white/80 hover:bg-white text-[#FF385C] cursor-pointer"
+                            title="Bỏ lưu"
+                          >
+                            <Trash2 className="w-3.5 h-3.5" />
+                          </button>
+                        </div>
+                      );
+                    })}
+                  </div>
+                );
+              })()}
             </div>
           )}
 
@@ -333,13 +328,25 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                     <button
                       key={item}
                       onClick={() => {
-                        const exists = userProfile.dietaryRestrictions.includes(item);
-                        setUserProfile({
-                          ...userProfile,
-                          dietaryRestrictions: exists
-                            ? userProfile.dietaryRestrictions.filter(i => i !== item)
-                            : [...userProfile.dietaryRestrictions, item]
-                        });
+                        let newRestrictions = [...userProfile.dietaryRestrictions];
+                        if (newRestrictions.includes(item)) {
+                          newRestrictions = newRestrictions.filter(i => i !== item);
+                        } else {
+                          // Ràng buộc thực tế (Logic constraints)
+                          if (item === 'Ăn chay / Thuần chay') {
+                            newRestrictions = newRestrictions.filter(i => i !== 'Thích hải sản');
+                          } else if (item === 'Thích hải sản') {
+                            newRestrictions = newRestrictions.filter(i => i !== 'Ăn chay / Thuần chay');
+                          }
+                          
+                          if (item === 'Không ăn cay') {
+                            newRestrictions = newRestrictions.filter(i => i !== 'Ăn cay vừa');
+                          } else if (item === 'Ăn cay vừa') {
+                            newRestrictions = newRestrictions.filter(i => i !== 'Không ăn cay');
+                          }
+                          newRestrictions.push(item);
+                        }
+                        setUserProfile({ ...userProfile, dietaryRestrictions: newRestrictions });
                       }}
                       className={`px-3 py-1.5 rounded-full border transition-colors cursor-pointer ${
                         userProfile.dietaryRestrictions.includes(item)
@@ -358,6 +365,19 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
           {/* TAB 3: QUẢN LÝ CHI TIÊU (BUDGET) */}
           {activeTab === 'budget' && (
             <div className="space-y-5">
+              {onOpenFullBudget && (
+                <button
+                  onClick={onOpenFullBudget}
+                  className="w-full py-2.5 px-4 rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold text-xs flex items-center justify-between shadow-xs transition-all cursor-pointer group"
+                >
+                  <div className="flex items-center gap-2">
+                    <Wallet className="w-4 h-4" />
+                    <span>Mở Bảng Quản Lý Chi Tiêu Toàn Diện</span>
+                  </div>
+                  <span className="text-[11px] group-hover:translate-x-1 transition-transform">→</span>
+                </button>
+              )}
+
               {/* Budget Overview Card */}
               <div className="p-5 rounded-3xl bg-[#222222] text-white space-y-4 shadow-md">
                 <div className="flex justify-between items-center">
@@ -488,7 +508,13 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
                     </div>
                     <a
                       href={`tel:${hl.number.replace(/\s+/g, '')}`}
+                      onClick={(e) => {
+                        if (!window.confirm(`⚠️ Bạn có chắc chắn muốn thực hiện cuộc gọi khẩn cấp tới ${hl.title} (${hl.number}) không?`)) {
+                          e.preventDefault();
+                        }
+                      }}
                       className="p-2 rounded-xl bg-[#F7F7F7] hover:bg-[#E5E5E5] text-[#222222] cursor-pointer"
+                      title="Gọi điện khẩn cấp"
                     >
                       <Phone className="w-3.5 h-3.5 text-[#FF385C]" />
                     </a>
