@@ -30,7 +30,11 @@ import {
   Video,
   VideoOff,
   ImageIcon,
-  ArrowLeft
+  ArrowLeft,
+  Pencil,
+  Clock,
+  ChevronLeft,
+  ChevronRight
 } from 'lucide-react';
 import { ExpenseItem, TripBudget } from '../types';
 
@@ -42,7 +46,9 @@ const INITIAL_TRIPS: TripBudget[] = [
     destination: 'Đà Nẵng & Hội An',
     duration: '4 ngày 3 đêm',
     totalBudget: 8000000,
-    startDate: '2026-10-15'
+    startDate: '2026-10-15',
+    endDate: '2026-10-18',
+    createdAt: '28/09/2026 08:30'
   },
   {
     id: 'trip-2',
@@ -50,7 +56,9 @@ const INITIAL_TRIPS: TripBudget[] = [
     destination: 'Hà Nội - Ninh Bình',
     duration: '3 ngày 2 đêm',
     totalBudget: 5000000,
-    startDate: '2026-11-01'
+    startDate: '2026-11-01',
+    endDate: '2026-11-03',
+    createdAt: '27/09/2026 14:15'
   },
   {
     id: 'trip-3',
@@ -58,7 +66,9 @@ const INITIAL_TRIPS: TripBudget[] = [
     destination: 'Đà Lạt',
     duration: '3 ngày 2 đêm',
     totalBudget: 6000000,
-    startDate: '2026-12-20'
+    startDate: '2026-12-20',
+    endDate: '2026-12-22',
+    createdAt: '25/09/2026 19:00'
   }
 ];
 
@@ -199,39 +209,58 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
 
   // Modals & Popups
   const [isAddExpenseOpen, setIsAddExpenseOpen] = useState(false);
+  const [targetTripIdForExpense, setTargetTripIdForExpense] = useState(currentTripId);
   const [isSwitchTripOpen, setIsSwitchTripOpen] = useState(false);
   const [isOptionsMenuOpen, setIsOptionsMenuOpen] = useState(false);
   const [isEditBudgetOpen, setIsEditBudgetOpen] = useState(false);
   const [newBudgetValue, setNewBudgetValue] = useState(activeTrip.totalBudget.toString());
   const [isEditDurationOpen, setIsEditDurationOpen] = useState(false);
-  const [durationDays, setDurationDays] = useState<number>(4);
-  const [durationNights, setDurationNights] = useState<number>(3);
   const [selectedReceiptView, setSelectedReceiptView] = useState<string | null>(null);
+
+  // State cho bộ chọn lịch nhỏ gọn (Compact Date Picker)
+  const [editStartDate, setEditStartDate] = useState<string>(activeTrip.startDate || '2026-10-15');
+  const [editEndDate, setEditEndDate] = useState<string>(activeTrip.endDate || '2026-10-18');
 
   // Modal Tạo Chuyến Đi Mới
   const [isCreateTripOpen, setIsCreateTripOpen] = useState(false);
   const [createTripName, setCreateTripName] = useState('');
   const [createTripDestination, setCreateTripDestination] = useState('');
-  const [createTripDays, setCreateTripDays] = useState(3);
-  const [createTripNights, setCreateTripNights] = useState(2);
+  const [createTripStartDate, setCreateTripStartDate] = useState('2026-11-05');
+  const [createTripEndDate, setCreateTripEndDate] = useState('2026-11-08');
   const [createTripBudget, setCreateTripBudget] = useState('6000000');
 
-  // Hàm trích xuất ngày & đêm từ chuỗi thời lượng
-  const parseDaysAndNights = (durationStr: string) => {
-    const daysMatch = durationStr.match(/(\d+)\s*ngày/i);
-    const nightsMatch = durationStr.match(/(\d+)\s*đêm/i);
-    const d = daysMatch ? parseInt(daysMatch[1], 10) : 3;
-    const n = nightsMatch ? parseInt(nightsMatch[1], 10) : Math.max(0, d - 1);
-    return { days: d, nights: n };
+  // Modal Chỉnh Sửa Khoản Chi (sửa giá tiền, địa điểm, phương thức thanh toán)
+  const [isEditExpenseOpen, setIsEditExpenseOpen] = useState(false);
+  const [editingExpense, setEditingExpense] = useState<ExpenseItem | null>(null);
+  const [editExpenseTitle, setEditExpenseTitle] = useState('');
+  const [editExpenseAmount, setEditExpenseAmount] = useState('');
+  const [editExpenseCategory, setEditExpenseCategory] = useState<'food' | 'stay' | 'transport' | 'other'>('food');
+  const [editExpenseMethod, setEditExpenseMethod] = useState<'cash' | 'transfer' | 'card'>('cash');
+  const [editExpenseNote, setEditExpenseNote] = useState('');
+
+  // Hàm tính toán số ngày & số đêm chuẩn xác từ khoảng ngày đã chọn
+  const calculateDaysAndNights = (start: string, end: string) => {
+    if (!start || !end) return { days: 1, nights: 0, text: '1 ngày' };
+    const d1 = new Date(start);
+    const d2 = new Date(end);
+    const diffTime = d2.getTime() - d1.getTime();
+    const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
+    
+    if (diffDays <= 0) {
+      return { days: 1, nights: 0, text: '1 ngày (đi về trong ngày)' };
+    }
+    const nights = diffDays;
+    const days = nights + 1;
+    return { days, nights, text: `${days} ngày ${nights} đêm` };
   };
 
   // Đồng bộ giá trị khi đổi chuyến đi
   useEffect(() => {
-    const parsed = parseDaysAndNights(activeTrip.duration);
-    setDurationDays(parsed.days);
-    setDurationNights(parsed.nights);
+    setEditStartDate(activeTrip.startDate || '2026-10-15');
+    setEditEndDate(activeTrip.endDate || '2026-10-18');
     setNewBudgetValue(activeTrip.totalBudget.toString());
-  }, [activeTrip.duration, activeTrip.totalBudget, currentTripId]);
+    setTargetTripIdForExpense(currentTripId);
+  }, [activeTrip, currentTripId]);
 
   // Tab trong Modal Thêm chi tiêu: 'manual' | 'camera' | 'upload'
   const [addExpenseTab, setAddExpenseTab] = useState<'manual' | 'camera' | 'upload'>('manual');
@@ -417,15 +446,17 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
     return matchCat && matchSearch;
   });
 
-  // Xử lý thêm chi tiêu thủ công
+  // Xử lý thêm chi tiêu thủ công (cho phép chọn chuyến đi hiện tại hoặc chuyến cũ)
   const handleSaveManualExpense = (e: React.FormEvent) => {
     e.preventDefault();
     const amountNum = Number(manualAmount);
     if (!manualTitle.trim() || isNaN(amountNum) || amountNum <= 0) return;
 
+    const chosenTripId = targetTripIdForExpense || currentTripId;
+
     const newItem: ExpenseItem = {
       id: `exp-${Date.now()}`,
-      tripId: currentTripId,
+      tripId: chosenTripId,
       title: manualTitle.trim(),
       amount: amountNum,
       category: manualCategory as any,
@@ -436,7 +467,7 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
 
     setAllExpenses(prev => ({
       ...prev,
-      [currentTripId]: [newItem, ...(prev[currentTripId] || [])]
+      [chosenTripId]: [newItem, ...(prev[chosenTripId] || [])]
     }));
 
     setManualTitle('');
@@ -460,9 +491,11 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
   // Xác nhận lưu khoản chi từ quét hóa đơn thực tế / Demo 1
   const handleConfirmScannedExpense = () => {
     if (!scannedData) return;
+    const chosenTripId = targetTripIdForExpense || currentTripId;
+
     const newItem: ExpenseItem = {
       id: `exp-${Date.now()}`,
-      tripId: currentTripId,
+      tripId: chosenTripId,
       title: scannedData.store,
       amount: scannedData.totalAmount,
       category: scannedData.category,
@@ -474,7 +507,7 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
 
     setAllExpenses(prev => ({
       ...prev,
-      [currentTripId]: [newItem, ...(prev[currentTripId] || [])]
+      [chosenTripId]: [newItem, ...(prev[chosenTripId] || [])]
     }));
 
     setIsAddExpenseOpen(false);
@@ -482,6 +515,44 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
     setScannedData(null);
     setActiveReceiptImage(null);
     stopRealCamera();
+  };
+
+  // Mở modal chỉnh sửa khoản chi
+  const handleOpenEditExpense = (item: ExpenseItem) => {
+    setEditingExpense(item);
+    setEditExpenseTitle(item.title);
+    setEditExpenseAmount(item.amount.toString());
+    setEditExpenseCategory((['food', 'stay', 'transport', 'other'].includes(item.category) ? item.category : 'food') as any);
+    setEditExpenseMethod(item.paymentMethod || 'cash');
+    setEditExpenseNote(item.note || '');
+    setIsEditExpenseOpen(true);
+  };
+
+  // Lưu chỉnh sửa khoản chi
+  const handleSaveEditExpense = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!editingExpense) return;
+    const amt = Number(editExpenseAmount);
+    if (!editExpenseTitle.trim() || isNaN(amt) || amt <= 0) return;
+
+    const updatedItem: ExpenseItem = {
+      ...editingExpense,
+      title: editExpenseTitle.trim(),
+      amount: amt,
+      category: editExpenseCategory,
+      paymentMethod: editExpenseMethod,
+      note: editExpenseNote.trim() || undefined
+    };
+
+    setAllExpenses(prev => ({
+      ...prev,
+      [currentTripId]: (prev[currentTripId] || []).map(item =>
+        item.id === editingExpense.id ? updatedItem : item
+      )
+    }));
+
+    setIsEditExpenseOpen(false);
+    setEditingExpense(null);
   };
 
   // Xóa khoản chi
@@ -502,70 +573,39 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
     setIsEditBudgetOpen(false);
   };
 
-  // Cập nhật thời lượng theo ngày (tự động điều chỉnh đêm để chênh lệch tối đa +-1)
-  const handleSetDays = (val: number) => {
-    const d = Math.max(1, Math.min(30, val));
-    setDurationDays(d);
-    
-    // Đảm bảo số đêm chênh lệch trong khoảng [d - 1, d + 1]
-    let n = durationNights;
-    if (n < Math.max(0, d - 1)) n = Math.max(0, d - 1);
-    if (n > d + 1) n = d + 1;
-    setDurationNights(n);
-  };
-
-  // Cập nhật thời lượng theo đêm (ràng buộc chênh lệch +-1 so với số ngày)
-  const handleSetNights = (val: number) => {
-    const minN = Math.max(0, durationDays - 1);
-    const maxN = durationDays + 1;
-    const n = Math.max(minN, Math.min(maxN, val));
-    setDurationNights(n);
-  };
-
-  // Cập nhật thời lượng chuyến đi
+  // Cập nhật thời lượng chuyến đi từ chọn lịch (nhỏ gọn, chuẩn xác số ngày & đêm)
   const handleSaveDuration = (e: React.FormEvent) => {
     e.preventDefault();
-    let d = durationDays;
-    let n = durationNights;
-    if (Math.abs(d - n) > 1) {
-      n = Math.max(0, d - 1);
-      setDurationNights(n);
-    }
-    const finalVal = n === 0 ? `${d} ngày` : `${d} ngày ${n} đêm`;
+    const calc = calculateDaysAndNights(editStartDate, editEndDate);
 
-    setTrips(prev => prev.map(t => t.id === currentTripId ? { ...t, duration: finalVal } : t));
+    setTrips(prev => prev.map(t => t.id === currentTripId ? {
+      ...t,
+      startDate: editStartDate,
+      endDate: editEndDate,
+      duration: calc.text
+    } : t));
     setIsEditDurationOpen(false);
   };
 
-  // Xử lý tạo chuyến đi mới trong Modal
-  const handleCreateSetDays = (val: number) => {
-    const d = Math.max(1, Math.min(30, val));
-    setCreateTripDays(d);
-    let n = createTripNights;
-    if (n < Math.max(0, d - 1)) n = Math.max(0, d - 1);
-    if (n > d + 1) n = d + 1;
-    setCreateTripNights(n);
-  };
-
-  const handleCreateSetNights = (val: number) => {
-    const minN = Math.max(0, createTripDays - 1);
-    const maxN = createTripDays + 1;
-    const n = Math.max(minN, Math.min(maxN, val));
-    setCreateTripNights(n);
-  };
-
+  // Xử lý tạo chuyến đi mới từ Modal (bao gồm chọn lịch & ghi nhận thời gian tạo)
   const handleCreateNewTrip = (e: React.FormEvent) => {
     e.preventDefault();
     if (!createTripName.trim()) return;
 
     const budgetNum = Number(createTripBudget) || 6000000;
-    const durationText = createTripNights === 0 ? `${createTripDays} ngày` : `${createTripDays} ngày ${createTripNights} đêm`;
+    const calc = calculateDaysAndNights(createTripStartDate, createTripEndDate);
+    const now = new Date();
+    const createdAtStr = `${now.toLocaleDateString('vi-VN')} ${now.toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' })}`;
+
     const newTrip: TripBudget = {
       id: `trip-${Date.now()}`,
       name: createTripName.trim(),
       destination: createTripDestination.trim() || createTripName.trim(),
-      duration: durationText,
-      totalBudget: budgetNum
+      duration: calc.text,
+      startDate: createTripStartDate,
+      endDate: createTripEndDate,
+      totalBudget: budgetNum,
+      createdAt: createdAtStr
     };
 
     setTrips(prev => [...prev, newTrip]);
@@ -658,18 +698,17 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
 
           <button
             onClick={() => {
-              const parsed = parseDaysAndNights(activeTrip.duration);
-              setDurationDays(parsed.days);
-              setDurationNights(parsed.nights);
+              setEditStartDate(activeTrip.startDate || '2026-10-15');
+              setEditEndDate(activeTrip.endDate || '2026-10-18');
               setIsEditDurationOpen(true);
             }}
             className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-stone-100 hover:bg-stone-200 text-stone-700 hover:text-stone-900 text-xs font-semibold self-start sm:self-auto transition-all cursor-pointer border border-stone-200/80 hover:border-stone-400 group shadow-xs"
-            title="Bấm để điều chỉnh thời lượng chuyến đi"
+            title="Bấm để chọn lịch trình chuyến đi"
           >
             <Calendar className="w-3.5 h-3.5 text-stone-500 group-hover:text-[#FF385C] transition-colors" />
             <span>Thời lượng: <strong className="text-stone-900">{activeTrip.duration}</strong></span>
             <span className="text-[10px] text-stone-500 group-hover:text-[#FF385C] font-semibold bg-white px-1.5 py-0.5 rounded-md border border-stone-200 transition-colors">
-              Chỉnh sửa
+              Chọn lịch
             </span>
           </button>
         </div>
@@ -1059,13 +1098,23 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
                         </div>
                       </div>
 
-                      <div className="flex items-center gap-3 shrink-0">
-                        <div className="text-right">
+                      <div className="flex items-center gap-1 sm:gap-1.5 shrink-0">
+                        <div className="text-right mr-1">
                           <div className="font-black text-stone-900 text-sm sm:text-base">
                             {exp.amount.toLocaleString('vi-VN')} <span className="text-xs font-semibold text-stone-500">₫</span>
                           </div>
                         </div>
 
+                        {/* Nút Chỉnh sửa khoản chi (giá tiền, địa điểm, phương thức) */}
+                        <button
+                          onClick={() => handleOpenEditExpense(exp)}
+                          className="p-2 text-stone-400 hover:text-stone-900 hover:bg-stone-100 rounded-xl transition-colors cursor-pointer"
+                          title="Chỉnh sửa giá tiền, địa điểm, phương thức thanh toán"
+                        >
+                          <Pencil className="w-3.5 h-3.5" />
+                        </button>
+
+                        {/* Nút Xóa khoản chi */}
                         <button
                           onClick={() => handleDeleteExpense(exp.id)}
                           className="p-2 text-stone-300 hover:text-rose-600 hover:bg-rose-50 rounded-xl transition-colors cursor-pointer"
@@ -1278,7 +1327,25 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
             {addExpenseTab === 'manual' && (
               <form onSubmit={handleSaveManualExpense} className="space-y-4">
                 <div className="space-y-1">
-                  <label className="text-xs font-bold text-stone-700">Tên khoản chi *</label>
+                  <label className="text-xs font-bold text-stone-700 flex items-center justify-between">
+                    <span>Lưu vào chuyến đi</span>
+                    <span className="text-[10px] text-stone-400 font-normal">Có thể lưu cho chuyến cũ</span>
+                  </label>
+                  <select
+                    value={targetTripIdForExpense}
+                    onChange={(e) => setTargetTripIdForExpense(e.target.value)}
+                    className="w-full px-3.5 py-2.5 bg-stone-50 border border-stone-200 rounded-xl text-xs font-semibold text-stone-800 focus:outline-hidden cursor-pointer"
+                  >
+                    {trips.map(tr => (
+                      <option key={tr.id} value={tr.id}>
+                        {tr.name} ({tr.duration}) {tr.id === currentTripId ? '• Chuyến đang mở' : ''}
+                      </option>
+                    ))}
+                  </select>
+                </div>
+
+                <div className="space-y-1">
+                  <label className="text-xs font-bold text-stone-700">Địa điểm / Tên khoản chi *</label>
                   <input
                     type="text"
                     value={manualTitle}
@@ -1698,7 +1765,11 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
                     <div>
                       <div className="font-extrabold text-xs text-stone-900">{t.name}</div>
                       <div className="text-[11px] text-stone-500">{t.destination} • {t.duration}</div>
-                      <div className="text-[10px] text-stone-400 mt-1">
+                      <div className="flex items-center gap-1.5 text-[10px] text-stone-400 mt-0.5">
+                        <Clock className="w-3 h-3 text-stone-400 shrink-0" />
+                        <span>Thời gian tạo: {t.createdAt || '28/09/2026'}</span>
+                      </div>
+                      <div className="text-[10px] text-stone-500 mt-1 font-medium">
                         Ngân sách: {t.totalBudget.toLocaleString('vi-VN')} ₫ (Đã chi: {spent.toLocaleString('vi-VN')} ₫)
                       </div>
                     </div>
@@ -1731,8 +1802,8 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
               onClick={() => {
                 setCreateTripName('');
                 setCreateTripDestination('');
-                setCreateTripDays(3);
-                setCreateTripNights(2);
+                setCreateTripStartDate('2026-11-05');
+                setCreateTripEndDate('2026-11-08');
                 setCreateTripBudget('6000000');
                 setIsCreateTripOpen(true);
               }}
@@ -1746,7 +1817,7 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
       )}
 
       {/* ============================================================== */}
-      {/* MODAL: TẠO CHUYẾN ĐI MỚI (Ở GIỮA KHUNG HÌNH, THIẾT KẾ ĐỒNG BỘ) */}
+      {/* MODAL: TẠO CHUYẾN ĐI MỚI (CHỌN LỊCH GỌN NHẸ & TÍNH NGÀY ĐÊM)    */}
       {/* ============================================================== */}
       {isCreateTripOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-in fade-in duration-150">
@@ -1796,59 +1867,48 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
                 />
               </div>
 
-              {/* Thời lượng dự kiến */}
+              {/* Chọn lịch trình dự kiến */}
               <div className="space-y-1.5">
                 <div className="flex items-center justify-between">
-                  <label className="text-xs font-bold text-stone-700">Thời lượng dự kiến</label>
+                  <label className="text-xs font-bold text-stone-700">Lịch trình & Thời lượng</label>
                   <span className="text-[11px] font-extrabold text-[#FF385C]">
-                    {createTripDays} ngày {createTripNights > 0 ? `${createTripNights} đêm` : ''}
+                    ✨ {calculateDaysAndNights(createTripStartDate, createTripEndDate).text}
                   </span>
                 </div>
                 <div className="grid grid-cols-2 gap-2.5">
-                  <div className="bg-stone-50 p-2.5 rounded-xl border border-stone-200 flex items-center justify-between">
-                    <span className="text-[11px] font-semibold text-stone-500">Số Ngày</span>
-                    <div className="flex items-center gap-1.5">
-                      <button
-                        type="button"
-                        onClick={() => handleCreateSetDays(createTripDays - 1)}
-                        disabled={createTripDays <= 1}
-                        className="w-6 h-6 rounded-md bg-white hover:bg-stone-100 disabled:opacity-30 text-stone-700 flex items-center justify-center font-black cursor-pointer shadow-xs border border-stone-200"
-                      >
-                        <Minus className="w-3 h-3" />
-                      </button>
-                      <span className="font-extrabold text-stone-900 text-xs w-4 text-center">{createTripDays}</span>
-                      <button
-                        type="button"
-                        onClick={() => handleCreateSetDays(createTripDays + 1)}
-                        disabled={createTripDays >= 30}
-                        className="w-6 h-6 rounded-md bg-white hover:bg-stone-100 disabled:opacity-30 text-stone-700 flex items-center justify-center font-black cursor-pointer shadow-xs border border-stone-200"
-                      >
-                        <Plus className="w-3 h-3" />
-                      </button>
-                    </div>
+                  <div className="space-y-1">
+                    <span className="text-[10px] text-stone-500 font-semibold flex items-center gap-1">
+                      <Calendar className="w-3 h-3 text-[#FF385C]" />
+                      <span>Ngày khởi hành (đi)</span>
+                    </span>
+                    <input
+                      type="date"
+                      value={createTripStartDate}
+                      onChange={(e) => {
+                        const val = e.target.value;
+                        setCreateTripStartDate(val);
+                        if (new Date(val) > new Date(createTripEndDate)) {
+                          setCreateTripEndDate(val);
+                        }
+                      }}
+                      className="w-full p-2 bg-stone-50 border border-stone-200 rounded-xl text-xs font-bold text-stone-900 focus:outline-hidden focus:border-[#FF385C] cursor-pointer"
+                      required
+                    />
                   </div>
 
-                  <div className="bg-stone-50 p-2.5 rounded-xl border border-stone-200 flex items-center justify-between">
-                    <span className="text-[11px] font-semibold text-stone-500">Số Đêm</span>
-                    <div className="flex items-center gap-1.5">
-                      <button
-                        type="button"
-                        onClick={() => handleCreateSetNights(createTripNights - 1)}
-                        disabled={createTripNights <= Math.max(0, createTripDays - 1)}
-                        className="w-6 h-6 rounded-md bg-white hover:bg-stone-100 disabled:opacity-30 text-stone-700 flex items-center justify-center font-black cursor-pointer shadow-xs border border-stone-200"
-                      >
-                        <Minus className="w-3 h-3" />
-                      </button>
-                      <span className="font-extrabold text-stone-900 text-xs w-4 text-center">{createTripNights}</span>
-                      <button
-                        type="button"
-                        onClick={() => handleCreateSetNights(createTripNights + 1)}
-                        disabled={createTripNights >= createTripDays + 1}
-                        className="w-6 h-6 rounded-md bg-white hover:bg-stone-100 disabled:opacity-30 text-stone-700 flex items-center justify-center font-black cursor-pointer shadow-xs border border-stone-200"
-                      >
-                        <Plus className="w-3 h-3" />
-                      </button>
-                    </div>
+                  <div className="space-y-1">
+                    <span className="text-[10px] text-stone-500 font-semibold flex items-center gap-1">
+                      <Calendar className="w-3 h-3 text-indigo-500" />
+                      <span>Ngày kết thúc (về)</span>
+                    </span>
+                    <input
+                      type="date"
+                      min={createTripStartDate}
+                      value={createTripEndDate}
+                      onChange={(e) => setCreateTripEndDate(e.target.value)}
+                      className="w-full p-2 bg-stone-50 border border-stone-200 rounded-xl text-xs font-bold text-stone-900 focus:outline-hidden focus:border-[#FF385C] cursor-pointer"
+                      required
+                    />
                   </div>
                 </div>
               </div>
@@ -1948,18 +2008,18 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
       )}
 
       {/* ============================================================== */}
-      {/* MODAL: CHỈNH SỬA THỜI LƯỢNG CHUYẾN ĐI (TỐI ƯU GỌN GÀNG)         */}
+      {/* MODAL: CHỌN LỊCH TRÌNH - THỜI LƯỢNG (NHỎ GỌN, TÍNH NGÀY ĐÊM)    */}
       {/* ============================================================== */}
       {isEditDurationOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-in fade-in duration-150">
-          <div className="bg-white rounded-3xl max-w-sm w-full p-6 shadow-2xl space-y-4 border border-stone-200 animate-in zoom-in-95 duration-150">
+          <div className="bg-white rounded-3xl max-w-sm w-full p-5 sm:p-6 shadow-2xl space-y-4 border border-stone-200 animate-in zoom-in-95 duration-150">
             <div className="flex items-center justify-between border-b border-stone-100 pb-3">
               <div className="flex items-center gap-2">
                 <div className="w-8 h-8 rounded-xl bg-[#FF385C]/10 text-[#FF385C] flex items-center justify-center font-bold">
                   <Calendar className="w-4 h-4" />
                 </div>
                 <div>
-                  <h3 className="font-extrabold text-base text-stone-900">Điều chỉnh thời lượng</h3>
+                  <h3 className="font-extrabold text-base text-stone-900">Chọn lịch trình chuyến đi</h3>
                   <div className="text-[11px] text-stone-500 truncate max-w-[200px]">{activeTrip.name}</div>
                 </div>
               </div>
@@ -1972,74 +2032,94 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
             </div>
 
             <form onSubmit={handleSaveDuration} className="space-y-4">
-              {/* Hiển thị thời lượng nổi bật trực quan */}
-              <div className="p-4 rounded-2xl bg-gradient-to-r from-stone-900 to-stone-800 text-white text-center space-y-1 shadow-xs">
-                <div className="text-[11px] text-stone-400 font-semibold uppercase tracking-wider">Thời lượng chọn</div>
-                <div className="text-2xl font-black text-white tracking-tight">
-                  {durationDays} ngày {durationNights > 0 ? `${durationNights} đêm` : ''}
-                </div>
-              </div>
-
-              {/* Bộ chọn Ngày & Đêm */}
-              <div className="grid grid-cols-2 gap-3">
-                {/* Bộ chọn Ngày */}
-                <div className="bg-stone-50 p-3 rounded-2xl border border-stone-200 space-y-1.5 text-center">
-                  <div className="text-xs font-bold text-stone-600">Số Ngày</div>
-                  <div className="flex items-center justify-between bg-white px-2 py-1.5 rounded-xl border border-stone-200/80 shadow-xs">
-                    <button
-                      type="button"
-                      onClick={() => handleSetDays(durationDays - 1)}
-                      disabled={durationDays <= 1}
-                      className="w-7 h-7 rounded-lg bg-stone-100 hover:bg-stone-200 disabled:opacity-30 disabled:cursor-not-allowed text-stone-700 flex items-center justify-center font-black cursor-pointer transition-colors"
-                    >
-                      <Minus className="w-3.5 h-3.5" />
-                    </button>
-                    <span className="font-extrabold text-stone-900 text-sm">{durationDays}</span>
-                    <button
-                      type="button"
-                      onClick={() => handleSetDays(durationDays + 1)}
-                      disabled={durationDays >= 30}
-                      className="w-7 h-7 rounded-lg bg-stone-100 hover:bg-stone-200 disabled:opacity-30 disabled:cursor-not-allowed text-stone-700 flex items-center justify-center font-black cursor-pointer transition-colors"
-                    >
-                      <Plus className="w-3.5 h-3.5" />
-                    </button>
+              {/* Thẻ hiển thị số ngày, số đêm tự động tính toán từ lịch */}
+              {(() => {
+                const calc = calculateDaysAndNights(editStartDate, editEndDate);
+                return (
+                  <div className="p-4 rounded-2xl bg-gradient-to-r from-stone-900 to-stone-800 text-white text-center space-y-1 shadow-sm">
+                    <div className="text-[10px] text-stone-400 font-semibold uppercase tracking-wider flex items-center justify-center gap-1.5">
+                      <Sparkles className="w-3 h-3 text-[#FF385C]" />
+                      <span>Thời lượng tính từ lịch</span>
+                    </div>
+                    <div className="text-xl sm:text-2xl font-black text-white tracking-tight">
+                      {calc.days} ngày {calc.nights > 0 ? `${calc.nights} đêm` : '0 đêm'}
+                    </div>
+                    <div className="text-[11px] text-stone-300">
+                      {editStartDate ? new Date(editStartDate).toLocaleDateString('vi-VN') : ''} → {editEndDate ? new Date(editEndDate).toLocaleDateString('vi-VN') : ''}
+                    </div>
                   </div>
+                );
+              })()}
+
+              {/* 2 Ô chọn ngày nhỏ gọn */}
+              <div className="grid grid-cols-2 gap-2.5">
+                <div className="space-y-1">
+                  <label className="text-[11px] font-bold text-stone-700 flex items-center gap-1">
+                    <Calendar className="w-3.5 h-3.5 text-[#FF385C]" />
+                    <span>Ngày đi</span>
+                  </label>
+                  <input
+                    type="date"
+                    value={editStartDate}
+                    onChange={(e) => {
+                      const newStart = e.target.value;
+                      setEditStartDate(newStart);
+                      if (new Date(newStart) > new Date(editEndDate)) {
+                        setEditEndDate(newStart);
+                      }
+                    }}
+                    className="w-full p-2.5 bg-stone-50 border border-stone-200 rounded-xl text-xs font-bold text-stone-900 focus:outline-hidden focus:border-[#FF385C] focus:bg-white transition-all cursor-pointer"
+                    required
+                  />
                 </div>
 
-                {/* Bộ chọn Đêm */}
-                <div className="bg-stone-50 p-3 rounded-2xl border border-stone-200 space-y-1.5 text-center">
-                  <div className="text-xs font-bold text-stone-600">Số Đêm</div>
-                  <div className="flex items-center justify-between bg-white px-2 py-1.5 rounded-xl border border-stone-200/80 shadow-xs">
-                    <button
-                      type="button"
-                      onClick={() => handleSetNights(durationNights - 1)}
-                      disabled={durationNights <= Math.max(0, durationDays - 1)}
-                      className="w-7 h-7 rounded-lg bg-stone-100 hover:bg-stone-200 disabled:opacity-30 disabled:cursor-not-allowed text-stone-700 flex items-center justify-center font-black cursor-pointer transition-colors"
-                      title={durationNights <= Math.max(0, durationDays - 1) ? 'Số đêm tối thiểu là Ngày - 1' : 'Giảm 1 đêm'}
-                    >
-                      <Minus className="w-3.5 h-3.5" />
-                    </button>
-                    <span className="font-extrabold text-stone-900 text-sm">{durationNights}</span>
-                    <button
-                      type="button"
-                      onClick={() => handleSetNights(durationNights + 1)}
-                      disabled={durationNights >= durationDays + 1}
-                      className="w-7 h-7 rounded-lg bg-stone-100 hover:bg-stone-200 disabled:opacity-30 disabled:cursor-not-allowed text-stone-700 flex items-center justify-center font-black cursor-pointer transition-colors"
-                      title={durationNights >= durationDays + 1 ? 'Số đêm tối đa là Ngày + 1' : 'Tăng 1 đêm'}
-                    >
-                      <Plus className="w-3.5 h-3.5" />
-                    </button>
-                  </div>
+                <div className="space-y-1">
+                  <label className="text-[11px] font-bold text-stone-700 flex items-center gap-1">
+                    <Calendar className="w-3.5 h-3.5 text-indigo-500" />
+                    <span>Ngày về</span>
+                  </label>
+                  <input
+                    type="date"
+                    min={editStartDate}
+                    value={editEndDate}
+                    onChange={(e) => setEditEndDate(e.target.value)}
+                    className="w-full p-2.5 bg-stone-50 border border-stone-200 rounded-xl text-xs font-bold text-stone-900 focus:outline-hidden focus:border-[#FF385C] focus:bg-white transition-all cursor-pointer"
+                    required
+                  />
                 </div>
               </div>
 
-              {/* Gợi ý quy chuẩn chênh lệch +-1 */}
-              <div className="flex items-center gap-2 text-[11px] text-stone-500 bg-stone-50 px-3 py-2 rounded-xl border border-stone-200/80">
-                <span className="w-2 h-2 rounded-full bg-emerald-500 shrink-0"></span>
-                <span>Số ngày & số đêm chênh lệch <strong>±1</strong> (VD: {durationDays}N{Math.max(0, durationDays - 1)}Đ, {durationDays}N{durationDays}Đ, {durationDays}N{durationDays + 1}Đ)</span>
+              {/* Phím bấm chọn nhanh thời lượng */}
+              <div className="space-y-1.5">
+                <div className="text-[10px] font-bold text-stone-500 uppercase tracking-wider">Chọn nhanh số ngày & đêm:</div>
+                <div className="grid grid-cols-4 gap-1.5">
+                  {[
+                    { label: 'Trong ngày', addDays: 0 },
+                    { label: '2N1Đ', addDays: 1 },
+                    { label: '3N2Đ', addDays: 2 },
+                    { label: '4N3Đ', addDays: 3 }
+                  ].map((item) => (
+                    <button
+                      key={item.label}
+                      type="button"
+                      onClick={() => {
+                        const start = new Date(editStartDate || '2026-10-15');
+                        const end = new Date(start);
+                        end.setDate(start.getDate() + item.addDays);
+                        const yyyy = end.getFullYear();
+                        const mm = String(end.getMonth() + 1).padStart(2, '0');
+                        const dd = String(end.getDate()).padStart(2, '0');
+                        setEditEndDate(`${yyyy}-${mm}-${dd}`);
+                      }}
+                      className="py-1.5 px-1 bg-stone-100 hover:bg-[#FF385C]/10 hover:text-[#FF385C] border border-stone-200 rounded-xl text-[11px] font-bold text-stone-700 transition-colors cursor-pointer text-center"
+                    >
+                      {item.label}
+                    </button>
+                  ))}
+                </div>
               </div>
 
-              <div className="flex gap-2.5 pt-1">
+              <div className="flex gap-2.5 pt-2 border-t border-stone-100">
                 <button
                   type="button"
                   onClick={() => setIsEditDurationOpen(false)}
@@ -2051,7 +2131,149 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
                   type="submit"
                   className="flex-1 py-2.5 bg-[#FF385C] hover:bg-[#E00B41] text-white rounded-xl text-xs font-bold transition-colors cursor-pointer shadow-xs"
                 >
-                  Lưu thời lượng
+                  Lưu lịch trình
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
+      {/* ============================================================== */}
+      {/* MODAL: CHỈNH SỬA KHOẢN CHI (GIÁ TIỀN, ĐỊA ĐIỂM, PHƯƠNG THỨC)    */}
+      {/* ============================================================== */}
+      {isEditExpenseOpen && editingExpense && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-in fade-in duration-150">
+          <div className="bg-white rounded-3xl max-w-md w-full p-6 shadow-2xl space-y-4 border border-stone-200 animate-in zoom-in-95 duration-150">
+            <div className="flex items-center justify-between border-b border-stone-100 pb-3">
+              <div className="flex items-center gap-2">
+                <div className="w-8 h-8 rounded-xl bg-amber-500/10 text-amber-600 flex items-center justify-center font-bold">
+                  <Pencil className="w-4 h-4" />
+                </div>
+                <div>
+                  <h3 className="font-extrabold text-base text-stone-900">Chỉnh sửa khoản chi</h3>
+                  <div className="text-[11px] text-stone-500">Cập nhật giá tiền, địa điểm và phương thức thanh toán</div>
+                </div>
+              </div>
+              <button 
+                onClick={() => {
+                  setIsEditExpenseOpen(false);
+                  setEditingExpense(null);
+                }} 
+                className="p-1 text-stone-400 hover:text-stone-700 cursor-pointer rounded-full hover:bg-stone-100 transition-colors"
+              >
+                <X className="w-4 h-4" />
+              </button>
+            </div>
+
+            <form onSubmit={handleSaveEditExpense} className="space-y-3.5">
+              {/* Địa điểm / Tên khoản chi */}
+              <div className="space-y-1">
+                <label className="text-xs font-bold text-stone-700">Địa điểm / Tên khoản chi <span className="text-[#FF385C]">*</span></label>
+                <input
+                  type="text"
+                  value={editExpenseTitle}
+                  onChange={(e) => setEditExpenseTitle(e.target.value)}
+                  placeholder="VD: Cơm niêu, Khách sạn..."
+                  className="w-full px-3.5 py-2.5 bg-stone-50 border border-stone-200 rounded-xl text-xs font-bold text-stone-900 focus:outline-hidden focus:border-[#FF385C] focus:bg-white"
+                  required
+                />
+              </div>
+
+              {/* Giá tiền & Danh mục */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div className="space-y-1">
+                  <label className="text-xs font-bold text-stone-700">Giá tiền (VNĐ) <span className="text-[#FF385C]">*</span></label>
+                  <input
+                    type="number"
+                    value={editExpenseAmount}
+                    onChange={(e) => setEditExpenseAmount(e.target.value)}
+                    placeholder="VD: 350000"
+                    className="w-full px-3.5 py-2.5 bg-stone-50 border border-stone-200 rounded-xl text-xs font-bold text-stone-900 focus:outline-hidden focus:border-[#FF385C] focus:bg-white"
+                    required
+                  />
+                </div>
+
+                <div className="space-y-1">
+                  <label className="text-xs font-bold text-stone-700">Danh mục chi tiêu</label>
+                  <select
+                    value={editExpenseCategory}
+                    onChange={(e) => setEditExpenseCategory(e.target.value as any)}
+                    className="w-full px-3.5 py-2.5 bg-stone-50 border border-stone-200 rounded-xl text-xs font-semibold text-stone-800 focus:outline-hidden cursor-pointer"
+                  >
+                    <option value="food">🍲 Ăn uống ẩm thực</option>
+                    <option value="stay">🏨 Khách sạn / Lưu trú</option>
+                    <option value="transport">🛵 Di chuyển / Phương tiện</option>
+                    <option value="other">🎁 Khác (Vé tour, Quà...)</option>
+                  </select>
+                </div>
+              </div>
+
+              {/* Phương thức thanh toán */}
+              <div className="space-y-1.5">
+                <label className="text-xs font-bold text-stone-700">Phương thức thanh toán</label>
+                <div className="grid grid-cols-3 gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setEditExpenseMethod('cash')}
+                    className={`p-2.5 rounded-xl border text-xs font-bold flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
+                      editExpenseMethod === 'cash' ? 'border-emerald-600 bg-emerald-50 text-emerald-700' : 'border-stone-200 bg-white text-stone-600'
+                    }`}
+                  >
+                    <Banknote className="w-3.5 h-3.5" />
+                    <span>Tiền mặt</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setEditExpenseMethod('transfer')}
+                    className={`p-2.5 rounded-xl border text-xs font-bold flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
+                      editExpenseMethod === 'transfer' ? 'border-blue-600 bg-blue-50 text-blue-700' : 'border-stone-200 bg-white text-stone-600'
+                    }`}
+                  >
+                    <QrCode className="w-3.5 h-3.5" />
+                    <span>Chuyển khoản QR</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setEditExpenseMethod('card')}
+                    className={`p-2.5 rounded-xl border text-xs font-bold flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
+                      editExpenseMethod === 'card' ? 'border-purple-600 bg-purple-50 text-purple-700' : 'border-stone-200 bg-white text-stone-600'
+                    }`}
+                  >
+                    <CreditCard className="w-3.5 h-3.5" />
+                    <span>Thẻ / POS</span>
+                  </button>
+                </div>
+              </div>
+
+              {/* Ghi chú */}
+              <div className="space-y-1">
+                <label className="text-xs font-bold text-stone-700">Ghi chú thêm (tùy chọn)</label>
+                <input
+                  type="text"
+                  value={editExpenseNote}
+                  onChange={(e) => setEditExpenseNote(e.target.value)}
+                  placeholder="VD: Cả nhóm chia đều, đã bao gồm thuế..."
+                  className="w-full px-3.5 py-2.5 bg-stone-50 border border-stone-200 rounded-xl text-xs text-stone-900 focus:outline-hidden"
+                />
+              </div>
+
+              <div className="flex gap-2.5 pt-2 border-t border-stone-100">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setIsEditExpenseOpen(false);
+                    setEditingExpense(null);
+                  }}
+                  className="flex-1 py-2.5 rounded-xl border border-stone-200 text-stone-600 hover:bg-stone-50 text-xs font-bold transition-colors cursor-pointer"
+                >
+                  Hủy
+                </button>
+                <button
+                  type="submit"
+                  className="flex-1 py-2.5 bg-[#FF385C] hover:bg-[#E00B41] text-white rounded-xl text-xs font-bold transition-colors cursor-pointer shadow-xs"
+                >
+                  Lưu thay đổi
                 </button>
               </div>
             </form>
@@ -2091,3 +2313,4 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
     </div>
   );
 };
+

@@ -213,6 +213,8 @@ export interface TripBudget {
   duration: string;
   totalBudget: number;
   startDate?: string;
+  endDate?: string;
+  createdAt?: string;
 }
 
 export interface UserProfile {
