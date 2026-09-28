@@ -9,7 +9,10 @@ import { AccountDrawer } from './components/AccountDrawer';
 import { BookingModal } from './components/BookingModal';
 import { SOSModal } from './components/SOSModal';
 import { BudgetTracker } from './components/BudgetTracker';
-import { LanguageCode } from './types';
+import { LanguageCode, AccountTab, AuthUser } from './types';
+import { getUser } from './services/authService';
+import { signOutGoogle } from './components/GoogleSignInButton';
+import { LegalModal, LegalDocId } from './components/LegalModal';
 
 export default function App() {
   // Navigation tabs: 'explore' (default) | 'nearby' | 'ai' | 'itinerary' | 'account' | 'budget'
@@ -50,7 +53,29 @@ export default function App() {
 
   // Account Drawer / Modal State
   const [accountDrawerOpen, setAccountDrawerOpen] = useState(false);
-  const [accountDrawerTab, setAccountDrawerTab] = useState<'wishlist' | 'dna' | 'budget' | 'emergency'>('wishlist');
+  const [accountDrawerTab, setAccountDrawerTab] = useState<AccountTab>('wishlist');
+
+  // Auth state (persisted in localStorage) — dùng chung cho Navbar & AccountDrawer
+  const [currentUser, setCurrentUser] = useState<AuthUser | null>(() => {
+    try {
+      const saved = localStorage.getItem('vietgo_user');
+      const parsed = saved ? JSON.parse(saved) : null;
+      // Lấy lại dữ liệu mới nhất từ kho tài khoản; phiên cũ / tài khoản đã xoá -> đăng xuất
+      return parsed?.id ? getUser(parsed.id) : null;
+    } catch {
+      return null;
+    }
+  });
+
+  useEffect(() => {
+    try {
+      if (currentUser) {
+        localStorage.setItem('vietgo_user', JSON.stringify(currentUser));
+      } else {
+        localStorage.removeItem('vietgo_user');
+      }
+    } catch (e) {}
+  }, [currentUser]);
 
   // Booking Modal State
   const [bookingModalOpen, setBookingModalOpen] = useState(false);
@@ -62,6 +87,9 @@ export default function App() {
 
   // SOS Modal State
   const [sosModalOpen, setSosModalOpen] = useState(false);
+
+  // Legal Modal State (Điều khoản dịch vụ / Chính sách quyền riêng tư)
+  const [legalDoc, setLegalDoc] = useState<LegalDocId | null>(null);
 
   // Parameters to pass to Itinerary
   const [itineraryParams, setItineraryParams] = useState<{
@@ -78,7 +106,7 @@ export default function App() {
   const [aiAssistantSeedQuery, setAiAssistantSeedQuery] = useState<string>('');
 
   // Handlers
-  const handleOpenAccount = (tab: 'wishlist' | 'dna' | 'budget' | 'emergency' = 'wishlist') => {
+  const handleOpenAccount = (tab: AccountTab = 'wishlist') => {
     if (tab === 'budget') {
       setActiveTab('budget');
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -128,6 +156,7 @@ export default function App() {
         wishlistCount={wishlist.length}
         onOpenWishlist={() => handleOpenAccount('wishlist')}
         onOpenAccount={handleOpenAccount}
+        currentUser={currentUser}
         onOpenSOS={() => setSosModalOpen(true)}
         language={language}
         setLanguage={setLanguage}
@@ -184,7 +213,10 @@ export default function App() {
 
         {/* Page 5: Quản lý chi tiêu (BudgetTracker) */}
         {activeTab === 'budget' && (
-          <BudgetTracker 
+          <BudgetTracker
+            // Sổ chi tiêu riêng theo tài khoản; đổi tài khoản → nạp lại đúng dữ liệu
+            key={currentUser?.id ?? 'guest'}
+            storageScope={currentUser?.id ?? 'guest'}
             onBack={() => {
               setActiveTab('explore');
               window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -206,7 +238,7 @@ export default function App() {
         googlePlaceId={(selectedDetailItem as any)?.googlePlaceId}
       />
 
-      {/* 4. Account Drawer (Wishlist, Travel DNA, Budget Tracker, Emergency) */}
+      {/* 4. Account Drawer (Wishlist, Hồ sơ cá nhân + Travel DNA, Budget Tracker, Emergency) */}
       <AccountDrawer
         isOpen={accountDrawerOpen}
         onClose={() => setAccountDrawerOpen(false)}
@@ -214,6 +246,14 @@ export default function App() {
         onToggleWishlist={handleToggleWishlist}
         onSelectItem={(item) => setSelectedDetailItem(item)}
         initialTab={accountDrawerTab}
+        currentUser={currentUser}
+        onLogin={setCurrentUser}
+        onLogout={() => {
+          setCurrentUser(null);
+          signOutGoogle();
+        }}
+        onUpdateUser={setCurrentUser}
+        onOpenLegal={setLegalDoc}
         onOpenFullBudget={() => {
           setAccountDrawerOpen(false);
           setActiveTab('budget');
@@ -243,7 +283,7 @@ export default function App() {
           </div>
 
           <div className="flex flex-wrap items-center gap-4 text-xs text-[#717171]">
-            <span className="hover:underline cursor-pointer" onClick={() => handleOpenAccount('dna')}>
+            <span className="hover:underline cursor-pointer" onClick={() => handleOpenAccount('profile')}>
               Hồ sơ du khách
             </span>
             <span>•</span>
@@ -261,9 +301,20 @@ export default function App() {
             >
               Cứu hộ khẩn cấp: 112 / 113
             </span>
+            <span>•</span>
+            <span className="hover:underline cursor-pointer" onClick={() => setLegalDoc('terms')}>
+              Điều khoản dịch vụ
+            </span>
+            <span>•</span>
+            <span className="hover:underline cursor-pointer" onClick={() => setLegalDoc('privacy')}>
+              Quyền riêng tư
+            </span>
           </div>
         </div>
       </footer>
+
+      {/* 8. Điều khoản dịch vụ & Chính sách quyền riêng tư */}
+      <LegalModal isOpen={legalDoc !== null} initialDoc={legalDoc ?? 'terms'} onClose={() => setLegalDoc(null)} />
     </div>
   );
 }

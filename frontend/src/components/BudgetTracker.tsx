@@ -37,6 +37,36 @@ import {
   ChevronRight
 } from 'lucide-react';
 import { ExpenseItem, TripBudget } from '../types';
+import {
+  BUDGET_LIMITS,
+  parseMoney,
+  validateExpenseText,
+  validateTripDates,
+  validateTripName,
+  describeDuration,
+  daysBetween,
+  toLocalISODate,
+  formatExpenseDate,
+  formatAbsoluteDate,
+  normalizeSearch,
+  buildExpenseCsv,
+  validateReceiptFile,
+  compressImage,
+  readFileAsDataUrl,
+  budgetStorageKeys,
+  safeSetItem
+} from '../utils/budgetRules';
+
+const newId = (prefix: string) =>
+  `${prefix}-${globalThis.crypto?.randomUUID?.() ?? `${Date.now().toString(36)}${Math.random().toString(36).slice(2, 8)}`}`;
+
+const FieldErrorText: React.FC<{ message?: string }> = ({ message }) =>
+  message ? (
+    <div className="flex items-start gap-1.5 p-2.5 rounded-xl bg-rose-50 border border-rose-200 text-[11px] font-semibold text-rose-700">
+      <AlertTriangle className="w-3.5 h-3.5 shrink-0 mt-px" />
+      <span>{message}</span>
+    </div>
+  ) : null;
 
 // Danh sách chuyến đi mặc định
 const INITIAL_TRIPS: TripBudget[] = [
@@ -148,14 +178,19 @@ const DEMO_1_RECEIPT = {
 
 interface BudgetTrackerProps {
   onBack?: () => void;
+  // 'guest' hoặc id tài khoản — mỗi tài khoản có sổ chi tiêu riêng trên cùng thiết bị
+  storageScope?: string;
 }
 
-export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
+export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack, storageScope = 'guest' }) => {
+  const storageKeys = budgetStorageKeys(storageScope);
+
   // 1. Quản lý Chuyến đi
   const [trips, setTrips] = useState<TripBudget[]>(() => {
     try {
-      const saved = localStorage.getItem('vietgo_budget_trips');
-      return saved ? JSON.parse(saved) : INITIAL_TRIPS;
+      const saved = localStorage.getItem(storageKeys.trips);
+      const parsed = saved ? JSON.parse(saved) : null;
+      return Array.isArray(parsed) && parsed.length > 0 ? parsed : INITIAL_TRIPS;
     } catch {
       return INITIAL_TRIPS;
     }
@@ -163,7 +198,7 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
 
   const [currentTripId, setCurrentTripId] = useState<string>(() => {
     try {
-      return localStorage.getItem('vietgo_current_trip_id') || 'trip-1';
+      return localStorage.getItem(storageKeys.currentTrip) || 'trip-1';
     } catch {
       return 'trip-1';
     }
@@ -174,31 +209,28 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
   // 2. Danh sách chi tiêu theo từng chuyến
   const [allExpenses, setAllExpenses] = useState<Record<string, ExpenseItem[]>>(() => {
     try {
-      const saved = localStorage.getItem('vietgo_budget_expenses');
+      const saved = localStorage.getItem(storageKeys.expenses);
       return saved ? JSON.parse(saved) : INITIAL_EXPENSES;
     } catch {
       return INITIAL_EXPENSES;
     }
   });
 
-  // Lưu localStorage
-  useEffect(() => {
-    try {
-      localStorage.setItem('vietgo_budget_trips', JSON.stringify(trips));
-    } catch (e) {}
-  }, [trips]);
+  // Lưu localStorage — nếu bộ nhớ đầy thì báo cho người dùng thay vì mất dữ liệu âm thầm
+  const [failedStorageKeys, setFailedStorageKeys] = useState<string[]>([]);
+  const persist = (key: string, value: string) => {
+    const ok = safeSetItem(key, value);
+    setFailedStorageKeys((prev) => (ok ? prev.filter((k) => k !== key) : prev.includes(key) ? prev : [...prev, key]));
+  };
 
-  useEffect(() => {
-    try {
-      localStorage.setItem('vietgo_current_trip_id', currentTripId);
-    } catch (e) {}
-  }, [currentTripId]);
+  useEffect(() => persist(storageKeys.trips, JSON.stringify(trips)), [trips]);
+  useEffect(() => persist(storageKeys.currentTrip, currentTripId), [currentTripId]);
+  useEffect(() => persist(storageKeys.expenses, JSON.stringify(allExpenses)), [allExpenses]);
 
+  // Chuyến đang chọn không còn tồn tại → chuyển về chuyến đầu tiên
   useEffect(() => {
-    try {
-      localStorage.setItem('vietgo_budget_expenses', JSON.stringify(allExpenses));
-    } catch (e) {}
-  }, [allExpenses]);
+    if (!trips.some((t) => t.id === currentTripId) && trips[0]) setCurrentTripId(trips[0].id);
+  }, [trips, currentTripId]);
 
   // Chi tiêu của chuyến hiện tại
   const currentTripExpenses = allExpenses[currentTripId] || [];
@@ -238,20 +270,21 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
   const [editExpenseMethod, setEditExpenseMethod] = useState<'cash' | 'transfer' | 'card'>('cash');
   const [editExpenseNote, setEditExpenseNote] = useState('');
 
+  // Thông báo lỗi hiển thị trong từng form (thay vì bỏ qua im lặng)
+  const [manualError, setManualError] = useState('');
+  const [editError, setEditError] = useState('');
+  const [budgetError, setBudgetError] = useState('');
+  const [createTripError, setCreateTripError] = useState('');
+  const [durationError, setDurationError] = useState('');
+  const [scanError, setScanError] = useState('');
+  // Ảnh hóa đơn đính kèm vào form nhập tay (khi AI không đọc được hoặc người dùng muốn sửa)
+  const [manualReceipt, setManualReceipt] = useState<string | null>(null);
+
   // Hàm tính toán số ngày & số đêm chuẩn xác từ khoảng ngày đã chọn
   const calculateDaysAndNights = (start: string, end: string) => {
     if (!start || !end) return { days: 1, nights: 0, text: '1 ngày' };
-    const d1 = new Date(start);
-    const d2 = new Date(end);
-    const diffTime = d2.getTime() - d1.getTime();
-    const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
-    
-    if (diffDays <= 0) {
-      return { days: 1, nights: 0, text: '1 ngày (đi về trong ngày)' };
-    }
-    const nights = diffDays;
-    const days = nights + 1;
-    return { days, nights, text: `${days} ngày ${nights} đêm` };
+    const nights = Math.max(0, daysBetween(start, end));
+    return { days: nights + 1, nights, text: describeDuration(start, end) };
   };
 
   // Đồng bộ giá trị khi đổi chuyến đi
@@ -282,6 +315,7 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
     paymentMethod: 'cash' | 'transfer' | 'card';
     invoiceNo?: string;
     items?: { name: string; price: number }[];
+    source?: 'ai' | 'demo';
   } | null>(null);
 
   const [activeReceiptImage, setActiveReceiptImage] = useState<string | null>(null);
@@ -342,18 +376,27 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
     if (!ctx) return;
 
     ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
-    const dataUrl = canvas.toDataURL('image/jpeg', 0.85);
-    setActiveReceiptImage(dataUrl);
     stopRealCamera();
+    let dataUrl: string;
+    try {
+      dataUrl = await compressImage(canvas.toDataURL('image/jpeg', 0.85));
+    } catch (err) {
+      setScanError(err instanceof Error ? err.message : 'Không xử lý được ảnh chụp.');
+      return;
+    }
+    setActiveReceiptImage(dataUrl);
 
     // Gửi ảnh chụp thực tế tới API quét hóa đơn AI
     await processRealReceiptImage(dataUrl);
   };
 
-  // Xử lý gửi ảnh thực tế (chụp hoặc tải lên) tới API AI
+  // Xử lý gửi ảnh thực tế (chụp hoặc tải lên) tới API AI.
+  // AI không chạy / không đọc được → báo lỗi và cho nhập tay, KHÔNG tự bịa số tiền.
   const processRealReceiptImage = async (base64Image: string) => {
     setIsScanning(true);
     setScanSuccess(false);
+    setScannedData(null);
+    setScanError('');
 
     try {
       const res = await fetch('/api/scan-receipt', {
@@ -361,55 +404,89 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ imageBase64: base64Image })
       });
+      const json = await res.json().catch(() => ({}));
+      if (!res.ok || !json.data) throw new Error(json.error || 'Không đọc được hóa đơn.');
 
-      if (res.ok) {
-        const json = await res.json();
-        if (json.data) {
-          setScannedData({
-            store: json.data.store || 'Khoản chi từ hóa đơn',
-            totalAmount: Number(json.data.totalAmount) || 250000,
-            category: (['food', 'stay', 'transport', 'other'].includes(json.data.category) ? json.data.category : 'food') as any,
-            paymentMethod: json.data.paymentMethod || 'transfer',
-            invoiceNo: json.data.invoiceNo,
-            items: json.data.items || []
-          });
-          setScanSuccess(true);
-          setIsScanning(false);
-          return;
-        }
-      }
-    } catch (e) {
-      console.warn('API scan receipt error:', e);
-    }
+      const amount = parseMoney(json.data.totalAmount, BUDGET_LIMITS.EXPENSE_MAX);
+      if (amount.error) throw new Error('Số tiền AI đọc được không hợp lệ. Vui lòng nhập thủ công.');
 
-    // Dự phòng thông minh nếu không kết nối được
-    setTimeout(() => {
       setScannedData({
-        store: 'Hóa đơn ẩm thực & du lịch thực tế',
-        totalAmount: 320000,
-        category: 'food',
-        paymentMethod: 'transfer',
-        invoiceNo: 'HD-' + Math.floor(1000 + Math.random() * 9000),
-        items: [{ name: 'Chi phí thanh toán thực tế', price: 320000 }]
+        store: String(json.data.store || 'Khoản chi từ hóa đơn').slice(0, BUDGET_LIMITS.TITLE_MAX),
+        totalAmount: amount.value,
+        category: (['food', 'stay', 'transport', 'other'].includes(json.data.category) ? json.data.category : 'other') as any,
+        paymentMethod: (['cash', 'transfer', 'card'].includes(json.data.paymentMethod) ? json.data.paymentMethod : 'cash') as any,
+        invoiceNo: json.data.invoiceNo || undefined,
+        items: json.data.items || [],
+        source: 'ai'
       });
       setScanSuccess(true);
+    } catch (e) {
+      const message = e instanceof Error ? e.message : '';
+      setScanError(
+        !message || message === 'Failed to fetch'
+          ? 'Không kết nối được máy chủ để đọc hóa đơn. Bạn có thể nhập thủ công và giữ ảnh đính kèm.'
+          : message
+      );
+    } finally {
       setIsScanning(false);
-    }, 1200);
-  };
-
-  // Xử lý tải ảnh từ máy tính thực tế
-  const handleRealFileUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        const base64 = event.target?.result as string;
-        setActiveReceiptImage(base64);
-        processRealReceiptImage(base64);
-      };
-      reader.readAsDataURL(file);
     }
   };
+
+  // Xử lý tải ảnh từ máy: kiểm tra loại/dung lượng, nén ảnh (tránh đầy bộ nhớ) rồi gửi AI
+  const handleRealFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    e.target.value = '';
+    if (!file) return;
+    setScanError('');
+    const fileError = validateReceiptFile(file);
+    if (fileError) {
+      setScanError(fileError);
+      return;
+    }
+    try {
+      const compressed = await compressImage(await readFileAsDataUrl(file));
+      setActiveReceiptImage(compressed);
+      await processRealReceiptImage(compressed);
+    } catch (err) {
+      setScanError(err instanceof Error ? err.message : 'Không xử lý được ảnh.');
+    }
+  };
+
+  // Chuyển sang form nhập tay, giữ ảnh hóa đơn và (nếu có) dữ liệu AI để người dùng kiểm tra lại
+  const openManualWithReceipt = (prefill?: NonNullable<typeof scannedData>) => {
+    if (prefill) {
+      setManualTitle(prefill.store);
+      setManualAmount(String(prefill.totalAmount));
+      setManualCategory(prefill.category);
+      setManualMethod(prefill.paymentMethod);
+    }
+    setManualReceipt(activeReceiptImage);
+    setScanSuccess(false);
+    setScannedData(null);
+    setScanError('');
+    setManualError('');
+    stopRealCamera();
+    setAddExpenseTab('manual');
+  };
+
+  const renderScanError = () =>
+    scanError ? (
+      <div className="p-3.5 rounded-2xl bg-amber-50 border border-amber-200 space-y-2.5">
+        <div className="flex items-start gap-2 text-[11px] font-semibold text-amber-900">
+          <AlertTriangle className="w-4 h-4 shrink-0 text-amber-600" />
+          <span>{scanError}</span>
+        </div>
+        {activeReceiptImage && (
+          <button
+            type="button"
+            onClick={() => openManualWithReceipt()}
+            className="w-full py-2 rounded-xl bg-white border border-amber-300 hover:bg-amber-100 text-amber-900 text-xs font-bold cursor-pointer transition-colors"
+          >
+            Nhập số tiền thủ công & giữ ảnh hóa đơn
+          </button>
+        )}
+      </div>
+    ) : null;
 
   // Tính toán số liệu Ngân sách chuyến đi
   const totalBudget = activeTrip.totalBudget;
@@ -439,9 +516,9 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
     else if (selectedCategoryFilter === 'other') matchCat = item.category !== 'food' && item.category !== 'stay' && item.category !== 'transport';
 
     let matchSearch = true;
-    if (searchQuery.trim()) {
-      matchSearch = item.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                    (item.note && item.note.toLowerCase().includes(searchQuery.toLowerCase()));
+    const query = normalizeSearch(searchQuery);
+    if (query) {
+      matchSearch = normalizeSearch(item.title).includes(query) || normalizeSearch(item.note ?? '').includes(query);
     }
     return matchCat && matchSearch;
   });
@@ -449,20 +526,27 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
   // Xử lý thêm chi tiêu thủ công (cho phép chọn chuyến đi hiện tại hoặc chuyến cũ)
   const handleSaveManualExpense = (e: React.FormEvent) => {
     e.preventDefault();
-    const amountNum = Number(manualAmount);
-    if (!manualTitle.trim() || isNaN(amountNum) || amountNum <= 0) return;
+    const textError = validateExpenseText(manualTitle, manualNote);
+    if (textError) return setManualError(textError);
+    const amount = parseMoney(manualAmount, BUDGET_LIMITS.EXPENSE_MAX);
+    if (amount.error) return setManualError(amount.error);
 
     const chosenTripId = targetTripIdForExpense || currentTripId;
+    if (!trips.some((t) => t.id === chosenTripId)) return setManualError('Chuyến đi đã chọn không còn tồn tại.');
 
+    const now = new Date();
     const newItem: ExpenseItem = {
-      id: `exp-${Date.now()}`,
+      id: newId('exp'),
       tripId: chosenTripId,
       title: manualTitle.trim(),
-      amount: amountNum,
+      amount: amount.value,
       category: manualCategory as any,
-      date: 'Hôm nay, ' + new Date().toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' }),
+      // Lưu thời gian tuyệt đối; nhãn "Hôm nay / Hôm qua" được tính lúc hiển thị
+      date: formatAbsoluteDate(now),
+      timestamp: now.toISOString(),
       paymentMethod: manualMethod,
-      note: manualNote.trim() || undefined
+      note: manualNote.trim() || undefined,
+      receiptImage: manualReceipt || undefined
     };
 
     setAllExpenses(prev => ({
@@ -473,6 +557,9 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
     setManualTitle('');
     setManualAmount('');
     setManualNote('');
+    setManualError('');
+    setManualReceipt(null);
+    setActiveReceiptImage(null);
     setIsAddExpenseOpen(false);
   };
 
@@ -481,10 +568,11 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
     setActiveReceiptImage('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=600&q=80');
     setIsScanning(true);
     setScanSuccess(false);
+    setScanError('');
     setTimeout(() => {
       setIsScanning(false);
       setScanSuccess(true);
-      setScannedData(DEMO_1_RECEIPT);
+      setScannedData({ ...DEMO_1_RECEIPT, source: 'demo' });
     }, 1100);
   };
 
@@ -492,16 +580,24 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
   const handleConfirmScannedExpense = () => {
     if (!scannedData) return;
     const chosenTripId = targetTripIdForExpense || currentTripId;
+    const amount = parseMoney(scannedData.totalAmount, BUDGET_LIMITS.EXPENSE_MAX);
+    if (amount.error) return setScanError(amount.error);
 
+    const now = new Date();
     const newItem: ExpenseItem = {
-      id: `exp-${Date.now()}`,
+      id: newId('exp'),
       tripId: chosenTripId,
-      title: scannedData.store,
-      amount: scannedData.totalAmount,
+      title: scannedData.store.slice(0, BUDGET_LIMITS.TITLE_MAX),
+      amount: amount.value,
       category: scannedData.category,
-      date: 'Hôm nay, ' + new Date().toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' }),
+      date: formatAbsoluteDate(now),
+      timestamp: now.toISOString(),
       paymentMethod: scannedData.paymentMethod,
-      note: scannedData.invoiceNo ? `Hóa đơn ${scannedData.invoiceNo} đã qua xác thực AI` : 'Khoản chi quét từ ảnh hóa đơn thực tế',
+      // Ghi đúng nguồn dữ liệu — không ghi "đã xác thực" khi chỉ là AI đọc tự động
+      note:
+        scannedData.source === 'demo'
+          ? 'Hóa đơn mẫu (Demo)'
+          : `Đọc tự động bằng AI từ ảnh hóa đơn${scannedData.invoiceNo ? ` (số ${scannedData.invoiceNo})` : ''}`,
       receiptImage: activeReceiptImage || undefined
     };
 
@@ -525,6 +621,7 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
     setEditExpenseCategory((['food', 'stay', 'transport', 'other'].includes(item.category) ? item.category : 'food') as any);
     setEditExpenseMethod(item.paymentMethod || 'cash');
     setEditExpenseNote(item.note || '');
+    setEditError('');
     setIsEditExpenseOpen(true);
   };
 
@@ -532,13 +629,15 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
   const handleSaveEditExpense = (e: React.FormEvent) => {
     e.preventDefault();
     if (!editingExpense) return;
-    const amt = Number(editExpenseAmount);
-    if (!editExpenseTitle.trim() || isNaN(amt) || amt <= 0) return;
+    const textError = validateExpenseText(editExpenseTitle, editExpenseNote);
+    if (textError) return setEditError(textError);
+    const amount = parseMoney(editExpenseAmount, BUDGET_LIMITS.EXPENSE_MAX);
+    if (amount.error) return setEditError(amount.error);
 
     const updatedItem: ExpenseItem = {
       ...editingExpense,
       title: editExpenseTitle.trim(),
-      amount: amt,
+      amount: amount.value,
       category: editExpenseCategory,
       paymentMethod: editExpenseMethod,
       note: editExpenseNote.trim() || undefined
@@ -553,10 +652,13 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
 
     setIsEditExpenseOpen(false);
     setEditingExpense(null);
+    setEditError('');
   };
 
   // Xóa khoản chi
   const handleDeleteExpense = (id: string) => {
+    const item = currentTripExpenses.find((e) => e.id === id);
+    if (!window.confirm(`Xóa khoản chi "${item?.title ?? ''}" (${(item?.amount ?? 0).toLocaleString('vi-VN')} ₫)?`)) return;
     setAllExpenses(prev => ({
       ...prev,
       [currentTripId]: (prev[currentTripId] || []).filter(e => e.id !== id)
@@ -566,17 +668,21 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
   // Cập nhật hạn mức ngân sách
   const handleSaveBudget = (e: React.FormEvent) => {
     e.preventDefault();
-    const val = Number(newBudgetValue);
-    if (isNaN(val) || val <= 0) return;
+    const budget = parseMoney(newBudgetValue, BUDGET_LIMITS.BUDGET_MAX, 'ngân sách');
+    if (budget.error) return setBudgetError(budget.error);
 
-    setTrips(prev => prev.map(t => t.id === currentTripId ? { ...t, totalBudget: val } : t));
+    setTrips(prev => prev.map(t => t.id === currentTripId ? { ...t, totalBudget: budget.value } : t));
+    setBudgetError('');
     setIsEditBudgetOpen(false);
   };
 
   // Cập nhật thời lượng chuyến đi từ chọn lịch (nhỏ gọn, chuẩn xác số ngày & đêm)
   const handleSaveDuration = (e: React.FormEvent) => {
     e.preventDefault();
+    const dateError = validateTripDates(editStartDate, editEndDate);
+    if (dateError) return setDurationError(dateError);
     const calc = calculateDaysAndNights(editStartDate, editEndDate);
+    setDurationError('');
 
     setTrips(prev => prev.map(t => t.id === currentTripId ? {
       ...t,
@@ -590,15 +696,24 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
   // Xử lý tạo chuyến đi mới từ Modal (bao gồm chọn lịch & ghi nhận thời gian tạo)
   const handleCreateNewTrip = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!createTripName.trim()) return;
+    if (trips.length >= BUDGET_LIMITS.MAX_TRIPS) {
+      return setCreateTripError(`Tối đa ${BUDGET_LIMITS.MAX_TRIPS} chuyến đi. Hãy xóa bớt chuyến cũ.`);
+    }
+    const nameError = validateTripName(createTripName, trips.map((t) => t.name));
+    if (nameError) return setCreateTripError(nameError);
+    const dateError = validateTripDates(createTripStartDate, createTripEndDate);
+    if (dateError) return setCreateTripError(dateError);
+    // Không tự thay giá trị người dùng nhập (trước đây 0 bị đổi thành 6.000.000)
+    const budget = parseMoney(createTripBudget, BUDGET_LIMITS.BUDGET_MAX, 'ngân sách');
+    if (budget.error) return setCreateTripError(budget.error);
 
-    const budgetNum = Number(createTripBudget) || 6000000;
+    const budgetNum = budget.value;
     const calc = calculateDaysAndNights(createTripStartDate, createTripEndDate);
-    const now = new Date();
-    const createdAtStr = `${now.toLocaleDateString('vi-VN')} ${now.toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' })}`;
+    const createdAtStr = formatAbsoluteDate();
+    setCreateTripError('');
 
     const newTrip: TripBudget = {
-      id: `trip-${Date.now()}`,
+      id: newId('trip'),
       name: createTripName.trim(),
       destination: createTripDestination.trim() || createTripName.trim(),
       duration: calc.text,
@@ -644,16 +759,12 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
 
   // Xuất báo cáo CSV
   const handleExportCSV = () => {
-    const headers = 'ID,Ten Khoan Chi,So Tien (VND),Danh Muc,Ngay,Phuong Thuc,Ghi Chu\n';
-    const rows = currentTripExpenses.map(e => 
-      `"${e.id}","${e.title}",${e.amount},"${e.category}","${e.date || ''}","${e.paymentMethod || ''}","${e.note || ''}"`
-    ).join('\n');
-
-    const blob = new Blob([headers + rows], { type: 'text/csv;charset=utf-8;' });
+    // BOM UTF-8 cho Excel, escape ngoặc kép, chặn chèn công thức — xem buildExpenseCsv
+    const blob = new Blob([buildExpenseCsv(currentTripExpenses)], { type: 'text/csv;charset=utf-8;' });
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.setAttribute('download', `bao-cao-chi-tieu-${activeTrip.id}.csv`);
+    link.setAttribute('download', `bao-cao-chi-tieu-${toLocalISODate()}.csv`);
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -662,6 +773,15 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
 
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 space-y-6">
+      {failedStorageKeys.length > 0 && (
+        <div className="p-4 rounded-2xl bg-rose-50 border border-rose-200 text-rose-900 text-xs font-semibold flex items-start gap-2" role="alert">
+          <AlertTriangle className="w-4 h-4 shrink-0 text-rose-600" />
+          <span>
+            Bộ nhớ trình duyệt đã đầy — thay đổi mới nhất CHƯA được lưu. Hãy xóa bớt khoản chi có ảnh hóa đơn
+            hoặc xuất CSV để sao lưu trước khi tải lại trang.
+          </span>
+        </div>
+      )}
       
       {/* Hidden Canvas cho chụp ảnh Webcam */}
       <canvas ref={canvasRef} className="hidden" />
@@ -700,6 +820,7 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
             onClick={() => {
               setEditStartDate(activeTrip.startDate || '2026-10-15');
               setEditEndDate(activeTrip.endDate || '2026-10-18');
+              setDurationError('');
               setIsEditDurationOpen(true);
             }}
             className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-stone-100 hover:bg-stone-200 text-stone-700 hover:text-stone-900 text-xs font-semibold self-start sm:self-auto transition-all cursor-pointer border border-stone-200/80 hover:border-stone-400 group shadow-xs"
@@ -720,6 +841,7 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
                 <button 
                   onClick={() => {
                     setNewBudgetValue(totalBudget.toString());
+                    setBudgetError('');
                     setIsEditBudgetOpen(true);
                   }}
                   className="text-[11px] px-2 py-0.5 rounded-md bg-stone-700 hover:bg-stone-600 text-stone-200 transition-colors cursor-pointer"
@@ -871,6 +993,7 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
                 <button
                   onClick={() => {
                     setNewBudgetValue(totalBudget.toString());
+                    setBudgetError('');
                     setIsEditBudgetOpen(true);
                   }}
                   className="w-full px-4 py-2.5 text-xs text-stone-700 hover:bg-stone-50 flex items-center gap-2.5 font-semibold text-left cursor-pointer"
@@ -906,6 +1029,9 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
         <button
           onClick={() => {
             setAddExpenseTab('manual');
+            setManualError('');
+            setScanError('');
+            setManualReceipt(null);
             setIsAddExpenseOpen(true);
           }}
           className="inline-flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-[#FF385C] hover:bg-[#E00B41] text-white text-xs sm:text-sm font-black shadow-md hover:shadow-lg transition-all cursor-pointer transform hover:-translate-y-0.5 active:translate-y-0"
@@ -1069,7 +1195,7 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
                           </div>
                           
                           <div className="flex flex-wrap items-center gap-2 text-[11px] text-stone-500">
-                            <span>{exp.date}</span>
+                            <span>{formatExpenseDate(exp)}</span>
                             <span>•</span>
                             <span className="capitalize">
                               {isFood ? 'Ăn uống' : isStay ? 'Lưu trú' : isTransport ? 'Di chuyển' : 'Khác'}
@@ -1262,6 +1388,9 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
                   setScanSuccess(false);
                   setScannedData(null);
                   setActiveReceiptImage(null);
+                  setScanError('');
+                  setManualError('');
+                  setManualReceipt(null);
                 }}
                 className="p-1.5 text-stone-400 hover:text-stone-700 rounded-full hover:bg-stone-100 transition-colors cursor-pointer"
               >
@@ -1322,7 +1451,7 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
 
             {/* TAB 1: NHẬP THỦ CÔNG */}
             {addExpenseTab === 'manual' && (
-              <form onSubmit={handleSaveManualExpense} className="space-y-4">
+              <form onSubmit={handleSaveManualExpense} className="space-y-4" noValidate>
                 <div className="space-y-1">
                   <label className="text-xs font-bold text-stone-700 flex items-center justify-between">
                     <span>Lưu vào chuyến đi</span>
@@ -1346,7 +1475,8 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
                   <input
                     type="text"
                     value={manualTitle}
-                    onChange={(e) => setManualTitle(e.target.value)}
+                    onChange={(e) => { setManualTitle(e.target.value); setManualError(''); }}
+                    maxLength={BUDGET_LIMITS.TITLE_MAX}
                     placeholder="VD: Cơm niêu Đà Nẵng, Tiền homestay, Thuê xe máy..."
                     className="w-full px-3.5 py-2.5 bg-stone-50 border border-stone-200 rounded-xl text-xs text-stone-900 focus:outline-hidden focus:ring-2 focus:ring-[#FF385C]"
                     required
@@ -1359,7 +1489,11 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
                     <input
                       type="number"
                       value={manualAmount}
-                      onChange={(e) => setManualAmount(e.target.value)}
+                      onChange={(e) => { setManualAmount(e.target.value); setManualError(''); }}
+                      min={1}
+                      step={1}
+                      max={BUDGET_LIMITS.EXPENSE_MAX}
+                      inputMode="numeric"
                       placeholder="VD: 250000"
                       className="w-full px-3.5 py-2.5 bg-stone-50 border border-stone-200 rounded-xl text-xs text-stone-900 focus:outline-hidden focus:ring-2 focus:ring-[#FF385C]"
                       required
@@ -1422,11 +1556,24 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
                   <input
                     type="text"
                     value={manualNote}
-                    onChange={(e) => setManualNote(e.target.value)}
+                    onChange={(e) => { setManualNote(e.target.value); setManualError(''); }}
+                    maxLength={BUDGET_LIMITS.NOTE_MAX}
                     placeholder="VD: Cả nhóm chia đều 4 người..."
                     className="w-full px-3.5 py-2.5 bg-stone-50 border border-stone-200 rounded-xl text-xs text-stone-900 focus:outline-hidden"
                   />
                 </div>
+
+                {manualReceipt && (
+                  <div className="p-2.5 bg-stone-50 rounded-xl border border-stone-200 flex items-center gap-3">
+                    <img src={manualReceipt} alt="Ảnh hóa đơn đính kèm" className="w-10 h-10 rounded-lg object-cover border border-stone-200" />
+                    <span className="flex-1 text-[11px] font-semibold text-stone-700">Đã đính kèm ảnh hóa đơn — hãy kiểm tra lại số tiền</span>
+                    <button type="button" onClick={() => setManualReceipt(null)} className="p-1 text-stone-400 hover:text-rose-600 cursor-pointer" title="Bỏ ảnh đính kèm">
+                      <X className="w-3.5 h-3.5" />
+                    </button>
+                  </div>
+                )}
+
+                <FieldErrorText message={manualError} />
 
                 <div className="pt-2">
                   <button
@@ -1552,12 +1699,14 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
                   </label>
                 </div>
 
+                {renderScanError()}
+
                 {/* Kết quả bóc tách từ ảnh chụp */}
                 {scanSuccess && scannedData && (
                   <div className="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 space-y-3">
                     <div className="flex items-center gap-2 text-emerald-800 font-extrabold text-xs">
                       <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                      <span>Đã bóc tách thành công từ ảnh chụp!</span>
+                      <span>AI đã đọc xong — hãy kiểm tra lại số tiền trước khi lưu.</span>
                     </div>
 
                     <div className="bg-white p-3 rounded-xl border border-emerald-100 text-xs space-y-1">
@@ -1576,6 +1725,13 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
                       className="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold transition-colors cursor-pointer shadow-xs"
                     >
                       Xác nhận lưu khoản chi này
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => openManualWithReceipt(scannedData)}
+                      className="w-full py-2 rounded-xl border border-emerald-300 bg-white hover:bg-emerald-50 text-emerald-800 text-xs font-bold cursor-pointer transition-colors"
+                    >
+                      Sửa trước khi lưu
                     </button>
                   </div>
                 )}
@@ -1602,7 +1758,7 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
                       Bấm vào đây để chọn ảnh hóa đơn thực tế từ máy tính
                     </div>
                     <p className="text-[11px] text-stone-500 max-w-sm mx-auto">
-                      Hỗ trợ mọi định dạng ảnh hóa đơn chụp thực tế (JPG, PNG, WEBP). AI sẽ đọc và bóc tách số tiền ngay lập tức!
+                      Hỗ trợ ảnh JPG, PNG, WEBP, HEIC (tối đa 10MB). Ảnh được nén trước khi lưu; AI đọc số tiền và bạn kiểm tra lại trước khi lưu.
                     </p>
                   </div>
                 </div>
@@ -1624,6 +1780,8 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
                     {isScanning && <RefreshCw className="w-4 h-4 animate-spin text-[#FF385C]" />}
                   </div>
                 )}
+
+                {renderScanError()}
 
                 {/* 2. KHU VỰC HÓA ĐƠN MẪU (DEMO 1) */}
                 <div className="p-4 rounded-2xl bg-stone-50 border border-stone-200 space-y-3">
@@ -1698,7 +1856,11 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
                   <div className="p-4 rounded-2xl bg-emerald-50 border border-emerald-200 space-y-2.5 animate-in fade-in">
                     <div className="flex items-center gap-2 text-emerald-800 font-extrabold text-xs">
                       <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                      <span>Trích xuất AI hoàn tất! Dữ liệu đã sẵn sàng.</span>
+                      <span>
+                        {scannedData.source === 'demo'
+                          ? 'Đã đọc hóa đơn mẫu (Demo).'
+                          : 'AI đã đọc xong — hãy kiểm tra lại số tiền trước khi lưu.'}
+                      </span>
                     </div>
                     <div className="text-[11px] text-emerald-900 space-y-1 bg-white/70 p-3 rounded-xl border border-emerald-100">
                       <div>• Khoản chi: <strong>{scannedData.store}</strong></div>
@@ -1712,6 +1874,13 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
                       className="w-full py-2.5 bg-emerald-600 hover:bg-emerald-700 text-white rounded-xl text-xs font-bold transition-colors cursor-pointer shadow-xs"
                     >
                       + Lưu ngay vào Sổ chi tiêu
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => openManualWithReceipt(scannedData)}
+                      className="w-full py-2 rounded-xl border border-emerald-300 bg-white hover:bg-emerald-50 text-emerald-800 text-xs font-bold cursor-pointer transition-colors"
+                    >
+                      Sửa trước khi lưu
                     </button>
                   </div>
                 )}
@@ -1802,6 +1971,7 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
                 setCreateTripStartDate('2026-11-05');
                 setCreateTripEndDate('2026-11-08');
                 setCreateTripBudget('6000000');
+                setCreateTripError('');
                 setIsCreateTripOpen(true);
               }}
               className="w-full py-2.5 border border-dashed border-stone-300 hover:border-stone-400 text-stone-700 rounded-xl text-xs font-bold transition-colors cursor-pointer flex items-center justify-center gap-1.5 hover:bg-stone-50"
@@ -1837,14 +2007,15 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
               </button>
             </div>
 
-            <form onSubmit={handleCreateNewTrip} className="space-y-3.5">
+            <form onSubmit={handleCreateNewTrip} className="space-y-3.5" noValidate>
               {/* Tên chuyến đi */}
               <div className="space-y-1">
                 <label className="text-xs font-bold text-stone-700">Tên chuyến đi <span className="text-[#FF385C]">*</span></label>
                 <input
                   type="text"
                   value={createTripName}
-                  onChange={(e) => setCreateTripName(e.target.value)}
+                  onChange={(e) => { setCreateTripName(e.target.value); setCreateTripError(''); }}
+                  maxLength={BUDGET_LIMITS.TRIP_NAME_MAX}
                   placeholder="VD: Kỳ nghỉ Phú Quốc, Săn mây Tà Xùa..."
                   className="w-full p-2.5 bg-stone-50 border border-stone-200 rounded-xl text-xs font-bold text-stone-900 focus:outline-hidden focus:border-[#FF385C] focus:bg-white transition-all"
                   required
@@ -1878,19 +2049,26 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
                       <Calendar className="w-3 h-3 text-[#FF385C]" />
                       <span>Ngày khởi hành (đi)</span>
                     </span>
-                    <input
-                      type="date"
-                      value={createTripStartDate}
-                      onChange={(e) => {
-                        const val = e.target.value;
-                        setCreateTripStartDate(val);
-                        if (new Date(val) > new Date(createTripEndDate)) {
-                          setCreateTripEndDate(val);
-                        }
-                      }}
-                      className="w-full p-2 bg-stone-50 border border-stone-200 rounded-xl text-xs font-bold text-stone-900 focus:outline-hidden focus:border-[#FF385C] cursor-pointer"
-                      required
-                    />
+                    <div className="relative">
+                      <input
+                        type="date"
+                        min={toLocalISODate()}
+                        value={createTripStartDate}
+                        onChange={(e) => {
+                          const val = e.target.value;
+                          setCreateTripStartDate(val);
+                          if (new Date(val) > new Date(createTripEndDate)) {
+                            setCreateTripEndDate(val);
+                          }
+                        }}
+                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                        required
+                      />
+                      <div className="w-full p-2 bg-stone-50 border border-stone-200 rounded-xl text-xs font-bold text-stone-900 flex justify-between items-center pointer-events-none">
+                        <span>{createTripStartDate ? new Date(createTripStartDate).toLocaleDateString('vi-VN') : 'DD/MM/YYYY'}</span>
+                        <Calendar className="w-3.5 h-3.5 text-stone-400" />
+                      </div>
+                    </div>
                   </div>
 
                   <div className="space-y-1">
@@ -1898,14 +2076,20 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
                       <Calendar className="w-3 h-3 text-indigo-500" />
                       <span>Ngày kết thúc (về)</span>
                     </span>
-                    <input
-                      type="date"
-                      min={createTripStartDate}
-                      value={createTripEndDate}
-                      onChange={(e) => setCreateTripEndDate(e.target.value)}
-                      className="w-full p-2 bg-stone-50 border border-stone-200 rounded-xl text-xs font-bold text-stone-900 focus:outline-hidden focus:border-[#FF385C] cursor-pointer"
-                      required
-                    />
+                    <div className="relative">
+                      <input
+                        type="date"
+                        min={createTripStartDate}
+                        value={createTripEndDate}
+                        onChange={(e) => setCreateTripEndDate(e.target.value)}
+                        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                        required
+                      />
+                      <div className="w-full p-2 bg-stone-50 border border-stone-200 rounded-xl text-xs font-bold text-stone-900 flex justify-between items-center pointer-events-none">
+                        <span>{createTripEndDate ? new Date(createTripEndDate).toLocaleDateString('vi-VN') : 'DD/MM/YYYY'}</span>
+                        <Calendar className="w-3.5 h-3.5 text-stone-400" />
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -1916,7 +2100,9 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
                 <input
                   type="number"
                   value={createTripBudget}
-                  onChange={(e) => setCreateTripBudget(e.target.value)}
+                  onChange={(e) => { setCreateTripBudget(e.target.value); setCreateTripError(''); }}
+                  min={1}
+                  step={1}
                   placeholder="VD: 6000000"
                   className="w-full p-2.5 bg-stone-50 border border-stone-200 rounded-xl text-xs font-bold text-stone-900 focus:outline-hidden focus:border-[#FF385C] focus:bg-white transition-all"
                   required
@@ -1934,6 +2120,8 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
                   ))}
                 </div>
               </div>
+
+              <FieldErrorText message={createTripError} />
 
               <div className="flex gap-2.5 pt-2 border-t border-stone-100">
                 <button
@@ -1968,13 +2156,15 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
               </button>
             </div>
 
-            <form onSubmit={handleSaveBudget} className="space-y-3">
+            <form onSubmit={handleSaveBudget} className="space-y-3" noValidate>
               <div className="space-y-1">
                 <label className="text-xs font-bold text-stone-600">Số tiền ngân sách mới (VNĐ)</label>
                 <input
                   type="number"
                   value={newBudgetValue}
-                  onChange={(e) => setNewBudgetValue(e.target.value)}
+                  onChange={(e) => { setNewBudgetValue(e.target.value); setBudgetError(''); }}
+                  min={1}
+                  step={1}
                   className="w-full p-2.5 bg-stone-50 border border-stone-200 rounded-xl text-xs font-bold text-stone-900"
                   required
                 />
@@ -1992,6 +2182,13 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
                   </button>
                 ))}
               </div>
+
+              <FieldErrorText message={budgetError} />
+              {!budgetError && Number(newBudgetValue) > 0 && Number(newBudgetValue) < totalSpent && (
+                <p className="text-[11px] font-semibold text-amber-700">
+                  Lưu ý: ngân sách mới thấp hơn số đã chi ({totalSpent.toLocaleString('vi-VN')} ₫).
+                </p>
+              )}
 
               <button
                 type="submit"
@@ -2028,7 +2225,7 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
               </button>
             </div>
 
-            <form onSubmit={handleSaveDuration} className="space-y-4">
+            <form onSubmit={handleSaveDuration} className="space-y-4" noValidate>
               {/* Thẻ hiển thị số ngày, số đêm tự động tính toán từ lịch */}
               {(() => {
                 const calc = calculateDaysAndNights(editStartDate, editEndDate);
@@ -2055,19 +2252,26 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
                     <Calendar className="w-3.5 h-3.5 text-[#FF385C]" />
                     <span>Ngày đi</span>
                   </label>
-                  <input
-                    type="date"
-                    value={editStartDate}
-                    onChange={(e) => {
-                      const newStart = e.target.value;
-                      setEditStartDate(newStart);
-                      if (new Date(newStart) > new Date(editEndDate)) {
-                        setEditEndDate(newStart);
-                      }
-                    }}
-                    className="w-full p-2.5 bg-stone-50 border border-stone-200 rounded-xl text-xs font-bold text-stone-900 focus:outline-hidden focus:border-[#FF385C] focus:bg-white transition-all cursor-pointer"
-                    required
-                  />
+                  <div className="relative">
+                    <input
+                      type="date"
+                      value={editStartDate}
+                      onChange={(e) => {
+                        const newStart = e.target.value;
+                        setEditStartDate(newStart);
+                        setDurationError('');
+                        if (new Date(newStart) > new Date(editEndDate)) {
+                          setEditEndDate(newStart);
+                        }
+                      }}
+                      className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                      required
+                    />
+                    <div className="w-full p-2.5 bg-stone-50 border border-stone-200 rounded-xl text-xs font-bold text-stone-900 flex justify-between items-center pointer-events-none">
+                      <span>{editStartDate ? new Date(editStartDate).toLocaleDateString('vi-VN') : 'DD/MM/YYYY'}</span>
+                      <Calendar className="w-3.5 h-3.5 text-stone-400" />
+                    </div>
+                  </div>
                 </div>
 
                 <div className="space-y-1">
@@ -2075,17 +2279,25 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
                     <Calendar className="w-3.5 h-3.5 text-indigo-500" />
                     <span>Ngày về</span>
                   </label>
-                  <input
-                    type="date"
-                    min={editStartDate}
-                    value={editEndDate}
-                    onChange={(e) => setEditEndDate(e.target.value)}
-                    className="w-full p-2.5 bg-stone-50 border border-stone-200 rounded-xl text-xs font-bold text-stone-900 focus:outline-hidden focus:border-[#FF385C] focus:bg-white transition-all cursor-pointer"
-                    required
-                  />
+                  <div className="relative">
+                    <input
+                      type="date"
+                      min={editStartDate}
+                      value={editEndDate}
+                      onChange={(e) => { setEditEndDate(e.target.value); setDurationError(''); }}
+                      className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                      required
+                    />
+                    <div className="w-full p-2.5 bg-stone-50 border border-stone-200 rounded-xl text-xs font-bold text-stone-900 flex justify-between items-center pointer-events-none">
+                      <span>{editEndDate ? new Date(editEndDate).toLocaleDateString('vi-VN') : 'DD/MM/YYYY'}</span>
+                      <Calendar className="w-3.5 h-3.5 text-stone-400" />
+                    </div>
+                  </div>
                 </div>
               </div>
 
+
+              <FieldErrorText message={durationError} />
 
               <div className="flex gap-2.5 pt-2 border-t border-stone-100">
                 <button
@@ -2134,14 +2346,15 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
               </button>
             </div>
 
-            <form onSubmit={handleSaveEditExpense} className="space-y-3.5">
+            <form onSubmit={handleSaveEditExpense} className="space-y-3.5" noValidate>
               {/* Địa điểm / Tên khoản chi */}
               <div className="space-y-1">
                 <label className="text-xs font-bold text-stone-700">Địa điểm / Tên khoản chi <span className="text-[#FF385C]">*</span></label>
                 <input
                   type="text"
                   value={editExpenseTitle}
-                  onChange={(e) => setEditExpenseTitle(e.target.value)}
+                  onChange={(e) => { setEditExpenseTitle(e.target.value); setEditError(''); }}
+                  maxLength={BUDGET_LIMITS.TITLE_MAX}
                   placeholder="VD: Cơm niêu, Khách sạn..."
                   className="w-full px-3.5 py-2.5 bg-stone-50 border border-stone-200 rounded-xl text-xs font-bold text-stone-900 focus:outline-hidden focus:border-[#FF385C] focus:bg-white"
                   required
@@ -2155,7 +2368,9 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
                   <input
                     type="number"
                     value={editExpenseAmount}
-                    onChange={(e) => setEditExpenseAmount(e.target.value)}
+                    onChange={(e) => { setEditExpenseAmount(e.target.value); setEditError(''); }}
+                    min={1}
+                    step={1}
                     placeholder="VD: 350000"
                     className="w-full px-3.5 py-2.5 bg-stone-50 border border-stone-200 rounded-xl text-xs font-bold text-stone-900 focus:outline-hidden focus:border-[#FF385C] focus:bg-white"
                     required
@@ -2220,11 +2435,14 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
                 <input
                   type="text"
                   value={editExpenseNote}
-                  onChange={(e) => setEditExpenseNote(e.target.value)}
+                  onChange={(e) => { setEditExpenseNote(e.target.value); setEditError(''); }}
+                  maxLength={BUDGET_LIMITS.NOTE_MAX}
                   placeholder="VD: Cả nhóm chia đều, đã bao gồm thuế..."
                   className="w-full px-3.5 py-2.5 bg-stone-50 border border-stone-200 rounded-xl text-xs text-stone-900 focus:outline-hidden"
                 />
               </div>
+
+              <FieldErrorText message={editError} />
 
               <div className="flex gap-2.5 pt-2 border-t border-stone-100">
                 <button

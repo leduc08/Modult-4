@@ -1,0 +1,13 @@
+{
+  "name": "vietgo-tests",
+  "private": true,
+  "type": "module",
+  "description": "Bộ kiểm thử VietGo: unit (tài khoản, chi tiêu), API và E2E trên Chrome thật",
+  "scripts": {
+    "test": "node run-all.mjs",
+    "test:unit": "npx --prefix .. tsx unit-auth.mts && npx --prefix .. tsx unit-budget.mts"
+  },
+  "dependencies": {
+    "playwright-core": "^1.55.0"
+  }
+}

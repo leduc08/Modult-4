@@ -1,26 +1,52 @@
 import React, { useState, useMemo } from 'react';
-import { 
-  X, 
-  Heart, 
-  Wallet, 
-  UserCheck, 
-  ShieldAlert, 
-  Trash2, 
-  PlusCircle, 
-  Star, 
-  MapPin, 
-  CheckCircle2, 
-  Sparkles, 
-  Phone, 
-  PieChart, 
-  DollarSign,
-  Award,
-  Globe,
-  Search
+import {
+  X,
+  Heart,
+  Wallet,
+  ShieldAlert,
+  ShieldCheck,
+  Trash2,
+  Sparkles,
+  Phone,
+  Search,
+  LogOut,
+  User
 } from 'lucide-react';
 import { PROVINCES } from '../data/vietnamData';
 import { DetailItem } from './ItemDetailModal';
-import { ExpenseItem, UserProfile, TravelStyle } from '../types';
+import { AuthForm } from './AuthForm';
+import { AccountSecurity } from './AccountSecurity';
+import { LegalDocId } from './LegalModal';
+import { ExpenseItem, UserProfile, TravelStyle, AuthUser, AccountTab } from '../types';
+
+export const getInitials = (name: string) =>
+  name
+    .trim()
+    .split(/\s+/)
+    .slice(-2)
+    .map((w) => w[0]?.toUpperCase() ?? '')
+    .join('');
+
+// Ảnh đại diện Google (nếu có), lỗi tải ảnh thì quay về chữ viết tắt.
+// Khung bọc ngoài cần `overflow-hidden` + bo tròn.
+export const AvatarContent: React.FC<{ user: AuthUser }> = ({ user }) => {
+  const [failed, setFailed] = useState(false);
+  if (user.avatarUrl && !failed) {
+    return (
+      <img
+        src={user.avatarUrl}
+        alt={user.name}
+        referrerPolicy="no-referrer"
+        onError={() => setFailed(true)}
+        className="w-full h-full object-cover"
+      />
+    );
+  }
+  return <>{getInitials(user.name)}</>;
+};
+
+export const isVerifiedUser =(user: AuthUser) =>
+  (!!user.email && user.emailVerified) || (!!user.phone && user.phoneVerified);
 
 interface AccountDrawerProps {
   isOpen: boolean;
@@ -28,8 +54,13 @@ interface AccountDrawerProps {
   wishlist: string[];
   onToggleWishlist: (id: string) => void;
   onSelectItem: (item: DetailItem) => void;
-  initialTab?: 'wishlist' | 'dna' | 'budget' | 'emergency';
+  initialTab?: AccountTab;
   onOpenFullBudget?: () => void;
+  currentUser: AuthUser | null;
+  onLogin: (user: AuthUser) => void;
+  onLogout: () => void;
+  onUpdateUser: (user: AuthUser) => void;
+  onOpenLegal: (doc: LegalDocId) => void;
 }
 
 export const AccountDrawer: React.FC<AccountDrawerProps> = ({
@@ -39,9 +70,14 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
   onToggleWishlist,
   onSelectItem,
   initialTab = 'wishlist',
-  onOpenFullBudget
+  onOpenFullBudget,
+  currentUser,
+  onLogin,
+  onLogout,
+  onUpdateUser,
+  onOpenLegal
 }) => {
-  const [activeTab, setActiveTab] = useState<'wishlist' | 'dna' | 'budget' | 'emergency'>(initialTab);
+  const [activeTab, setActiveTab] = useState<AccountTab>(initialTab);
   const [wishlistSearch, setWishlistSearch] = useState('');
 
   // Sync initial tab when opened
@@ -121,9 +157,9 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
 
   // Travel DNA state
   const [userProfile, setUserProfile] = useState<UserProfile>({
-    id: 'user-default',
-    name: 'Nguyễn Văn An',
-    email: 'traveler.an@vietgo.ai',
+    id: currentUser?.id ?? 'guest',
+    name: currentUser?.name ?? '',
+    email: currentUser?.email ?? '',
     primaryStyle: 'Foodie & Ẩm thực',
     dietaryRestrictions: ['Ăn cay vừa', 'Không hành sống'],
     preferredPace: 'balanced',
@@ -147,18 +183,18 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
         {/* Drawer Header — tiêu đề thay đổi theo tab */}
         <div className="p-5 border-b border-[#E5E5E5] flex items-center justify-between bg-white shrink-0">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-full bg-[#222222] text-white flex items-center justify-center font-bold text-sm">
-              VA
+            <div className="w-10 h-10 rounded-full overflow-hidden bg-[#222222] text-white flex items-center justify-center font-bold text-sm">
+              {currentUser ? <AvatarContent user={currentUser} /> : <User className="w-5 h-5" />}
             </div>
             <div>
               <h2 className="text-base font-black text-[#222222]">
                 {activeTab === 'wishlist' && 'Danh sách yêu thích'}
-                {activeTab === 'dna' && 'Hồ sơ Travel DNA'}
+                {activeTab === 'profile' && (currentUser ? 'Hồ sơ cá nhân' : 'Đăng nhập / Đăng ký')}
                 {activeTab === 'budget' && 'Quản lý chi tiêu'}
                 {activeTab === 'emergency' && 'Hotline cứu hộ SOS'}
               </h2>
               <p className="text-xs text-[#717171]">
-                {userProfile.email}
+                {currentUser ? (currentUser.email || currentUser.phone || `@${currentUser.username}`) :'Khách — chưa đăng nhập'}
               </p>
             </div>
           </div>
@@ -281,85 +317,136 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
             </div>
           )}
 
-          {/* TAB 2: HỒ SƠ TRAVEL DNA */}
-          {activeTab === 'dna' && (
-            <div className="space-y-5">
-              <div className="p-4 rounded-3xl bg-[#F7F7F7] border border-[#E5E5E5] flex items-center justify-between">
-                <div>
-                  <div className="text-[11px] font-bold text-[#717171] uppercase tracking-wider">Hồ sơ cá nhân hóa</div>
-                  <h3 className="text-base font-black text-[#222222]">Chỉ số khám phá Việt Nam</h3>
-                </div>
-                <div className="text-right">
-                  <div className="text-2xl font-black text-[#FF385C]">{visitedCount} / 34+</div>
-                  <div className="text-[11px] text-[#717171]">Tỉnh thành đã đặt chân</div>
-                </div>
-              </div>
-
-              <div className="space-y-3">
-                <label className="text-xs font-bold text-[#222222]">Phong cách du lịch ưu tiên</label>
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs">
-                  {[
-                    'Foodie & Ẩm thực',
-                    'Nghỉ dưỡng & Chill',
-                    'Khám phá Văn hóa & Lịch sử',
-                    'Phượt bụi & Khám phá mạo hiểm',
-                    'Du lịch Tiết kiệm & Tự túc',
-                    'Check-in Sống ảo'
-                  ].map((style) => (
+          {/* TAB 2: HỒ SƠ CÁ NHÂN (THÔNG TIN CÁ NHÂN + TRAVEL DNA) */}
+          {activeTab === 'profile' && (
+            !currentUser ? (
+              <AuthForm onLogin={onLogin} onOpenLegal={onOpenLegal} />
+            ) : (
+              <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-300">
+                {/* NỬA TRÊN: THÔNG TIN CÁ NHÂN */}
+                <div className="bg-white p-5 sm:p-6 rounded-3xl border border-[#E5E5E5] shadow-sm relative overflow-hidden">
+                  <div className="absolute top-0 right-0 w-40 h-40 bg-[#FF385C]/10 rounded-full blur-3xl -mr-12 -mt-12 pointer-events-none"></div>
+                  <div className="flex items-center justify-between mb-5 relative z-10">
+                    <h3 className="text-sm font-extrabold text-[#222222]">Thông tin cá nhân</h3>
                     <button
-                      key={style}
-                      onClick={() => setUserProfile({ ...userProfile, primaryStyle: style as TravelStyle })}
-                      className={`p-3 rounded-2xl border text-left font-semibold transition-all cursor-pointer ${
-                        userProfile.primaryStyle === style
-                          ? 'bg-[#222222] text-white border-[#222222]'
-                          : 'bg-[#F7F7F7] text-[#717171] border-[#E5E5E5] hover:border-[#222222]'
-                      }`}
+                      onClick={onLogout}
+                      className="px-3 py-1.5 rounded-full border border-[#E5E5E5] text-xs font-bold text-[#717171] hover:text-rose-600 hover:border-rose-200 hover:bg-rose-50 flex items-center gap-1.5 cursor-pointer transition-colors"
                     >
-                      {style}
+                      <LogOut className="w-3.5 h-3.5" /> Đăng xuất
                     </button>
-                  ))}
-                </div>
-              </div>
+                  </div>
 
-              <div className="space-y-3">
-                <label className="text-xs font-bold text-[#222222]">Sở thích & Lưu ý ăn uống</label>
-                <div className="flex flex-wrap gap-2 text-xs">
-                  {['Không hành', 'Ăn cay vừa', 'Không ăn cay', 'Ăn chay / Thuần chay', 'Thích hải sản', 'Dị ứng đậu phộng'].map((item) => (
-                    <button
-                      key={item}
-                      onClick={() => {
-                        let newRestrictions = [...userProfile.dietaryRestrictions];
-                        if (newRestrictions.includes(item)) {
-                          newRestrictions = newRestrictions.filter(i => i !== item);
-                        } else {
-                          // Ràng buộc thực tế (Logic constraints)
-                          if (item === 'Ăn chay / Thuần chay') {
-                            newRestrictions = newRestrictions.filter(i => i !== 'Thích hải sản');
-                          } else if (item === 'Thích hải sản') {
-                            newRestrictions = newRestrictions.filter(i => i !== 'Ăn chay / Thuần chay');
+                  <div className="flex items-center gap-4 relative z-10">
+                    <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden bg-gradient-to-tr from-[#FF385C] to-orange-400 text-white flex items-center justify-center text-xl sm:text-2xl font-black shadow-md border-4 border-white shrink-0">
+                      <AvatarContent user={currentUser} />
+                    </div>
+                    <div className="min-w-0">
+                      <div className="text-lg sm:text-xl font-black text-[#222222] truncate">{currentUser.name}</div>
+                      <div className="text-xs font-semibold text-[#717171] truncate">@{currentUser.username}</div>
+                      {isVerifiedUser(currentUser) ? (
+                        <div className="text-[11px] font-bold text-emerald-700 mt-1.5 flex items-center gap-1 bg-emerald-50 border border-emerald-200 w-fit px-2 py-0.5 rounded-full">
+                          <ShieldCheck className="w-3.5 h-3.5" /> Đã xác thực
+                        </div>
+                      ) : (
+                        <div className="text-[11px] font-bold text-amber-700 mt-1.5 flex items-center gap-1 bg-amber-50 border border-amber-200 w-fit px-2 py-0.5 rounded-full">
+                          <ShieldAlert className="w-3.5 h-3.5" /> Chưa xác minh
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="mt-5 relative z-10 space-y-3">
+                    <h4 className="text-xs font-extrabold text-[#222222]">Liên hệ & khôi phục tài khoản</h4>
+                    <AccountSecurity user={currentUser} onUpdate={onUpdateUser} />
+                  </div>
+                </div>
+
+                {/* NỬA DƯỚI: HỒ SƠ TRAVEL DNA */}
+                <div className="flex items-center gap-3">
+                  <div className="flex-1 border-t border-[#E5E5E5] border-dashed"></div>
+                  <div className="flex items-center gap-1.5 text-[11px] font-bold uppercase tracking-wider text-[#717171]">
+                    <Sparkles className="w-3.5 h-3.5 text-[#FF385C]" /> Hồ sơ Travel DNA
+                  </div>
+                  <div className="flex-1 border-t border-[#E5E5E5] border-dashed"></div>
+                </div>
+
+                <div className="p-4 rounded-3xl bg-[#F7F7F7] border border-[#E5E5E5] flex items-center justify-between">
+                  <div>
+                    <div className="text-[11px] font-bold text-[#717171] uppercase tracking-wider">Hồ sơ cá nhân hóa</div>
+                    <h3 className="text-base font-black text-[#222222]">Chỉ số khám phá Việt Nam</h3>
+                  </div>
+                  <div className="text-right">
+                    <div className="text-2xl font-black text-[#FF385C]">{visitedCount} / 34+</div>
+                    <div className="text-[11px] text-[#717171]">Tỉnh thành đã đặt chân</div>
+                  </div>
+                </div>
+
+                <div className="space-y-3">
+                  <label className="text-xs font-bold text-[#222222]">Phong cách du lịch ưu tiên</label>
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs">
+                    {[
+                      'Foodie & Ẩm thực',
+                      'Nghỉ dưỡng & Chill',
+                      'Khám phá Văn hóa & Lịch sử',
+                      'Phượt bụi & Khám phá mạo hiểm',
+                      'Du lịch Tiết kiệm & Tự túc',
+                      'Check-in Sống ảo'
+                    ].map((style) => (
+                      <button
+                        key={style}
+                        onClick={() => setUserProfile({ ...userProfile, primaryStyle: style as TravelStyle })}
+                        className={`p-3 rounded-2xl border text-left font-semibold transition-all cursor-pointer ${
+                          userProfile.primaryStyle === style
+                            ? 'bg-[#222222] text-white border-[#222222]'
+                            : 'bg-[#F7F7F7] text-[#717171] border-[#E5E5E5] hover:border-[#222222]'
+                        }`}
+                      >
+                        {style}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="space-y-3">
+                  <label className="text-xs font-bold text-[#222222]">Sở thích & Lưu ý ăn uống</label>
+                  <div className="flex flex-wrap gap-2 text-xs">
+                    {['Không hành', 'Ăn cay vừa', 'Không ăn cay', 'Ăn chay / Thuần chay', 'Thích hải sản', 'Dị ứng đậu phộng'].map((item) => (
+                      <button
+                        key={item}
+                        onClick={() => {
+                          let newRestrictions = [...userProfile.dietaryRestrictions];
+                          if (newRestrictions.includes(item)) {
+                            newRestrictions = newRestrictions.filter(i => i !== item);
+                          } else {
+                            // Ràng buộc thực tế (Logic constraints)
+                            if (item === 'Ăn chay / Thuần chay') {
+                              newRestrictions = newRestrictions.filter(i => i !== 'Thích hải sản');
+                            } else if (item === 'Thích hải sản') {
+                              newRestrictions = newRestrictions.filter(i => i !== 'Ăn chay / Thuần chay');
+                            }
+
+                            if (item === 'Không ăn cay') {
+                              newRestrictions = newRestrictions.filter(i => i !== 'Ăn cay vừa');
+                            } else if (item === 'Ăn cay vừa') {
+                              newRestrictions = newRestrictions.filter(i => i !== 'Không ăn cay');
+                            }
+                            newRestrictions.push(item);
                           }
-                          
-                          if (item === 'Không ăn cay') {
-                            newRestrictions = newRestrictions.filter(i => i !== 'Ăn cay vừa');
-                          } else if (item === 'Ăn cay vừa') {
-                            newRestrictions = newRestrictions.filter(i => i !== 'Không ăn cay');
-                          }
-                          newRestrictions.push(item);
-                        }
-                        setUserProfile({ ...userProfile, dietaryRestrictions: newRestrictions });
-                      }}
-                      className={`px-3 py-1.5 rounded-full border transition-colors cursor-pointer ${
-                        userProfile.dietaryRestrictions.includes(item)
-                          ? 'bg-[#FF385C] text-white border-[#FF385C]'
-                          : 'bg-[#F7F7F7] text-[#717171] border-[#E5E5E5]'
-                      }`}
-                    >
-                      {item}
-                    </button>
-                  ))}
+                          setUserProfile({ ...userProfile, dietaryRestrictions: newRestrictions });
+                        }}
+                        className={`px-3 py-1.5 rounded-full border transition-colors cursor-pointer ${
+                          userProfile.dietaryRestrictions.includes(item)
+                            ? 'bg-[#FF385C] text-white border-[#FF385C]'
+                            : 'bg-[#F7F7F7] text-[#717171] border-[#E5E5E5]'
+                        }`}
+                      >
+                        {item}
+                      </button>
+                    ))}
+                  </div>
                 </div>
               </div>
-            </div>
+            )
           )}
 
           {/* TAB 3: QUẢN LÝ CHI TIÊU (BUDGET) */}

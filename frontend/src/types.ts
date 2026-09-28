@@ -228,4 +228,29 @@ export interface UserProfile {
   savedItems: string[];
 }
 
+export type AuthMethod = 'email' | 'phone';
+
+export interface AuthUser {
+  id: string;
+  username: string;
+  name: string;
+  email?: string;
+  phone?: string;
+  emailVerified: boolean;
+  phoneVerified: boolean;
+  hasPassword: boolean;
+  avatarUrl?: string;
+  googleEmail?: string; // có giá trị = đã liên kết tài khoản Google
+}
+
+// Hồ sơ Google đã được backend xác thực từ ID token
+export interface GoogleProfile {
+  sub: string;
+  email: string;
+  name: string;
+  picture: string | null;
+}
+
+export type AccountTab = 'wishlist' | 'profile' | 'budget' | 'emergency';
+
 export type LanguageCode = 'vi' | 'en' | 'ko' | 'ja' | 'zh';
