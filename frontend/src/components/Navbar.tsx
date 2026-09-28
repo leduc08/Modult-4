@@ -45,7 +45,6 @@ export const Navbar: React.FC<NavbarProps> = ({
     { id: 'nearby' as const, label: 'Xung quanh', icon: MapPin },
     { id: 'ai' as const, label: 'Trợ lý AI', icon: Bot },
     { id: 'itinerary' as const, label: 'Lịch trình', icon: Calendar },
-    { id: 'budget' as const, label: 'Quản lý chi tiêu', icon: Wallet },
   ];
 
   return (
@@ -147,18 +146,28 @@ export const Navbar: React.FC<NavbarProps> = ({
             <div className="relative">
               <button
                 onClick={() => setAccountMenuOpen(!accountMenuOpen)}
-                className="flex items-center gap-2 p-1.5 pl-3 rounded-full border border-[#E5E5E5] hover:shadow-md transition-all cursor-pointer bg-white"
+                className={`flex items-center gap-2 p-1.5 pl-3 rounded-full border transition-all cursor-pointer bg-white ${
+                  activeTab === 'budget'
+                    ? 'border-emerald-500 shadow-sm ring-2 ring-emerald-500/20'
+                    : 'border-[#E5E5E5] hover:shadow-md'
+                }`}
+                title="Menu tài khoản & Tiện ích"
               >
                 <Menu className="w-4 h-4 text-[#717171]" />
-                <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#222222] text-white text-xs font-black flex items-center justify-center shadow-xs">
-                  VA
+                <div className="relative">
+                  <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#222222] text-white text-xs font-black flex items-center justify-center shadow-xs">
+                    VA
+                  </div>
+                  {activeTab === 'budget' && (
+                    <span className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 bg-emerald-500 rounded-full border-2 border-white" />
+                  )}
                 </div>
               </button>
 
               {/* Account Dropdown Menu */}
               {accountMenuOpen && (
                 <div 
-                  className="absolute right-0 top-12 w-56 bg-white rounded-2xl shadow-xl border border-[#E5E5E5] py-2 z-50 animate-in fade-in zoom-in-95 duration-150"
+                  className="absolute right-0 top-12 w-60 bg-white rounded-2xl shadow-xl border border-[#E5E5E5] py-2 z-50 animate-in fade-in zoom-in-95 duration-150"
                   onClick={() => setAccountMenuOpen(false)}
                 >
                   <div className="px-4 py-2 border-b border-[#E5E5E5]">
@@ -168,7 +177,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
                   <button
                     onClick={() => onOpenAccount('wishlist')}
-                    className="w-full px-4 py-2.5 text-xs text-[#222222] hover:bg-[#F7F7F7] flex items-center gap-2.5 font-semibold text-left cursor-pointer"
+                    className="w-full px-4 py-2.5 text-xs text-[#222222] hover:bg-[#F7F7F7] flex items-center gap-2.5 font-semibold text-left cursor-pointer transition-colors"
                   >
                     <Heart className="w-4 h-4 text-[#FF385C]" />
                     <span>Danh sách yêu thích ({wishlistCount})</span>
@@ -176,7 +185,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
                   <button
                     onClick={() => onOpenAccount('dna')}
-                    className="w-full px-4 py-2.5 text-xs text-[#222222] hover:bg-[#F7F7F7] flex items-center gap-2.5 font-semibold text-left cursor-pointer"
+                    className="w-full px-4 py-2.5 text-xs text-[#222222] hover:bg-[#F7F7F7] flex items-center gap-2.5 font-semibold text-left cursor-pointer transition-colors"
                   >
                     <UserCheck className="w-4 h-4 text-[#FF385C]" />
                     <span>Hồ sơ Travel DNA</span>
@@ -184,17 +193,26 @@ export const Navbar: React.FC<NavbarProps> = ({
 
                   <button
                     onClick={() => onOpenAccount('budget')}
-                    className="w-full px-4 py-2.5 text-xs text-[#222222] hover:bg-[#F7F7F7] flex items-center gap-2.5 font-semibold text-left cursor-pointer"
+                    className={`w-full px-4 py-2.5 text-xs flex items-center justify-between font-semibold text-left cursor-pointer transition-colors ${
+                      activeTab === 'budget' 
+                        ? 'bg-emerald-50 text-emerald-800 font-bold border-l-4 border-emerald-600' 
+                        : 'text-[#222222] hover:bg-[#F7F7F7]'
+                    }`}
                   >
-                    <Wallet className="w-4 h-4 text-emerald-600" />
-                    <span>Quản lý chi tiêu</span>
+                    <div className="flex items-center gap-2.5">
+                      <Wallet className={`w-4 h-4 ${activeTab === 'budget' ? 'text-emerald-700' : 'text-emerald-600'}`} />
+                      <span>Quản lý chi tiêu</span>
+                    </div>
+                    <span className="text-[10px] font-bold px-1.5 py-0.5 rounded-full bg-emerald-100 text-emerald-700">
+                      Mới
+                    </span>
                   </button>
 
                   <div className="border-t border-[#E5E5E5] my-1"></div>
 
                   <button
                     onClick={onOpenSOS}
-                    className="w-full px-4 py-2.5 text-xs text-rose-600 hover:bg-rose-50 flex items-center gap-2.5 font-bold text-left cursor-pointer"
+                    className="w-full px-4 py-2.5 text-xs text-rose-600 hover:bg-rose-50 flex items-center gap-2.5 font-bold text-left cursor-pointer transition-colors"
                   >
                     <ShieldAlert className="w-4 h-4 text-rose-600" />
                     <span>Cứu hộ khẩn cấp SOS</span>

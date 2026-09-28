@@ -177,7 +177,12 @@ export default function App() {
 
         {/* Page 5: Quản lý chi tiêu (BudgetTracker) */}
         {activeTab === 'budget' && (
-          <BudgetTracker />
+          <BudgetTracker 
+            onBack={() => {
+              setActiveTab('explore');
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }} 
+          />
         )}
       </main>
 
@@ -202,6 +207,11 @@ export default function App() {
         onToggleWishlist={handleToggleWishlist}
         onSelectItem={(item) => setSelectedDetailItem(item)}
         initialTab={accountDrawerTab}
+        onOpenFullBudget={() => {
+          setAccountDrawerOpen(false);
+          setActiveTab('budget');
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }}
       />
 
       {/* 5. Booking Modal */}

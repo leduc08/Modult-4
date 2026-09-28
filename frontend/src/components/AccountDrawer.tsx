@@ -28,6 +28,7 @@ interface AccountDrawerProps {
   onToggleWishlist: (id: string) => void;
   onSelectItem: (item: DetailItem) => void;
   initialTab?: 'wishlist' | 'dna' | 'budget' | 'emergency';
+  onOpenFullBudget?: () => void;
 }
 
 export const AccountDrawer: React.FC<AccountDrawerProps> = ({
@@ -36,7 +37,8 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
   wishlist,
   onToggleWishlist,
   onSelectItem,
-  initialTab = 'wishlist'
+  initialTab = 'wishlist',
+  onOpenFullBudget
 }) => {
   const [activeTab, setActiveTab] = useState<'wishlist' | 'dna' | 'budget' | 'emergency'>(initialTab);
 
@@ -358,6 +360,19 @@ export const AccountDrawer: React.FC<AccountDrawerProps> = ({
           {/* TAB 3: QUẢN LÝ CHI TIÊU (BUDGET) */}
           {activeTab === 'budget' && (
             <div className="space-y-5">
+              {onOpenFullBudget && (
+                <button
+                  onClick={onOpenFullBudget}
+                  className="w-full py-2.5 px-4 rounded-2xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold text-xs flex items-center justify-between shadow-xs transition-all cursor-pointer group"
+                >
+                  <div className="flex items-center gap-2">
+                    <Wallet className="w-4 h-4" />
+                    <span>Mở Bảng Quản Lý Chi Tiêu Toàn Diện</span>
+                  </div>
+                  <span className="text-[11px] group-hover:translate-x-1 transition-transform">→</span>
+                </button>
+              )}
+
               {/* Budget Overview Card */}
               <div className="p-5 rounded-3xl bg-[#222222] text-white space-y-4 shadow-md">
                 <div className="flex justify-between items-center">

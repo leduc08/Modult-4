@@ -28,7 +28,8 @@ import {
   Plus,
   Video,
   VideoOff,
-  ImageIcon
+  ImageIcon,
+  ArrowLeft
 } from 'lucide-react';
 import { ExpenseItem, TripBudget } from '../types';
 
@@ -134,7 +135,11 @@ const DEMO_1_RECEIPT = {
   category: 'food' as const
 };
 
-export const BudgetTracker: React.FC = () => {
+interface BudgetTrackerProps {
+  onBack?: () => void;
+}
+
+export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack }) => {
   // 1. Quản lý Chuyến đi
   const [trips, setTrips] = useState<TripBudget[]>(() => {
     try {
@@ -491,6 +496,24 @@ export const BudgetTracker: React.FC = () => {
       
       {/* Hidden Canvas cho chụp ảnh Webcam */}
       <canvas ref={canvasRef} className="hidden" />
+
+      {/* Thanh điều hướng Quay lại Khám phá khi mở từ Menu 3 gạch */}
+      {onBack && (
+        <div className="flex items-center justify-between pb-1 animate-in fade-in duration-200">
+          <button 
+            onClick={onBack}
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-stone-100 hover:bg-stone-200 text-stone-700 hover:text-[#222222] text-xs font-bold transition-all cursor-pointer shadow-xs group"
+          >
+            <ArrowLeft className="w-4 h-4 text-stone-500 group-hover:-translate-x-0.5 transition-transform" />
+            <span>Quay lại Khám phá</span>
+          </button>
+          
+          <div className="hidden sm:flex items-center gap-2 text-xs text-stone-500 bg-stone-50 px-3 py-1.5 rounded-full border border-stone-200">
+            <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
+            <span>Đang mở từ <strong className="text-stone-700">Menu 3 gạch</strong></span>
+          </div>
+        </div>
+      )}
 
       {/* ============================================================== */}
       {/* 1. NGÂN SÁCH CHUYẾN ĐI (TỔNG NGÂN SÁCH, ĐÃ CHI, CÒN LẠI)        */}
