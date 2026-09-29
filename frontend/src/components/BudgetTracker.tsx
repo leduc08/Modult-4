@@ -37,6 +37,7 @@ import {
   ChevronRight
 } from 'lucide-react';
 import { ExpenseItem, TripBudget } from '../types';
+import type { AIReceiptImport } from '../../../database/aiReceiptTypes';
 import {
   BUDGET_LIMITS,
   parseMoney,
@@ -180,9 +181,11 @@ interface BudgetTrackerProps {
   onBack?: () => void;
   // 'guest' hoặc id tài khoản — mỗi tài khoản có sổ chi tiêu riêng trên cùng thiết bị
   storageScope?: string;
+  pendingAIReceipt?: AIReceiptImport | null;
+  onAIReceiptConsumed?: () => void;
 }
 
-export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack, storageScope = 'guest' }) => {
+export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack, storageScope = 'guest', pendingAIReceipt, onAIReceiptConsumed }) => {
   const storageKeys = budgetStorageKeys(storageScope);
 
   // 1. Quản lý Chuyến đi
@@ -304,6 +307,28 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack, storageSco
   const [manualCategory, setManualCategory] = useState<'food' | 'stay' | 'transport' | 'other'>('food');
   const [manualMethod, setManualMethod] = useState<'cash' | 'transfer' | 'card'>('cash');
   const [manualNote, setManualNote] = useState('');
+  const [importedAIReceipt, setImportedAIReceipt] = useState<AIReceiptImport | null>(null);
+  const [aiReceiptDate, setAIReceiptDate] = useState('');
+
+  useEffect(() => {
+    if (!isAddExpenseOpen) setImportedAIReceipt(null);
+  }, [isAddExpenseOpen]);
+
+  useEffect(() => {
+    if (!pendingAIReceipt) return;
+    setImportedAIReceipt(pendingAIReceipt);
+    setManualTitle(pendingAIReceipt.title);
+    setManualAmount(pendingAIReceipt.amount?.toString() || '');
+    setManualCategory(pendingAIReceipt.category);
+    setManualMethod(pendingAIReceipt.paymentMethod);
+    setAIReceiptDate(pendingAIReceipt.date || toLocalISODate());
+    setManualNote('Đọc tự động bằng AI từ ảnh hóa đơn; người dùng kiểm tra trước khi lưu.');
+    setManualReceipt(pendingAIReceipt.receiptImage || null);
+    setManualError('');
+    setAddExpenseTab('manual');
+    setIsAddExpenseOpen(true);
+    onAIReceiptConsumed?.();
+  }, [pendingAIReceipt, onAIReceiptConsumed]);
 
   // State cho quét ảnh hóa đơn & Camera thực tế
   const [isScanning, setIsScanning] = useState(false);
@@ -534,9 +559,18 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack, storageSco
     const chosenTripId = targetTripIdForExpense || currentTripId;
     if (!trips.some((t) => t.id === chosenTripId)) return setManualError('Chuyến đi đã chọn không còn tồn tại.');
 
-    const now = new Date();
+    const importedId = importedAIReceipt ? `ai-receipt-${importedAIReceipt.id}` : '';
+    if (importedId && Object.values(allExpenses).some(items => Array.isArray(items) && items.some(item => item.id === importedId))) {
+      return setManualError('Hóa đơn từ tin nhắn này đã được thêm vào chi tiêu.');
+    }
+    const receiptDate = importedAIReceipt ? new Date(`${aiReceiptDate}T12:00:00`) : null;
+    if (receiptDate && (Number.isNaN(receiptDate.getTime()) || toLocalISODate(receiptDate) !== aiReceiptDate)) {
+      return setManualError('Vui lòng chọn ngày hóa đơn hợp lệ.');
+    }
+
+    const now = receiptDate || new Date();
     const newItem: ExpenseItem = {
-      id: newId('exp'),
+      id: importedId || newId('exp'),
       tripId: chosenTripId,
       title: manualTitle.trim(),
       amount: amount.value,
@@ -1452,6 +1486,14 @@ export const BudgetTracker: React.FC<BudgetTrackerProps> = ({ onBack, storageSco
             {/* TAB 1: NHẬP THỦ CÔNG */}
             {addExpenseTab === 'manual' && (
               <form onSubmit={handleSaveManualExpense} className="space-y-4" noValidate>
+                {importedAIReceipt && (
+                  <div className="rounded-xl bg-emerald-50 p-3 space-y-2 text-xs text-emerald-900">
+                    <p>Đã nhận hóa đơn từ Trợ lý AI. Kiểm tra số tiền, danh mục và chuyến đi trước khi lưu.</p>
+                    {!importedAIReceipt.amount && <p>Chưa đọc được tổng tiền VNĐ hợp lệ. Hãy nhập số tiền bên dưới{importedAIReceipt.currency && importedAIReceipt.currency !== 'VND' ? ` (hóa đơn dùng ${importedAIReceipt.currency})` : ''}.</p>}
+                    <label className="block font-semibold" htmlFor="ai-receipt-date">Ngày hóa đơn</label>
+                    <input id="ai-receipt-date" type="date" value={aiReceiptDate} onChange={e => { setAIReceiptDate(e.target.value); setManualError(''); }} className="rounded-lg border p-2 bg-white text-stone-900" />
+                  </div>
+                )}
                 <div className="space-y-1">
                   <label className="text-xs font-bold text-stone-700 flex items-center justify-between">
                     <span>Lưu vào chuyến đi</span>

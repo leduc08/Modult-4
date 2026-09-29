@@ -38,6 +38,7 @@ import {
   queryNearbyPlaces 
 } from '../services/nearbyPlacesService';
 import { DetailItem } from './ItemDetailModal';
+import type { ChatActionContext } from '../../../database/chatActionTypes';
 import { 
   DEFAULT_DATA_SOURCE, 
   IS_SAMPLE_MODE, 
@@ -62,6 +63,7 @@ import {
 } from '../data/places/index';
 
 interface NearbyPageProps {
+  initialChatFocus?: { context: ChatActionContext; category: 'all' | 'food' };
   wishlist: string[];
   onToggleWishlist: (id: string) => void;
   onSelectItem: (item: DetailItem) => void;
@@ -94,6 +96,7 @@ function findNearestCity(lat: number, lng: number): typeof POPULAR_AREAS[0] {
 }
 
 export const NearbyPage: React.FC<NearbyPageProps> = ({
+  initialChatFocus,
   wishlist,
   onToggleWishlist,
   onSelectItem,
@@ -126,7 +129,12 @@ export const NearbyPage: React.FC<NearbyPageProps> = ({
     name: string;
     cityId: string;
     isRealUser: boolean;
-  }>({
+  }>(initialChatFocus ? {
+    ...initialChatFocus.context.coordinates,
+    name: initialChatFocus.context.destination,
+    cityId: findNearestCity(initialChatFocus.context.coordinates.lat, initialChatFocus.context.coordinates.lng).id,
+    isRealUser: false,
+  } : {
     lat: 16.0544,
     lng: 108.2022,
     name: 'Đà Nẵng',
@@ -142,8 +150,12 @@ export const NearbyPage: React.FC<NearbyPageProps> = ({
 
   // 3. Search & Filter State
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState<PlaceCategoryGroup>('all');
-  const [selectedRadius, setSelectedRadius] = useState<number | 'all'>(5);
+  const [selectedCategory, setSelectedCategory] = useState<PlaceCategoryGroup>(initialChatFocus?.category || 'all');
+  const [selectedRadius, setSelectedRadius] = useState<number | 'all'>(initialChatFocus ? 'all' : 5);
+  const [chatProvinceId, setChatProvinceId] = useState(initialChatFocus?.context.provinceId || '');
+  const [recommendedIds, setRecommendedIds] = useState<string[]>(initialChatFocus
+    ? initialChatFocus.category === 'food' ? initialChatFocus.context.foodIds : [...initialChatFocus.context.poiIds, ...initialChatFocus.context.foodIds]
+    : []);
   const [sortBy, setSortBy] = useState<'nearest' | 'rating'>('nearest');
   const [onlyOpenNow, setOnlyOpenNow] = useState(false);
 
@@ -167,6 +179,7 @@ export const NearbyPage: React.FC<NearbyPageProps> = ({
    * 'google'         → Google Places API (New) - có billing
    */
   const [dataSource, setDataSource] = useState<DataSourceType>(() => {
+    if (initialChatFocus) return 'sample';
     // Auto-detect pre-fetched data on mount
     if (hasPreFetchedData()) return 'foursquare+osm';
     return 'sample';
@@ -271,6 +284,8 @@ export const NearbyPage: React.FC<NearbyPageProps> = ({
 
   // Jump to specific preset city/area
   const handleSelectArea = (area: typeof POPULAR_AREAS[0]) => {
+    setChatProvinceId('');
+    setRecommendedIds([]);
     setSearchCenter({
       lat: area.lat,
       lng: area.lng,
@@ -300,8 +315,9 @@ export const NearbyPage: React.FC<NearbyPageProps> = ({
       searchQuery,
       sortBy,
       onlyOpenNow,
-    });
-  }, [searchCenter, selectedRadius, selectedCategory, searchQuery, sortBy, onlyOpenNow, usingSample]);
+    }).filter(place => (!chatProvinceId || place.provinceId === chatProvinceId)
+      && (!recommendedIds.length || recommendedIds.includes(place.id)));
+  }, [searchCenter, selectedRadius, selectedCategory, searchQuery, sortBy, onlyOpenNow, usingSample, chatProvinceId, recommendedIds]);
 
   /** Danh sách địa điểm hiển thị — tuỳ theo dataSource */
   const staticPlaces = useMemo(() => {
@@ -680,6 +696,12 @@ export const NearbyPage: React.FC<NearbyPageProps> = ({
     });
   }, [places, selectedPlaceId, mapZoom]);
 
+  useEffect(() => {
+    if (chatProvinceId && places.length && mapInstanceRef.current) {
+      mapInstanceRef.current.fitBounds(places.map(p => [p.coordinates.lat, p.coordinates.lng] as [number, number]), { padding: [40, 40], maxZoom: 14 });
+    }
+  }, [chatProvinceId, places]);
+
   // When selectedPlaceId changes, center map on that place
   const handleSelectPlaceFromList = (place: NearbyPlace) => {
     setSelectedPlaceId(place.id);
@@ -748,6 +770,12 @@ export const NearbyPage: React.FC<NearbyPageProps> = ({
         >
           {/* Top Sticky Header: Search Bar & Area Indicator */}
           <div className="p-4 sm:p-5 border-b border-[#E5E5E5] bg-white shrink-0 space-y-3">
+            {chatProvinceId && (
+              <div className="text-xs text-[#717171] flex items-center justify-between gap-2">
+                <span>Gợi ý từ cuộc chat: {initialChatFocus?.context.destination}</span>
+                {recommendedIds.length > 0 && <button className="underline" onClick={() => setRecommendedIds([])}>Xem tất cả</button>}
+              </div>
+            )}
             {/* Search Input Box */}
             <div className="relative">
               <Search className="w-4 h-4 text-[#717171] absolute left-3.5 top-3" />

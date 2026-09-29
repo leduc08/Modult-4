@@ -13,7 +13,9 @@
     "clean": "rm -rf dist server.js",
     "lint": "tsc --noEmit",
     "fetch-places": "tsx scripts/fetch-places.ts",
-    "prune-places": "tsx scripts/prune-places.ts"
+    "prune-places": "tsx scripts/prune-places.ts",
+    "import:kaggle": "tsx scripts/import-kaggle-to-supabase.ts",
+    "import:tourism": "tsx scripts/import-tourism-catalog-to-supabase.ts"
   },
   "dependencies": {
     "@google/genai": "^2.4.0",

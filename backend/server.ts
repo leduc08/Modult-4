@@ -5,6 +5,11 @@ import { GoogleGenAI } from '@google/genai';
 import { createServer as createViteServer } from 'vite';
 import { answerWithVerifiedPlaces } from './verifiedChat.ts';
 import { createVerifiedPlan } from './verifiedPlanRoute.ts';
+import { DeepSeekClient } from '../ai/deepseekClient.ts';
+import { validateAssistantImage, analyzeAssistantImage } from '../ai/imageAnalysis.ts';
+import { getImageRecommendations } from '../ai/imageRecommendations.ts';
+import { resolveChatAction } from '../ai/chatActions.ts';
+import { getSuggestedChatActions } from '../ai/suggestedChatActions.ts';
 
 dotenv.config();
 
@@ -14,23 +19,26 @@ const PORT = Number(process.env.PORT) || 3000;
 app.use(express.json({ limit: '25mb' }));
 app.use(express.urlencoded({ limit: '25mb', extended: true }));
 
-// Initialize Google GenAI client
-const apiKey = process.env.GEMINI_API_KEY;
-let ai: GoogleGenAI | null = null;
-if (apiKey) {
-  ai = new GoogleGenAI({
-    apiKey: apiKey,
+// DeepSeek powers the travel assistant and verified planner. Gemini remains
+// configured separately for the team's existing receipt scanner.
+const deepSeekApiKey = process.env.DEEPSEEK_API_KEY?.trim();
+const thinking = process.env.DEEPSEEK_THINKING === 'enabled' ? 'enabled' : 'disabled';
+const ai = deepSeekApiKey ? new DeepSeekClient(deepSeekApiKey, process.env.DEEPSEEK_MODEL || 'deepseek-flash', thinking) : null;
+const geminiApiKey = process.env.GEMINI_API_KEY?.trim();
+const plannerAI: GoogleGenAI | null = geminiApiKey ? new GoogleGenAI({
+    apiKey: geminiApiKey,
     httpOptions: {
       headers: {
         'User-Agent': 'aistudio-build',
       },
     },
-  });
-}
+  }) : null;
 
 // 1. Health check
 app.get('/api/health', (req, res) => {
-  res.json({ status: 'ok', hasGeminiKey: !!apiKey });
+  res.json({ status: 'ok', aiProvider: 'deepseek', hasDeepSeekKey: !!deepSeekApiKey,
+    model: ai?.model || process.env.DEEPSEEK_MODEL || 'deepseek-flash', thinking: ai?.thinking || thinking,
+    hasGeminiKey: !!geminiApiKey });
 });
 
 // 1.5. Real AI Receipt Scanner (Vision OCR)
@@ -61,7 +69,7 @@ app.post('/api/scan-receipt', async (req, res) => {
       return res.status(413).json({ error: 'Ảnh quá lớn (tối đa 8MB).', code: 'IMAGE_TOO_LARGE' });
     }
 
-    if (!ai) {
+    if (!plannerAI) {
       return res.status(503).json({
         error: 'Tính năng đọc hóa đơn bằng AI chưa được bật (thiếu GEMINI_API_KEY). Vui lòng nhập số tiền thủ công.',
         code: 'AI_UNAVAILABLE'
@@ -70,7 +78,7 @@ app.post('/api/scan-receipt', async (req, res) => {
 
     let parsed: any;
     try {
-      const response = await ai.models.generateContent({
+      const response = await plannerAI.models.generateContent({
         model: 'gemini-2.5-flash',
         contents: [
           {
@@ -139,12 +147,49 @@ app.post('/api/chat', async (req, res) => {
   try {
     const message = String(req.body?.message || '').trim();
     if (!message) return res.status(400).json({ error: 'Message is required' });
-    const response = await answerWithVerifiedPlaces(message, req.body?.conversationHistory || [], ai);
-    return res.json(response);
+    const conversationHistory = Array.isArray(req.body?.conversationHistory) ? req.body.conversationHistory : [];
+    const language = typeof req.body?.language === 'string' ? req.body.language : 'vi';
+    const result = await answerWithVerifiedPlaces(message, conversationHistory, ai, '', language);
+    const suggestedActions = getSuggestedChatActions([...conversationHistory, { sender: 'user', text: message }],
+      { sender: 'ai', text: result.text, suggestedActions: result.suggestedActions, verifiedActions: result.verifiedActions, actionsUnavailable: !ai || result.actionsUnavailable === true });
+    return res.json({ ...result, actionsUnavailable: !ai || result.actionsUnavailable === true, suggestedActions });
   } catch (error: any) {
     console.error('Chat error:', error);
     return res.status(500).json({ error: error.message || 'Lỗi xử lý AI Chatbot' });
   }
+});
+
+app.post('/api/ai/analyze-image', async (req, res) => {
+  let imageDataUrl: string;
+  try { imageDataUrl = validateAssistantImage(req.body?.imageDataUrl); }
+  catch (error) { return res.status(400).json({ error: error instanceof Error ? error.message : 'Ảnh không hợp lệ.' }); }
+  if (!ai) return res.status(503).json({ error: 'Chưa cấu hình DEEPSEEK_API_KEY để phân tích ảnh.' });
+  try {
+    const question = typeof req.body?.question === 'string' ? req.body.question : '';
+    const analysis = await analyzeAssistantImage(imageDataUrl, question, ai);
+    const recommendations = await getImageRecommendations(analysis);
+    const note = recommendations.placeMatch === 'possible_landmark'
+      ? '\n\nMình tìm được địa điểm cùng tên trong dữ liệu VietGo để bạn đối chiếu; điều này chưa xác nhận ảnh được chụp tại đó.'
+      : recommendations.placeMatch === 'similar_places'
+        ? '\n\nCác địa điểm bên dưới có đặc điểm tương tự ảnh, không khẳng định đây là nơi chụp.'
+        : analysis.category === 'food' && recommendations.richData.foods.length
+          ? '\n\nMình tìm được quán có món này trong dữ liệu VietGo.'
+          : '';
+    return res.json({ ...analysis, text: `${analysis.text}${note}`,
+      richData: recommendations.richData, knowledgeSources: recommendations.knowledgeSources });
+  } catch (error) { return res.status(502).json({ error: error instanceof Error ? error.message : 'Không thể phân tích ảnh.' }); }
+});
+
+app.post('/api/chat-action', async (req, res) => {
+  try {
+    const { action, messages } = req.body || {};
+    if (!['open_map', 'open_planner', 'open_food'].includes(action) || !Array.isArray(messages)) {
+      return res.status(400).json({ error: 'Yêu cầu thao tác chat không hợp lệ.' });
+    }
+    const context = await resolveChatAction(messages.filter((m: any) => m && typeof m.text === 'string'), ai, action);
+    if (!context) return res.status(422).json({ error: 'Chưa xác định được điểm đến có dữ liệu bản đồ/lịch trình. Hãy ghi rõ điểm đến trong cuộc chat rồi thử lại.' });
+    return res.json(context);
+  } catch (error) { return res.status(422).json({ error: error instanceof Error ? error.message : 'Không thể thực hiện thao tác từ cuộc chat. Hãy thử lại.' }); }
 });
 
 app.post('/api/plan-trip', async (req, res) => {
