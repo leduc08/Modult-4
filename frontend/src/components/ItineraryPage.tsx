@@ -31,6 +31,7 @@ import { PROVINCES, ALL_TIPS } from '../data/vietnamData';
 import { DetailItem } from './ItemDetailModal';
 
 interface ItineraryPageProps {
+  initialGeneratedPlan?: TripPlan | null;
   initialPlanParams?: {
     destination: string;
     days: number;
@@ -45,6 +46,7 @@ interface ItineraryPageProps {
 }
 
 export const ItineraryPage: React.FC<ItineraryPageProps> = ({
+  initialGeneratedPlan,
   initialPlanParams,
   onSelectItem,
   onOpenBooking,
@@ -197,7 +199,7 @@ export const ItineraryPage: React.FC<ItineraryPageProps> = ({
   };
 
   // Plan State
-  const [plan, setPlan] = useState<TripPlan>(() => generateDefaultPlan(destination, daysCount));
+  const [plan, setPlan] = useState<TripPlan>(() => initialGeneratedPlan || generateDefaultPlan(destination, daysCount));
 
   // Sync if initialPlanParams updates
   useEffect(() => {
@@ -208,10 +210,11 @@ export const ItineraryPage: React.FC<ItineraryPageProps> = ({
       if (initialPlanParams.style) {
         setTravelStyle(initialPlanParams.style as any);
       }
-      setPlan(generateDefaultPlan(initialPlanParams.destination, initialPlanParams.days));
+      setPlan(initialGeneratedPlan || generateDefaultPlan(initialPlanParams.destination, initialPlanParams.days));
+      if (initialGeneratedPlan) setBudgetTotal(initialGeneratedPlan.totalBudget);
       setActiveDay(1);
     }
-  }, [initialPlanParams]);
+  }, [initialPlanParams, initialGeneratedPlan]);
 
   // If pendingAddItem passed from modal or chat, add it to current day!
   useEffect(() => {
@@ -575,7 +578,7 @@ export const ItineraryPage: React.FC<ItineraryPageProps> = ({
               onChange={(e) => setGuestsCount(Number(e.target.value))}
               className="bg-transparent font-semibold focus:outline-hidden cursor-pointer"
             >
-              {[1, 2, 4, 6].map(n => (
+              {[...new Set([1, 2, 4, 6, guestsCount])].sort((a, b) => a - b).map(n => (
                 <option key={n} value={n}>{n} người</option>
               ))}
             </select>

@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useLayoutEffect, useCallback } from 'react';
 import { 
   Send, 
   Bot, 
@@ -16,24 +16,41 @@ import {
   ExternalLink,
   MessageSquare,
   RefreshCw,
-  Plus
+  Plus,
+  Trash2
 } from 'lucide-react';
 import { POI, FoodSpot, TravelTip } from '../types';
 import { DetailItem } from './ItemDetailModal';
+import { CHAT_STORAGE_KEY, loadChatHistory, createChatSession, appendChatMessage, deleteChatSession } from './chatHistory';
+import type { ChatActionName, ChatActionContext } from '../../../database/chatActionTypes';
+import { AIReplyText } from './AIReplyText';
+import { AIImageInput } from './AIImageInput';
+import { getSuggestedChatActions } from '../../../ai/suggestedChatActions';
+import { normalizeAIReceipt, type AIReceiptDraft, type AIReceiptImport } from '../../../database/aiReceiptTypes';
 
 export interface ChatMessageItem {
   id: string;
   sender: 'user' | 'ai';
   text: string;
   timestamp: string;
+  imageThumbnail?: string;
+  actionsUnavailable?: boolean;
+  verifiedActions?: string[];
+  actionContextText?: string;
+  receiptDraft?: AIReceiptDraft;
+  receiptThumbnail?: string;
+  knowledgeSources?: { id: string; title: string; sourceUrl: string }[];
   richData?: {
     pois?: POI[];
     foods?: FoodSpot[];
     tips?: TravelTip[];
+    tripPreview?: ChatActionContext;
+    tripPreviewUserId?: string;
     extractedTrip?: {
       destination: string;
       days: number;
       guests: number;
+      budget?: number;
       style?: string;
     };
   };
@@ -46,73 +63,154 @@ export interface ChatMessageItem {
 
 interface AIAssistantPageProps {
   initialQuery?: string;
+  onInitialQueryConsumed?: () => void;
   onSelectItem: (item: DetailItem) => void;
   onAddToItinerary: (item: DetailItem) => void;
   onProceedToItinerary: (params: { destination: string; days: number; guests: number; style?: string }) => void;
+  onExecuteChatAction: (action: ChatActionName, context: ChatActionContext) => Promise<void>;
+  onImportReceipt: (receipt: AIReceiptImport) => void;
 }
 
 export const AIAssistantPage: React.FC<AIAssistantPageProps> = ({
   initialQuery,
+  onInitialQueryConsumed,
   onSelectItem,
   onAddToItinerary,
   onProceedToItinerary,
+  onExecuteChatAction,
+  onImportReceipt,
 }) => {
+  // Keep the document scrollbar gutter while this viewport-sized tab is open.
+  // Reset document scrolling before paint; only the chat panels should scroll.
+  useLayoutEffect(() => {
+    const root = document.documentElement;
+    const previous = {
+      overflowY: root.style.overflowY,
+      scrollbarGutter: root.style.scrollbarGutter,
+      scrollBehavior: root.style.scrollBehavior,
+    };
+    root.style.scrollbarGutter = 'stable';
+    root.style.overflowY = 'hidden';
+    root.style.scrollBehavior = 'auto';
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    return () => {
+      root.style.overflowY = previous.overflowY;
+      root.style.scrollbarGutter = previous.scrollbarGutter;
+      root.style.scrollBehavior = previous.scrollBehavior;
+    };
+  }, []);
+
   // Chat sidebar toggle on desktop
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(() => window.matchMedia('(min-width: 768px)').matches);
+  const [aiStatus, setAiStatus] = useState<{ hasDeepSeekKey: boolean; model: string } | null>(null);
+
+  useEffect(() => {
+    const controller = new AbortController();
+    fetch('/api/health', { signal: controller.signal })
+      .then(response => response.ok ? response.json() : Promise.reject(new Error('Health check failed')))
+      .then(data => {
+        if (data.aiProvider === 'deepseek') setAiStatus({ hasDeepSeekKey: data.hasDeepSeekKey === true, model: data.model });
+      })
+      .catch(() => {});
+    return () => controller.abort();
+  }, []);
   
   // Chat sessions
-  const [sessions, setSessions] = useState([
-    { id: 'session-1', title: 'Tư vấn du lịch Việt Nam', time: 'Hôm nay' }
-  ]);
-  const [activeSessionId, setActiveSessionId] = useState('session-1');
+  const [history, setHistory] = useState(loadChatHistory);
+  const { sessions, activeSessionId } = history;
+  const messages = sessions.find(session => session.id === activeSessionId)!.messages;
+  const [storageError, setStorageError] = useState(false);
+  const [pendingSessions, setPendingSessions] = useState<string[]>([]);
+  const [runningAction, setRunningAction] = useState<string | null>(null);
+  const [typingMessageId, setTypingMessageId] = useState<string | null>(null);
+  const finishTyping = useCallback(() => setTypingMessageId(null), []);
+  const actionBusy = useRef(false);
+  const [actionError, setActionError] = useState<{ messageId: string; text: string } | null>(null);
+  const requests = useRef(new Map<string, AbortController>());
+  const consumedQuery = useRef('');
 
-  // Messages state
-  const [messages, setMessages] = useState<ChatMessageItem[]>([
-    {
-      id: 'welcome-msg',
-      sender: 'ai',
-      text: `Xin chào! Tôi có thể gợi ý nơi tham quan và ăn uống từ dữ liệu địa điểm VietGo đã lưu. Hãy cho tôi biết thành phố bạn muốn tìm hiểu.`,
-      timestamp: 'Bây giờ',
-      suggestedActions: [
-        { label: '🍲 Quán ăn tại Hà Nội', action: 'ask_hanoi_food' },
-        { label: '🏛️ Điểm tham quan tại Huế', action: 'ask_hue_sights' },
-        { label: '📅 Tạo lịch trình Đà Nẵng', action: 'plan_danang' }
-      ]
+  useEffect(() => {
+    try {
+      localStorage.setItem(CHAT_STORAGE_KEY, JSON.stringify(history));
+      setStorageError(false);
+    } catch {
+      setStorageError(true);
     }
-  ]);
+  }, [history]);
+
+  useEffect(() => () => {
+    requests.current.forEach(controller => controller.abort());
+  }, []);
 
   const [inputMessage, setInputMessage] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
-  const messagesEndRef = useRef<HTMLDivElement>(null);
+  const isLoading = pendingSessions.includes(activeSessionId);
+  const chatScrollRef = useRef<HTMLDivElement>(null);
+  const chatContentRef = useRef<HTMLDivElement>(null);
+  const followChatRef = useRef(true);
+  const manualScrollRef = useRef(false);
+  const lastScrollTopRef = useRef(0);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
-  // Auto scroll
-  const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
-  };
+  // Observe rendered height, including the child typewriter animation. Scroll
+  // only this panel; repeated smooth scrolling would lag behind the reply.
+  const scrollToBottom = useCallback(() => {
+    const panel = chatScrollRef.current;
+    if (!panel || !followChatRef.current) return;
+    panel.scrollTop = panel.scrollHeight;
+    lastScrollTopRef.current = panel.scrollTop;
+  }, []);
+
+  useEffect(() => {
+    followChatRef.current = true;
+    manualScrollRef.current = false;
+    lastScrollTopRef.current = 0;
+    scrollToBottom();
+  }, [activeSessionId, scrollToBottom]);
+
+  useEffect(() => {
+    const content = chatContentRef.current;
+    const panel = chatScrollRef.current;
+    if (!content || !panel) return;
+    const observer = new ResizeObserver(scrollToBottom);
+    observer.observe(content);
+    observer.observe(panel);
+    return () => {
+      observer.disconnect();
+    };
+  }, [scrollToBottom]);
 
   useEffect(() => {
     scrollToBottom();
-  }, [messages, isLoading]);
+  }, [messages, isLoading, scrollToBottom]);
 
   // If initialQuery provided, send it automatically
   useEffect(() => {
     if (initialQuery && initialQuery.trim()) {
+      if (consumedQuery.current === initialQuery || requests.current.has(activeSessionId)) return;
+      consumedQuery.current = initialQuery;
       handleSendMessage(initialQuery);
+      onInitialQueryConsumed?.();
+    } else {
+      consumedQuery.current = '';
     }
-  }, [initialQuery]);
+  }, [initialQuery, activeSessionId, pendingSessions]);
 
   // Topic prompt chips for quick discovery
   const topicChips = [
-    { label: '🏛️ Văn hóa & Danh thắng', prompt: 'Gợi ý địa điểm văn hóa trong dữ liệu VietGo tại Huế' },
-    { label: '🍲 Ăn uống', prompt: 'Gợi ý quán ăn trong dữ liệu VietGo tại Đà Nẵng' },
-    { label: '🌿 Tham quan', prompt: 'Gợi ý điểm tham quan trong dữ liệu VietGo tại Ninh Bình' },
-    { label: '☕ Cà phê', prompt: 'Gợi ý quán cà phê trong dữ liệu VietGo tại Hà Nội' }
+    { label: '🏛️ Văn hóa & Danh thắng', prompt: 'Top 3 di tích lịch sử và văn hóa ngàn năm đặc sắc nhất ở Huế và Hội An?' },
+    { label: '🍲 Ẩm thực chuẩn vị', prompt: 'Gợi ý các quán ăn gia truyền tại Đà Nẵng giá chuẩn, không phụ thu?' },
+    { label: '✈️ Quy định hàng không', prompt: 'Quy định đóng thùng xốp mang nước mắm và sầu riêng lên máy bay Vietnam Airlines và Vietjet?' },
+    { label: '🛡️ Tránh bẫy du lịch', prompt: 'Mẹo tránh bẫy taxi dù tại sân bay Nội Bài và Tân Sơn Nhất?' },
+    { label: '📅 Lập lịch trình', prompt: 'Lập lịch trình du lịch Đà Lạt 3 ngày 2 đêm cho cặp đôi ngân sách 5 triệu' }
   ];
 
   const handleSendMessage = async (customText?: string) => {
     const textToSend = customText || inputMessage;
-    if (!textToSend.trim() || isLoading) return;
+    if (!textToSend.trim() || requests.current.has(activeSessionId)) return;
+    followChatRef.current = true;
+    const sessionId = activeSessionId;
+    const controller = new AbortController();
+    requests.current.set(sessionId, controller);
 
     const userMessage: ChatMessageItem = {
       id: `user-${Date.now()}`,
@@ -121,9 +219,9 @@ export const AIAssistantPage: React.FC<AIAssistantPageProps> = ({
       timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
     };
 
-    setMessages(prev => [...prev, userMessage]);
+    setHistory(prev => appendChatMessage(prev, sessionId, userMessage));
     setInputMessage('');
-    setIsLoading(true);
+    setPendingSessions(prev => [...prev, sessionId]);
 
     // Reset textarea height
     if (textareaRef.current) {
@@ -132,6 +230,7 @@ export const AIAssistantPage: React.FC<AIAssistantPageProps> = ({
 
     try {
       const response = await fetch('/api/chat', {
+        signal: controller.signal,
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -141,69 +240,149 @@ export const AIAssistantPage: React.FC<AIAssistantPageProps> = ({
       });
 
       if (!response.ok) {
-        throw new Error('Không thể kết nối máy chủ');
+        const errorData = await response.json().catch(() => ({}));
+        throw new Error(errorData.error || 'Không thể kết nối máy chủ');
       }
 
       const data = await response.json();
-
-      // Check if user is asking to plan a trip
-      const lower = textToSend.toLowerCase();
-      let extractedTrip: any = undefined;
-      if (lower.includes('lịch trình') || lower.includes('lên kế hoạch') || lower.includes('ngày') || lower.includes('tour')) {
-        let dest = '';
-        if (lower.includes('đà nẵng')) dest = 'Đà Nẵng';
-        if (lower.includes('hà nội')) dest = 'Hà Nội';
-        else if (lower.includes('đà lạt')) dest = 'Đà Lạt';
-        else if (lower.includes('phú quốc')) dest = 'Phú Quốc';
-        else if (lower.includes('sa pa') || lower.includes('sapa')) dest = 'Sa Pa';
-        else if (lower.includes('hội an')) dest = 'Hội An';
-        else if (lower.includes('ninh bình')) dest = 'Ninh Bình';
-        else if (lower.includes('huế')) dest = 'Huế';
-        else if (lower.includes('nha trang')) dest = 'Nha Trang';
-        else if (lower.includes('hồ chí minh') || lower.includes('tp.hcm') || lower.includes('sài gòn')) dest = 'TP. Hồ Chí Minh';
-
-        let days = 3;
-        const daysMatch = lower.match(/(\d+)\s*ngày/);
-        if (daysMatch) days = Math.min(Math.max(parseInt(daysMatch[1]), 1), 7);
-
-        let guests = 2;
-        const guestsMatch = lower.match(/(\d+)\s*(người|khách)/);
-        if (guestsMatch) guests = parseInt(guestsMatch[1]);
-
-        if (dest) extractedTrip = {
-          destination: dest,
-          days,
-          guests,
-          style: lower.includes('nghỉ dưỡng') ? 'Nghỉ dưỡng & Chill' : lower.includes('ẩm thực') ? 'Foodie & Ẩm thực' : 'Khám phá văn hóa'
-        };
-      }
 
       const aiMsg: ChatMessageItem = {
         id: `ai-${Date.now()}`,
         sender: 'ai',
         text: data.text || 'VietGo AI sẵn sàng hỗ trợ bạn!',
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        knowledgeSources: Array.isArray(data.knowledgeSources) ? data.knowledgeSources : [],
+        actionsUnavailable: data.actionsUnavailable === true,
+        actionContextText: typeof data.actionContextText === 'string' ? data.actionContextText.slice(0, 6000) : undefined,
         richData: {
           pois: data.richData?.pois || [],
           foods: data.richData?.foods || [],
           tips: data.richData?.tips || [],
-          extractedTrip
         },
-        suggestedActions: data.suggestedActions || []
+        suggestedActions: data.suggestedActions || [],
+        verifiedActions: Array.isArray(data.verifiedActions) ? data.verifiedActions : [],
       };
 
-      setMessages(prev => [...prev, aiMsg]);
+      if (!controller.signal.aborted) {
+        setTypingMessageId(aiMsg.id);
+        setHistory(prev => appendChatMessage(prev, sessionId, aiMsg));
+      }
     } catch (err: any) {
+      if (controller.signal.aborted) return;
       console.error(err);
       const fallbackMsg: ChatMessageItem = {
         id: `ai-err-${Date.now()}`,
         sender: 'ai',
-        text: `Chào bạn! Cảm ơn bạn đã hỏi. Tôi đã tra cứu dữ liệu du lịch Việt Nam: Đối với các thắc mắc về điểm đến, di chuyển và ẩm thực, bạn cũng có thể duyệt trực tiếp ở trang Khám phá hoặc dùng công cụ Lập lịch trình.`,
+        text: `Chưa nhận được phản hồi AI: ${err.message || 'Không thể kết nối máy chủ'}. Bạn có thể thử gửi lại câu hỏi.`,
         timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
       };
-      setMessages(prev => [...prev, fallbackMsg]);
+      setHistory(prev => appendChatMessage(prev, sessionId, fallbackMsg));
     } finally {
-      setIsLoading(false);
+      requests.current.delete(sessionId);
+      setPendingSessions(prev => prev.filter(id => id !== sessionId));
+    }
+  };
+
+  const handleAnalyzeImage = async (imageDataUrl: string, thumbnail: string) => {
+    if (requests.current.has(activeSessionId) || actionBusy.current) throw new Error('Hãy chờ thao tác hiện tại hoàn tất.');
+    const sessionId = activeSessionId;
+    const question = inputMessage.trim();
+    const controller = new AbortController();
+    requests.current.set(sessionId, controller);
+    setPendingSessions(prev => [...prev, sessionId]);
+    setInputMessage('');
+    setHistory(prev => appendChatMessage(prev, sessionId, {
+      id: `user-image-${crypto.randomUUID()}`, sender: 'user', text: question || 'Phân tích ảnh này giúp mình.',
+      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }), imageThumbnail: thumbnail,
+    }));
+    try {
+      const response = await fetch('/api/ai/analyze-image', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' }, signal: controller.signal,
+        body: JSON.stringify({ imageDataUrl, question }),
+      });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error || 'Không phân tích được ảnh.');
+      const id = `ai-image-${crypto.randomUUID()}`;
+      if (!controller.signal.aborted) {
+        setTypingMessageId(id);
+        setHistory(prev => appendChatMessage(prev, sessionId, { id, sender: 'ai', text: data.text,
+          ...(data.category === 'receipt' ? {
+            receiptDraft: normalizeAIReceipt({ ...data.receiptDraft, store: data.receiptDraft?.title, totalAmount: data.receiptDraft?.amount }),
+            receiptThumbnail: thumbnail,
+          } : {}),
+          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+          knowledgeSources: Array.isArray(data.knowledgeSources) ? data.knowledgeSources : [],
+          richData: {
+            pois: Array.isArray(data.richData?.pois) ? data.richData.pois : [],
+            foods: Array.isArray(data.richData?.foods) ? data.richData.foods : [],
+            tips: [],
+          } }));
+      }
+    } catch (e) {
+      if (!controller.signal.aborted) {
+        setHistory(prev => appendChatMessage(prev, sessionId, {
+          id: `ai-image-error-${crypto.randomUUID()}`, sender: 'ai',
+          text: `Chưa phân tích được ảnh: ${e instanceof Error ? e.message : 'Lỗi kết nối.'}`,
+          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        }));
+      }
+      throw e;
+    } finally {
+      requests.current.delete(sessionId);
+      setPendingSessions(prev => prev.filter(id => id !== sessionId));
+    }
+  };
+
+  const handleChatAction = async (action: ChatActionName, messageId: string) => {
+    if (actionBusy.current || isLoading) return;
+    const sessionId = activeSessionId;
+    actionBusy.current = true;
+    setRunningAction(`${messageId}:${action}`);
+    setActionError(null);
+    try {
+      const messageIndex = messages.findIndex(m => m.id === messageId);
+      const response = await fetch('/api/chat-action', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action, messages: (action === 'open_planner' ? messages : messages.slice(0, messageIndex + 1))
+          .filter(m => !m.richData?.tripPreview).map(m => ({ sender: m.sender, text: `${m.text}${m.actionContextText ? `\n${m.actionContextText}` : ''}` })) }),
+      });
+      const data = await response.json();
+      if (!response.ok) throw new Error(data.error || 'Không thể xác định yêu cầu trong cuộc chat.');
+      if (action === 'open_planner') {
+        setHistory(prev => appendChatMessage(prev, sessionId, {
+          id: `trip-preview-${crypto.randomUUID()}`, sender: 'ai',
+          text: 'Đây là thông tin chuyến đi tổng hợp từ cuộc chat, ưu tiên các cập nhật mới nhất của bạn. Kiểm tra trước khi tiếp tục nhé.',
+          timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+          richData: { tripPreview: data, tripPreviewUserId: messages.filter(m => m.sender === 'user').at(-1)?.id },
+        }));
+      } else {
+        await onExecuteChatAction(action, data);
+      }
+    } catch (error) {
+      setActionError({ messageId, text: error instanceof Error ? error.message : 'Không thể thực hiện thao tác. Hãy thử lại.' });
+    } finally {
+      actionBusy.current = false;
+      setRunningAction(null);
+    }
+  };
+
+  const handleConfirmTrip = async (message: ChatMessageItem) => {
+    if (actionBusy.current || isLoading || !message.richData?.tripPreview) return;
+    if (message.richData.tripPreviewUserId !== messages.filter(m => m.sender === 'user').at(-1)?.id) {
+      // A new user request must be reviewed before generating a plan.
+      await handleChatAction('open_planner', message.id);
+      return;
+    }
+    actionBusy.current = true;
+    setRunningAction(`${message.id}:confirm_planner`);
+    setActionError(null);
+    try {
+      await onExecuteChatAction('open_planner', message.richData.tripPreview);
+    } catch (error) {
+      setActionError({ messageId: message.id, text: error instanceof Error ? error.message : 'Không thể tạo lịch trình. Hãy thử lại.' });
+    } finally {
+      actionBusy.current = false;
+      setRunningAction(null);
     }
   };
 
@@ -215,26 +394,26 @@ export const AIAssistantPage: React.FC<AIAssistantPageProps> = ({
   };
 
   const handleNewChat = () => {
-    const newId = `session-${Date.now()}`;
-    setSessions(prev => [{ id: newId, title: 'Cuộc trò chuyện mới', time: 'Vừa xong' }, ...prev]);
-    setActiveSessionId(newId);
-    setMessages([
-      {
-        id: 'welcome-new',
-        sender: 'ai',
-        text: `Xin chào! Bạn đang muốn tìm hiểu về địa điểm, ẩm thực hay cần lập lịch trình cho chuyến đi nào tại Việt Nam?`,
-        timestamp: 'Bây giờ'
-      }
-    ]);
+    const session = createChatSession();
+    setHistory(prev => ({ sessions: [session, ...prev.sessions], activeSessionId: session.id }));
+    setTypingMessageId(null);
+    setInputMessage('');
+  };
+
+  const handleDeleteChat = (sessionId: string) => {
+    if (!window.confirm('Xoá cuộc trò chuyện này? Nội dung đã xoá không thể khôi phục.')) return;
+    requests.current.get(sessionId)?.abort();
+    setHistory(prev => deleteChatSession(prev, sessionId));
+    if (sessionId === activeSessionId) setInputMessage('');
   };
 
   return (
-    <div className="flex h-[calc(100vh-80px)] bg-white text-[#222222] overflow-hidden">
+    <div className="relative flex h-full min-h-0 w-full bg-white text-[#222222] overflow-hidden">
       {/* 1. Desktop Collapsible Sidebar (Chat History) */}
       <aside 
         className={`${
           sidebarOpen ? 'w-64' : 'w-0'
-        } hidden md:flex flex-col border-r border-[#E5E5E5] bg-[#F7F7F7] transition-all duration-300 overflow-hidden shrink-0`}
+        } ${sidebarOpen ? 'flex' : 'hidden md:flex'} absolute inset-y-0 left-0 z-30 md:relative max-w-[80vw] min-h-0 flex-col border-r border-[#E5E5E5] bg-[#F7F7F7] transition-all duration-300 overflow-hidden shrink-0`}
       >
         <div className="p-4 border-b border-[#E5E5E5] flex items-center justify-between">
           <button
@@ -244,26 +423,45 @@ export const AIAssistantPage: React.FC<AIAssistantPageProps> = ({
             <Plus className="w-4 h-4 text-[#FF385C]" />
             <span>Đoạn chat mới</span>
           </button>
+          <button onClick={() => setSidebarOpen(false)} aria-label="Đóng lịch sử chat" className="md:hidden ml-2 p-2 rounded-lg hover:bg-white">
+            <PanelLeftClose className="w-4 h-4" />
+          </button>
         </div>
 
         {/* Sessions list */}
-        <div className="flex-1 overflow-y-auto p-2 space-y-1">
+        <div className="min-h-0 flex-1 overflow-y-auto p-2 space-y-1">
           <div className="text-[11px] font-bold text-[#717171] px-3 py-2 uppercase tracking-wider">
             Lịch sử trò chuyện
           </div>
           {sessions.map((sess) => (
+            <div key={sess.id} className="flex items-center gap-1">
             <button
               key={sess.id}
-              onClick={() => setActiveSessionId(sess.id)}
-              className={`w-full flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-semibold text-left transition-colors cursor-pointer truncate ${
+              onClick={() => {
+                setHistory(prev => ({ ...prev, activeSessionId: sess.id }));
+                setInputMessage('');
+                if (window.innerWidth < 768) setSidebarOpen(false);
+              }}
+              title={sess.title}
+              aria-current={activeSessionId === sess.id ? 'true' : undefined}
+              className={`min-w-0 flex-1 flex items-center gap-2.5 px-3 py-2.5 rounded-xl text-xs font-semibold text-left transition-colors cursor-pointer truncate ${
                 activeSessionId === sess.id 
                   ? 'bg-white text-[#222222] shadow-2xs font-bold border border-[#E5E5E5]'
                   : 'text-[#717171] hover:bg-white/60 hover:text-[#222222]'
               }`}
             >
               <MessageSquare className="w-3.5 h-3.5 text-[#FF385C] shrink-0" />
-              <span className="truncate">{sess.title}</span>
+              <span className="min-w-0 truncate">{sess.title}</span>
             </button>
+            <button
+              onClick={() => handleDeleteChat(sess.id)}
+              aria-label={`Xoá cuộc trò chuyện: ${sess.title}`}
+              title="Xoá cuộc trò chuyện"
+              className="shrink-0 p-2 rounded-lg text-[#717171] hover:bg-rose-100 hover:text-rose-600 cursor-pointer"
+            >
+              <Trash2 className="w-4 h-4" />
+            </button>
+            </div>
           ))}
         </div>
 
@@ -274,13 +472,14 @@ export const AIAssistantPage: React.FC<AIAssistantPageProps> = ({
       </aside>
 
       {/* 2. Main Chat Canvas */}
-      <div className="flex-1 flex flex-col h-full bg-white relative">
+      <div className="min-w-0 min-h-0 flex-1 flex flex-col h-full bg-white relative">
         {/* Top Chat Header */}
         <div className="h-14 px-4 sm:px-6 border-b border-[#E5E5E5] flex items-center justify-between bg-white shrink-0">
           <div className="flex items-center gap-2.5">
             <button
               onClick={() => setSidebarOpen(!sidebarOpen)}
-              className="hidden md:flex p-1.5 rounded-lg hover:bg-[#F7F7F7] text-[#717171] hover:text-[#222222] cursor-pointer"
+              className="flex p-1.5 rounded-lg hover:bg-[#F7F7F7] text-[#717171] hover:text-[#222222] cursor-pointer"
+              aria-label={sidebarOpen ? 'Thu gọn lịch sử chat' : 'Mở lịch sử chat'}
               title={sidebarOpen ? 'Thu gọn sidebar' : 'Mở sidebar'}
             >
               {sidebarOpen ? <PanelLeftClose className="w-4 h-4" /> : <PanelLeft className="w-4 h-4" />}
@@ -291,9 +490,11 @@ export const AIAssistantPage: React.FC<AIAssistantPageProps> = ({
             <div>
               <div className="text-xs font-extrabold text-[#222222] flex items-center gap-1.5">
                 <span>Trợ lý Du lịch VietGo AI</span>
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                <span className={`w-1.5 h-1.5 rounded-full ${aiStatus?.hasDeepSeekKey ? 'bg-emerald-500' : 'bg-amber-500'}`}></span>
               </div>
-              <div className="text-[10px] text-[#717171]">Am hiểu văn hóa & Tri thức 34+ tỉnh thành</div>
+              <div className="text-[10px] text-[#717171]">
+                {aiStatus ? aiStatus.hasDeepSeekKey ? `DeepSeek • ${aiStatus.model}` : 'DeepSeek • Chưa cấu hình API key' : 'Đang kiểm tra kết nối AI...'}
+              </div>
             </div>
           </div>
 
@@ -307,7 +508,31 @@ export const AIAssistantPage: React.FC<AIAssistantPageProps> = ({
         </div>
 
         {/* Chat Messages Scroll Area */}
-        <div className="flex-1 overflow-y-auto p-4 sm:p-6 space-y-6 max-w-4xl mx-auto w-full">
+        <div ref={chatScrollRef}
+          onScroll={event => {
+            const panel = event.currentTarget;
+            const nearBottom = panel.scrollHeight - panel.scrollTop - panel.clientHeight <= 48;
+            if (nearBottom) followChatRef.current = true;
+            else if (manualScrollRef.current && panel.scrollTop < lastScrollTopRef.current) followChatRef.current = false;
+            manualScrollRef.current = false;
+            lastScrollTopRef.current = panel.scrollTop;
+          }}
+          onWheel={event => {
+            manualScrollRef.current = true;
+            if (event.deltaY < 0) followChatRef.current = false;
+          }}
+          onTouchMove={() => { manualScrollRef.current = true; }}
+          onPointerDown={() => { manualScrollRef.current = true; }}
+          onKeyDown={event => {
+            if (['ArrowUp','ArrowDown','PageUp','PageDown','Home','End',' '].includes(event.key)) manualScrollRef.current = true;
+          }}
+          className="min-h-0 flex-1 overflow-y-auto overscroll-contain p-4 sm:p-6 max-w-4xl mx-auto w-full">
+          <div ref={chatContentRef} className="space-y-6">
+          {storageError && (
+            <p role="alert" className="text-xs text-amber-800 bg-amber-50 rounded-xl p-3">
+              Trình duyệt không thể lưu lịch sử chat. Nội dung có thể mất khi tải lại trang; hãy kiểm tra dung lượng hoặc quyền lưu trữ.
+            </p>
+          )}
           {/* Topic suggestion chips if only initial messages */}
           {messages.length <= 2 && (
             <div className="space-y-2.5 pt-2 pb-4">
@@ -327,8 +552,9 @@ export const AIAssistantPage: React.FC<AIAssistantPageProps> = ({
           )}
 
           {/* Messages rendering */}
-          {messages.map((msg) => {
+          {messages.map((msg, messageIndex) => {
             const isAi = msg.sender === 'ai';
+            const visibleActions = getSuggestedChatActions(messages.slice(0, messageIndex), msg);
             return (
               <div 
                 key={msg.id} 
@@ -345,16 +571,51 @@ export const AIAssistantPage: React.FC<AIAssistantPageProps> = ({
                 <div className={`max-w-[85%] sm:max-w-[78%] space-y-3 ${
                   isAi ? 'text-[#222222]' : 'text-right'
                 }`}>
+                  {msg.imageThumbnail?.startsWith('data:image/jpeg;base64,') && <img src={msg.imageThumbnail} alt="Ảnh đã gửi cho AI" className="max-w-48 max-h-48 rounded-xl border" />}
                   <div className={`p-4 rounded-2xl text-xs sm:text-sm leading-relaxed whitespace-pre-line inline-block text-left ${
                     isAi 
                       ? 'bg-[#F7F7F7] border border-[#E5E5E5] text-[#222222]' 
                       : 'bg-[#222222] text-white shadow-xs'
-                  }`}>
-                    {msg.text}
+                  } break-words [overflow-wrap:anywhere]`}>
+                    {isAi ? <AIReplyText text={msg.text} animate={typingMessageId === msg.id} onComplete={finishTyping} /> : msg.text}
                   </div>
 
+                  {isAi && msg.receiptDraft && (
+                    <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-left space-y-2 text-xs">
+                      <p className="font-bold">Thông tin hóa đơn</p>
+                      <p>{msg.receiptDraft.title || 'Chưa đọc được tên cửa hàng'}</p>
+                      <p>Số tiền: {msg.receiptDraft.amount ? `${msg.receiptDraft.amount.toLocaleString('vi-VN')} VNĐ` : 'Cần nhập lại số tiền VNĐ'}</p>
+                      {msg.receiptDraft.date && <p>Ngày: {msg.receiptDraft.date}</p>}
+                      <p className="text-emerald-800">Kiểm tra thông tin và chọn chuyến đi trước khi lưu.</p>
+                      <button type="button" onClick={() => onImportReceipt({ ...msg.receiptDraft!, id: msg.id, receiptImage: msg.receiptThumbnail })}
+                        className="rounded-xl bg-emerald-700 px-4 py-2 font-bold text-white hover:bg-emerald-800">
+                        Thêm vào chi tiêu →
+                      </button>
+                    </div>
+                  )}
+
+                  {isAi && msg.knowledgeSources && msg.knowledgeSources.length > 0 && (
+                    <div className="flex flex-wrap items-center gap-2 text-[11px] text-[#717171]">
+                      <span className="font-semibold">Nguồn tham khảo:</span>
+                      {msg.knowledgeSources.map((source) => {
+                        let safeUrl = '';
+                        try {
+                          const parsed = new URL(source.sourceUrl);
+                          if (parsed.protocol === 'https:') safeUrl = parsed.href;
+                        } catch { /* Supabase catalog records may not have an external URL. */ }
+                        return safeUrl ? (
+                          <a key={source.id} href={safeUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 underline underline-offset-2 hover:text-[#222222]">
+                            {source.title}<ExternalLink className="w-3 h-3" />
+                          </a>
+                        ) : (
+                          <span key={source.id}>{source.title}</span>
+                        );
+                      })}
+                    </div>
+                  )}
+
                   {/* Trip Planning Detected Card: "Tiếp tục ở Lịch trình" */}
-                  {msg.richData?.extractedTrip && (
+                  {msg.richData?.tripPreview && (
                     <div className="p-4 rounded-2xl border border-rose-200 bg-rose-50/60 space-y-2.5 text-left">
                       <div className="flex items-center gap-2">
                         <Calendar className="w-4 h-4 text-[#FF385C]" />
@@ -363,17 +624,23 @@ export const AIAssistantPage: React.FC<AIAssistantPageProps> = ({
                         </span>
                       </div>
                       <div className="text-xs text-stone-800 space-y-1">
-                        <div><strong>Điểm đến:</strong> {msg.richData.extractedTrip.destination}</div>
-                        <div><strong>Thời lượng:</strong> {msg.richData.extractedTrip.days} ngày ({msg.richData.extractedTrip.guests} khách)</div>
-                        {msg.richData.extractedTrip.style && (
-                          <div><strong>Phong cách:</strong> {msg.richData.extractedTrip.style}</div>
+                        <div><strong>Điểm đến:</strong> {msg.richData.tripPreview.destination}</div>
+                        <div><strong>Thời lượng:</strong> {msg.richData.tripPreview.days} ngày ({msg.richData.tripPreview.guests} khách)</div>
+                        <div><strong>Ngân sách dự kiến:</strong> {msg.richData.tripPreview.budget.toLocaleString('vi-VN')} VNĐ</div>
+                        {msg.richData.tripPreview.style && (
+                          <div><strong>Phong cách:</strong> {msg.richData.tripPreview.style}</div>
                         )}
+                        <p className="text-stone-500">Thông tin chưa nêu dùng giá trị mặc định. Bạn có thể gửi tin nhắn để cập nhật.</p>
                       </div>
                       <button
-                        onClick={() => onProceedToItinerary(msg.richData!.extractedTrip!)}
-                        className="w-full py-2.5 px-4 rounded-xl bg-[#FF385C] hover:bg-[#E00B41] text-white text-xs font-bold transition-all shadow-xs flex items-center justify-center gap-2 cursor-pointer"
+                        onClick={() => void handleConfirmTrip(msg)}
+                        disabled={runningAction !== null || isLoading}
+                        className="w-full py-2.5 px-4 rounded-xl bg-[#FF385C] hover:bg-[#E00B41] text-white text-xs font-bold transition-all shadow-xs flex items-center justify-center gap-2 cursor-pointer disabled:opacity-50 disabled:cursor-wait"
                       >
-                        <span>Tiếp tục ở Lịch trình &rarr;</span>
+                        <span>{runningAction === `${msg.id}:confirm_planner` ? 'Đang tạo lịch trình từ chat…'
+                          : runningAction === `${msg.id}:open_planner` ? 'Đang tổng hợp…'
+                          : msg.richData.tripPreviewUserId !== messages.filter(m => m.sender === 'user').at(-1)?.id
+                            ? 'Cập nhật theo chat mới nhất' : 'Tiếp tục ở Lịch trình →'}</span>
                       </button>
                     </div>
                   )}
@@ -463,31 +730,21 @@ export const AIAssistantPage: React.FC<AIAssistantPageProps> = ({
                   )}
 
                   {/* Suggested Quick Actions */}
-                  {msg.suggestedActions && msg.suggestedActions.length > 0 && (
+                  {visibleActions.length > 0 && (
                     <div className="flex flex-wrap gap-1.5 pt-1">
-                      {msg.suggestedActions.map((act, i) => (
+                      {visibleActions.map((act, i) => (
                         <button
                           key={i}
-                          onClick={() => {
-                            if (act.action === 'ask_hanoi_food') {
-                              handleSendMessage('Gợi ý quán ăn trong dữ liệu VietGo tại Hà Nội');
-                            } else if (act.action === 'ask_hue_sights') {
-                              handleSendMessage('Gợi ý điểm tham quan trong dữ liệu VietGo tại Huế');
-                            } else if (act.action === 'plan_danang') {
-                              onProceedToItinerary({ destination: 'Đà Nẵng', days: 3, guests: 2, style: 'Cặp đôi & Chill' });
-                            } else if (act.action === 'open_planner') {
-                              onProceedToItinerary({ destination: '', days: 3, guests: 2 });
-                            } else {
-                              handleSendMessage(act.label);
-                            }
-                          }}
-                          className="px-3 py-1 rounded-full bg-white hover:bg-[#F7F7F7] border border-[#E5E5E5] text-xs font-semibold text-[#222222] cursor-pointer transition-colors shadow-2xs"
+                          disabled={runningAction !== null || isLoading}
+                          onClick={() => void handleChatAction(act.action, msg.id)}
+                          className="px-3 py-1 rounded-full bg-white hover:bg-[#F7F7F7] border border-[#E5E5E5] text-xs font-semibold text-[#222222] cursor-pointer transition-colors shadow-2xs disabled:opacity-50 disabled:cursor-wait"
                         >
-                          {act.label}
+                          {runningAction === `${msg.id}:${act.action}` ? 'Đang thực hiện…' : act.label}
                         </button>
                       ))}
                     </div>
                   )}
+                  {actionError?.messageId === msg.id && <p role="alert" className="text-xs text-rose-600">{actionError.text}</p>}
                 </div>
               </div>
             );
@@ -500,16 +757,17 @@ export const AIAssistantPage: React.FC<AIAssistantPageProps> = ({
               </div>
               <div className="bg-[#F7F7F7] border border-[#E5E5E5] rounded-2xl px-4 py-2.5 text-xs text-[#717171] flex items-center gap-2">
                 <div className="w-2 h-2 rounded-full bg-[#FF385C] animate-ping"></div>
-                <span>Đang tìm trong dữ liệu địa điểm VietGo...</span>
+                <span>VietGo AI đang xử lý yêu cầu của bạn...</span>
               </div>
             </div>
           )}
 
-          <div ref={messagesEndRef} />
+          </div>
         </div>
 
         {/* 3. Fixed Bottom Chat Input Bar */}
         <div className="p-4 border-t border-[#E5E5E5] bg-white shrink-0">
+          <AIImageInput disabled={isLoading || runningAction !== null} onAnalyze={handleAnalyzeImage} />
           <div className="max-w-4xl mx-auto flex items-end gap-2">
             <div className="flex-1 bg-[#F7F7F7] border border-[#E5E5E5] focus-within:border-[#222222] focus-within:bg-white rounded-2xl p-2.5 transition-all">
               <textarea

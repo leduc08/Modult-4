@@ -16,11 +16,15 @@ import { LanguageCode, AccountTab, AuthUser } from './types';
 import { getUser } from './services/authService';
 import { signOutGoogle } from './components/GoogleSignInButton';
 import { LegalModal, LegalDocId } from './components/LegalModal';
+import type { ChatActionName, ChatActionContext } from '../../database/chatActionTypes';
+import type { AIReceiptImport } from '../../database/aiReceiptTypes';
+import { resolveAIPlannerCity } from '../../ai/plannerDestination';
 
 export default function App() {
   // Navigation tabs: 'explore' (default) | 'nearby' | 'ai' | 'itinerary' | 'account' | 'budget'
   const [activeTab, setActiveTab] = useState<'home' | 'explore' | 'nearby' | 'ai' | 'itinerary' | 'account' | 'budget'>('home');
   const [preselectedCity, setPreselectedCity] = useState('');
+  const [pendingAIReceipt, setPendingAIReceipt] = useState<AIReceiptImport | null>(null);
   const [verifiedTrip, setVerifiedTrip] = useState<VerifiedTrip | null>(() => { try { const saved = localStorage.getItem('vietgo_verified_trip'); return saved ? JSON.parse(saved) : null; } catch { return null; } });
   const [savedTrip, setSavedTrip] = useState<VerifiedTrip | null>(() => { try { const saved = localStorage.getItem('vietgo_verified_trip'); return saved ? JSON.parse(saved) : null; } catch { return null; } });
   const [language, setLanguage] = useState<LanguageCode>('vi');
@@ -107,6 +111,7 @@ export default function App() {
 
   // Item pending to be added into itinerary
   const [pendingAddItem, setPendingAddItem] = useState<DetailItem | null>(null);
+  const [chatMapFocus, setChatMapFocus] = useState<{ context: ChatActionContext; category: 'all' | 'food'; id: number } | null>(null);
 
   // Query to seed into AI Assistant
   const [aiAssistantSeedQuery, setAiAssistantSeedQuery] = useState<string>('');
@@ -135,6 +140,49 @@ export default function App() {
 
   const handleProceedToItineraryFromAI = (params: { destination: string; days: number; guests: number; style?: string }) => handleQuickPlanTrip(params);
 
+  const handleExecuteChatAction = async (action: ChatActionName, context: ChatActionContext) => {
+    if (action === 'open_planner') {
+      const plannerCityId = resolveAIPlannerCity(context.provinceId, context.destination, CITY_NAMES);
+      if (!plannerCityId) throw new Error(`Chưa có dữ liệu lịch trình cho ${context.destination}. Hãy chọn một thành phố có dữ liệu.`);
+      const response = await fetch('/api/plan-trip', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ destination: plannerCityId, days: context.days, peopleCount: context.guests,
+          budget: context.budget, style: context.style }),
+      });
+      const plan = await response.json();
+      if (!response.ok) throw new Error(plan.error || 'Không thể tạo lịch trình.');
+      const start = new Date();
+      const startDate = start.toISOString().slice(0, 10);
+      const schedule = (plan.days || []).map((day: any, dayIndex: number) => {
+        const date = new Date(start);
+        date.setUTCDate(date.getUTCDate() + dayIndex);
+        return { dayNumber: day.dayNumber || dayIndex + 1, date: date.toISOString().slice(0, 10),
+          places: (day.items || []).map((item: any) => {
+            const categoryLabel = String(item.activityType || '');
+            const categoryGroup = /ăn|ẩm thực|food|cafe|cà phê/i.test(categoryLabel) ? 'food' : 'sightseeing';
+            return { id: item.placeId || item.id, name: item.title || item.locationName, address: item.address || '',
+              coordinates: item.coordinates, categoryGroup, categoryLabel, dataSource: item.source || 'osm',
+              rating: null, reviewCount: null, imageUrl: item.imageUrl || null, isPlaceholderImage: !item.imageUrl,
+              phone: null, website: null, openingHours: item.notes || null, description: item.notes || null,
+              needsReview: false, conflictNote: null, tags: [], cityId: plannerCityId,
+              fetchedAt: item.fetchedAt || plan.sourceUpdatedAt || startDate,
+              plannedStartTime: String(item.timeSlot || '').match(/\d{2}:\d{2}/)?.[0], plannedDurationMinutes: 90 };
+          }) };
+      });
+      if (!schedule.length) throw new Error('Chưa tạo được ngày nào trong lịch trình.');
+      const trip = { id: plan.id || `trip-${Date.now()}`, cityId: plannerCityId, startDate,
+        endDate: schedule.at(-1)?.date, days: context.days, guests: context.guests,
+        budget: context.budget, interest: context.style, schedule } as VerifiedTrip;
+      setVerifiedTrip(trip);
+      setSavedTrip(trip);
+      setActiveTab('itinerary');
+    } else {
+      setChatMapFocus({ context, category: action === 'open_food' ? 'food' : 'all', id: Date.now() });
+      setActiveTab('nearby');
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   const handleAddToItinerary = (item: DetailItem) => {
     setPendingAddItem(item);
     setActiveTab('itinerary');
@@ -155,7 +203,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-white text-[#222222] flex flex-col font-sans selection:bg-[#FF385C] selection:text-white">
+    <div className={`${activeTab === 'ai' ? 'h-dvh min-h-0 overflow-hidden' : 'min-h-screen'} bg-white text-[#222222] flex flex-col font-sans selection:bg-[#FF385C] selection:text-white`}>
       {/* 1. Header & Navigation (Airbnb style: Desktop header, Mobile fixed bottom bar) */}
       <Navbar
         activeTab={activeTab}
@@ -170,7 +218,7 @@ export default function App() {
       />
 
       {/* 2. Main Page View Container */}
-      <main className={`flex-1 ${activeTab === 'nearby' ? 'pb-16 md:pb-0' : 'pb-20 md:pb-8'}`}>
+      <main className={`flex-1 ${activeTab === 'ai' ? 'min-h-0 overflow-hidden pb-16 md:pb-0' : activeTab === 'nearby' ? 'pb-16 md:pb-0' : 'pb-20 md:pb-8'}`}>
         {activeTab === 'home' && <PlannerHome onPlan={(trip) => { setVerifiedTrip(trip); setSavedTrip(trip); setActiveTab('itinerary'); }} savedTrip={savedTrip} onContinue={() => { if (savedTrip) { setVerifiedTrip(savedTrip); setActiveTab('itinerary'); } }} preselectedCity={preselectedCity} initialTrip={verifiedTrip} />}
 
         {activeTab === 'explore' && <VerifiedExplorePage onPlanCity={(cityId) => { setPreselectedCity(cityId); setActiveTab('home'); }} onSelectItem={(item) => setSelectedDetailItem(item)} />}
@@ -178,6 +226,8 @@ export default function App() {
         {/* Page 2: Xung quanh (NearbyPage - Interactive Map & Nearby Places) */}
         {activeTab === 'nearby' && (
           <NearbyPage
+            key={chatMapFocus?.id || 'nearby'}
+            initialChatFocus={chatMapFocus || undefined}
             wishlist={wishlist}
             onToggleWishlist={handleToggleWishlist}
             onSelectItem={(item) => setSelectedDetailItem(item)}
@@ -192,6 +242,8 @@ export default function App() {
             onSelectItem={(item) => setSelectedDetailItem(item)}
             onAddToItinerary={handleAddToItinerary}
             onProceedToItinerary={handleProceedToItineraryFromAI}
+            onExecuteChatAction={handleExecuteChatAction}
+            onImportReceipt={(receipt) => { setPendingAIReceipt(receipt); setActiveTab('budget'); }}
           />
         )}
 
@@ -203,6 +255,8 @@ export default function App() {
             // Sổ chi tiêu riêng theo tài khoản; đổi tài khoản → nạp lại đúng dữ liệu
             key={currentUser?.id ?? 'guest'}
             storageScope={currentUser?.id ?? 'guest'}
+            pendingAIReceipt={pendingAIReceipt}
+            onAIReceiptConsumed={() => setPendingAIReceipt(null)}
             onBack={() => {
               setActiveTab('explore');
               window.scrollTo({ top: 0, behavior: 'smooth' });

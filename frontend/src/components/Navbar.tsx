@@ -55,7 +55,7 @@ export const Navbar: React.FC<NavbarProps> = ({
   return (
     <>
       {/* 1. Desktop & Mobile Top Header */}
-      <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-[#E5E5E5] transition-all">
+      <header className="sticky top-0 z-40 shrink-0 bg-white/95 backdrop-blur-md border-b border-[#E5E5E5] transition-all">
         {/* Top Micro Emergency & Language bar */}
         <div className="bg-[#222222] text-[#F7F7F7] text-[11px] px-4 sm:px-8 py-1.5 flex items-center justify-between">
           <div className="flex items-center gap-2">
