@@ -2,7 +2,11 @@
 
 Ngày kiểm tra: 29/09/2026.
 
-Planner đã chuyển sang DeepSeek theo sự cho phép riêng: 68/68 test cục bộ/mô phỏng, TypeScript và build frontend/backend đạt. Frontend còn cảnh báo kích thước chunk lớn. Test mới bao gồm chọn ID hợp lệ với thông tin khách, chặn ID lạ/trùng/khác nhóm và giữ fallback khi provider lỗi/thiếu key/vùng không hỗ trợ. Chưa thử DeepSeek thật hoặc UI của planner sau chuyển đổi. Không bật local/Cloudflare.
+Planner backend đã kiểm tra bằng DeepSeek thật (`deepseek-flash`, suy luận tắt) qua API local: Đà Nẵng 3 ngày/2 khách/10 triệu trả 6 ID không trùng, 3,48 giây; Đà Lạt 2 ngày/3 khách/5 triệu trả 4 ID không trùng, 2,97 giây. Cả hai có summaryAI xác nhận dùng lựa chọn DeepSeek, không fallback. Các lượt trước: 68/68 test cục bộ/mô phỏng, TypeScript và build frontend/backend đạt; frontend còn cảnh báo chunk lớn.
+
+Giao diện thực tế: nút Tạo lịch trình ở trang Lập lịch tạo thành công chuyến Đà Nẵng 3 ngày, nhưng PlannerSearchForm vẫn gọi makeTrip cục bộ, không gọi /api/plan-trip. Vì vậy việc chuyển backend sang DeepSeek chưa chuyển nút này sang DeepSeek. Chỉ xác minh và ghi nhận, không sửa luồng trong lượt kiểm tra. Chưa kiểm tra end-to-end nút tiếp tục từ chat AI bằng dữ liệu mới.
+
+Bố cục AI trên trình duyệt desktop 1280×720: chuyển từ Khám phá, Lập lịch và Lịch trình về AI giữ header 1274×110, main y=110/h=521, ô nhập x=328/y=555, không dịch qua các lượt. Sau cuộn Lịch trình tới scrollY=70, trở về AI có scrollY=0; không có lỗi console trong lượt kiểm tra. Chưa kiểm tra di động/thiết bị cảm ứng. Local bật tạm để kiểm tra rồi đã tắt, không bật Cloudflare. Không sửa dữ liệu Supabase.
 
 Kiểm tra cuộn chat mới nhất trên trình duyệt với phản hồi giả: bám cuối trong lúc hiện chữ, giữ vị trí khi cuộn lên và về cuối đúng; không cuộn toàn trang. TypeScript/build cuối đạt. Chưa kiểm tra thiết bị cảm ứng thật. Fixture và server thử đã dọn; không bật lại server chính/Cloudflare.
 
