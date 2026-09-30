@@ -1,10 +1,13 @@
 # Tổng hợp thay đổi AI Agent — VietGo
 
-Cập nhật tài liệu: 29/09/2026.
+Cập nhật tài liệu: 30/09/2026.
 
-- Ngày 29/09/2026: tab Trợ lý AI giữ khoảng thanh cuộn ngoài và đặt vị trí cuộn trang về đầu trước khi vẽ để giảm lệch bố cục khi chuyển tab. Chỉ khoá cuộn ngoài khi tab AI được gắn; khôi phục các style trước đó khi rời tab, giữ cuộn bên trong chat. Không sửa các tab khác. TypeScript và git diff --check đạt; chưa kiểm tra trực quan trên trình duyệt cho thay đổi này.
+- Ngày 30/09/2026: cập nhật nhánh `ai-agents` bằng fast-forward từ `origin/main` ở commit gộp PR #13 (`b5d0bed`), bảo toàn ghi chú kiểm thử local. Đầu chat Trợ lý AI không còn hiển thị tên nhà cung cấp/model; thay bằng trạng thái hỗ trợ/cấu hình. Theo yêu cầu mới nhất, không hiển thị khung nguồn tham khảo dưới câu trả lời; backend vẫn có thể tra cứu và giữ metadata nguồn trong lịch sử/API, không sửa dữ liệu hoặc các tab khác. TypeScript và git diff --check đạt cho trạng thái hiện tại; chưa kiểm tra trực quan trên trình duyệt.
 
-Tài liệu ghi lại phần Trợ lý AI hiện trên nhánh làm việc `ai-agents`, dựa trên `main` đến commit `90052ae`, bao gồm các tích hợp dữ liệu địa điểm và planner. Đây là mô tả trạng thái triển khai, không phải cam kết rằng mọi tình huống đã được kiểm thử.
+- Ngày 29/09/2026: tab Trợ lý AI giữ khoảng thanh cuộn ngoài và đặt vị trí cuộn trang về đầu trước khi vẽ để giảm lệch bố cục khi chuyển tab. Chỉ khoá cuộn ngoài khi tab AI được gắn; khôi phục các style trước đó khi rời tab, giữ cuộn bên trong chat. TypeScript và git diff --check đạt. Đã kiểm tra trực quan trên desktop 1280×720: ba lượt chuyển từ Khám phá/Lập lịch/Lịch trình về AI giữ nguyên vị trí header, main và ô nhập; sau cuộn trang Lịch trình, AI trở về scrollY=0. Chưa kiểm tra di động.
+- Kiểm tra bổ sung 29/09/2026: API planner chạy local gọi DeepSeek thật thành công cho Đà Nẵng (3 ngày, 6 ID không trùng, 3,48 giây) và Đà Lạt (2 ngày, 4 ID không trùng, 2,97 giây); dùng deepseek-flash với suy luận tắt, không fallback. Trang Lập lịch tạo chuyến đi thành công nhưng nút Tạo lịch trình ở PlannerSearchForm vẫn dùng makeTrip cục bộ, chưa gọi backend DeepSeek. Không sửa luồng này trong lượt kiểm tra; chưa kiểm tra end-to-end nút từ chat bằng dữ liệu mới. Server kiểm tra đã tắt, Cloudflare không bật; không sửa dữ liệu Supabase. Kết quả này bổ sung cho các ghi nhận kiểm thử lịch sử bên dưới.
+
+Tài liệu ghi lại phần Trợ lý AI hiện trên nhánh làm việc `ai-agents`, đã đồng bộ `main` đến commit `b5d0bed`, bao gồm các tích hợp dữ liệu địa điểm và planner. Đây là mô tả trạng thái triển khai, không phải cam kết rằng mọi tình huống đã được kiểm thử.
 
 Quy tắc duy trì: thêm thay đổi AI mới vào tài liệu; cập nhật mô tả khi cách hoạt động thay đổi; xoá mô tả chức năng đã bị xoá khỏi dự án. Tài liệu phải phản ánh trạng thái hiện tại, không giữ các mô tả tính năng đã lỗi thời. Quy tắc bắt buộc được ghi trong `AGENTS.md`.
 
@@ -44,7 +47,7 @@ Các thay đổi liên quan:
 - Bổ sung dữ liệu Kaggle Vietnam Tourism V2 và công cụ truy xuất cục bộ.
 - Bổ sung script import Kaggle và danh mục VietGo lên Supabase.
 - Bổ sung migration cho bảng dữ liệu và các hàm tìm kiếm phục vụ AI.
-- Hiện nguồn tham khảo bên dưới câu trả lời; các bản ghi danh mục không có URL được hiển thị dưới dạng tên nguồn.
+- Backend trả metadata nguồn cho chat để lưu cùng lịch sử; giao diện hiện không hiển thị khung nguồn tham khảo theo yêu cầu người dùng.
 - DeepSeek chọn tối đa ba ID từ catalog đã tra bằng công cụ, soạn câu trả lời theo dữ liệu được cung cấp. Supabase cung cấp tri thức; ID Supabase khác catalog không được tự gán làm ghim bản đồ.
 - Chat chỉ hiển thị `answer` tự nhiên, không nối danh sách kỹ thuật. Thông tin khách tổng hợp ưu tiên cập nhật mới nhất; thông tin AI tự giả định không tính là khách xác nhận. Model có thể gợi ý điểm đến trước khi khách chọn nhưng không tự coi đó là đủ dữ kiện planner. Trần mỗi phản hồi tool chat là 1.300 token; nếu tra cứu thì tổng chi phí gồm cả lượt gọi công cụ và lượt trả lời cuối.
 - ID địa điểm được giữ trong `actionContextText` ẩn, lưu cùng kết quả chat và chỉ ghép vào ngữ cảnh khi bấm nút thao tác; không cần hiển thị mã trong câu trả lời để mở bản đồ/lịch trình. DeepSeek lỗi, thiếu key hoặc trả JSON không hợp lệ sẽ hiển thị thông báo lỗi ngắn và ẩn nút, không tự thay câu trả lời bằng ba địa điểm đầu danh sách.

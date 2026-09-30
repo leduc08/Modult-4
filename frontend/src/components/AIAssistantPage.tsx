@@ -13,7 +13,6 @@ import {
   PlusCircle, 
   Star, 
   MapPin, 
-  ExternalLink,
   MessageSquare,
   RefreshCw,
   Plus,
@@ -102,14 +101,14 @@ export const AIAssistantPage: React.FC<AIAssistantPageProps> = ({
 
   // Chat sidebar toggle on desktop
   const [sidebarOpen, setSidebarOpen] = useState(() => window.matchMedia('(min-width: 768px)').matches);
-  const [aiStatus, setAiStatus] = useState<{ hasDeepSeekKey: boolean; model: string } | null>(null);
+  const [aiStatus, setAiStatus] = useState<{ hasDeepSeekKey: boolean } | null>(null);
 
   useEffect(() => {
     const controller = new AbortController();
     fetch('/api/health', { signal: controller.signal })
       .then(response => response.ok ? response.json() : Promise.reject(new Error('Health check failed')))
       .then(data => {
-        if (data.aiProvider === 'deepseek') setAiStatus({ hasDeepSeekKey: data.hasDeepSeekKey === true, model: data.model });
+        if (data.aiProvider === 'deepseek') setAiStatus({ hasDeepSeekKey: data.hasDeepSeekKey === true });
       })
       .catch(() => {});
     return () => controller.abort();
@@ -493,7 +492,7 @@ export const AIAssistantPage: React.FC<AIAssistantPageProps> = ({
                 <span className={`w-1.5 h-1.5 rounded-full ${aiStatus?.hasDeepSeekKey ? 'bg-emerald-500' : 'bg-amber-500'}`}></span>
               </div>
               <div className="text-[10px] text-[#717171]">
-                {aiStatus ? aiStatus.hasDeepSeekKey ? `DeepSeek • ${aiStatus.model}` : 'DeepSeek • Chưa cấu hình API key' : 'Đang kiểm tra kết nối AI...'}
+                {aiStatus ? aiStatus.hasDeepSeekKey ? 'Sẵn sàng hỗ trợ chuyến đi của bạn' : 'Trợ lý AI chưa được cấu hình' : 'Đang kiểm tra kết nối AI...'}
               </div>
             </div>
           </div>
@@ -591,26 +590,6 @@ export const AIAssistantPage: React.FC<AIAssistantPageProps> = ({
                         className="rounded-xl bg-emerald-700 px-4 py-2 font-bold text-white hover:bg-emerald-800">
                         Thêm vào chi tiêu →
                       </button>
-                    </div>
-                  )}
-
-                  {isAi && msg.knowledgeSources && msg.knowledgeSources.length > 0 && (
-                    <div className="flex flex-wrap items-center gap-2 text-[11px] text-[#717171]">
-                      <span className="font-semibold">Nguồn tham khảo:</span>
-                      {msg.knowledgeSources.map((source) => {
-                        let safeUrl = '';
-                        try {
-                          const parsed = new URL(source.sourceUrl);
-                          if (parsed.protocol === 'https:') safeUrl = parsed.href;
-                        } catch { /* Supabase catalog records may not have an external URL. */ }
-                        return safeUrl ? (
-                          <a key={source.id} href={safeUrl} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1 underline underline-offset-2 hover:text-[#222222]">
-                            {source.title}<ExternalLink className="w-3 h-3" />
-                          </a>
-                        ) : (
-                          <span key={source.id}>{source.title}</span>
-                        );
-                      })}
                     </div>
                   )}
 
