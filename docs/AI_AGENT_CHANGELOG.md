@@ -1,10 +1,14 @@
 # Tổng hợp thay đổi AI Agent — VietGo
 
-Cập nhật tài liệu: 29/09/2026.
+Cập nhật tài liệu: 01/10/2026.
 
+- Ngày 01/10/2026: Gói đóng góp địa điểm qua Pull Request được nhập vào cùng SQLite quản trị mà công cụ tra địa điểm của Trợ lý AI đang đọc. Luồng AI và quyền ghi của AI không đổi; địa điểm đã nhập chỉ xuất hiện với AI khi thỏa điều kiện công khai hiện có. Đã kiểm tra TypeScript, build và kiểm thử xuất/nhập địa điểm; chưa kiểm tra dịch vụ AI bên ngoài.
+
+- Ngày 29/09/2026: API công khai địa điểm dùng chung với Trợ lý AI và `/api/plan-trip` chỉ trả địa điểm đã xuất bản, chưa xóa và có tọa độ hợp lệ; bộ lập lịch AI loại địa điểm tạm đóng cửa và đóng cửa vĩnh viễn. Chỉnh sửa quản trị nằm riêng trong SQLite, nên nhập lại JSON nguồn không ghi đè bản admin. Không thay đổi prompt hay quyền ghi của công cụ AI. Đã kiểm tra kiểu dữ liệu, build và kiểm thử API quản trị; chưa gọi thử dịch vụ AI bên ngoài.
 - Ngày 29/09/2026: tab Trợ lý AI giữ khoảng thanh cuộn ngoài và đặt vị trí cuộn trang về đầu trước khi vẽ để giảm lệch bố cục khi chuyển tab. Chỉ khoá cuộn ngoài khi tab AI được gắn; khôi phục các style trước đó khi rời tab, giữ cuộn bên trong chat. Không sửa các tab khác. TypeScript và git diff --check đạt; chưa kiểm tra trực quan trên trình duyệt cho thay đổi này.
+- Ngày 29/09/2026: sau khi đồng bộ nhánh `main`, công cụ tra địa điểm của Trợ lý AI đọc danh mục đã ghép các chỉnh sửa quản trị từ SQLite. Chat và lịch trình vẫn dùng DeepSeek; Gemini chỉ phục vụ đọc hóa đơn. TypeScript, bản build và 15 bài kiểm thử liên quan đã đạt; chưa kiểm tra tương tác AI với dịch vụ bên ngoài.
 
-Tài liệu ghi lại phần Trợ lý AI hiện trên nhánh làm việc `ai-agents`, dựa trên `main` đến commit `90052ae`, bao gồm các tích hợp dữ liệu địa điểm và planner. Đây là mô tả trạng thái triển khai, không phải cam kết rằng mọi tình huống đã được kiểm thử.
+Tài liệu ghi lại phần Trợ lý AI hiện trên nhánh làm việc, bao gồm các tích hợp dữ liệu địa điểm và planner. Đây là mô tả trạng thái triển khai, không phải cam kết rằng mọi tình huống đã được kiểm thử.
 
 Quy tắc duy trì: thêm thay đổi AI mới vào tài liệu; cập nhật mô tả khi cách hoạt động thay đổi; xoá mô tả chức năng đã bị xoá khỏi dự án. Tài liệu phải phản ánh trạng thái hiện tại, không giữ các mô tả tính năng đã lỗi thời. Quy tắc bắt buộc được ghi trong `AGENTS.md`.
 
@@ -25,7 +29,7 @@ Hiện tại, DeepSeek Flash phục vụ chat, phân tích ảnh và backend t�
 DeepSeek **không trực tiếp truy cập Supabase**. `/api/chat` gửi tin mới, 8 tin gần nhất (tối đa 1.200 ký tự/tin) và thông tin khách tổng hợp từ toàn bộ lịch sử cho model. Model quyết định trả lời/hỏi bổ sung ngay hoặc gọi công cụ chỉ đọc; backend thực hiện, trả kết quả về model rồi model viết câu trả lời và đề xuất nút.
 
 - `search_tourism_knowledge`: tra Supabase/Kaggle và nguồn dự phòng theo cấu hình, query do model tạo có ngữ cảnh điểm đến. Không tự truy vấn Supabase trước mọi tin nhắn nữa.
-- `search_place_catalog`: đọc file địa điểm của thành phố được allowlist, lọc nhóm tham quan/ăn uống, tối đa 12 ứng viên; chỉ các ID model chọn từ kết quả công cụ mới được xác minh để mở bản đồ/quán ăn.
+- `search_place_catalog`: đọc danh mục địa điểm của thành phố được allowlist cùng các chỉnh sửa quản trị trong SQLite, lọc nhóm tham quan/ăn uống, tối đa 12 ứng viên; chỉ các ID model chọn từ kết quả công cụ mới được xác minh để mở bản đồ/quán ăn.
 - `get_seasonal_destinations`: đọc `bestMonths`/`weatherSummary` từ `database/vietnamData.ts`; không cần khách nêu thành phố. Model được gửi ngày hiện tại tại Việt Nam để hiểu “mùa này”, không coi khí hậu tham khảo là dự báo.
 - Giới hạn một đợt tối đa 2 công cụ và tối đa 2 lần gọi DeepSeek/tin; lần cuối không cho gọi thêm công cụ. Công cụ không có SQL, URL tùy ý, ghi/xóa dữ liệu hoặc tự tạo lịch trình. Tham số được kiểm tra, đường dẫn catalog chỉ lấy từ registry thành phố.
 - Chat không còn bị dừng vì chưa có thành phố, điểm đến ngoài planner, ngày quá giới hạn, khoảng ngân sách hoặc catalog thiếu. Model vẫn tư vấn/hỏi rõ, biết `plannerIssues`; chỉ nút/API thao tác giữ giới hạn riêng.

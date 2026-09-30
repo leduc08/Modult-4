@@ -53,7 +53,6 @@ import {
   searchNearbyPlaces as searchFoursquare,
   FoursquareApiError,
 } from '../services/foursquareService';
-import { GoogleMapView } from './GoogleMapView';
 import {
   loadCityPlaces,
   filterCityPlaces,
@@ -476,7 +475,6 @@ export const NearbyPage: React.FC<NearbyPageProps> = ({
 
   // 1. Initialize Leaflet Map
   useEffect(() => {
-    if (dataSource === 'google') return;
     if (!mapContainerRef.current) return;
     if (mapInstanceRef.current) return;
 
@@ -491,12 +489,11 @@ export const NearbyPage: React.FC<NearbyPageProps> = ({
       preferCanvas: true,
     });
 
-    // Minimalist Gray Canvas map (Beautiful like CARTO, Free, No API Key)
+    // OpenStreetMap base tiles for every nearby-place data source.
     leafletLib
-      .tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
-        attribution: 'Tiles &copy; Esri &mdash; Esri, DeLorme, NAVTEQ',
-        className: 'nearby-base-tiles',
-        maxZoom: 16,
+      .tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+        maxZoom: 19,
       })
       .addTo(map);
 
@@ -520,7 +517,7 @@ export const NearbyPage: React.FC<NearbyPageProps> = ({
       map.remove();
       mapInstanceRef.current = null;
     };
-  }, [dataSource === 'google']);
+  }, []);
 
   useEffect(() => {
     const map = mapInstanceRef.current;
@@ -1204,29 +1201,8 @@ export const NearbyPage: React.FC<NearbyPageProps> = ({
             mobileView === 'list' ? 'hidden lg:block' : 'block'
           } h-[calc(100dvh-154px)] lg:h-[calc(100vh-110px)] bg-stone-100`}
         >
-          {/* Map Canvas — Google hoặc Leaflet tuỳ dataSource */}
-          {dataSource === 'google' ? (
-            <GoogleMapView
-              center={searchCenter}
-              places={livePlaces}
-              selectedPlaceId={selectedPlaceId}
-              onSelectPlace={(id) => {
-                // Chỉ update UI — KHÔNG trigger API call
-                setSelectedPlaceId(id);
-                const el = placeCardsRef.current[id];
-                if (el) el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-              }}
-              userCoords={realUserCoords}
-              onMapMoveEnd={(c) => {
-                setCurrentMapCenter(c);
-                const dist = Math.hypot(c.lat - searchCenter.lat, c.lng - searchCenter.lng);
-                if (dist > 0.005) setHasMapMovedAway(true);
-              }}
-            />
-          ) : (
-            // Leaflet Map Canvas (Sample Mode — giữ nguyên)
-            <div ref={mapContainerRef} className="w-full h-full z-0" />
-          )}
+          {/* OpenStreetMap map canvas for every place data source */}
+          <div ref={mapContainerRef} className="w-full h-full z-0" />
 
           {/* Error Banner — API lỗi (KHÔNG âm thầm fallback) */}
           {dataSource !== 'sample' && fetchState === 'error' && apiError && (

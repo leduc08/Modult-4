@@ -43,7 +43,7 @@ export interface NearbyPlace {
   // --- Multi-source fields (Foursquare + OSM pre-fetch) ---
 
   /** Nguồn dữ liệu gốc */
-  dataSource?: 'foursquare' | 'osm' | 'merged' | 'sample' | 'google';
+  dataSource?: 'foursquare' | 'osm' | 'merged' | 'admin' | 'sample' | 'google';
 
   /** Foursquare place ID — giữ để đối chiếu */
   foursquareId?: string;

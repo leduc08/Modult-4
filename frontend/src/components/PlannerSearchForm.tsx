@@ -1,8 +1,8 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
-import { CalendarDays, ChevronLeft, ChevronRight, MapPin, Minus, Plus, SlidersHorizontal, Sparkles, Users, X } from 'lucide-react';
+import { CalendarDays, ChevronLeft, ChevronRight, MapPin, Minus, Plus, SlidersHorizontal, Sparkles, Users, Wallet, X } from 'lucide-react';
 import { CITY_NAMES, SUPPORTED_CITIES, getCityTripPlaces, makeTrip, type Participants, type VerifiedTrip } from '../data/tripPlaces';
 
-type Panel = 'destination' | 'dates' | 'guests' | null;
+type Panel = 'destination' | 'dates' | 'guests' | 'budget' | null;
 type CityOption = { id: string; name: string; count: number; sights: number; foods: number };
 const MAX_DAYS = 7; // The previous planner exposed trips of up to seven days.
 const MAX_GUESTS = 6; // The previous planner accepted at most six people.
@@ -23,7 +23,9 @@ export const PlannerSearchForm: React.FC<{ onPlan: (trip: VerifiedTrip) => void;
   const [startDate, setStartDate] = useState(initialTrip?.startDate || '');
   const [endDate, setEndDate] = useState(initialTrip?.endDate || (initialTrip?.schedule.at(-1)?.date || ''));
   const [participants, setParticipants] = useState<Participants>(initialTrip?.participants || { adults: initialTrip?.guests || 1, children: 0, infants: 0 });
-  const [budget, setBudget] = useState(initialTrip?.budget?.toString() || '');
+  const [budget, setBudget] = useState<number | null>(typeof initialTrip?.budget === 'number' ? initialTrip.budget : null);
+  const [budgetDraft, setBudgetDraft] = useState(() => typeof initialTrip?.budget === 'number' ? new Intl.NumberFormat('vi-VN').format(initialTrip.budget) : '');
+  const [budgetFieldError, setBudgetFieldError] = useState('');
   const [interest, setInterest] = useState(initialTrip?.interest || '');
   const [pace, setPace] = useState(initialTrip?.pace || 'vừa phải');
   const [showOptions, setShowOptions] = useState(false);
@@ -35,7 +37,7 @@ export const PlannerSearchForm: React.FC<{ onPlan: (trip: VerifiedTrip) => void;
   const [error, setError] = useState('');
   const [busy, setBusy] = useState(false);
   const rootRef = useRef<HTMLFormElement>(null);
-  const triggerRefs = useRef<Record<Exclude<Panel, null>, HTMLButtonElement | null>>({ destination: null, dates: null, guests: null });
+  const triggerRefs = useRef<Record<Exclude<Panel, null>, HTMLButtonElement | null>>({ destination: null, dates: null, guests: null, budget: null });
   const queryRef = useRef<HTMLInputElement>(null);
   const panelRef = useRef<HTMLDivElement>(null);
   const activeRef = useRef<Panel>(null);
@@ -48,7 +50,7 @@ export const PlannerSearchForm: React.FC<{ onPlan: (trip: VerifiedTrip) => void;
       const data = await getCityTripPlaces(city.id);
       if (!data) throw new Error(city.id);
       const sights = data.places.filter(p => p.categoryGroup === 'sightseeing' || p.categoryGroup === 'culture').length;
-      const foods = data.places.filter(p => p.categoryGroup === 'food' || p.categoryGroup === 'cafe').length;
+      const foods = data.places.filter(p => p.categoryGroup === 'food').length;
       return { ...city, count: data.places.length, sights, foods };
     })).then(results => {
       if (!alive) return;
@@ -97,13 +99,38 @@ export const PlannerSearchForm: React.FC<{ onPlan: (trip: VerifiedTrip) => void;
     return () => { document.removeEventListener('pointerdown', outside); document.removeEventListener('keydown', escape); };
   }, [active]);
 
-  const open = (panel: Exclude<Panel, null>) => { setError(''); if (active === panel) close(); else setActive(panel); };
+  const open = (panel: Exclude<Panel, null>) => {
+    setError('');
+    if (active === panel) { close(); return; }
+    if (panel === 'budget') {
+      setBudgetDraft(budget === null ? '' : new Intl.NumberFormat('vi-VN').format(budget));
+      setBudgetFieldError('');
+    }
+    setActive(panel);
+  };
+  const changeBudgetDraft = (raw: string) => {
+    if (raw.includes('-')) { setBudgetDraft(raw); setBudgetFieldError('Ngân sách không được âm.'); return; }
+    if (!/^[\d.]*$/.test(raw) || /\.\d{1,2}$/.test(raw)) { setBudgetDraft(raw); setBudgetFieldError('Chỉ nhập số VNĐ nguyên; dấu chấm chỉ để ngăn hàng nghìn.'); return; }
+    const digits = raw.replace(/\D/g, '');
+    if (digits.length > 12) { setBudgetDraft(raw); setBudgetFieldError('Số tiền quá lớn.'); return; }
+    setBudgetDraft(digits ? new Intl.NumberFormat('vi-VN').format(Number(digits)) : '');
+    setBudgetFieldError('');
+  };
+  const applyBudget = () => {
+    const digits = budgetDraft.replace(/\D/g, '');
+    if (budgetFieldError) return;
+    if (!digits) { setBudgetFieldError('Nhập số tiền hoặc chọn Chưa xác định.'); return; }
+    const amount = Number(digits);
+    if (!Number.isSafeInteger(amount) || amount < 0) { setBudgetFieldError('Ngân sách không hợp lệ.'); return; }
+    setBudget(amount);
+    close();
+  };
   const chooseCity = (city: CityOption) => {
     setCityId(city.id); setQuery(city.name); onCityChange?.(city.id); setError(''); setActive('dates');
   };
   const shownCities = useMemo(() => cities.filter(city => !query || [city.name, ...(aliases[city.id] || [])].some(name => normalize(name).includes(normalize(query)))), [cities, query]);
   const selectedCity = cities.find(city => city.id === cityId);
-  const maxDays = selectedCity ? Math.min(MAX_DAYS, Math.floor(selectedCity.sights / (pace === 'nhiều điểm' ? 2 : 1)), Math.floor(selectedCity.foods / (pace === 'thư thả' ? 1 : 2))) : MAX_DAYS;
+  const maxDays = selectedCity ? Math.min(MAX_DAYS, Math.floor(selectedCity.sights / (pace === 'thư thả' ? 1 : 2)), Math.floor(selectedCity.foods / (pace === 'nhiều điểm' ? 2 : 1))) : MAX_DAYS;
   const chooseDate = (iso: string) => {
     if (!startDate || endDate || iso < startDate) { setStartDate(iso); setEndDate(''); setDateError(''); return; }
     const length = tripDays(startDate, iso);
@@ -125,7 +152,7 @@ export const PlannerSearchForm: React.FC<{ onPlan: (trip: VerifiedTrip) => void;
     if (startDate < todayISO() || endDate < startDate) { setError('Khoảng ngày không hợp lệ. Vui lòng chọn lại từ hôm nay.'); setActive('dates'); return false; }
     if (tripDays(startDate, endDate) > maxDays) { setError(`Lịch trình tại ${selectedCity.name} hỗ trợ tối đa ${maxDays} ngày với nhịp độ đã chọn.`); setActive('dates'); return false; }
     if (participants.adults < 1 || total > MAX_GUESTS) { setError(`Cần ít nhất 1 người lớn và tối đa ${MAX_GUESTS} người tham gia.`); setActive('guests'); return false; }
-    if (budget && (!Number.isFinite(Number(budget)) || Number(budget) < 0)) { setError('Ngân sách không hợp lệ.'); setShowOptions(true); return false; }
+    if (budget !== null && (!Number.isSafeInteger(budget) || budget < 0)) { setError('Ngân sách không hợp lệ.'); setActive('budget'); return false; }
     return true;
   };
   const submit = async (event: React.FormEvent) => {
@@ -136,7 +163,7 @@ export const PlannerSearchForm: React.FC<{ onPlan: (trip: VerifiedTrip) => void;
       const data = await getCityTripPlaces(cityId);
       if (!data) throw new Error(`Không tải được dữ liệu địa điểm ${CITY_NAMES[cityId]}. Vui lòng thử lại.`);
       const days = tripDays(startDate, endDate);
-      const trip = makeTrip({ cityId, startDate, endDate, days, guests: total, participants, budget: budget ? Number(budget) : undefined, interest: interest || undefined, pace }, data.places);
+      const trip = makeTrip({ cityId, startDate, endDate, days, guests: total, participants, budget, interest: interest || undefined, pace }, data.places);
       if (!trip) throw new Error(`Dữ liệu ${CITY_NAMES[cityId]} chưa đủ cho ${days} ngày với nhịp độ đã chọn. Hãy rút ngắn chuyến đi hoặc đổi nhịp độ.`);
       onPlan(trip);
     } catch (cause) {
@@ -164,6 +191,7 @@ export const PlannerSearchForm: React.FC<{ onPlan: (trip: VerifiedTrip) => void;
       <button ref={el => { triggerRefs.current.destination = el; }} type="button" aria-expanded={active === 'destination'} aria-controls="planner-destination" onClick={() => open('destination')} className={`planner-field ${active === 'destination' ? 'planner-field-active' : ''}`}><MapPin aria-hidden="true" className="planner-icon" /><span className="min-w-0"><strong>Điểm đến</strong><span className="planner-value">{cityId ? CITY_NAMES[cityId] : 'Bạn muốn đi đâu?'}</span></span></button>
       <button ref={el => { triggerRefs.current.dates = el; }} type="button" aria-expanded={active === 'dates'} aria-controls="planner-dates" onClick={() => open('dates')} className={`planner-field ${active === 'dates' ? 'planner-field-active' : ''}`}><CalendarDays aria-hidden="true" className="planner-icon" /><span className="min-w-0"><strong>Thời gian</strong><span className="planner-value">{startDate ? `${displayDate(startDate)}${endDate ? ` – ${displayDate(endDate)}` : ' – Chọn ngày về'}${endDate && startDate.slice(0, 4) !== endDate.slice(0, 4) ? ` ${endDate.slice(0, 4)}` : ''}` : 'Chọn ngày đi – ngày về'}</span></span></button>
       <button ref={el => { triggerRefs.current.guests = el; }} type="button" aria-expanded={active === 'guests'} aria-controls="planner-guests" onClick={() => open('guests')} className={`planner-field ${active === 'guests' ? 'planner-field-active' : ''}`}><Users aria-hidden="true" className="planner-icon" /><span className="min-w-0"><strong>Người tham gia</strong><span className="planner-value"><span className="planner-guests-full">{participants.adults} người lớn{participants.children ? `, ${participants.children} trẻ em` : ''}{participants.infants ? `, ${participants.infants} em bé` : ''}</span><span className="planner-guests-short">{total} người</span></span></span></button>
+      <button ref={el => { triggerRefs.current.budget = el; }} type="button" aria-expanded={active === 'budget'} aria-controls="planner-budget" onClick={() => open('budget')} className={`planner-field ${active === 'budget' ? 'planner-field-active' : ''}`}><Wallet aria-hidden="true" className="planner-icon" /><span className="min-w-0"><strong>Ngân sách</strong><span className="planner-value">{budget === null ? 'Chưa xác định' : `${new Intl.NumberFormat('vi-VN').format(budget)} ₫ / cả nhóm`}</span></span></button>
       <button type="submit" disabled={busy} className="planner-submit"><Sparkles className="h-5 w-5 shrink-0" aria-hidden="true" />{busy ? 'Đang tạo lịch trình' : 'Tạo lịch trình'}</button>
     </div>
     {active && <div className="planner-backdrop" onClick={() => close()} aria-hidden="true" />}
@@ -185,7 +213,16 @@ export const PlannerSearchForm: React.FC<{ onPlan: (trip: VerifiedTrip) => void;
       {([['adults', 'Người lớn', 'Từ 13 tuổi trở lên'], ['children', 'Trẻ em', 'Từ 2–12 tuổi'], ['infants', 'Em bé', 'Dưới 2 tuổi']] as const).map(([key, label, description]) => <div key={key} className="flex items-center justify-between gap-3 border-b border-neutral-100 py-4"><div><strong className="text-sm">{label}</strong><p className="text-xs text-neutral-500">{description}</p></div><div className="flex items-center gap-3"><button type="button" aria-label={`Giảm ${label}`} disabled={participants[key] <= (key === 'adults' ? 1 : 0)} onClick={() => changeCount(key, -1)} className="planner-count-button"><Minus className="h-4 w-4" /></button><output className="w-5 text-center text-sm font-semibold">{participants[key]}</output><button type="button" aria-label={`Tăng ${label}`} disabled={total >= MAX_GUESTS} onClick={() => changeCount(key, 1)} className="planner-count-button"><Plus className="h-4 w-4" /></button></div></div>)}
       <p className="mt-3 text-xs text-neutral-500">Tối đa {MAX_GUESTS} người tham gia. Chưa tính giá riêng theo độ tuổi.</p><div className="mt-5 text-right"><button type="button" onClick={() => close()} className="rounded-full bg-[#FF385C] px-6 py-2.5 text-sm font-bold text-white">Xong</button></div>
     </div>}
-    <div className="mt-3 px-3"><button type="button" aria-expanded={showOptions} aria-controls="trip-options" onClick={() => setShowOptions(!showOptions)} className="flex items-center gap-2 rounded-full px-2 py-1.5 text-xs font-semibold text-neutral-600 hover:bg-neutral-100"><SlidersHorizontal className="h-4 w-4" />Thêm ngân sách, sở thích và nhịp độ</button>{showOptions && <div id="trip-options" className="mt-3 grid gap-4 rounded-2xl border border-neutral-200 bg-white p-4 sm:grid-cols-3"><label className="text-xs font-bold">Ngân sách dự kiến (VNĐ)<input type="number" min="0" value={budget} onChange={e => setBudget(e.target.value)} placeholder="Chưa xác định" className="mt-2 w-full rounded-xl border border-neutral-200 p-3 text-sm font-medium focus:border-[#FF385C] focus:outline-none" /><span className="mt-1 block font-normal leading-5 text-neutral-500">Chi phí thiếu dữ liệu giá sẽ không được tính.</span></label><label className="text-xs font-bold">Sở thích<select value={interest} onChange={e => setInterest(e.target.value)} className="mt-2 w-full rounded-xl border border-neutral-200 p-3 text-sm font-medium"><option value="">Đa dạng</option><option value="culture">Văn hóa</option><option value="sightseeing">Danh thắng</option><option value="food">Ẩm thực</option></select></label><label className="text-xs font-bold">Nhịp độ<select value={pace} onChange={e => setPace(e.target.value)} className="mt-2 w-full rounded-xl border border-neutral-200 p-3 text-sm font-medium"><option>thư thả</option><option>vừa phải</option><option>nhiều điểm</option></select></label></div>}</div>
+    {active === 'budget' && <div ref={panelRef} id="planner-budget" role="dialog" aria-label="Chọn ngân sách" className="planner-panel planner-budget">
+      <div className="planner-mobile-head"><strong>Ngân sách chuyến đi</strong><button type="button" aria-label="Đóng" onClick={() => close()}><X /></button></div>
+      <p className="text-sm font-bold">Ngân sách cho cả nhóm trong toàn bộ chuyến đi</p>
+      <p className="mt-1 text-xs leading-5 text-neutral-500">Chỉ gồm ăn uống và vé tham quan/hoạt động. Chưa gồm lưu trú và di chuyển.</p>
+      <label htmlFor="planner-budget-input" className="mt-5 block text-xs font-bold">Số tiền (VNĐ)</label>
+      <input id="planner-budget-input" type="text" inputMode="numeric" value={budgetDraft} onChange={event => changeBudgetDraft(event.target.value)} placeholder="Ví dụ: 3.000.000" aria-invalid={Boolean(budgetFieldError)} aria-describedby={budgetFieldError ? 'planner-budget-error' : undefined} className={`mt-2 w-full rounded-xl border px-4 py-3 text-base font-semibold outline-none ${budgetFieldError ? 'border-rose-500' : 'border-neutral-200 focus:border-[#FF385C]'}`} />
+      {budgetFieldError && <p id="planner-budget-error" role="alert" className="mt-2 text-xs font-semibold text-rose-700">{budgetFieldError}</p>}
+      <div className="mt-5 flex flex-wrap items-center justify-between gap-3 border-t border-neutral-100 pt-4"><button type="button" onClick={() => { setBudget(null); setBudgetDraft(''); setBudgetFieldError(''); close(); }} className="text-sm font-bold text-neutral-700 underline">Chưa xác định</button><button type="button" onClick={applyBudget} className="rounded-full bg-[#FF385C] px-6 py-2.5 text-sm font-bold text-white">Áp dụng</button></div>
+    </div>}
+    <div className="mt-3 px-3"><button type="button" aria-expanded={showOptions} aria-controls="trip-options" onClick={() => setShowOptions(!showOptions)} className="flex items-center gap-2 rounded-full px-2 py-1.5 text-xs font-semibold text-neutral-600 hover:bg-neutral-100"><SlidersHorizontal className="h-4 w-4" />Thêm sở thích và nhịp độ</button>{showOptions && <div id="trip-options" className="mt-3 grid gap-4 rounded-2xl border border-neutral-200 bg-white p-4 sm:grid-cols-2"><label className="text-xs font-bold">Sở thích<select value={interest} onChange={e => setInterest(e.target.value)} className="mt-2 w-full rounded-xl border border-neutral-200 p-3 text-sm font-medium"><option value="">Đa dạng</option><option value="culture">Văn hóa</option><option value="sightseeing">Danh thắng</option><option value="food">Ẩm thực</option></select></label><label className="text-xs font-bold">Nhịp độ<select value={pace} onChange={e => setPace(e.target.value)} className="mt-2 w-full rounded-xl border border-neutral-200 p-3 text-sm font-medium"><option>thư thả</option><option>vừa phải</option><option>nhiều điểm</option></select></label></div>}</div>
     {error && <p role="alert" className="mx-3 mt-3 rounded-xl bg-rose-50 p-3 text-sm font-medium text-rose-700">{error}</p>}
   </form>;
 };

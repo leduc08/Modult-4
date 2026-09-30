@@ -11,3 +11,9 @@ tools/
 
 # Kết quả chạy test (tạo lại mỗi lần chạy)
 tests/reports/
+
+# Persistent admin place edits
+data/*.sqlite*
+data/place-images/
+data/test-upload-*/
+data/test-contrib-*/
