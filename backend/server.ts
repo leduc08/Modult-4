@@ -1,5 +1,6 @@
 import express from 'express';
 import path from 'path';
+import { createHmac, timingSafeEqual } from 'node:crypto';
 import dotenv from 'dotenv';
 import { GoogleGenAI } from '@google/genai';
 import { createServer as createViteServer } from 'vite';
@@ -10,6 +11,7 @@ import { validateAssistantImage, analyzeAssistantImage } from '../ai/imageAnalys
 import { getImageRecommendations } from '../ai/imageRecommendations.ts';
 import { resolveChatAction } from '../ai/chatActions.ts';
 import { getSuggestedChatActions } from '../ai/suggestedChatActions.ts';
+import { CITY_NAMES, findDuplicates, getAdminPlace, getCityPlaces, getImage, listAdminPlaces, listAudit, saveImage, saveManagedPlace, savePlace, setDeleted } from './placeStore.ts';
 
 dotenv.config();
 
@@ -231,6 +233,66 @@ app.post('/api/reserve', (req, res) => {
 // 6. Google Sign-In — frontend lấy Client ID từ đây, gửi ID token lên để server xác thực
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID || '';
 const GOOGLE_ISSUERS = ['accounts.google.com', 'https://accounts.google.com'];
+const ADMIN_GOOGLE_SUB = process.env.ADMIN_GOOGLE_SUB || '';
+const ADMIN_SESSION_SECRET = process.env.ADMIN_SESSION_SECRET || '';
+const ADMIN_COOKIE = 'vietgo_admin_session';
+const USER_COOKIE = 'vietgo_google_session';
+const ADMIN_SESSION_MS = 8 * 60 * 60 * 1000;
+const adminConfigured = Boolean(GOOGLE_CLIENT_ID && ADMIN_GOOGLE_SUB && ADMIN_SESSION_SECRET.length >= 32);
+
+function googleSession(req: express.Request): string | null {
+  if (ADMIN_SESSION_SECRET.length < 32) return null;
+  const cookie = req.headers.cookie?.split(';').map(value => value.trim()).find(value => value.startsWith(`${USER_COOKIE}=`));
+  const token = cookie?.slice(USER_COOKIE.length + 1);
+  if (!token) return null;
+  const [subject, expiry, signature] = token.split('.');
+  if (!subject || !/^\d+$/.test(expiry || '') || Number(expiry) < Date.now() || !/^[a-f0-9]{64}$/.test(signature || '')) return null;
+  const expected = createHmac('sha256', ADMIN_SESSION_SECRET).update(`user.${subject}.${expiry}`).digest('hex');
+  const received = Buffer.from(signature, 'hex');
+  return received.length === Buffer.byteLength(expected, 'hex') && timingSafeEqual(received, Buffer.from(expected, 'hex')) ? subject : null;
+}
+
+function adminSession(req: express.Request): boolean {
+  if (!adminConfigured) return false;
+  const cookie = req.headers.cookie?.split(';').map(value => value.trim()).find(value => value.startsWith(`${ADMIN_COOKIE}=`));
+  const token = cookie?.slice(ADMIN_COOKIE.length + 1);
+  if (!token) return false;
+  const [subject, expiry, signature] = token.split('.');
+  if (subject !== ADMIN_GOOGLE_SUB || !/^\d+$/.test(expiry || '') || Number(expiry) < Date.now() || !/^[a-f0-9]{64}$/.test(signature || '')) return false;
+  const expected = createHmac('sha256', ADMIN_SESSION_SECRET).update(`${subject}.${expiry}`).digest('hex');
+  const received = Buffer.from(signature, 'hex');
+  return received.length === Buffer.byteLength(expected, 'hex') && timingSafeEqual(received, Buffer.from(expected, 'hex'));
+}
+
+function setAdminCookie(req: express.Request, res: express.Response, sub: string) {
+  const expiry = String(Date.now() + ADMIN_SESSION_MS);
+  const signature = createHmac('sha256', ADMIN_SESSION_SECRET).update(`${sub}.${expiry}`).digest('hex');
+  res.cookie(ADMIN_COOKIE, `${sub}.${expiry}.${signature}`, {
+    httpOnly: true, sameSite: 'strict', secure: req.secure || req.get('x-forwarded-proto') === 'https',
+    path: '/', maxAge: ADMIN_SESSION_MS,
+  });
+}
+
+function setGoogleCookie(req: express.Request, res: express.Response, sub: string) {
+  if (ADMIN_SESSION_SECRET.length < 32) return;
+  const expiry = String(Date.now() + ADMIN_SESSION_MS);
+  const signature = createHmac('sha256', ADMIN_SESSION_SECRET).update(`user.${sub}.${expiry}`).digest('hex');
+  res.cookie(USER_COOKIE, `${sub}.${expiry}.${signature}`, {
+    httpOnly: true, sameSite: 'strict', secure: req.secure || req.get('x-forwarded-proto') === 'https',
+    path: '/', maxAge: ADMIN_SESSION_MS,
+  });
+}
+
+function requireAdmin(req: express.Request, res: express.Response, next: express.NextFunction) {
+  if (!adminSession(req)) return res.status(403).json({ error: 'Chỉ tài khoản quản trị được phép thực hiện thao tác này.' });
+  const origin = req.get('origin');
+  try {
+    if (origin && new URL(origin).host !== req.get('host')) return res.status(403).json({ error: 'Nguồn yêu cầu không hợp lệ.' });
+  } catch {
+    return res.status(403).json({ error: 'Nguồn yêu cầu không hợp lệ.' });
+  }
+  next();
+}
 
 app.get('/api/auth/google/config', (req, res) => {
   res.json({ clientId: GOOGLE_CLIENT_ID });
@@ -266,16 +328,127 @@ app.post('/api/auth/google', async (req, res) => {
       return res.status(403).json({ error: 'Email của tài khoản Google này chưa được xác minh.' });
     }
 
+    const isAdmin = adminConfigured && info.sub === ADMIN_GOOGLE_SUB;
+    setGoogleCookie(req, res, info.sub);
+    if (isAdmin) setAdminCookie(req, res, info.sub);
+    else res.clearCookie(ADMIN_COOKIE, { path: '/' });
     res.json({
       sub: info.sub,
       email: String(info.email).toLowerCase(),
       name: info.name || info.email.split('@')[0],
-      picture: info.picture || null
+      picture: info.picture || null,
+      isAdmin,
     });
   } catch (error: any) {
     console.error('Google auth error:', error);
     res.status(502).json({ error: 'Không kết nối được tới Google. Vui lòng thử lại.' });
   }
+});
+
+app.get('/api/admin/session', (req, res) => {
+  res.setHeader('Cache-Control', 'no-store');
+  res.json({ authenticated: Boolean(googleSession(req) || adminSession(req)), isAdmin: adminSession(req), configured: adminConfigured });
+});
+
+app.get('/api/admin/identity', (req, res) => {
+  res.setHeader('Cache-Control', 'no-store');
+  const sub = googleSession(req);
+  if (!sub) return res.status(401).json({ error: 'Hãy đăng nhập bằng Google trên website trước.' });
+  res.json({ sub });
+});
+
+app.post('/api/admin/logout', (req, res) => {
+  res.clearCookie(ADMIN_COOKIE, { path: '/' });
+  res.clearCookie(USER_COOKIE, { path: '/' });
+  res.json({ ok: true });
+});
+
+app.get('/api/places/cities', (_req, res) => {
+  res.json(Object.entries(CITY_NAMES).map(([id, name]) => ({ id, name })));
+});
+
+app.get('/api/places/:cityId', (req, res) => {
+  const data = getCityPlaces(req.params.cityId);
+  if (!data) return res.status(404).json({ error: 'Khu vực không tồn tại.' });
+  res.setHeader('Cache-Control', 'no-store');
+  res.json(data);
+});
+
+app.get('/api/place-images/:imageId', (req, res) => {
+  const image = getImage(req.params.imageId);
+  if (!image) return res.status(404).end();
+  res.setHeader('Content-Type', image.mime);
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.setHeader('Cache-Control', 'public, max-age=3600');
+  res.send(image.bytes);
+});
+
+app.get('/api/admin/place-records', requireAdmin, (req, res) => {
+  res.setHeader('Cache-Control', 'no-store');
+  res.json(listAdminPlaces(req.query));
+});
+app.get('/api/admin/place-records/audit', requireAdmin, (req, res) => {
+  res.setHeader('Cache-Control', 'no-store');
+  res.json(listAudit(req.query));
+});
+app.get('/api/admin/place-records/duplicates', requireAdmin, (req, res) => {
+  const cityId = String(req.query.cityId || '');
+  if (!Object.hasOwn(CITY_NAMES, cityId)) return res.status(422).json({ error: 'Khu vực không hợp lệ.' });
+  const lat = req.query.lat === '' ? null : Number(req.query.lat);
+  const lng = req.query.lng === '' ? null : Number(req.query.lng);
+  res.json({ items: findDuplicates(cityId, { name: req.query.name, address: req.query.address,
+    coordinates: lat == null || lng == null ? null : { lat, lng } }, String(req.query.excludeId || '')) });
+});
+app.get('/api/admin/place-records/:cityId/:placeId', requireAdmin, (req, res) => {
+  const place = getAdminPlace(req.params.cityId, req.params.placeId);
+  if (!place) return res.status(404).json({ error: 'Không tìm thấy địa điểm.' });
+  res.setHeader('Cache-Control', 'no-store');
+  res.json(place);
+});
+app.post('/api/admin/place-records', requireAdmin, (req, res) => {
+  const result = saveManagedPlace(req.body ?? {}, ADMIN_GOOGLE_SUB);
+  if (result.error) return res.status(result.status || 500).json({ error: result.error });
+  res.status(201).json(result);
+});
+app.put('/api/admin/place-records/:cityId/:placeId', requireAdmin, (req, res) => {
+  const result = saveManagedPlace(req.body ?? {}, ADMIN_GOOGLE_SUB, req.params.cityId, req.params.placeId);
+  if (result.error) return res.status(result.status || 500).json({ error: result.error });
+  res.json(result);
+});
+app.delete('/api/admin/place-records/:cityId/:placeId', requireAdmin, (req, res) => {
+  const result = setDeleted(req.params.cityId, req.params.placeId, Number(req.body?.version), true, ADMIN_GOOGLE_SUB);
+  if (result.error) return res.status(result.status || 500).json({ error: result.error });
+  res.json(result);
+});
+app.post('/api/admin/place-records/:cityId/:placeId/restore', requireAdmin, (req, res) => {
+  const result = setDeleted(req.params.cityId, req.params.placeId, Number(req.body?.version), false, ADMIN_GOOGLE_SUB);
+  if (result.error) return res.status(result.status || 500).json({ error: result.error });
+  res.json(result);
+});
+app.post('/api/admin/place-images', requireAdmin, express.raw({ type: ['image/jpeg', 'image/png', 'image/webp'], limit: '5mb' }), (req, res) => {
+  if (!Buffer.isBuffer(req.body)) return res.status(415).json({ error: 'Chỉ nhận ảnh JPEG, PNG hoặc WebP.' });
+  const result = saveImage(req.body, req.get('content-type') || '', ADMIN_GOOGLE_SUB);
+  if (result.error) return res.status(422).json({ error: result.error });
+  res.status(201).json(result);
+});
+app.get('/api/admin/place-images/:imageId', requireAdmin, (req, res) => {
+  const image = getImage(req.params.imageId, true);
+  if (!image) return res.status(404).end();
+  res.setHeader('Content-Type', image.mime);
+  res.setHeader('X-Content-Type-Options', 'nosniff');
+  res.send(image.bytes);
+});
+
+app.post('/api/admin/places/:cityId', requireAdmin, (req, res) => {
+  const result = savePlace(req.params.cityId, req.body ?? {}, undefined, ADMIN_GOOGLE_SUB);
+  if (result.error) return res.status(result.status ?? 500).json({ error: result.error });
+  res.status(201).json(result.place);
+});
+
+app.put('/api/admin/places/:cityId/:placeId', requireAdmin, (req, res) => {
+  const result = savePlace(req.params.cityId, req.body ?? {}, req.params.placeId, ADMIN_GOOGLE_SUB);
+  if (result.error) return res.status(result.status ?? 500).json({ error: result.error });
+  res.json(result.place);
 });
 
 // Vite Middleware & Static Serving

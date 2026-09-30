@@ -23,7 +23,7 @@ export interface MergedPlaceJSON {
   categoryLabel: string;
   foursquareId?: string;
   osmId?: string;
-  dataSource: 'foursquare' | 'osm' | 'merged';
+  dataSource: 'foursquare' | 'osm' | 'merged' | 'admin';
   rating: number | null;
   reviewCount: number | null;
   imageUrl: string | null;
@@ -35,6 +35,21 @@ export interface MergedPlaceJSON {
   needsReview: boolean;
   conflictNote: string | null;
   tags: string[];
+  price?: { status: 'unknown' | 'free' | 'priced'; minVnd: number | null; maxVnd: number | null; unit: 'person' | 'ticket' | 'dish' | 'group' | null; note?: string | null; checkedAt?: string | null } | null;
+  estimatedDurationMinutes?: number | null;
+  operatingStatus?: 'unverified' | 'active' | 'temporarily_closed' | 'permanently_closed';
+  weeklyHours?: Record<string, { status: 'unknown' | 'closed' | 'open' | 'all_day'; open: string | null; close: string | null }> | null;
+  updatedAt?: string | null;
+}
+
+export function formatManagedPrice(price: MergedPlaceJSON['price']): string | undefined {
+  if (!price || price.status === 'unknown') return undefined;
+  if (price.status === 'free') return 'Miễn phí';
+  if (price.minVnd == null || !price.unit) return undefined;
+  const amount = (value: number) => `${new Intl.NumberFormat('vi-VN').format(value)} ₫`;
+  const range = price.maxVnd != null && price.maxVnd > price.minVnd ? `${amount(price.minVnd)}–${amount(price.maxVnd)}` : amount(price.minVnd);
+  const unit = { person: 'người', ticket: 'vé', dish: 'món', group: 'cả nhóm' }[price.unit];
+  return `${range}/${unit}`;
 }
 
 export interface MergeStats {
@@ -73,9 +88,6 @@ export interface CityPlacesData {
 const cityModules: Record<string, () => Promise<{ default: CityPlacesData }>> =
   import.meta.glob('./*.json') as any;
 
-/** Cache loaded city data to avoid re-importing */
-const cityCache = new Map<string, CityPlacesData>();
-
 /** List of available city IDs (based on existing JSON files) */
 export function getAvailableCityIds(): string[] {
   return Object.keys(cityModules).map(key =>
@@ -93,21 +105,14 @@ export function hasPreFetchedData(): boolean {
  * Returns null if no data file exists for this city.
  */
 export async function loadCityPlaces(cityId: string): Promise<CityPlacesData | null> {
-  // Check cache first
-  if (cityCache.has(cityId)) {
-    return cityCache.get(cityId)!;
-  }
-
   const key = `./${cityId}.json`;
   if (!(key in cityModules)) {
     return null;
   }
 
   try {
-    const mod = await cityModules[key]();
-    const data = mod.default;
-    cityCache.set(cityId, data);
-    return data;
+    const response = await fetch(`/api/places/${encodeURIComponent(cityId)}`, { cache: 'no-store' });
+    return response.ok ? await response.json() as CityPlacesData : null;
   } catch (err) {
     console.warn(`Failed to load places data for ${cityId}:`, err);
     return null;
@@ -143,8 +148,9 @@ function mergedToNearbyPlace(
     address: mp.address,
     openingHours: mp.openingHours || '',
     ticketPrice: undefined,
+    publicPriceLabel: formatManagedPrice(mp.price),
     estimatedTime: '',
-    description: `${mp.description || 'Chưa có mô tả.'} Nguồn: ${mp.dataSource === 'osm' ? 'OpenStreetMap' : mp.dataSource === 'foursquare' ? 'Foursquare' : 'Foursquare + OpenStreetMap'}. Dữ liệu cập nhật: ${new Date(fetchedAt).toLocaleDateString('vi-VN')}.`,
+    description: `${mp.description || 'Chưa có mô tả.'} Nguồn: ${mp.dataSource === 'admin' ? 'VietGo' : mp.dataSource === 'osm' ? 'OpenStreetMap' : mp.dataSource === 'foursquare' ? 'Foursquare' : 'Foursquare + OpenStreetMap'}. Dữ liệu cập nhật: ${new Date(fetchedAt).toLocaleDateString('vi-VN')}.`,
     imageUrl: mp.isPlaceholderImage ? '' : imageUrl,
     tags: mp.tags,
     localTips: '',
@@ -174,7 +180,7 @@ function mergedToNearbyPlace(
     reviewCount: mp.reviewCount,
     openingHours: mp.openingHours ?? undefined,
     isOpenNow: undefined, // pre-fetched data doesn't know current status
-    priceDisplay: undefined,
+    priceDisplay: formatManagedPrice(mp.price),
     description: mp.description || '',
     tags: mp.tags,
     distanceKm: distKm,

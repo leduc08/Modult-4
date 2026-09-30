@@ -452,7 +452,8 @@ export const PRIVACY_POLICY: LegalDocument = {
             ]
           ]
         },
-        'Khi bạn dùng "Đăng nhập bằng Google", Google có thể đặt cookie riêng để vận hành tính năng đăng nhập theo chính sách của Google.'
+        'Khi bạn dùng "Đăng nhập bằng Google", Google có thể đặt cookie riêng để vận hành tính năng đăng nhập theo chính sách của Google.',
+        'Tài khoản quản trị sử dụng cookie phiên HttpOnly để giới hạn quyền thêm và sửa địa điểm. Cookie này hết hạn sau 8 giờ hoặc khi đăng xuất admin.'
       ]
     },
     {

@@ -1,6 +1,5 @@
-import fs from 'node:fs/promises';
-import path from 'node:path';
 import { PROVINCES } from '../database/vietnamData.ts';
+import { getCityPlaces } from '../backend/placeStore.ts';
 import { AI_SUPPORTED_CITIES, resolveAIPlannerCity } from './plannerDestination.ts';
 import { normalizeTripText } from './tripState.ts';
 import { getChatKnowledge, type ChatKnowledge } from './supabaseKnowledge.ts';
@@ -47,9 +46,10 @@ export function createTravelTools(lookupKnowledge: (query: string) => Promise<Ch
         if (!['food','sightseeing','all'].includes(String(args.category))) throw new Error('Invalid category');
         const cityId = resolveAIPlannerCity('', cityName, AI_SUPPORTED_CITIES);
         if (!cityId) return { places: [], note: 'Chưa có catalog bản đồ cho thành phố này. Có thể tra cứu tri thức khác; không gán ID/tọa độ.' };
-        let data: { places: Array<VerifiedChatPlace & { needsReview?: boolean; coordinates?: {lat:number;lng:number}; dataSource?: string }> };
-        try { data = JSON.parse(await fs.readFile(path.join(process.cwd(),'frontend','src','data','places',`${cityId}.json`),'utf8')); }
+        let data: { places: Array<VerifiedChatPlace & { needsReview?: boolean; coordinates?: {lat:number;lng:number}; dataSource?: string }> } | null;
+        try { data = getCityPlaces(cityId); }
         catch { return { places: [], note: 'Catalog cục bộ chưa tải được. Hãy dùng nguồn khác hoặc nói rõ chưa xác minh.' }; }
+        if (!data) return { places: [], note: 'Catalog cục bộ chưa tải được. Hãy dùng nguồn khác hoặc nói rõ chưa xác minh.' };
         const terms = normalizeTripText(query).split(/[^a-z0-9]+/).filter(term => term.length >= 3);
         const score = (item: typeof data.places[number]) => terms.filter(term => normalizeTripText(`${item.name} ${item.address}`).includes(term)).length;
         const places = data.places.filter(item => !item.needsReview && item.name?.trim() && item.address?.trim()

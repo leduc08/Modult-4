@@ -1,9 +1,8 @@
-import fs from 'fs/promises';
-import path from 'path';
 import { Type, type DeepSeekClient } from '../ai/deepseekClient.ts';
+import { getCityPlaces } from './placeStore.ts';
 
 const cities: Record<string, string> = { 'ha-noi': 'Hà Nội', 'da-nang': 'Đà Nẵng', 'hoi-an': 'Hội An', hue: 'Huế', 'ninh-binh': 'Ninh Bình', 'da-lat': 'Đà Lạt', 'sa-pa': 'Sa Pa', 'phu-quoc': 'Phú Quốc', 'nha-trang': 'Nha Trang', 'tp-hcm': 'TP. Hồ Chí Minh' };
-type Place = { id: string; name: string; address: string; coordinates: { lat: number; lng: number }; categoryGroup: string; categoryLabel: string; dataSource: string; openingHours: string | null; needsReview: boolean; imageUrl: string | null; isPlaceholderImage: boolean };
+type Place = { id: string; name: string; address: string; coordinates: { lat: number; lng: number }; categoryGroup: string; categoryLabel: string; dataSource: string; openingHours: string | null; needsReview: boolean; imageUrl: string | null; isPlaceholderImage: boolean; operatingStatus?: string };
 
 export async function createVerifiedPlan(body: any, ai: DeepSeekClient | null) {
   const cityId = cities[body.destination] ? body.destination : Object.keys(cities).find(id => cities[id].toLocaleLowerCase('vi') === String(body.destination || '').toLocaleLowerCase('vi'));
@@ -11,9 +10,9 @@ export async function createVerifiedPlan(body: any, ai: DeepSeekClient | null) {
   const days = Math.max(1, Math.min(7, Math.trunc(Number(body.days) || 3)));
   const guests = Math.max(1, Math.trunc(Number(body.peopleCount) || 2));
   let data: { fetchedAt: string; places: Place[] };
-  try { data = JSON.parse(await fs.readFile(path.join(process.cwd(), 'frontend', 'src', 'data', 'places', `${cityId}.json`), 'utf8')); }
-  catch { return { error: 'Chưa có dữ liệu địa điểm cho khu vực này.', status: 422 }; }
-  const useful = data.places.filter(p => !p.needsReview && p.name?.trim() && p.address?.trim() && Number.isFinite(p.coordinates?.lat) && Number.isFinite(p.coordinates?.lng) && !/^\d+\s|^(unnamed|không tên|restaurant|cafe|coffee)$/i.test(p.name.trim()));
+  data = getCityPlaces(cityId);
+  if (!data) return { error: 'Chưa có dữ liệu địa điểm cho khu vực này.', status: 422 };
+  const useful = data.places.filter(p => !p.needsReview && !['temporarily_closed', 'permanently_closed'].includes(p.operatingStatus || '') && p.name?.trim() && p.address?.trim() && Number.isFinite(p.coordinates?.lat) && Number.isFinite(p.coordinates?.lng) && !/^\d+\s|^(unnamed|không tên|restaurant|cafe|coffee)$/i.test(p.name.trim()));
   const sights = useful.filter(p => ['sightseeing', 'culture'].includes(p.categoryGroup));
   const foods = useful.filter(p => ['food', 'cafe'].includes(p.categoryGroup));
   if (sights.length < days || foods.length < days) return { error: `Dữ liệu ${cities[cityId]} chưa đủ cho ${days} ngày. Hãy giảm số ngày hoặc đổi khu vực.`, status: 422 };
