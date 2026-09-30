@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 240" role="img" aria-label="Ảnh địa điểm chưa có">
+  <rect width="320" height="240" fill="#fff1f3"/>
+  <circle cx="253" cy="51" r="26" fill="#ffd0da"/>
+  <path d="M0 188 93 91l59 60 35-39 133 115v13H0Z" fill="#ffc2d0"/>
+  <path d="M0 211 93 130l57 60 40-39 130 79v10H0Z" fill="#ff8fa8"/>
+  <path d="M160 46c-28 0-51 23-51 51 0 36 51 85 51 85s51-49 51-85c0-28-23-51-51-51Z" fill="#ff385c" stroke="white" stroke-width="6"/>
+  <circle cx="160" cy="97" r="15" fill="white"/>
+</svg>

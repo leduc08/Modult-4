@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { 
   Compass, 
   MapPin,
@@ -43,13 +43,20 @@ export const Navbar: React.FC<NavbarProps> = ({
   setLanguage,
 }) => {
   const [accountMenuOpen, setAccountMenuOpen] = useState(false);
+  const [adminAllowed, setAdminAllowed] = useState(false);
+  useEffect(() => {
+    let alive = true;
+    fetch('/api/admin/session', { cache: 'no-store' }).then(response => response.json())
+      .then(session => { if (alive) setAdminAllowed(session.isAdmin === true); })
+      .catch(() => { if (alive) setAdminAllowed(false); });
+    return () => { alive = false; };
+  }, [currentUser, accountMenuOpen]);
 
   const mainNavItems = [
     { id: 'home' as const, label: 'L\u1eadp l\u1ecbch', icon: Calendar },
     { id: 'explore' as const, label: 'Khám phá', icon: Compass },
     { id: 'nearby' as const, label: 'Xung quanh', icon: MapPin },
     { id: 'ai' as const, label: 'Trợ lý AI', icon: Bot },
-    { id: 'itinerary' as const, label: 'Lịch trình', icon: Calendar },
   ];
 
   return (
@@ -112,7 +119,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           <nav className="hidden md:flex items-center gap-1 bg-[#F7F7F7] p-1.5 rounded-full border border-[#E5E5E5]">
             {mainNavItems.map((item) => {
               const Icon = item.icon;
-              const isActive = activeTab === item.id;
+              const isActive = activeTab === item.id || (item.id === 'home' && activeTab === 'itinerary');
               return (
                 <button
                   key={item.id}
@@ -241,6 +248,11 @@ export const Navbar: React.FC<NavbarProps> = ({
 
                   <div className="border-t border-[#E5E5E5] my-1"></div>
 
+                  {adminAllowed && <a href="/admin/places" className="w-full px-4 py-2.5 text-xs text-[#222222] hover:bg-[#F7F7F7] flex items-center gap-2.5 font-semibold">
+                    <ShieldCheck className="w-4 h-4 text-[#FF385C]" />
+                    <span>Quản trị dữ liệu</span>
+                  </a>}
+
                   <button
                     onClick={onOpenSOS}
                     className="w-full px-4 py-2.5 text-xs text-rose-600 hover:bg-rose-50 flex items-center gap-2.5 font-bold text-left cursor-pointer transition-colors"
@@ -257,9 +269,9 @@ export const Navbar: React.FC<NavbarProps> = ({
 
       {/* 2. Mobile Fixed Bottom Navigation Bar (Airbnb Style) */}
       <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/98 backdrop-blur-md border-t border-[#E5E5E5] px-2 py-1.5 flex items-center justify-around shadow-lg">
-        {/* Item 1: Khám phá */}
-        <button onClick={() => setActiveTab('home')} className={`flex flex-col items-center gap-1 py-1 px-2 rounded-xl transition-all cursor-pointer min-w-[56px] ${activeTab === 'home' ? 'text-[#FF385C]' : 'text-[#717171] hover:text-[#222222]'}`}>
-          <Calendar className={`w-5 h-5 ${activeTab === 'home' ? 'stroke-[2.5]' : 'stroke-2'}`} />
+        {/* Lập lịch */}
+        <button onClick={() => setActiveTab('home')} className={`flex flex-col items-center gap-1 py-1 px-2 rounded-xl transition-all cursor-pointer min-w-[56px] ${activeTab === 'home' || activeTab === 'itinerary' ? 'text-[#FF385C]' : 'text-[#717171] hover:text-[#222222]'}`}>
+          <Calendar className={`w-5 h-5 ${activeTab === 'home' || activeTab === 'itinerary' ? 'stroke-[2.5]' : 'stroke-2'}`} />
           <span className="text-[10px] font-bold">Lập lịch</span>
         </button>
 
@@ -295,18 +307,7 @@ export const Navbar: React.FC<NavbarProps> = ({
           <span className="text-[10px] font-bold">Trợ lý AI</span>
         </button>
 
-        {/* Item 4: Lịch trình */}
-        <button
-          onClick={() => setActiveTab('itinerary')}
-          className={`flex flex-col items-center gap-1 py-1 px-2 rounded-xl transition-all cursor-pointer min-w-[56px] ${
-            activeTab === 'itinerary' ? 'text-[#FF385C]' : 'text-[#717171] hover:text-[#222222]'
-          }`}
-        >
-          <Calendar className={`w-5 h-5 ${activeTab === 'itinerary' ? 'stroke-[2.5]' : 'stroke-2'}`} />
-          <span className="text-[10px] font-bold">Lịch trình</span>
-        </button>
-
-        {/* Item 5: Tài khoản */}
+        {/* Item 4: Tài khoản */}
         <button
           onClick={() => onOpenAccount('wishlist')}
           className={`flex flex-col items-center gap-1 py-1 px-2 rounded-xl transition-all cursor-pointer min-w-[56px] ${

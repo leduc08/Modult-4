@@ -249,6 +249,7 @@ export interface GoogleProfile {
   email: string;
   name: string;
   picture: string | null;
+  isAdmin?: boolean;
 }
 
 export type AccountTab = 'wishlist' | 'profile' | 'budget' | 'emergency';

@@ -142,6 +142,7 @@ export const ItemDetailModal: React.FC<ItemDetailModalProps> = ({
     priceNumber = 'avgPrice' in item ? item.avgPrice : undefined;
     priceText = `${item.priceRange} / món`;
   }
+  if ('publicPriceLabel' in item && typeof item.publicPriceLabel === 'string') priceText = item.publicPriceLabel;
 
   return (
     <div 

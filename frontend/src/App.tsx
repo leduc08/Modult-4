@@ -19,6 +19,7 @@ import { LegalModal, LegalDocId } from './components/LegalModal';
 import type { ChatActionName, ChatActionContext } from '../../database/chatActionTypes';
 import type { AIReceiptImport } from '../../database/aiReceiptTypes';
 import { resolveAIPlannerCity } from '../../ai/plannerDestination';
+import { AdminPlacesPage } from './components/AdminPlacesPage';
 
 export default function App() {
   // Navigation tabs: 'explore' (default) | 'nearby' | 'ai' | 'itinerary' | 'account' | 'budget'
@@ -202,6 +203,8 @@ export default function App() {
     setBookingModalOpen(true);
   };
 
+  if (window.location.pathname === '/admin' || window.location.pathname === '/admin/places' || window.location.pathname === '/admin/places/login') return <AdminPlacesPage />;
+
   return (
     <div className={`${activeTab === 'ai' ? 'h-dvh min-h-0 overflow-hidden' : 'min-h-screen'} bg-white text-[#222222] flex flex-col font-sans selection:bg-[#FF385C] selection:text-white`}>
       {/* 1. Header & Navigation (Airbnb style: Desktop header, Mobile fixed bottom bar) */}
@@ -291,6 +294,7 @@ export default function App() {
         onLogout={() => {
           setCurrentUser(null);
           signOutGoogle();
+          void fetch('/api/admin/logout', { method: 'POST' });
         }}
         onUpdateUser={setCurrentUser}
         onOpenLegal={setLegalDoc}
