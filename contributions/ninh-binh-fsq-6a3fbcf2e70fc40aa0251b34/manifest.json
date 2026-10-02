@@ -1,0 +1,27 @@
+{
+  "format": "vietgo-place-contribution-v1",
+  "changes": [
+    {
+      "kind": "update",
+      "cityId": "ninh-binh",
+      "placeId": "fsq-6a3fbcf2e70fc40aa0251b34",
+      "before": {
+        "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+        "tags": [
+          "Desert",
+          "Cafe, Coffee, and Tea House"
+        ]
+      },
+      "after": {
+        "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQL9ptziL6qncwmXZS9lKF3xgUEiLbzMcDGQBY45uazbw&s=10",
+        "tags": [
+          "Desert",
+          "Cafe",
+          "Coffee",
+          "and Tea House"
+        ]
+      }
+    }
+  ],
+  "images": []
+}

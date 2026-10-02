@@ -1,0 +1,17 @@
+{
+  "format": "vietgo-place-contribution-v1",
+  "changes": [
+    {
+      "kind": "update",
+      "cityId": "hoi-an",
+      "placeId": "osm-node-5444648882",
+      "before": {
+        "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop"
+      },
+      "after": {
+        "imageUrl": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/06/98/e1/a7/nhung-cloth-shop.jpg?w=1200&h=-1&s=1"
+      }
+    }
+  ],
+  "images": []
+}

@@ -1,0 +1,19 @@
+{
+  "format": "vietgo-place-contribution-v1",
+  "changes": [
+    {
+      "kind": "update",
+      "cityId": "hoi-an",
+      "placeId": "fsq-5b1a78dafc9e94002c4e3e89",
+      "before": {
+        "website": "http://tastevietnam.asia",
+        "imageUrl": "/images/food-placeholder.svg"
+      },
+      "after": {
+        "website": "http://tastevietnam.asia/",
+        "imageUrl": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/28/d0/06/cf/ambience.jpg?w=900&h=500&s=1"
+      }
+    }
+  ],
+  "images": []
+}

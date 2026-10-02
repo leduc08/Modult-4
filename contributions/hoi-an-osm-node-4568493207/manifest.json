@@ -1,0 +1,27 @@
+{
+  "format": "vietgo-place-contribution-v1",
+  "changes": [
+    {
+      "kind": "update",
+      "cityId": "hoi-an",
+      "placeId": "osm-node-4568493207",
+      "before": {
+        "imageUrl": "/images/food-placeholder.svg",
+        "needsReview": false,
+        "coordinates": {
+          "lat": 15.8917649,
+          "lng": 108.375176
+        }
+      },
+      "after": {
+        "coordinates": {
+          "lat": 15.877028,
+          "lng": 108.390286
+        },
+        "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSytqO60RH-J1mMFMC0VqGC6AiFRAieVvzzXI9-fdIJ8ih7TvMUpFSWNo8&s=10",
+        "needsReview": true
+      }
+    }
+  ],
+  "images": []
+}

@@ -1,0 +1,27 @@
+{
+  "format": "vietgo-place-contribution-v1",
+  "changes": [
+    {
+      "kind": "update",
+      "cityId": "ninh-binh",
+      "placeId": "osm-node-6528047104",
+      "before": {
+        "categoryLabel": "Ẩm thực (savory_pancakes;chicken;american;local;tea;barbecue;pizza;burger;international;seafood;italian_pizza;crepe;asian;pancake;sandwich;vietnamese;coffee_shop;fish;kebab;breakfast;grill;diner;noodle;hot_dog)",
+        "imageUrl": "/images/food-placeholder.svg",
+        "tags": [
+          "savory_pancakes;chicken;american;local;tea;barbecue;pizza;burger;international;seafood;italian_pizza;crepe;asian;pancake;sandwich;vietnamese;coffee_shop;fish;kebab;breakfast;grill;diner;noodle;hot_dog",
+          "restaurant"
+        ]
+      },
+      "after": {
+        "categoryLabel": "Ẩm thực (savory_pancakes;chicken;american;local;tea;barbecue;pizza;burger;international;seafood;ital",
+        "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSs3jkyiqXEo091W-f_Hko37FRNzya3kNc1d-lV-bECGg&s=10",
+        "tags": [
+          "savory_pancakes;chicken;american;local;tea;barbecue;pizza;bu",
+          "restaurant"
+        ]
+      }
+    }
+  ],
+  "images": []
+}

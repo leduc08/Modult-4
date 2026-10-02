@@ -1,0 +1,19 @@
+{
+  "format": "vietgo-place-contribution-v1",
+  "changes": [
+    {
+      "kind": "update",
+      "cityId": "ninh-binh",
+      "placeId": "fsq-4ff8fe25e4b0cdc6b909905f",
+      "before": {
+        "name": "Yến Model",
+        "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop"
+      },
+      "after": {
+        "name": "Ha Linh",
+        "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSG8DYuEHzH4csIkDN6Y-dauA6r5QsVkGc0nr_nYkgEyv5Vd12UwpNS4IA&s=10"
+      }
+    }
+  ],
+  "images": []
+}

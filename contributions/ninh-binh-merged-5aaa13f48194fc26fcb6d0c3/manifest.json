@@ -1,0 +1,17 @@
+{
+  "format": "vietgo-place-contribution-v1",
+  "changes": [
+    {
+      "kind": "update",
+      "cityId": "ninh-binh",
+      "placeId": "merged-5aaa13f48194fc26fcb6d0c3",
+      "before": {
+        "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop"
+      },
+      "after": {
+        "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSM5GK4ABnNN5Wsk5OpVl338dqVTzQ2LHM3mYL1OztIaFpvwDsKrGYY4A&s=10"
+      }
+    }
+  ],
+  "images": []
+}

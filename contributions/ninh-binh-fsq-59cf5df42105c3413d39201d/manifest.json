@@ -1,0 +1,19 @@
+{
+  "format": "vietgo-place-contribution-v1",
+  "changes": [
+    {
+      "kind": "update",
+      "cityId": "ninh-binh",
+      "placeId": "fsq-59cf5df42105c3413d39201d",
+      "before": {
+        "name": "The Admiral Benbow Cafe",
+        "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop"
+      },
+      "after": {
+        "name": "Trang An Riverside Garden",
+        "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT4KkNxtTbYbIUJYsQ85PC5sp1FgPm8Px4o7NJMfqVSgA&s=10"
+      }
+    }
+  ],
+  "images": []
+}

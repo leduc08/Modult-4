@@ -1,0 +1,19 @@
+{
+  "format": "vietgo-place-contribution-v1",
+  "changes": [
+    {
+      "kind": "update",
+      "cityId": "ninh-binh",
+      "placeId": "fsq-6a2f9d7b1cfbd64cf151cf50",
+      "before": {
+        "name": "Lò E Coffee",
+        "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop"
+      },
+      "after": {
+        "name": "Trung Nguyên Coffee",
+        "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSs75LfJ8oq3hFZnkOazRUrz1BlZ27mhjJlEkOcA9G3iw&s=10"
+      }
+    }
+  ],
+  "images": []
+}

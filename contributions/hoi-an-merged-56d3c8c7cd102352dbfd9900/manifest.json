@@ -1,0 +1,19 @@
+{
+  "format": "vietgo-place-contribution-v1",
+  "changes": [
+    {
+      "kind": "update",
+      "cityId": "hoi-an",
+      "placeId": "merged-56d3c8c7cd102352dbfd9900",
+      "before": {
+        "website": "http://www.rosiecafe.com",
+        "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop"
+      },
+      "after": {
+        "website": "http://www.rosiecafe.com/",
+        "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXA0X1bO9HNpY3Aa7TVbbtnGGhZifx-4Ss9zMJ6ODbaZ2ZEPESNDtzuKqL&s=10"
+      }
+    }
+  ],
+  "images": []
+}

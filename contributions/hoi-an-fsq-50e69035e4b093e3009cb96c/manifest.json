@@ -1,0 +1,19 @@
+{
+  "format": "vietgo-place-contribution-v1",
+  "changes": [
+    {
+      "kind": "update",
+      "cityId": "hoi-an",
+      "placeId": "fsq-50e69035e4b093e3009cb96c",
+      "before": {
+        "website": "http://ancientfaifo.com.vn",
+        "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop"
+      },
+      "after": {
+        "website": "http://ancientfaifo.com.vn/",
+        "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQf1-Zhsv2eRYDAdJDj51RDcQHMqR8Y3526zcwzDdG7nctaS_o6sFYN8Uw&s=10"
+      }
+    }
+  ],
+  "images": []
+}

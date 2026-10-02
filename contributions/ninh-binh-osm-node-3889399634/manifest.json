@@ -1,0 +1,27 @@
+{
+  "format": "vietgo-place-contribution-v1",
+  "changes": [
+    {
+      "kind": "update",
+      "cityId": "ninh-binh",
+      "placeId": "osm-node-3889399634",
+      "before": {
+        "coordinates": {
+          "lat": 20.2895968,
+          "lng": 105.8891242
+        },
+        "website": "nhahangthanglong.ninhbinh.vn",
+        "imageUrl": "/images/food-placeholder.svg"
+      },
+      "after": {
+        "coordinates": {
+          "lat": 20.259073,
+          "lng": 105.965808
+        },
+        "website": "https://nhahangthanglong.ninhbinh.vn/",
+        "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXXV6nOMj5gaKAaS8yEZ52a32a4o4jvn3WuhWCGcJoIosUXTkWFFqIjCm9&s=10"
+      }
+    }
+  ],
+  "images": []
+}

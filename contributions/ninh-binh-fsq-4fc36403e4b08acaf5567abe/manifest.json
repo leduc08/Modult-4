@@ -1,0 +1,17 @@
+{
+  "format": "vietgo-place-contribution-v1",
+  "changes": [
+    {
+      "kind": "update",
+      "cityId": "ninh-binh",
+      "placeId": "fsq-4fc36403e4b08acaf5567abe",
+      "before": {
+        "imageUrl": "/images/food-placeholder.svg"
+      },
+      "after": {
+        "imageUrl": "https://hotel84.com/hotel84-images/news/photo/nhahang-dung-vang.jpg"
+      }
+    }
+  ],
+  "images": []
+}
