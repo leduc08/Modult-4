@@ -1,0 +1,19 @@
+{
+  "format": "vietgo-place-contribution-v1",
+  "changes": [
+    {
+      "kind": "update",
+      "cityId": "hue",
+      "placeId": "fsq-4dfc513cd22d879302f4fe64",
+      "before": {
+        "website": "http://chodongba.com.vn",
+        "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop"
+      },
+      "after": {
+        "website": "http://chodongba.com.vn/",
+        "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuGdxja8AdV3aT-jrf9fxEkpmlG-phcb1JL9GrT58DZA&s=10"
+      }
+    }
+  ],
+  "images": []
+}

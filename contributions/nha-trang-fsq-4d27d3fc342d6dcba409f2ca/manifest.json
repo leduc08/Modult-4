@@ -1,0 +1,19 @@
+{
+  "format": "vietgo-place-contribution-v1",
+  "changes": [
+    {
+      "kind": "update",
+      "cityId": "nha-trang",
+      "placeId": "fsq-4d27d3fc342d6dcba409f2ca",
+      "before": {
+        "website": "http://www.dulichamthucnhatrang.vn",
+        "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop"
+      },
+      "after": {
+        "website": "http://www.dulichamthucnhatrang.vn/",
+        "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNzfaG1WIGyWFc6BuQaslh6BMRGgtiEkWGhSCOZHIgdQ&s=10"
+      }
+    }
+  ],
+  "images": []
+}

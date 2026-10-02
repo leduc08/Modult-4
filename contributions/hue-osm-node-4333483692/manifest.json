@@ -1,0 +1,17 @@
+{
+  "format": "vietgo-place-contribution-v1",
+  "changes": [
+    {
+      "kind": "update",
+      "cityId": "hue",
+      "placeId": "osm-node-4333483692",
+      "before": {
+        "imageUrl": "/images/food-placeholder.svg"
+      },
+      "after": {
+        "imageUrl": "https://vietnamnightlife.com/uploads/images/2024/03/1709808678-single_product2-yoyobeerclubcover.jpg"
+      }
+    }
+  ],
+  "images": []
+}

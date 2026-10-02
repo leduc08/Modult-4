@@ -1,0 +1,19 @@
+{
+  "format": "vietgo-place-contribution-v1",
+  "changes": [
+    {
+      "kind": "update",
+      "cityId": "hue",
+      "placeId": "fsq-4bce6f79cc8cd13afd77c4cf",
+      "before": {
+        "website": "http://hueworldheritage.org.vn",
+        "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop"
+      },
+      "after": {
+        "website": "http://hueworldheritage.org.vn/",
+        "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5-vbnDtr--A7msxEyFUxiu3LI9YEz7gAOpenxFkzEow&s=10"
+      }
+    }
+  ],
+  "images": []
+}

@@ -1,0 +1,17 @@
+{
+  "format": "vietgo-place-contribution-v1",
+  "changes": [
+    {
+      "kind": "update",
+      "cityId": "hue",
+      "placeId": "osm-node-12632000434",
+      "before": {
+        "imageUrl": "/images/food-placeholder.svg"
+      },
+      "after": {
+        "imageUrl": "https://down-vn.img.susercontent.com/vn-11134259-7r98o-lwc1xxz3y9cp83@resize_ss640x400"
+      }
+    }
+  ],
+  "images": []
+}

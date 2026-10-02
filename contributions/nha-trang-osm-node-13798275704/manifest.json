@@ -1,0 +1,17 @@
+{
+  "format": "vietgo-place-contribution-v1",
+  "changes": [
+    {
+      "kind": "update",
+      "cityId": "nha-trang",
+      "placeId": "osm-node-13798275704",
+      "before": {
+        "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop"
+      },
+      "after": {
+        "imageUrl": "https://scontent.fsgn5-9.fna.fbcdn.net/v/t39.30808-1/362652873_115516121631169_2557782433119035819_n.jpg?stp=dst-jpg_tt6&cstp=mx716x715&ctp=s200x200&_nc_cat=101&_nc_map=urlgen_bucketless&ccb=1-7&_nc_sid=2d3e12&_nc_ohc=tn3Faq1O0qYQ7kNvwEf3fmF&_nc_oc=AdqrVhsYliYm4nPDd3SbPLqDtX0Ksbd54tHeZUU8NVAXydAQ5P4Q7wCiO7jvyQfiO0o&_nc_zt=24&_nc_ht=scontent.fsgn5-9.fna&_nc_gid=cz3LIA_62lQFDSFuOu8o9w&_nc_ss=7b2a8&oh=00_AQOZZBMISNyLDOJweYbnTIYMJbkvDfmxBubQl7qrWmUgxQ&oe=6AC53E1F"
+      }
+    }
+  ],
+  "images": []
+}

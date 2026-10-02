@@ -1,0 +1,19 @@
+{
+  "format": "vietgo-place-contribution-v1",
+  "changes": [
+    {
+      "kind": "update",
+      "cityId": "hue",
+      "placeId": "osm-node-5152915021",
+      "before": {
+        "address": "13",
+        "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop"
+      },
+      "after": {
+        "address": "xóm 13, thôn Mậu Tài, xã Phú Mậu, huyện Phú Vang (nay thuộc thành phố Huế), tỉnh Thừa Thiên Huế",
+        "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTGl3DHN53vlg32PhDC16_WJPzmiMmUYAmMBLN2LIDVPA&s=10"
+      }
+    }
+  ],
+  "images": []
+}

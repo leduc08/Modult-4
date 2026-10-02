@@ -1,0 +1,19 @@
+{
+  "format": "vietgo-place-contribution-v1",
+  "changes": [
+    {
+      "kind": "update",
+      "cityId": "nha-trang",
+      "placeId": "fsq-4e748382d22d80eb32c4835a",
+      "before": {
+        "website": "http://paradise-vn.com",
+        "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop"
+      },
+      "after": {
+        "website": "http://paradise-vn.com/",
+        "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQrbRV95A1AorjK-4gk9MbPCTnlXX_nLIB5JQD470v2Ow&s=10"
+      }
+    }
+  ],
+  "images": []
+}

@@ -1,0 +1,19 @@
+{
+  "format": "vietgo-place-contribution-v1",
+  "changes": [
+    {
+      "kind": "update",
+      "cityId": "hue",
+      "placeId": "osm-node-5458104124",
+      "before": {
+        "website": "http://www.aromarestaurant.com.vn",
+        "imageUrl": "/images/food-placeholder.svg"
+      },
+      "after": {
+        "website": "http://www.aromarestaurant.com.vn/",
+        "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTPnA3yRID3ICfjYCOOPrrFblBw4NCC3WRLGaQVLCZexnkxbqC97AKnyk2m&s=10"
+      }
+    }
+  ],
+  "images": []
+}

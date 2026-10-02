@@ -1,0 +1,19 @@
+{
+  "format": "vietgo-place-contribution-v1",
+  "changes": [
+    {
+      "kind": "update",
+      "cityId": "hue",
+      "placeId": "fsq-4b698937f964a52061a62be3",
+      "before": {
+        "website": "http://www.imperial-hotel.com.vn",
+        "imageUrl": "/images/stay-placeholder.svg"
+      },
+      "after": {
+        "website": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQBUnTvSg69phLz8Z3zDjT6DX7tM0-t_E2MHMbyPVRzqw&s=10",
+        "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzDCl5dfnEMkeiK0IojnFKdamoXqnnPaO0u2t0QPRtEg&s=10"
+      }
+    }
+  ],
+  "images": []
+}

@@ -1,0 +1,17 @@
+{
+  "format": "vietgo-place-contribution-v1",
+  "changes": [
+    {
+      "kind": "update",
+      "cityId": "hue",
+      "placeId": "osm-node-14026565802",
+      "before": {
+        "imageUrl": "/images/food-placeholder.svg"
+      },
+      "after": {
+        "imageUrl": "https://statics.vinpearl.com/banh-canh-ca-loc-hue-06_1702314569.jpg"
+      }
+    }
+  ],
+  "images": []
+}

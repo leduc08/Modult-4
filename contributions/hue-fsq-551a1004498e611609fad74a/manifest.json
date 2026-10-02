@@ -1,0 +1,27 @@
+{
+  "format": "vietgo-place-contribution-v1",
+  "changes": [
+    {
+      "kind": "update",
+      "cityId": "hue",
+      "placeId": "fsq-551a1004498e611609fad74a",
+      "before": {
+        "coordinates": {
+          "lat": 16.465713446788236,
+          "lng": 107.59088744401085
+        },
+        "website": "http://artsonata.com",
+        "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop"
+      },
+      "after": {
+        "coordinates": {
+          "lat": 16.465689,
+          "lng": 107.590901
+        },
+        "website": "http://artsonata.com/",
+        "imageUrl": "https://down-vn.img.susercontent.com/vn-11134513-7r98o-lstyd70hrkbd00@resize_ss320x200"
+      }
+    }
+  ],
+  "images": []
+}
