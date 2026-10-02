@@ -1,0 +1,17 @@
+{
+  "format": "vietgo-place-contribution-v1",
+  "changes": [
+    {
+      "kind": "update",
+      "cityId": "phu-quoc",
+      "placeId": "fsq-66459ca4c59e4679325c3fdb",
+      "before": {
+        "address": "Phu Quoc, Tỉnh Kiến Giang"
+      },
+      "after": {
+        "address": "Sân bay cũ, giao lộ Đại lộ Võ Văn Kiệt và đường Hùng Vương nối dài, Đặc khu Phú Quốc, tỉnh An Giang"
+      }
+    }
+  ],
+  "images": []
+}

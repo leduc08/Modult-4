@@ -1,0 +1,21 @@
+{
+  "format": "vietgo-place-contribution-v1",
+  "changes": [
+    {
+      "kind": "update",
+      "cityId": "sa-pa",
+      "placeId": "fsq-57e76320498e1db1bf51984a",
+      "before": {
+        "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop",
+        "imageSource": null,
+        "imageRightsNote": null
+      },
+      "after": {
+        "imageUrl": "https://images.unsplash.com/photo-1768141793124-6d53679bce28?auto=format&fit=crop&w=1200&q=85",
+        "imageSource": "https://unsplash.com/photos/temples-on-a-lush-green-mountain-above-clouds-xif5cMNTW-Y",
+        "imageRightsNote": "Unsplash License; ảnh của BW JP. Trang nguồn mô tả quần thể chùa trên đỉnh Fansipan, Sa Pa."
+      }
+    }
+  ],
+  "images": []
+}

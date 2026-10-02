@@ -1,0 +1,19 @@
+{
+  "format": "vietgo-place-contribution-v1",
+  "changes": [
+    {
+      "kind": "update",
+      "cityId": "sa-pa",
+      "placeId": "osm-node-2024643568",
+      "before": {
+        "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+        "address": ""
+      },
+      "after": {
+        "address": "9VG2+WJF, Sa Pa, Lào Cai",
+        "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTXtm__YTLZMv_Zt2kbP6j5kaxw8CAa_z0BpAgiyDB-9lpWgDewAinfOsBG&s=10"
+      }
+    }
+  ],
+  "images": []
+}

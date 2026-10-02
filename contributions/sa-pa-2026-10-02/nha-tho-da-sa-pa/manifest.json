@@ -1,0 +1,21 @@
+{
+  "format": "vietgo-place-contribution-v1",
+  "changes": [
+    {
+      "kind": "update",
+      "cityId": "sa-pa",
+      "placeId": "osm-node-989240427",
+      "before": {
+        "name": "Our Lady of Rosary Church - Sapa Catholic Parish",
+        "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+        "address": ""
+      },
+      "after": {
+        "name": "Nhà thờ đá Sa Pa",
+        "address": "P. Hàm Rồng, Sa Pa, Lào Cai 333100",
+        "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSldSEgeiWTUYIAL-tVQKXANSLJJs-q7nbfNyklhMb4tIQdpE0igJJRAYI&s=10"
+      }
+    }
+  ],
+  "images": []
+}

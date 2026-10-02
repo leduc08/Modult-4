@@ -1,0 +1,19 @@
+{
+  "format": "vietgo-place-contribution-v1",
+  "changes": [
+    {
+      "kind": "update",
+      "cityId": "sa-pa",
+      "placeId": "osm-node-12248299185",
+      "before": {
+        "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+        "address": ""
+      },
+      "after": {
+        "address": "4A, đường Thạch Sơn, ngay trung tâm thị trấn Sa Pa, tỉnh Lào Cai.",
+        "imageUrl": "https://visitsapa.com.vn/VisitSaPa/_default_upload_bucket/3530/image-thumb__3530__720_jpg/den-mau-son-sapa_1744600267.9e6aae39.jpg"
+      }
+    }
+  ],
+  "images": []
+}

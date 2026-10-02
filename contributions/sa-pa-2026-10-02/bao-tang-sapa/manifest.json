@@ -1,0 +1,19 @@
+{
+  "format": "vietgo-place-contribution-v1",
+  "changes": [
+    {
+      "kind": "update",
+      "cityId": "sa-pa",
+      "placeId": "osm-node-3668724311",
+      "before": {
+        "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+        "address": "103, Xuân Vien"
+      },
+      "after": {
+        "address": "2 Fansipan, Sa Pa, Lào Cai 330000",
+        "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcStKqkznA9fh6mCVAqIrgL7EkYdwBMrTHJvy-cF7EFYJNjvfAibmu0ZuYCl&s=10"
+      }
+    }
+  ],
+  "images": []
+}
