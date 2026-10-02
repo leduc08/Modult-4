@@ -1,0 +1,19 @@
+{
+  "format": "vietgo-place-contribution-v1",
+  "changes": [
+    {
+      "kind": "update",
+      "cityId": "sa-pa",
+      "placeId": "osm-node-13359125623",
+      "before": {
+        "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+        "address": ""
+      },
+      "after": {
+        "address": "32 Fansipan, Sa Pa, Lào Cai",
+        "imageUrl": "https://vietsensetravel.com/view/at_den-hang-pho_5c1b70563f0fc9f384a9b09e104f81be.jpg"
+      }
+    }
+  ],
+  "images": []
+}

@@ -1,0 +1,26 @@
+{
+  "format": "vietgo-place-contribution-v1",
+  "changes": [
+    {
+      "kind": "update",
+      "cityId": "sa-pa",
+      "placeId": "osm-node-13320396945",
+      "before": {
+        "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+        "address": ""
+      },
+      "after": {
+        "address": "19 Đ. Sở Than, Sa Pa, Lào Cai",
+        "imageUrl": "/api/place-images/37caba7b-1b31-4d33-a191-2f38ab895c6b"
+      }
+    }
+  ],
+  "images": [
+    {
+      "id": "37caba7b-1b31-4d33-a191-2f38ab895c6b",
+      "file": "images/37caba7b-1b31-4d33-a191-2f38ab895c6b.webp",
+      "mime": "image/webp",
+      "sha256": "0eb7b5e7575ee3e14b7a7e7f664045bc17f8f2c045f1df7ea9f7a544324e946c"
+    }
+  ]
+}

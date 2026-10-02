@@ -1,0 +1,21 @@
+{
+  "format": "vietgo-place-contribution-v1",
+  "changes": [
+    {
+      "kind": "update",
+      "cityId": "phu-quoc",
+      "placeId": "osm-node-5519240633",
+      "before": {
+        "name": "Temporary Church",
+        "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+        "address": ""
+      },
+      "after": {
+        "name": "Nhà thờ giáo xứ phương Đông",
+        "address": "Đường Cách Mạng Tháng 8, Khu phố 10, Dương Đông, Đặc khu Phú Quốc, tỉnh An Giang",
+        "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6h5U08Lk9AIahoXS6ZiKmb1MF_mNlpzZdIio5F2WoH0eYPtKrcWEc-d0&s=10"
+      }
+    }
+  ],
+  "images": []
+}

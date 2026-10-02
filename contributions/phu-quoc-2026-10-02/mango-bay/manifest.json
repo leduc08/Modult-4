@@ -1,0 +1,19 @@
+{
+  "format": "vietgo-place-contribution-v1",
+  "changes": [
+    {
+      "kind": "update",
+      "cityId": "phu-quoc",
+      "placeId": "fsq-4ca5ec0214c33704ca53ba3b",
+      "before": {
+        "imageUrl": "/images/stay-placeholder.svg",
+        "address": ""
+      },
+      "after": {
+        "address": "Tổ 3, ấp Ông Lang, Đặc khu Phú Quốc, tỉnh An Giang",
+        "imageUrl": "https://mangobayphuquoc.com/wp-content/uploads/2020/10/about-1.jpg"
+      }
+    }
+  ],
+  "images": []
+}
