@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { MapPin } from 'lucide-react';
-import { CITY_NAMES, SUPPORTED_CITIES, type TripPlace } from '../data/tripPlaces';
+import { CITY_NAMES, SUPPORTED_CITIES, photoFirst, type TripPlace } from '../data/tripPlaces';
 import type { DetailItem } from './ItemDetailModal';
 import { formatManagedPrice, loadCityPlaces } from '../data/places';
 
@@ -29,7 +29,7 @@ export const VerifiedExplorePage: React.FC<{ onPlanCity: (cityId: string) => voi
     });
     return () => { active = false; };
   }, [cityId]);
-  const visible = places.filter(p => (group === 'all' || p.categoryGroup === group) && (!query || `${p.name} ${p.address} ${p.categoryLabel}`.toLocaleLowerCase('vi').includes(query.toLocaleLowerCase('vi')))).slice(0, 40);
+  const visible = places.filter(p => (group === 'all' || p.categoryGroup === group) && (!query || `${p.name} ${p.address} ${p.categoryLabel}`.toLocaleLowerCase('vi').includes(query.toLocaleLowerCase('vi')))).sort((a, b) => photoFirst(a, b) || a.name.localeCompare(b.name, 'vi')).slice(0, 40);
   const open = (place: TripPlace) => onSelectItem({
     itemType: 'poi', id: place.id, name: place.name, category: place.categoryLabel as any,
     coordinates: place.coordinates, address: place.address, openingHours: place.openingHours || '',

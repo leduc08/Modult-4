@@ -14,7 +14,14 @@ export type TripDay = { dayNumber: number; date: string; places: TripPlace[] };
 export type Participants = { adults: number; children: number; infants: number };
 export type VerifiedTrip = { id: string; cityId: string; startDate: string; endDate?: string; days: number; guests: number; participants?: Participants; budget?: number | null; interest?: string; pace?: string; schedule: TripDay[]; savedAt?: string };
 
-const isUsefulPlace = (place: MergedPlaceJSON) =>
+/** Ảnh thật: có URL, không phải ảnh giữ chỗ và cờ isPlaceholderImage không bật. */
+export const hasRealPhoto = (place: { imageUrl?: string | null; isPlaceholderImage?: boolean }) =>
+  Boolean(place.imageUrl?.trim()) && place.isPlaceholderImage !== true && !/placeholder\.svg/i.test(place.imageUrl || '');
+/** Comparator dùng trước mọi tiêu chí khác: địa điểm có ảnh thật xếp trước. */
+export const photoFirst = (a: { imageUrl?: string | null; isPlaceholderImage?: boolean }, b: { imageUrl?: string | null; isPlaceholderImage?: boolean }) =>
+  Number(hasRealPhoto(b)) - Number(hasRealPhoto(a));
+
+const isUsefulPlace =(place: MergedPlaceJSON) =>
   !place.needsReview && Boolean(place.name?.trim() && place.address?.trim()) &&
   Number.isFinite(place.coordinates?.lat) && Number.isFinite(place.coordinates?.lng) &&
   !/^\d+\s|^(unnamed|không tên|restaurant|cafe|coffee)$/i.test(place.name.trim());
@@ -104,7 +111,7 @@ export function makeTrip(input: { cityId: string; startDate: string; endDate?: s
           : cost.knownVnd <= targetPerSlot ? 17 - Math.min(6, cost.knownVnd / Math.max(1, targetPerSlot) * 6)
             : -Math.min(24, (cost.knownVnd - targetPerSlot) / Math.max(1, targetPerSlot) * 8);
         return { place, score: quality + affordability - proximity };
-      }).sort((a, b) => b.score - a.score || a.place.name.localeCompare(b.place.name, 'vi'));
+      }).sort((a, b) => photoFirst(a.place, b.place) || b.score - a.score || a.place.name.localeCompare(b.place.name, 'vi'));
       const choice = ranked[0]?.place;
       if (!choice) return null;
       const place = { ...choice, plannedStartTime: slot.start, plannedDurationMinutes: slot.duration };

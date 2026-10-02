@@ -8,6 +8,7 @@ const cityPhotos: Record<string, string> = {
   'da-nang': '/images/cities/da-nang.jpg',
   'hue': '/images/cities/hue.jpg',
   'ninh-binh': '/images/cities/ninh-binh.jpg',
+  'da-lat': '/images/cities/da-lat.jpg',
 };
 
 const CityPhoto: React.FC<{ cityId: string; name: string }> = ({ cityId, name }) => {
