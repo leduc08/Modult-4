@@ -1,0 +1,19 @@
+{
+  "format": "vietgo-place-contribution-v1",
+  "changes": [
+    {
+      "kind": "update",
+      "cityId": "ninh-binh",
+      "placeId": "fsq-66eba214ad31dc17a9a87060",
+      "before": {
+        "website": "http://baotangtinh.ninhbinh.gov.vn",
+        "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop"
+      },
+      "after": {
+        "website": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTe_TGrbC4nYmnZmWiTUifZExQTCx-f6aQZcuHvCMieZDEi7DNY7J6U0b8&s=10",
+        "imageUrl": "https://sodulich.ninhbinh.gov.vn/uploads/images/Du_lich_-_Di_san/Bao_tang.jpg"
+      }
+    }
+  ],
+  "images": []
+}

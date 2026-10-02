@@ -1,0 +1,17 @@
+{
+  "format": "vietgo-place-contribution-v1",
+  "changes": [
+    {
+      "kind": "update",
+      "cityId": "hoi-an",
+      "placeId": "osm-node-6099308589",
+      "before": {
+        "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop"
+      },
+      "after": {
+        "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRXvitkivKRqqa-Nq6Ijyl9Up_7VneZkQl63p_QUrQvMEEO_Wh3BgvxYxWB&s=10"
+      }
+    }
+  ],
+  "images": []
+}

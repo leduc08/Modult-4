@@ -1,0 +1,17 @@
+{
+  "format": "vietgo-place-contribution-v1",
+  "changes": [
+    {
+      "kind": "update",
+      "cityId": "ninh-binh",
+      "placeId": "osm-node-4490104989",
+      "before": {
+        "imageUrl": "/images/food-placeholder.svg"
+      },
+      "after": {
+        "imageUrl": "https://q-xx.bstatic.com/xdata/images/hotel/max500/645366940.jpg?k=1ebfa99508b30b6779d0ef42deddb732215fc287d8effcaa0de76657a032088b&o="
+      }
+    }
+  ],
+  "images": []
+}

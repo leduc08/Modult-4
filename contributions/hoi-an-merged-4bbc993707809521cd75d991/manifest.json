@@ -1,0 +1,17 @@
+{
+  "format": "vietgo-place-contribution-v1",
+  "changes": [
+    {
+      "kind": "update",
+      "cityId": "hoi-an",
+      "placeId": "merged-4bbc993707809521cd75d991",
+      "before": {
+        "imageUrl": "/images/food-placeholder.svg"
+      },
+      "after": {
+        "imageUrl": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/16/94/d2/0b/photo2jpg.jpg?w=1200&h=1200&s=1"
+      }
+    }
+  ],
+  "images": []
+}

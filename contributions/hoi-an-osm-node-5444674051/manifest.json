@@ -1,0 +1,19 @@
+{
+  "format": "vietgo-place-contribution-v1",
+  "changes": [
+    {
+      "kind": "update",
+      "cityId": "hoi-an",
+      "placeId": "osm-node-5444674051",
+      "before": {
+        "name": "Cafe Thiện Trung",
+        "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop"
+      },
+      "after": {
+        "name": "Cafe CORDY",
+        "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHI3o-mBnq2UW2-NatN9i0iSLpgD9zZZ6fY9aukPGlJg&s=10"
+      }
+    }
+  ],
+  "images": []
+}

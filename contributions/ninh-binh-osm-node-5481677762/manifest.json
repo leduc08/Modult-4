@@ -1,0 +1,17 @@
+{
+  "format": "vietgo-place-contribution-v1",
+  "changes": [
+    {
+      "kind": "update",
+      "cityId": "ninh-binh",
+      "placeId": "osm-node-5481677762",
+      "before": {
+        "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop"
+      },
+      "after": {
+        "imageUrl": "https://mia.vn/media/uploads/blog-du-lich/le-hoi-lang-ong-nam-hai-le-hoi-bay-to-long-biet-on-voi-ca-ong-tren-dao-phu-quoc-1616513254.jpg"
+      }
+    }
+  ],
+  "images": []
+}

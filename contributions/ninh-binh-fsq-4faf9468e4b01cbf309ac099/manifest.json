@@ -1,0 +1,17 @@
+{
+  "format": "vietgo-place-contribution-v1",
+  "changes": [
+    {
+      "kind": "update",
+      "cityId": "ninh-binh",
+      "placeId": "fsq-4faf9468e4b01cbf309ac099",
+      "before": {
+        "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop"
+      },
+      "after": {
+        "imageUrl": "https://trieudien.com/wp-content/uploads/2026/06/CONG-VIEN-TRAN-HUNG-DAO-HA-NAM-53.jpg"
+      }
+    }
+  ],
+  "images": []
+}

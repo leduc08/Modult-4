@@ -1,0 +1,17 @@
+{
+  "format": "vietgo-place-contribution-v1",
+  "changes": [
+    {
+      "kind": "update",
+      "cityId": "ninh-binh",
+      "placeId": "osm-node-7294329086",
+      "before": {
+        "imageUrl": "/images/food-placeholder.svg"
+      },
+      "after": {
+        "imageUrl": "https://cdn.eva.vn/upload/4-2024/images/2024-10-29/1730180151-1a47d808-2600-4066-width680height907.jpg"
+      }
+    }
+  ],
+  "images": []
+}

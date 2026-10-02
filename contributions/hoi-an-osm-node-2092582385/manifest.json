@@ -1,0 +1,17 @@
+{
+  "format": "vietgo-place-contribution-v1",
+  "changes": [
+    {
+      "kind": "update",
+      "cityId": "hoi-an",
+      "placeId": "osm-node-2092582385",
+      "before": {
+        "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop"
+      },
+      "after": {
+        "imageUrl": "https://tourhoian.vn/wp-content/uploads/2022/06/hoi-quan-hai-nam-assembly.jpg"
+      }
+    }
+  ],
+  "images": []
+}

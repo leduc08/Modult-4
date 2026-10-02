@@ -1,0 +1,19 @@
+{
+  "format": "vietgo-place-contribution-v1",
+  "changes": [
+    {
+      "kind": "update",
+      "cityId": "hoi-an",
+      "placeId": "osm-node-10304609242",
+      "before": {
+        "website": "https://banhxeoba9.business.site",
+        "imageUrl": "/images/food-placeholder.svg"
+      },
+      "after": {
+        "website": "https://banhxeoba9.business.site/",
+        "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ_KSNtZ_APPzDqW_8uxVp2NL6cJ_HJedudcsdaS3-m5lt3Ju4Hya3RiKjK&s=10"
+      }
+    }
+  ],
+  "images": []
+}

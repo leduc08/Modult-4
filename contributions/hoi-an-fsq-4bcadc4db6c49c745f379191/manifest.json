@@ -1,0 +1,19 @@
+{
+  "format": "vietgo-place-contribution-v1",
+  "changes": [
+    {
+      "kind": "update",
+      "cityId": "hoi-an",
+      "placeId": "fsq-4bcadc4db6c49c745f379191",
+      "before": {
+        "website": "http://hoianworldheritage.org.vn",
+        "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop"
+      },
+      "after": {
+        "website": "http://hoianworldheritage.org.vn/",
+        "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZsrjFfX_5RUS-OzXEhlXrzCGBaZIQVboWORx44iOjIabMyLxmks7sjBg&s=10"
+      }
+    }
+  ],
+  "images": []
+}

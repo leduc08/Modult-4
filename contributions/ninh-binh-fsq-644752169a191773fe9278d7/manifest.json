@@ -1,0 +1,17 @@
+{
+  "format": "vietgo-place-contribution-v1",
+  "changes": [
+    {
+      "kind": "update",
+      "cityId": "ninh-binh",
+      "placeId": "fsq-644752169a191773fe9278d7",
+      "before": {
+        "imageUrl": "/images/food-placeholder.svg"
+      },
+      "after": {
+        "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8zVwj63jUqqy_RKfYQVKbLbs0Nuzegbsa0WNTh4gVYWy4CrcvOryiKAY&s=10"
+      }
+    }
+  ],
+  "images": []
+}

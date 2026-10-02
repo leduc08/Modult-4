@@ -1,0 +1,25 @@
+{
+  "format": "vietgo-place-contribution-v1",
+  "changes": [
+    {
+      "kind": "update",
+      "cityId": "hoi-an",
+      "placeId": "fsq-4e57191d88770d2fe3193f29",
+      "before": {
+        "coordinates": {
+          "lat": 15.87832170593615,
+          "lng": 108.32348278365005
+        },
+        "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop"
+      },
+      "after": {
+        "coordinates": {
+          "lat": 15.84989,
+          "lng": 108.399966
+        },
+        "imageUrl": "https://media-cdn.nangtrip.com/single/1785901276490783097831677.webp"
+      }
+    }
+  ],
+  "images": []
+}

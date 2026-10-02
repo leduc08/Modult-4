@@ -1,0 +1,19 @@
+{
+  "format": "vietgo-place-contribution-v1",
+  "changes": [
+    {
+      "kind": "update",
+      "cityId": "ninh-binh",
+      "placeId": "fsq-5aae24932a7ab60d440b1cf9",
+      "before": {
+        "website": "http://ninhbinhhotel.com.vn",
+        "imageUrl": "/images/food-placeholder.svg"
+      },
+      "after": {
+        "website": "http://ninhbinhhotel.com.vn/",
+        "imageUrl": "https://dulichninhbinh.com.vn/mypicture/images/2023/T11/hoang-hai.jpg"
+      }
+    }
+  ],
+  "images": []
+}

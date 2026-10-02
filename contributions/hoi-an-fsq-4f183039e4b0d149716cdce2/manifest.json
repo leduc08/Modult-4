@@ -1,0 +1,17 @@
+{
+  "format": "vietgo-place-contribution-v1",
+  "changes": [
+    {
+      "kind": "update",
+      "cityId": "hoi-an",
+      "placeId": "fsq-4f183039e4b0d149716cdce2",
+      "before": {
+        "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop"
+      },
+      "after": {
+        "imageUrl": "https://danangprivatecar.com/wp-content/uploads/2023/11/Tourists-can-experience-the-artisans-craft-making-process-when-visiting-the-craft-village.jpeg"
+      }
+    }
+  ],
+  "images": []
+}

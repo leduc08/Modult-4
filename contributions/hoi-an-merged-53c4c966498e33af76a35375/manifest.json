@@ -1,0 +1,19 @@
+{
+  "format": "vietgo-place-contribution-v1",
+  "changes": [
+    {
+      "kind": "update",
+      "cityId": "hoi-an",
+      "placeId": "merged-53c4c966498e33af76a35375",
+      "before": {
+        "name": "Hola Taco!",
+        "imageUrl": "/images/food-placeholder.svg"
+      },
+      "after": {
+        "name": "Hola Tacos!",
+        "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSCWuOEqqBXK-O1wb5ewq1V9XmKK6IlWKL5BNIplLjWw2PiPvmW6Z2WkTZG&s=10"
+      }
+    }
+  ],
+  "images": []
+}

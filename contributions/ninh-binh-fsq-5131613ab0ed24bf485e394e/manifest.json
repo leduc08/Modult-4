@@ -1,0 +1,19 @@
+{
+  "format": "vietgo-place-contribution-v1",
+  "changes": [
+    {
+      "kind": "update",
+      "cityId": "ninh-binh",
+      "placeId": "fsq-5131613ab0ed24bf485e394e",
+      "before": {
+        "website": "http://fine18.vn",
+        "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop"
+      },
+      "after": {
+        "website": "http://fine18.vn/",
+        "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTxwK33sfM3dzhSvCBW2m4fAc0bjpHdriX0NDUWYEWuDw&s=10"
+      }
+    }
+  ],
+  "images": []
+}

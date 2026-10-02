@@ -1,0 +1,27 @@
+{
+  "format": "vietgo-place-contribution-v1",
+  "changes": [
+    {
+      "kind": "update",
+      "cityId": "hoi-an",
+      "placeId": "osm-node-4359528394",
+      "before": {
+        "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop",
+        "needsReview": false,
+        "coordinates": {
+          "lat": 15.9039705,
+          "lng": 108.3322436
+        }
+      },
+      "after": {
+        "coordinates": {
+          "lat": 15.90557,
+          "lng": 108.331967
+        },
+        "imageUrl": "https://hoianheritage.net/uploads/trao-doi-chuyen-nganh/2024_12/mieu-ngu-hanh-tra-que.jpg",
+        "needsReview": true
+      }
+    }
+  ],
+  "images": []
+}
