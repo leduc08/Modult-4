@@ -1,0 +1,17 @@
+{
+  "format": "vietgo-place-contribution-v1",
+  "changes": [
+    {
+      "kind": "update",
+      "cityId": "nha-trang",
+      "placeId": "osm-node-3850506270",
+      "before": {
+        "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop"
+      },
+      "after": {
+        "imageUrl": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/08/09/86/56/beer-house-hotel.jpg?w=900&h=500&s=1"
+      }
+    }
+  ],
+  "images": []
+}

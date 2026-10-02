@@ -1,0 +1,17 @@
+{
+  "format": "vietgo-place-contribution-v1",
+  "changes": [
+    {
+      "kind": "update",
+      "cityId": "hue",
+      "placeId": "osm-node-2628520035",
+      "before": {
+        "imageUrl": "/images/food-placeholder.svg"
+      },
+      "after": {
+        "imageUrl": "https://khamphahue.com.vn/Portals/0/hoangnta/%E1%BA%A9m%20th%E1%BB%B1c/b%C3%A8o%20n%E1%BA%ADm%20l%E1%BB%8Dc%20b%C3%A0%20%C4%91%E1%BB%8F/khamphahue_beonamlocbado4.jpg"
+      }
+    }
+  ],
+  "images": []
+}

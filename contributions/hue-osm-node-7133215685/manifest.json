@@ -1,0 +1,17 @@
+{
+  "format": "vietgo-place-contribution-v1",
+  "changes": [
+    {
+      "kind": "update",
+      "cityId": "hue",
+      "placeId": "osm-node-7133215685",
+      "before": {
+        "imageUrl": "/images/food-placeholder.svg"
+      },
+      "after": {
+        "imageUrl": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1b/82/e6/b6/welcome-back-customer.jpg?w=500&h=-1&s=1"
+      }
+    }
+  ],
+  "images": []
+}

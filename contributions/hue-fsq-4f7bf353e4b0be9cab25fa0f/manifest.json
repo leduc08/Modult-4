@@ -1,0 +1,19 @@
+{
+  "format": "vietgo-place-contribution-v1",
+  "changes": [
+    {
+      "kind": "update",
+      "cityId": "hue",
+      "placeId": "fsq-4f7bf353e4b0be9cab25fa0f",
+      "before": {
+        "website": "http://www.sacombank.com.vn",
+        "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop"
+      },
+      "after": {
+        "website": "http://www.sacombank.com.vn/",
+        "imageUrl": "https://statics.vinpearl.com/bao-tang-ho-chi-minh-hue-3_1709220134.jpeg"
+      }
+    }
+  ],
+  "images": []
+}

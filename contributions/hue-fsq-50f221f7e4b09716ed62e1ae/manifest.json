@@ -1,0 +1,19 @@
+{
+  "format": "vietgo-place-contribution-v1",
+  "changes": [
+    {
+      "kind": "update",
+      "cityId": "hue",
+      "placeId": "fsq-50f221f7e4b09716ed62e1ae",
+      "before": {
+        "website": "http://baotangcungdinh.vn",
+        "imageUrl": "https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&q=80&auto=format&fit=crop"
+      },
+      "after": {
+        "website": "http://baotangcungdinh.vn/",
+        "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQen3YgoxX4xYTzNqDPLqzIiA2QIV_tZOw3gtQ4c3QmlA&s=10"
+      }
+    }
+  ],
+  "images": []
+}

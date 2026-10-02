@@ -1,0 +1,17 @@
+{
+  "format": "vietgo-place-contribution-v1",
+  "changes": [
+    {
+      "kind": "update",
+      "cityId": "hue",
+      "placeId": "fsq-5ef875d48edac100084890df",
+      "before": {
+        "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop"
+      },
+      "after": {
+        "imageUrl": "https://huongrivercruises.com/wp-content/uploads/2026/02/cong-viet-tu-tuong-hue-1-scaled.jpg"
+      }
+    }
+  ],
+  "images": []
+}

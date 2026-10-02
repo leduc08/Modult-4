@@ -1,0 +1,17 @@
+{
+  "format": "vietgo-place-contribution-v1",
+  "changes": [
+    {
+      "kind": "update",
+      "cityId": "hue",
+      "placeId": "osm-node-4388564794",
+      "before": {
+        "imageUrl": "/images/food-placeholder.svg"
+      },
+      "after": {
+        "imageUrl": "https://khamphahue.com.vn/Portals/0/DuLich/DiemAnUong/NhaHang/AncientHueGardenHouses/Khamphahue_AncientHueGardenHouse30.jpg?ver=2023-04-11-140755-437"
+      }
+    }
+  ],
+  "images": []
+}

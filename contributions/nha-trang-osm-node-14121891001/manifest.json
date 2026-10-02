@@ -1,0 +1,17 @@
+{
+  "format": "vietgo-place-contribution-v1",
+  "changes": [
+    {
+      "kind": "update",
+      "cityId": "nha-trang",
+      "placeId": "osm-node-14121891001",
+      "before": {
+        "imageUrl": "/images/food-placeholder.svg"
+      },
+      "after": {
+        "imageUrl": "https://datviettour.com.vn/uploads/images/tin-tuc-SEO/mien-trung/Nha-Trang/danh-thang/vinpearl-harbou-nha-trang-2.jpg"
+      }
+    }
+  ],
+  "images": []
+}

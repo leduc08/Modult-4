@@ -1,0 +1,25 @@
+{
+  "format": "vietgo-place-contribution-v1",
+  "changes": [
+    {
+      "kind": "update",
+      "cityId": "nha-trang",
+      "placeId": "osm-node-10970238905",
+      "before": {
+        "imageUrl": "/images/food-placeholder.svg",
+        "tags": [
+          "american;asian;barbecue;breakfast;chicken;coffee_shop;grill;international;russian",
+          "restaurant"
+        ]
+      },
+      "after": {
+        "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSJFzuEH7pghpAawo-9QUT5PxLeFonFd0JRaYMcv5b0XMOuOxdX12bGCxA&s=10",
+        "tags": [
+          "american;asian;barbecue;breakfast;chicken;coffee_shop;grill;",
+          "restaurant"
+        ]
+      }
+    }
+  ],
+  "images": []
+}

@@ -1,0 +1,17 @@
+{
+  "format": "vietgo-place-contribution-v1",
+  "changes": [
+    {
+      "kind": "update",
+      "cityId": "nha-trang",
+      "placeId": "osm-node-5189485425",
+      "before": {
+        "imageUrl": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&q=80&auto=format&fit=crop"
+      },
+      "after": {
+        "imageUrl": "https://statics.vinpearl.com/bo-ne-nha-trang-3_1695040480.jpg"
+      }
+    }
+  ],
+  "images": []
+}

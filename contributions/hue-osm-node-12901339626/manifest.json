@@ -1,0 +1,17 @@
+{
+  "format": "vietgo-place-contribution-v1",
+  "changes": [
+    {
+      "kind": "update",
+      "cityId": "hue",
+      "placeId": "osm-node-12901339626",
+      "before": {
+        "imageUrl": "/images/food-placeholder.svg"
+      },
+      "after": {
+        "imageUrl": "https://hues.vn/wp-content/uploads/2023/05/tinh-tam-2-1.jpg"
+      }
+    }
+  ],
+  "images": []
+}

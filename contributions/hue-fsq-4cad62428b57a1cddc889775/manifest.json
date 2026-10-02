@@ -1,0 +1,19 @@
+{
+  "format": "vietgo-place-contribution-v1",
+  "changes": [
+    {
+      "kind": "update",
+      "cityId": "hue",
+      "placeId": "fsq-4cad62428b57a1cddc889775",
+      "before": {
+        "website": "https://www.ancienthue.com.vn",
+        "imageUrl": "/images/food-placeholder.svg"
+      },
+      "after": {
+        "website": "https://www.ancienthue.com.vn/",
+        "imageUrl": "https://khamphahue.com.vn/Portals/0/Media/T7/upload/VHDL/AmThuc/DiaChiAnUong/NhaHang/AncientHue/2.jpg"
+      }
+    }
+  ],
+  "images": []
+}

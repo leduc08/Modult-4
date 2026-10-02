@@ -1,0 +1,17 @@
+{
+  "format": "vietgo-place-contribution-v1",
+  "changes": [
+    {
+      "kind": "update",
+      "cityId": "hue",
+      "placeId": "osm-node-11199237119",
+      "before": {
+        "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop"
+      },
+      "after": {
+        "imageUrl": "https://lh3.googleusercontent.com/gps-cs-s/ANWiy9QkgzQZrEhYG0BYZTohkUlwNsFJVDClSJQFvhVDG0nrp84cXsYijytLNudadXNWTtCb9bjSSPb4w_wzDmr-oeQaXf_r40wPgHtMJj4Q_KvUzLgC68OQaZ8NOTWhsg4x7wc_F5E7Xw=w408-h544-k-no"
+      }
+    }
+  ],
+  "images": []
+}

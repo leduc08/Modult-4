@@ -1,0 +1,17 @@
+{
+  "format": "vietgo-place-contribution-v1",
+  "changes": [
+    {
+      "kind": "update",
+      "cityId": "nha-trang",
+      "placeId": "fsq-4bbef8e6ba9776b0fa64fec8",
+      "before": {
+        "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop"
+      },
+      "after": {
+        "imageUrl": "https://seayoutravel.vn/wp-content/uploads/2025/11/best-time-of-year-to-visit-nha-trang%E2%80%8B.webp"
+      }
+    }
+  ],
+  "images": []
+}

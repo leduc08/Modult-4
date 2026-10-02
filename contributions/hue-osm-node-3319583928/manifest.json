@@ -1,0 +1,17 @@
+{
+  "format": "vietgo-place-contribution-v1",
+  "changes": [
+    {
+      "kind": "update",
+      "cityId": "hue",
+      "placeId": "osm-node-3319583928",
+      "before": {
+        "imageUrl": "/images/food-placeholder.svg"
+      },
+      "after": {
+        "imageUrl": "https://khamphahue.com.vn/Portals/0/Medias/Nam2022/T9/nha-vuon-y-thao-khong-gian-thuong-thuc-am-thuc-xu-hue-vo-cung-co-kinh-03-1638853094.jpeg"
+      }
+    }
+  ],
+  "images": []
+}

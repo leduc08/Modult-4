@@ -1,0 +1,19 @@
+{
+  "format": "vietgo-place-contribution-v1",
+  "changes": [
+    {
+      "kind": "update",
+      "cityId": "nha-trang",
+      "placeId": "fsq-4b99cd1cf964a5206e9235e3",
+      "before": {
+        "website": "http://www.sailingclubvietnam.com",
+        "imageUrl": "https://images.unsplash.com/photo-1528127269322-539801943592?w=400&q=80&auto=format&fit=crop"
+      },
+      "after": {
+        "website": "http://www.sailingclubvietnam.com/",
+        "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTX8e7TADcpbGzMWDLM7BWskTEyw1lpdiT-rL9svcC0nw&s=10"
+      }
+    }
+  ],
+  "images": []
+}

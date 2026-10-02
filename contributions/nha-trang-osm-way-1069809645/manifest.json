@@ -1,0 +1,17 @@
+{
+  "format": "vietgo-place-contribution-v1",
+  "changes": [
+    {
+      "kind": "update",
+      "cityId": "nha-trang",
+      "placeId": "osm-way-1069809645",
+      "before": {
+        "imageUrl": "/images/food-placeholder.svg"
+      },
+      "after": {
+        "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR5LCNmeAvpqpLELEzZ8KsWOfoU_Eb1n7S0cpEEbIku8g&s=10"
+      }
+    }
+  ],
+  "images": []
+}

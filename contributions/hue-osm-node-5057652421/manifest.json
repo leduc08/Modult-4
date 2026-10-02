@@ -1,0 +1,19 @@
+{
+  "format": "vietgo-place-contribution-v1",
+  "changes": [
+    {
+      "kind": "update",
+      "cityId": "hue",
+      "placeId": "osm-node-5057652421",
+      "before": {
+        "name": "Awesome BAHH MI",
+        "imageUrl": "https://images.unsplash.com/photo-1483985988355-763728e1935b?w=400&q=80&auto=format&fit=crop"
+      },
+      "after": {
+        "name": "Awesome BANH MI",
+        "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7ovPS3uHmPX1IrX7kb2m3pFyUkxakQ2I2ZYfeOiYkdA&s=10"
+      }
+    }
+  ],
+  "images": []
+}
